@@ -4,9 +4,12 @@ import styles from './HomeForm.module.scss';
 import Image from 'next/image';
 
 const HomeForm: FC<FormProps> = ({item, headline, children, description}) => {
+
+    const imageUrl = item || '/default-image-path.jpg';
+
     return (
         <div className={styles.wrapper}>
-            <Image src={item} alt="Form Item" className={styles.item}/>
+            <Image src={imageUrl} alt="Form Item" className={styles.item}/>
 
             <form className={styles.form}>
                 <h1 className={styles.headline}>{headline}</h1>
