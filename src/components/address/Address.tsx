@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import styles from './Address.module.scss';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 const containerStyle = {

@@ -2,7 +2,6 @@
 
 import React, {FC, useState} from 'react';
 import { BsPlusLg } from "react-icons/bs";
-import { TfiClose } from "react-icons/tfi";
 import styles from "./FrequentlyAskedQuestion.module.scss";
 import {FrequentlyAskedQuestionProps} from "@/types/frequentlyAskedQuestion";
 import Image from 'next/image';
