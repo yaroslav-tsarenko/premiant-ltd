@@ -1,0 +1,57 @@
+.bottomNav{
+  display: none;
+}
+
+.nav {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 0 20px;
+  bottom: 60px;
+}
+
+.links {
+  list-style: none;
+  bottom: 0;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.link {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+
+}
+
+.bottomBurgerMenu {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  z-index: 1000;
+  padding: 10px 70px;
+}
+
+.burgerIcon{
+  font-size: 20px;
+  background: #24CBBF;
+  border: none;
+  padding: 5px 6px 2px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 1028px) {
+  .bottomNav{
+    display: flex;
+    flex-direction: column;
+  }
+
+}

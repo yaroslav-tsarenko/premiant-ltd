@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  margin-bottom: 120px;
+  flex-direction: column;
+  padding: var(--main-padding-properties);
+}
+
+.beanie {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  width: 100%;
+  align-items: self-start;
+  justify-content: space-between;
+}
+
+.headline {
+  font-size: 40px;
+  font-weight: bold;
+  color: lighten(#000000, 50%);
+  width: 40%;
+}
+
+.highlight {
+  color: var(--main-font-color);
+}
+
+.scheme{
+  margin-top: 50px;
+    display: flex;
+  width: 100%;
+
+}

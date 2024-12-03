@@ -1,0 +1,14 @@
+.languageDropdown {
+  border: none;
+  align-items: center;
+  text-align: center;
+}
+
+.languageDropdown select {
+  font-size: 16px;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--main-font-color);
+  outline: none;
+  cursor: pointer;
+}

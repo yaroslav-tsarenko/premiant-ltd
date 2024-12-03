@@ -1,0 +1,93 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: var(--main-padding-properties);
+  width: 100%;
+  margin: 0;
+  height: 100px;
+}
+
+.logo {
+  width: 382px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.links {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: fit-content;
+  gap: 30px;
+}
+
+.link {
+  font-size: 16px;
+  transition: transform 0.2s;
+  will-change: transform;
+  white-space: nowrap;
+
+}
+
+.link:hover {
+  transform: scale(1.1);
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.loginButton {
+  background-color: blue;
+  color: white;
+}
+
+.registerButton {
+  background-color: green;
+  color: white;
+}
+
+@media (max-width: 1240px) {
+  .logo {
+    width: 280px;
+  }
+  .links ul {
+    gap: 15px;
+  }
+  .header {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 1028px) {
+  .header {
+    justify-content: center;
+    height: 80px;
+  }
+
+  .logo {
+    width: 382px;
+  }
+  .links {
+    display: none;
+  }
+}

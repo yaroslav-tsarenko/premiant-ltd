@@ -1,0 +1,50 @@
+.promo {
+  background-color: var(--allocation-color);
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 30px 0 30px;
+  flex-direction: row;
+  text-align: center;
+  border-radius: 10px;
+  padding: 15px 12px;
+
+}
+
+.promo section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: row;
+  text-align: center;
+  background: linear-gradient(to right, #6E6E6E, #151515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.text{
+  background: linear-gradient(to right, #6E6E6E, #151515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.link{
+}
+
+@media (max-width: 1028px) {
+    .link{
+        display: none;
+    }
+}
+
