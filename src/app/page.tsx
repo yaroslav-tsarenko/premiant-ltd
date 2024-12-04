@@ -22,6 +22,7 @@ import FrequentlyAskedQuestionItem from "@/assets/icons/frequentlyAskedQuestionI
 import HomeForm from "@/components/home-form/HomeForm";
 import FormItem from "@/assets/icons/formItem.svg";
 import Address from "@/components/address/Address";
+import Footer from "@/components/footer/Footer";
 
 export default function Home() {
     return (
@@ -158,6 +159,25 @@ export default function Home() {
 
             <Address/>
 
+            <Footer
+                footerLinks={[
+                    {name: 'Главная', route: '#'},
+                    {name: 'О Компании', route: '#'},
+                    {name: 'Инвесторам/Партнерам', route: '#'},
+                    {name: 'FAQ', route: '#'},
+                    {name: 'Контакты', route: '#'},
+                    {name: 'Поддержка', route: '#'},
+                ]}
+                contacts={[
+                    {label: 'E-mail', value: 'premiantltd@gmail.com'},
+                    {label: 'Phone', value: '+38 888 88 88 888'},
+                    {label: 'Telegram', value: '@ltdpr'},
+                ]}
+            >
+
+                <Button variant="hero">Начать инвестировать</Button>
+
+            </Footer>
 
             <BottomNav
                 logo={BottomNuvLogo}
