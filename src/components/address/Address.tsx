@@ -32,10 +32,12 @@ const darkTheme = [
     { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#3d3d3d" }] },
 ];
 
+const libraries: ("places" | "drawing" | "geometry" | "visualization" | "marker")[] = ["marker"];
+
 const Address = () => {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM", // Replace with your API key
-        libraries: ["marker"], // Add the marker library
+        libraries,
     });
 
     const mapRef = useRef<google.maps.Map | null>(null);
