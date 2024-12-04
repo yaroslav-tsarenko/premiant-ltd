@@ -42,18 +42,15 @@ export default function Home() {
 
             <HeroSection
                 headline="ИНВЕСТИРУЙТЕ С НАМИ И ПРИУМНОЖАЙТЕ СВОЙ КАПИТАЛ"
-                text="присоединяйтесь к платформе уже сегодня и откройте новые возможности для роста!"
-            >
+                text="присоединяйтесь к платформе уже сегодня и откройте новые возможности для роста!">
                 <Button variant="hero">Начать инвестировать</Button>
-
             </HeroSection>
 
             <PromoBar
                 price={PricePromo}
                 text="За время перебывания вас на сайте наши партнеры заработали"
                 promoLink={{name: "Присоедениться к нам", route: '#'}}
-                arrowIcon={ArrowRight}
-            />
+                arrowIcon={ArrowRight}/>
 
             <CompanyInfo item={CompanyInfoItem}
                          images={[
