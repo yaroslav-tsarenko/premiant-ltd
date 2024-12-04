@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import whiteMarker from '@/assets/icons/whiteMarker.svg';
+import React, { useEffect, useState } from 'react';
+import { useLoadScript } from '@react-google-maps/api';
 
 const containerStyle = {
     width: '100%',
-    height: '400px'
+    height: '700px'
 };
 
 const darkTheme = [
@@ -40,24 +39,24 @@ const Address: React.FC = () => {
 
     const [center] = useState({ lat: 53.515028, lng: -1.122465 });
 
+    useEffect(() => {
+        if (isLoaded) {
+            const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
+                center,
+                zoom: 15,
+                styles: darkTheme
+            });
+
+            new google.maps.Marker({
+                map,
+                position: center
+            });
+        }
+    }, [isLoaded, center]);
+
     if (!isLoaded) return <div>Loading...</div>;
 
-    return (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={15}
-            options={{ styles: darkTheme }}
-        >
-            <Marker
-                position={center}
-                icon={{
-                    url: whiteMarker.src,
-                    scaledSize: new google.maps.Size(46, 59)
-                }}
-            />
-        </GoogleMap>
-    );
+    return <div id="map" style={containerStyle}></div>;
 };
 
 export default Address;
