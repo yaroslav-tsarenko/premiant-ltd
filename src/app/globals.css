@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@font-face {
+    font-family: 'GropledBold';
+    src: url('../assets/fonts/gropled-bold.otf') format('opentype');
+}
 :root {
     --background: #ffffff;
     --foreground: #000000;
@@ -10,6 +16,7 @@
     --secondary-font-color: #F4F7FE;
     --allocation-color: #17F4E3;
     --icon-color: #333333;
+    --grey-font-color: #6E6E6E;
 }
 
 html,
@@ -19,16 +26,11 @@ body {
     margin: 0;
     padding: 0;
     background: transparent;
-
-}
-
-body {
+    font-family: 'Manrope', sans-serif;
     color: var(--foreground);
     background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
 }
 
 * {
