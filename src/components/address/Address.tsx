@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import React, { useEffect, useRef } from "react";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 
 const mapStyles = {
     width: "100%",
@@ -29,30 +29,55 @@ const darkTheme = [
     { featureType: "road.local", elementType: "labels.text.fill", stylers: [{ color: "#616161" }] },
     { featureType: "transit", elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
     { featureType: "water", elementType: "geometry", stylers: [{ color: "#000000" }] },
-    { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#3d3d3d" }] }
+    { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#3d3d3d" }] },
 ];
 
 const Address = () => {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM", // Replace with your API key
+        libraries: ["marker"], // Add the marker library
     });
 
-    const center = { lat: 53.515028, lng: -1.122465 };
+    const mapRef = useRef<google.maps.Map | null>(null);
+
+    useEffect(() => {
+        if (isLoaded && mapRef.current) {
+            (async () => {
+                const markerLibrary = (await google.maps.importLibrary(
+                    "marker"
+                )) as unknown as { AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement };
+
+                const { AdvancedMarkerElement } = markerLibrary;
+
+                const position = { lat: 53.515028, lng: -1.122465 };
+
+                // Create an advanced marker
+                new AdvancedMarkerElement({
+                    map: mapRef.current,
+                    position,
+                    title: "Location",
+                });
+            })();
+        }
+    }, [isLoaded]);
+
+    const onLoad = (map: google.maps.Map) => {
+        mapRef.current = map;
+    };
 
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
         <GoogleMap
             mapContainerStyle={mapStyles}
-            center={center}
+            center={{ lat: 53.515028, lng: -1.122465 }}
             zoom={15}
+            onLoad={onLoad}
             options={{
                 styles: darkTheme,
-                disableDefaultUI: true, // Optional: To remove default UI controls
+                disableDefaultUI: true,
             }}
-        >
-            <Marker position={center} />
-        </GoogleMap>
+        />
     );
 };
 
