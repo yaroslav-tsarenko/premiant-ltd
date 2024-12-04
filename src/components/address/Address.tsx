@@ -46,11 +46,6 @@ const Address: React.FC = () => {
                 zoom: 15,
                 styles: darkTheme
             });
-
-            new google.maps.Marker({
-                map,
-                position: center
-            });
         }
     }, [isLoaded, center]);
 
