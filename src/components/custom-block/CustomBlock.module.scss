@@ -85,13 +85,14 @@
   position: absolute;
   z-index: 1000;
   flex-direction: column;
-  clip-path: polygon(100% 0, 100% 94%, 82% 100%, 0 100%, 0 0);
+  clip-path: polygon(100% 0, 100% 90%, 86% 100%, 0 100%, 0 0);
   background-color: #EBF0F3;
   width: 410px;
   height: 120px;
   top: 112px;
   left: 50px;
   padding: 20px;
+  border-radius: 5px;
 
   h2 {
     font-size: 30px;
@@ -102,32 +103,34 @@
     -webkit-text-fill-color: transparent;
   }
 
-  p{
+  p {
     font-size: 16px;
     color: var(--secondary-color);
+    width: 290px;
   }
 }
 
-.addressContact{
+.addressContact {
   display: flex;
   position: absolute;
   z-index: 1000;
   flex-direction: column;
-  clip-path: polygon(100% 0, 100% 94%, 82% 100%, 0 100%, 0 0);
+  clip-path: polygon(100% 0, 100% 90%, 86% 100%, 0 100%, 0 0);
   background-color: #EBF0F3;
   width: 410px;
   height: auto;
   bottom: 112px;
   right: 50px;
   padding: 20px;
+  border-radius: 5px;
 
-  .label{
+  .label {
     color: var(--grey-font-color);
     font-size: 18px;
     font-weight: 500;
   }
 
-  .value{
+  .value {
     color: var(--secondary-color);
     font-size: 18px;
     font-weight: 500;
@@ -146,9 +149,21 @@
     height: 250px;
     clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
   }
+
+  .address {
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .addressContact {
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%);
+  }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   .featureScheme {
     width: 250px;
     clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
@@ -157,5 +172,34 @@
   .modified {
     width: 250px;
     clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
+  }
+
+  .address {
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height:200px;
+    transform: none;
+    margin-bottom: 20px;
+
+    p{
+        width: 100%;
+    }
+  }
+
+  .addressContact {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    height: 200px;
+    transform: none;
+    margin-top: 20px;
+
+    .label, .value {
+      font-size: 16px;
+      width: 100%;
+    }
   }
 }

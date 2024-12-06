@@ -7,11 +7,6 @@ import useLoadGoogleMaps from '@/hooks/useLoadGoogleMaps';
 import styles from './Address.module.scss';
 import {AddressProps} from "@/types/address";
 
-const containerStyle = {
-    width: '100%',
-    height: '400px'
-};
-
 const darkTheme = [
     { elementType: 'geometry', stylers: [{ color: '#212121' }] },
     { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
@@ -36,7 +31,7 @@ const darkTheme = [
     { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#3d3d3d' }] }
 ];
 
-const Address: React.FC<AddressProps> = ({ children }) => {
+const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
     const isLoaded = useLoadGoogleMaps("AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM");
 
     const [center] = useState({ lat: 53.515028, lng: -1.122465 });
@@ -45,9 +40,9 @@ const Address: React.FC<AddressProps> = ({ children }) => {
 
     return (
         <div className={styles.wrapper}>
-            {children}
+            {firstChildren}
             <GoogleMap
-                mapContainerStyle={containerStyle}
+                mapContainerClassName={styles.map}
                 center={center}
                 zoom={15}
                 options={{
@@ -63,11 +58,11 @@ const Address: React.FC<AddressProps> = ({ children }) => {
                     position={center}
                     icon={{
                         url: whiteMarker.src,
-                        scaledSize: new google.maps.Size(46, 59)
+                        scaledSize: new google.maps.Size(46, 59),
                     }}
                 />
             </GoogleMap>
-            {children}
+            {secondChildren}
         </div>
     );
 };

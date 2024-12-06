@@ -224,30 +224,34 @@ export default function Home() {
                 <Button variant="form">Отправить</Button>
             </HomeForm>
 
-            <Address>
-                <CustomBlock variant="address">
-                    <div>
-                        <h2>АДРЕС КОМПАНИИ</h2>
-                        <p>52 Chequer Avenue, Doncaster, England, DN4 5AS</p>
-                    </div>
-                </CustomBlock>
-                <CustomBlock variant="addressContact">
-                    <div>
+            <Address
+                firstChildren={
+                    <CustomBlock variant="address">
                         <div>
-                            <p className={styles.label}>E-mail</p>
-                            <p className={styles.value}>premiantltd@gmail.com</p>
+                            <h2>АДРЕС КОМПАНИИ</h2>
+                            <p>52 Chequer Avenue, Doncaster, England, DN4 5AS</p>
                         </div>
+                    </CustomBlock>
+                }
+                secondChildren={
+                    <CustomBlock variant="addressContact">
                         <div>
-                            <p className={styles.label}>Phone</p>
-                            <p className={styles.value}>+38 888 88 88 888</p>
+                            <div>
+                                <p className={styles.label}>E-mail</p>
+                                <p className={styles.value}>premiantltd@gmail.com</p>
+                            </div>
+                            <div>
+                                <p className={styles.label}>Phone</p>
+                                <p className={styles.value}>+38 888 88 88 888</p>
+                            </div>
+                            <div>
+                                <p className={styles.label}>Telegram</p>
+                                <p className={styles.value}>@ltdpr</p>
+                            </div>
                         </div>
-                        <div>
-                            <p className={styles.label}>Telegram</p>
-                            <p className={styles.value}>@ltdpr</p>
-                        </div>
-                    </div>
-                </CustomBlock>
-            </Address>
+                    </CustomBlock>
+                }
+            />
 
             <Footer
                 footerLinks={[
