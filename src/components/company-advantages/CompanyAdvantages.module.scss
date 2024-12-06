@@ -50,6 +50,12 @@
   background: black;
 }
 
+.paragraph div{
+    display: flex;
+    gap: 10px;
+  align-items: center;
+}
+
 .paragraphHeadline {
   font-size: 24px;
   font-weight: bold;
@@ -67,7 +73,7 @@
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid #000;
+  border: 4px solid var(--secondary-color);
   border-radius: 4px;
 }
 

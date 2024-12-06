@@ -4,7 +4,7 @@ import {FeaturesInfoProps} from "@/types/featuresInfo";
 import Image from 'next/image';
 import FeaturesScheme from "@/assets/images/featuresScheme.svg";
 
-const FeaturesInfo: FC<FeaturesInfoProps> = ({item}) => {
+const FeaturesInfo: FC<FeaturesInfoProps> = ({item, children}) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.beanie}>
@@ -15,7 +15,9 @@ const FeaturesInfo: FC<FeaturesInfoProps> = ({item}) => {
                 </h1>
             </div>
 
-            <Image src={FeaturesScheme} alt="Features Scheme" className={styles.scheme}/>
+            <div className={styles.scheme}>
+                {children}
+            </div>
 
         </div>
     );

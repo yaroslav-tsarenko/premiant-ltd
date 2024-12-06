@@ -23,6 +23,7 @@
   font-weight: bolder;
   box-shadow: 12px 0 20px 2px rgba(255, 255, 255, 0.5);
   transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .hero:hover {
@@ -40,6 +41,8 @@
   box-shadow: -12px 0 20px 2px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease-in-out;
   width: fit-content;
+  margin-top: 35px;
+  z-index: 1000;
 }
 
 .companyInfo:hover {
@@ -63,6 +66,22 @@
 
 .form:hover {
   box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.7);
+}
+
+.calculator{
+  background: #17F4E3;
+  color: var(--secondary-color);
+  border-radius: 30px;
+  padding: 15px 15px;
+  border: none;
+  font-size: 16px;
+  font-weight: bolder;
+  box-shadow: 12px 0 20px 2px rgba(31, 255, 242, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.calculator:hover {
+  box-shadow: 0 0 30px 10px rgba(21, 149, 140, 0.5);
 }
 
 @media (max-width: 768px) {

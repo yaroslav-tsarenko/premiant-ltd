@@ -3,6 +3,8 @@
   margin-bottom: 120px;
   flex-direction: column;
   padding: var(--main-padding-properties);
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .beanie {
@@ -27,8 +29,30 @@
 }
 
 .scheme{
-  margin-top: 50px;
-    display: flex;
-  width: 100%;
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 100px;
+  flex-direction: row;
+  justify-content: center;
 }
+
+@media (max-width: 1024px) {
+  .scheme{
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+    .beanie{
+        flex-direction: column;
+        gap: 20px;
+    }
+  .headline{
+    width: 100%;
+  }
+
+  .scheme{
+    gap: 20px;
+  }
+}
+
