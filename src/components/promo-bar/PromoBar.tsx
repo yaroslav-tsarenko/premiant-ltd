@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from "next/link";
 import styles from './PromoBar.module.scss';
 
-const PromoBar: FC<PromoBarProps> = ({price, text, promoLink, arrowIcon}) => {
+const PromoBar: FC<PromoBarProps> = ({text, promoLink, arrowIcon}) => {
     return (
         <div className={styles.promo}>
             <div>
