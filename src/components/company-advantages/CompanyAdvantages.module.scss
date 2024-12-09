@@ -3,6 +3,7 @@
   flex-direction: column;
   padding: var(--main-padding-properties);
   position: relative;
+  margin: 80px 0 140px 0;;
 }
 
 .beanie {
@@ -48,6 +49,10 @@
 .paragraph:hover {
   color: var(--primary-color);
   background: black;
+}
+
+.paragraph:hover .icon {
+  border-color: white;
 }
 
 .paragraph div{

@@ -70,7 +70,9 @@ export default function Home() {
             </CompanyInfo>
 
             <FeaturesInfo
-                item={FeaturesItem}
+                item="О НАС"
+                title="ОСНОВНЫЕ ОСОБЕННОСТИ"
+                modTitle="ЗАРАБОТКА"
             >
                 <CustomBlock variant="featureScheme">
                     <div>
@@ -252,6 +254,8 @@ export default function Home() {
                     </CustomBlock>
                 }
             />
+
+
 
             <Footer
                 footerLinks={[
