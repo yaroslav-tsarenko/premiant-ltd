@@ -23,6 +23,9 @@ import HomeForm from "@/components/home-form/HomeForm";
 import FormItem from "@/assets/icons/formItem.svg";
 import Address from "@/components/address/Address";
 import Footer from "@/components/footer/Footer";
+import CustomBlock from "@/components/custom-block/CustomBlock";
+import styles from "@/components/custom-block/CustomBlock.module.scss";
+import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 
 export default function Home() {
     return (
@@ -36,7 +39,7 @@ export default function Home() {
                     {name: 'Контакты', route: '/contacts'},
                 ]}
             >
-                <Button>Войти</Button>
+                <Button variant="headerSign">Войти</Button>
                 <Button variant="outline">Регистрация</Button>
             </Header>
 
@@ -67,9 +70,70 @@ export default function Home() {
             </CompanyInfo>
 
             <FeaturesInfo
-                item={FeaturesItem}
+                item="О НАС"
+                title="ОСНОВНЫЕ ОСОБЕННОСТИ"
+                modTitle="ЗАРАБОТКА"
+            >
+                <CustomBlock variant="featureScheme">
+                    <div>
+                        <h2>01</h2>
+                        <p>Максимизация прибыли через трафик</p>
+                    </div>
 
-            />
+                    <p>
+                        Premiant LTD повышает конверсии и рентабельность рекламных кампаний, обеспечивая клиентам
+                        высокую отдачу от инвестиций.
+                    </p>
+                </CustomBlock>
+
+                <CustomBlock variant="featureScheme">
+                    <div>
+                        <h2>02</h2>
+                        <p>Глобальный охват аудитории</p>
+                    </div>
+
+                    <p>
+                        Сотрудничество с крупными сетями позволяет привлекать трафик со всего мира, увеличивая конверсии
+                        и доходы.
+                    </p>
+                </CustomBlock>
+
+                <CustomBlock variant="featureScheme">
+                    <div>
+                        <h2>03</h2>
+                        <p>Гибкость и адаптивность</p>
+                    </div>
+
+                    <p>
+                        Premiant LTD быстро реагирует на изменения рынка, повышая точность таргетинга и эффективность
+                        рекламы.
+                    </p>
+                </CustomBlock>
+
+                <CustomBlock variant="featureScheme">
+                    <div>
+                        <h2>04</h2>
+                        <p>Инновации для оптимизации</p>
+                    </div>
+
+                    <p>
+                        Современные алгоритмы и машинное обучение делают Premiant LTD лидером в сфере арбитража
+                        интернет-трафика.
+                    </p>
+                </CustomBlock>
+
+                <CustomBlock variant="modified">
+                    <div>
+                        <h2>05</h2>
+                        <p>Прозрачность и контроль</p>
+                    </div>
+
+                    <p>
+                        Подробные отчеты обеспечивают полное понимание расходов и результатов кампаний.
+                    </p>
+                </CustomBlock>
+
+            </FeaturesInfo>
 
             <CompanyAdvantages
                 item={CompanyAdvantagesItem}
@@ -108,6 +172,11 @@ export default function Home() {
                             " считанные минуты вы сможете воспользоваться всеми преимуществами нашего сервиса."
                     },
                 ]}
+            />
+
+            <TariffCalculator
+                primaryButton={<Button variant="calculator">Начать инвестировать</Button>}
+                secondaryButton={<Button variant="hero">Оставить заявку</Button>}
             />
 
             <FrequentlyAskedQuestion
@@ -157,7 +226,36 @@ export default function Home() {
                 <Button variant="form">Отправить</Button>
             </HomeForm>
 
-            <Address/>
+            <Address
+                firstChildren={
+                    <CustomBlock variant="address">
+                        <div>
+                            <h2>АДРЕС КОМПАНИИ</h2>
+                            <p>52 Chequer Avenue, Doncaster, England, DN4 5AS</p>
+                        </div>
+                    </CustomBlock>
+                }
+                secondChildren={
+                    <CustomBlock variant="addressContact">
+                        <div>
+                            <div>
+                                <p className={styles.label}>E-mail</p>
+                                <p className={styles.value}>premiantltd@gmail.com</p>
+                            </div>
+                            <div>
+                                <p className={styles.label}>Phone</p>
+                                <p className={styles.value}>+38 888 88 88 888</p>
+                            </div>
+                            <div>
+                                <p className={styles.label}>Telegram</p>
+                                <p className={styles.value}>@ltdpr</p>
+                            </div>
+                        </div>
+                    </CustomBlock>
+                }
+            />
+
+
 
             <Footer
                 footerLinks={[

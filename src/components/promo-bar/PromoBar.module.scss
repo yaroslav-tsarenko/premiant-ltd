@@ -14,7 +14,12 @@
 
 }
 
-.promo section {
+.price{
+  font-family: 'GropledBold', sans-serif;
+  font-size: 32px;
+}
+
+.promo div {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -44,6 +49,12 @@
 
 @media (max-width: 1028px) {
     .link{
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .promo {
         display: none;
     }
 }

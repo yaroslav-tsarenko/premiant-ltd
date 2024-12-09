@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import React, {useState } from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import whiteMarker from '@/assets/icons/whiteMarker.svg';
-
-const containerStyle = {
-    width: '100%',
-    height: '400px'
-};
+import useLoadGoogleMaps from '@/hooks/useLoadGoogleMaps';
+import styles from './Address.module.scss';
+import {AddressProps} from "@/types/address";
 
 const darkTheme = [
     { elementType: 'geometry', stylers: [{ color: '#212121' }] },
@@ -33,30 +31,39 @@ const darkTheme = [
     { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#3d3d3d' }] }
 ];
 
-const Address: React.FC = () => {
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: "AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM"
-    });
+const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
+    const isLoaded = useLoadGoogleMaps("AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM");
 
     const [center] = useState({ lat: 53.515028, lng: -1.122465 });
 
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={15}
-            options={{ styles: darkTheme }}
-        >
-            <Marker
-                position={center}
-                icon={{
-                    url: whiteMarker.src,
-                    scaledSize: new google.maps.Size(46, 59)
+        <div className={styles.wrapper}>
+            {firstChildren}
+            <GoogleMap
+                mapContainerClassName={styles.map}
+                center={center}
+                zoom={15}
+                options={{
+                    styles: darkTheme,
+                    disableDefaultUI: true,
+                    zoomControl: false,
+                    streetViewControl: false,
+                    fullscreenControl: false,
+                    mapTypeControl: false,
                 }}
-            />
-        </GoogleMap>
+            >
+                <Marker
+                    position={center}
+                    icon={{
+                        url: whiteMarker.src,
+                        scaledSize: new google.maps.Size(46, 59),
+                    }}
+                />
+            </GoogleMap>
+            {secondChildren}
+        </div>
     );
 };
 

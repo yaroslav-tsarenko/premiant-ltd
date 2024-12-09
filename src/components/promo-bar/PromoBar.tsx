@@ -7,10 +7,12 @@ import styles from './PromoBar.module.scss';
 const PromoBar: FC<PromoBarProps> = ({price, text, promoLink, arrowIcon}) => {
     return (
         <div className={styles.promo}>
-            <section>
-                <Image src={price} alt="Price"/>
+            <div>
+                <p className={styles.price}>
+                    180 000$
+                </p>
                 <p className={styles.text}>{text}</p>
-            </section>
+            </div>
 
             <Link href={promoLink.route} legacyBehavior>
                 <a className={styles.links}>

@@ -1,5 +1,4 @@
 
-
 .info {
   display: flex;
   width: 100%;
@@ -11,13 +10,21 @@
   position: relative;
 }
 
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
 .textContainer {
   display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
   gap: 25px;
-  width: 50%;
+  padding: 0 70px;
 }
 
 .item {
@@ -36,6 +43,8 @@
 .modified {
   font-weight: bold;
   font-family: 'GropledBold', sans-serif;
+  font-size: 40px;
+
 }
 
 .headline {
@@ -69,8 +78,12 @@
 }
 
 @media (max-width: 1028px) {
+  .textWrapper {
+    width: 100%;
+  }
+
   .textContainer {
-    width: 80%;
+    width: 100%;
   }
 
   .item {
@@ -88,13 +101,22 @@
 }
 
 @media (max-width: 768px) {
+
+  .modified{
+    font-size: 30px;
+  }
+
   .info {
     gap: 20px;
   }
 
+    .textWrapper {
+      margin: 0;
+    }
+
   .textContainer {
-    width: 100%;
     gap: 15px;
+    padding: 0;
   }
 
 
