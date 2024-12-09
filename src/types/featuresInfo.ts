@@ -1,4 +1,6 @@
 export interface FeaturesInfoProps {
-    item: string;
-    bases?: {order: string; headline: string; text: string}[]
+    item?: string;
+    title?: string;
+    modTitle?: string;
+    children: React.ReactNode;
 }

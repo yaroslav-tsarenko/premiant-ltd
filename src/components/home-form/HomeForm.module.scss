@@ -5,7 +5,6 @@
   margin-top: 100px;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 100px;
 }
 
 .form {
@@ -13,10 +12,10 @@
   flex-direction: column;
   width: 60%;
   margin-left: auto;
-  background: var(--main-font-color);
+  background: var(--secondary-color);
   padding: 20px;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 70px) 100%, 0 100%);
-
+  clip-path: polygon(100% 0, 100% 92%, 91% 100%, 0 100%, 0 0);
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 .headline {
@@ -81,13 +80,13 @@
     margin-top: 20px;
   }
 
-    .headline {
-        font-size: 36px;
-    }
+  .headline {
+    font-size: 36px;
+  }
 
-    .text {
-        font-size: 14px;
-    }
+  .text {
+    font-size: 14px;
+  }
 }
 
 

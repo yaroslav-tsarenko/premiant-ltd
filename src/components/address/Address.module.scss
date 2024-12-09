@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  position: relative;
+  padding: 82px 30px;
+  background-color: var(--secondary-color);
+  width: 93%;
+  flex-direction: column;
+}
+
+.map {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 1028px) {
+  .wrapper {
+    margin-top: 80px;
+    width: 100%;
+    padding: 50px 30px;
+  }
+
+  .map {
+    height: 700px;
+  }
+
+}
+
+@media (min-width: 768px) {
+.wrapper{
+  justify-content: center;
+}
+}

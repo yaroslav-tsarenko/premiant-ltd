@@ -4,9 +4,7 @@ import styles from './HeroSection.module.scss';
 
 const HeroSection: FC<HeroSectionProps> = ({headline, text, children }) => {
     return (
-        <div
-            className={styles.heroSection}
-        >
+        <div className={styles.heroSection}>
 
             <div className={styles.content}>
                 <h1 className={styles.headline}>{headline}</h1>

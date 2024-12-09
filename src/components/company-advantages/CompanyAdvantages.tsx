@@ -14,10 +14,15 @@ const CompanyAdvantages: FC<CompanyAdvantagesProps> = ({item, headline, content 
             <div className={styles.content}>
                 {content.map(({paragraph, text}, index) => (
                     <div key={index} className={styles.paragraph}>
-                        <h3 className={styles.paragraphHeadline}>
+
+                        <div>
                             <span className={styles.icon}></span>
-                            {paragraph}
-                        </h3>
+
+                            <h3 className={styles.paragraphHeadline}>
+                                {paragraph}
+                            </h3>
+                        </div>
+
                         <p className={styles.paragraphText}>{text}</p>
                     </div>
                 ))}
