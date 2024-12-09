@@ -16,7 +16,6 @@ import CompanyInfoItem from "@/assets/icons/companyInfoItem.svg";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import CompanyAdvantagesItem from "@/assets/icons/companyAdvantagesItem.svg";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
-import FeaturesItem from "@/assets/icons/featuresItem.svg";
 import FrequentlyAskedQuestion from "@/components/frequently-asked-question/FrequentlyAskedQuestion";
 import FrequentlyAskedQuestionItem from "@/assets/icons/frequentlyAskedQuestionItem.svg";
 import HomeForm from "@/components/home-form/HomeForm";
