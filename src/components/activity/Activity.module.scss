@@ -1,0 +1,206 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--main-padding-properties);
+  margin-top: 80px;
+  gap: 100px;
+}
+
+.beanie {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  width: 70%;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  color: black;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.headline {
+  font-weight: bold;
+  font-size: 40px;
+  color: var(--main-font-color);
+  font-family: 'GropledBold', sans-serif;
+}
+
+.modTitle {
+  font-weight: bold;
+  font-size: 40px;
+  color: lighten(#000000, 50%);
+  font-family: 'GropledBold', sans-serif;
+  padding-left: 80px;
+}
+
+.headDescription {
+  font-size: 16px;
+  color: lighten(#000000, 50%);
+  padding-left: 80px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  align-items: start;
+}
+
+.scheme {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: end;
+}
+
+.schemeText {
+  font-size: 16px;
+  color: lighten(#000000, 50%);
+  width: 50%;
+  font-weight: 600;
+}
+
+.checkCompany {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: end;
+}
+
+.documentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+  background-color: var(--secondary-color);
+  align-items: center;
+  padding: 20px 40px 20px 20px;
+  clip-path: polygon(0 0, 91% 0, 100% 10%, 100% 100%, 8% 100%, 0 89%);
+  z-index: 100;
+  position: relative;
+}
+
+.document {
+  z-index: 100;
+}
+
+.checkText {
+  font-size: 16px;
+  color: lighten(#000000, 50%);
+  width: 50%;
+  font-weight: 600;
+  text-align: right;
+}
+
+.checkTextAfter{
+    display: none;
+}
+
+.gradient {
+  position: absolute;
+  z-index: 0;
+}
+
+@media(max-width: 1028px) {
+
+  .wrapper {
+    gap: 50px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .checkCompany {
+    align-items: start;
+  }
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: 26px;
+  }
+
+  .modTitle {
+    padding-left: 0;
+    font-size: 26px;
+  }
+
+  .headDescription {
+    padding-left: 0;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .text {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .text div {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .beanie {
+    width: 100%;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .scheme {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .schemeText {
+    width: 100%;
+  }
+
+  .checkCompany {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .checkText {
+    display: none;
+  }
+
+  .checkTextAfter {
+    display: flex;
+    font-size: 16px;
+    color: lighten(#000000, 50%);
+    font-weight: 600;
+    width: 100%;
+  }
+
+}
+
+
+

@@ -1,0 +1,23 @@
+.goal {
+  display: flex;
+  align-items: start;
+  background-color: #EBF0F3;
+  flex-direction: column;
+  padding: 12px 30px;
+  gap: 10px;
+}
+
+.date {
+  font-size: 40px;
+  color: var(--secondary-color);
+  font-family: 'GropledBold', sans-serif;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--grey-font-color);
+  font-weight: 600;
+  width:fit-content;
+  text-align: justify;
+  height: auto;
+}

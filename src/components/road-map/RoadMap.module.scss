@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: var(--main-padding-properties);
+  margin-top: 100px;
+  gap: 30px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headline {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'GropledBold', sans-serif;
+  background: linear-gradient(to right, #6e6e6e, #151515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.controlling {
+  display: flex;
+  gap: 20px;
+}
+
+.arrow {
+  font-size: 35px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  color: var(--secondary-color);
+}
+
+.arrow:hover {
+  color: var(--allocation-color);
+}
+
+.goals {
+  display: flex;
+  gap: 30px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.goals > * {
+  flex: 0 0 calc(100% / 4.5);
+}
