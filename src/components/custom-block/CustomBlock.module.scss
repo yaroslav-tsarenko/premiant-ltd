@@ -41,6 +41,7 @@
     color: #999;
     font-weight: 100;
   }
+
 }
 
 .modified {
@@ -70,8 +71,7 @@
     margin-bottom: 10px;
     font-weight: bold;
     color: var(--primary-color);
-  }
-;
+  };
 
   p {
     font-size: 16px;
@@ -138,16 +138,22 @@
 }
 
 @media (max-width: 768px) {
+
+
   .featureScheme {
-    width: 400px;
-    height: 250px;
-    clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
+    width: 100%;
+    height: fit-content;
+    gap: 32px;
+    justify-content: center;
+    padding: 20px;
+    clip-path: polygon(0 0, 94% 0, 100% 8%, 100% 100%, 6% 100%, 0 94%);
   }
 
   .modified {
-    width: 400px;
-    height: 250px;
-    clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
+    width: 100%;
+    height: fit-content;
+    gap: 32px;
+    clip-path: polygon(0 0, 94% 0, 100% 8%, 100% 100%, 6% 100%, 0 94%);
   }
 
   .address {
@@ -164,27 +170,18 @@
 }
 
 @media (max-width: 480px) {
-  .featureScheme {
-    width: 250px;
-    clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
-  }
-
-  .modified {
-    width: 250px;
-    clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
-  }
 
   .address {
     position: relative;
     width: 100%;
     top: 0;
     left: 0;
-    height:200px;
+    height: 200px;
     transform: none;
     margin-bottom: 20px;
 
-    p{
-        width: 100%;
+    p {
+      width: 100%;
     }
   }
 

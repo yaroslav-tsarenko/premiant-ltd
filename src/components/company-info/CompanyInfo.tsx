@@ -47,8 +47,6 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = [], children}) => {
                         {children}
                     </div>
                 </div>
-
-
                 <div className={styles.images}>
                     {images.map((image, index) => (
                         <Image key={index} src={image.image} alt={`Company Image ${index}`} className={styles.image}/>

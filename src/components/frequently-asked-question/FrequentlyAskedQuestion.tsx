@@ -5,7 +5,6 @@ import {BsPlusLg} from "react-icons/bs";
 import styles from "./FrequentlyAskedQuestion.module.scss";
 import {FrequentlyAskedQuestionProps} from "@/types/frequentlyAskedQuestion";
 import Dot from "@/components/dot/Dot";
-import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
 
 const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = []}) => {
     const [openAnswerIndex, setOpenAnswerIndex] = useState<number | null>(null);
@@ -15,7 +14,6 @@ const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = 
     };
 
     return (
-        <ContainerWrapper>
             <div className={styles.wrapper}>
                 <div className={styles.beanie}>
                     <h1 className={styles.headline}>
@@ -23,8 +21,8 @@ const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = 
                     </h1>
                 </div>
                 <div className={styles.content}>
-                    <Dot title="FAQ"/>
-                    <section className={styles.faq}>
+                    <Dot title="Ответы на ваши вопросы"/>
+                    <div className={styles.faq}>
                         {questions.map(({question, answer}, index) => (
                             <div key={index} className={styles.question}>
                                 <div className={styles.questionHeader}>
@@ -49,10 +47,9 @@ const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = 
                                 </div>
                             </div>
                         ))}
-                    </section>
+                    </div>
                 </div>
             </div>
-        </ContainerWrapper>
     );
 };
 

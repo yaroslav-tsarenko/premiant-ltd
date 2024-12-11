@@ -3,7 +3,6 @@ import styles from './TariffСalculator.module.scss';
 import TariffComponent from "@/components/tariff-component/TariffComponent";
 import {TariffCalculatorProps} from "@/types/tariffCalculator";
 import Image from 'next/image';
-import Gradient from '@/assets/images/calculatorGradient.svg';
 import Grid from '@/assets/images/grid.svg';
 import Dot from "@/components/dot/Dot";
 
@@ -18,7 +17,6 @@ const TariffCalculator: FC<TariffCalculatorProps> = ({primaryButton, secondaryBu
             </div>
             <div className={styles.calculatorContent}>
                 <Image src={Grid} alt="Grid" className={styles.grid}/>
-                <Image src={Gradient} alt="Gradient" className={styles.gradient}/>
                 <div className={styles.calculatorInner}>
                     <aside className={styles.calculator}>
                         <div className={styles.head}>
