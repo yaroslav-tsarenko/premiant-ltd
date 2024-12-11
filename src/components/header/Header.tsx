@@ -14,43 +14,37 @@ const Header: FC<HeaderProps> = ({headerLinks = [], children}) => {
 
     return (
         <header className={styles.header}>
-            <nav className={styles.links}>
-                <ul>
-                    {firstPartLinks.map((link, index) => (
-                        <li key={index} className={styles.link}>
-                            <Link href={link.route} legacyBehavior>
-                                <a>{link.name}</a>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-
-            <Link href="/" legacyBehavior>
-                <Image src={logo} alt="Логотип" className={styles.logo}/>
-            </Link>
-
-            <nav className={styles.links}>
-                <ul>
-                    {secondPartLinks.map((link, index) => (
-                        <li key={index} className={styles.link}>
-                            <Link href={link.route} legacyBehavior>
-                                <a>{link.name}</a>
-                            </Link>
-                        </li>
-                    ))}
-
-                    <LanguageDropdown/>
-
-                    {children}
-                </ul>
-
-
-                <div>
-
-                </div>
-
-            </nav>
+            <div className={styles.headerInner}>
+                <nav className={styles.links}>
+                    <ul>
+                        {firstPartLinks.map((link, index) => (
+                            <li key={index} className={styles.link}>
+                                <Link href={link.route} legacyBehavior>
+                                    <a>{link.name}</a>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+                <Link href="/" legacyBehavior>
+                    <Image src={logo} alt="Логотип" className={styles.logo}/>
+                </Link>
+                <nav className={styles.links}>
+                    <ul>
+                        {secondPartLinks.map((link, index) => (
+                            <li key={index} className={styles.link}>
+                                <Link href={link.route} legacyBehavior>
+                                    <a>{link.name}</a>
+                                </Link>
+                            </li>
+                        ))}
+                        <LanguageDropdown/>
+                        {children}
+                    </ul>
+                    <div>
+                    </div>
+                </nav>
+            </div>
         </header>
     );
 };

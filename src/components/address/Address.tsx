@@ -6,6 +6,7 @@ import whiteMarker from '@/assets/icons/whiteMarker.svg';
 import useLoadGoogleMaps from '@/hooks/useLoadGoogleMaps';
 import styles from './Address.module.scss';
 import {AddressProps} from "@/types/address";
+import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
 
 const darkTheme = [
     { elementType: 'geometry', stylers: [{ color: '#212121' }] },
@@ -39,31 +40,31 @@ const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
-        <div className={styles.wrapper}>
-            {firstChildren}
-            <GoogleMap
-                mapContainerClassName={styles.map}
-                center={center}
-                zoom={15}
-                options={{
-                    styles: darkTheme,
-                    disableDefaultUI: true,
-                    zoomControl: false,
-                    streetViewControl: false,
-                    fullscreenControl: false,
-                    mapTypeControl: false,
-                }}
-            >
-                <Marker
-                    position={center}
-                    icon={{
-                        url: whiteMarker.src,
-                        scaledSize: new google.maps.Size(46, 59),
+            <div className={styles.wrapper}>
+                {firstChildren}
+                <GoogleMap
+                    mapContainerClassName={styles.map}
+                    center={center}
+                    zoom={15}
+                    options={{
+                        styles: darkTheme,
+                        disableDefaultUI: true,
+                        zoomControl: false,
+                        streetViewControl: false,
+                        fullscreenControl: false,
+                        mapTypeControl: false,
                     }}
-                />
-            </GoogleMap>
-            {secondChildren}
-        </div>
+                >
+                    <Marker
+                        position={center}
+                        icon={{
+                            url: whiteMarker.src,
+                            scaledSize: new google.maps.Size(46, 59),
+                        }}
+                    />
+                </GoogleMap>
+                {secondChildren}
+            </div>
     );
 };
 

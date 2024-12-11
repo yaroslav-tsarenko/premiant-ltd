@@ -36,9 +36,24 @@
   color: var(--secondary-color);
 }
 
+.calculatorInner {
+  display: flex;
+  max-width: 1920px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media screen and (max-width: 478px) {
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
 .calculatorContent {
   display: flex;
   gap: 60px;
+  margin: 0 auto;
   background-color: var(--secondary-color);
   width: 100%;
   padding: 80px 0 68px 0;
@@ -57,6 +72,10 @@
   height: 290px;
   clip-path: polygon(100% 0, 100% 90%, 87% 100%, 0 100%, 0 0);
   border-radius: 5px;
+
+  @media screen and (max-width: 478px) {
+    width: 100%;
+  }
 }
 
 .head {
@@ -126,6 +145,15 @@
   z-index: 2;
   overflow: hidden;
 
+  @media screen and (max-width: 478px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
 }
 
 .bottomApplication {
@@ -189,7 +217,7 @@
     gap: 30px;
   }
 
-  .content{
+  .content {
     width: 100%;
   }
 }
@@ -205,7 +233,7 @@
     }
   }
 
-  .title{
+  .title {
     font-size: 40px;
   }
 }

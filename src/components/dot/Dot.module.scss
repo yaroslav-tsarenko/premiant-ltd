@@ -1,0 +1,22 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background-color: var(--secondary-color);
+    color: black;
+  }
+
+  p{
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #4d4d4d;
+  }
+}
+

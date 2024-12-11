@@ -25,7 +25,6 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                     </ul>
                     {children}
                 </nav>
-
                 <div className={styles.content}>
                     <div className={styles.headline}>
                         <p className={styles.copyright}>
@@ -46,7 +45,6 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                     </div>
                 </div>
             </div>
-
             <div className={styles.mobile}>
                 <nav className={styles.linksMob}>
                     <ul>
@@ -58,7 +56,6 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                             </li>
                         ))}
                     </ul>
-
                     <ul>
                         {secondPartLinks.map((link, index) => (
                             <li key={index} className={styles.link}>
@@ -69,7 +66,6 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                         ))}
                     </ul>
                 </nav>
-
                 <div className={styles.contactsMob}>
                     <div className={styles.contactMob}>
                         {firstPartContacts.map((contact, index) => (
@@ -79,7 +75,6 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                             </div>
                         ))}
                     </div>
-
                     <div className={styles.telegram}>
                         {secondPartContacts.map((contact, index) => (
                             <div key={index} className={styles.contact}>
@@ -89,9 +84,7 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                         ))}
                     </div>
                 </div>
-
                 {children}
-
                 <div className={styles.headline}>
                     <p className={styles.copyright}>
                         © PremiantLTD 2021-2024
