@@ -70,16 +70,11 @@
 
 @media (max-width: 1028px) {
   .wrapper {
-    width: 340px;
+    width: 100%;
   }
   .fullWidth {
     width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .wrapper {
-    width: 80%;
+    margin: 0;
   }
 }
 

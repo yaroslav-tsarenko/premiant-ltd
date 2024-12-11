@@ -35,16 +35,17 @@
 .images {
   display: flex;
   gap: 30px;
-  align-items: end;
-  flex-wrap: wrap;
   margin-left: 100px;
+}
+
+.image {
+  object-fit: contain;
 }
 
 .modified {
   font-weight: bold;
   font-family: 'GropledBold', sans-serif;
   font-size: 40px;
-
 }
 
 .headline {
@@ -102,7 +103,7 @@
 
 @media (max-width: 768px) {
 
-  .modified{
+  .modified {
     font-size: 30px;
   }
 
@@ -110,15 +111,14 @@
     gap: 20px;
   }
 
-    .textWrapper {
-      margin: 0;
-    }
+  .textWrapper {
+    margin: 0;
+  }
 
   .textContainer {
     gap: 15px;
     padding: 0;
   }
-
 
   .image {
     max-width: 200px;
@@ -133,13 +133,18 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 478px) {
   .headline {
     font-size: 20px;
   }
 
-  .image {
-    max-width: 150px;
+  .images {
+    display: flex;
+    margin: 0;
+    align-items: flex-end;
+
+    &:nth-child(2) {
+    }
   }
 }
 

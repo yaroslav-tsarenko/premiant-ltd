@@ -40,18 +40,18 @@
   font-family: 'GropledBold', sans-serif;
 }
 
-.modTitle{
-    font-size: 40px;
-    font-weight: bold;
-    color: #000000;
-    font-family: 'GropledBold', sans-serif;
+.modTitle {
+  font-size: 40px;
+  font-weight: bold;
+  color: #000000;
+  font-family: 'GropledBold', sans-serif;
 }
 
 .highlight {
   color: var(--main-font-color);
 }
 
-.scheme{
+.scheme {
   display: flex;
   flex-wrap: wrap;
   gap: 100px;
@@ -60,21 +60,22 @@
 }
 
 @media (max-width: 1024px) {
-  .scheme{
+  .scheme {
     gap: 50px;
   }
 }
 
 @media (max-width: 768px) {
-    .beanie{
-        flex-direction: column;
-        gap: 20px;
-    }
-  .headline{
+  .beanie {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .headline {
     width: 100%;
   }
 
-  .scheme{
+  .scheme {
     gap: 20px;
   }
 }

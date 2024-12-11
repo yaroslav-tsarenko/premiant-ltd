@@ -23,7 +23,6 @@ const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, fu
                     </div>
                 </div>
             </div>
-
             <Link href="#" legacyBehavior>
                 <a className={styles.btn}>Выбрать тариф</a>
             </Link>
