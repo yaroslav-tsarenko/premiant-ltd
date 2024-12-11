@@ -1,0 +1,130 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 81px 0 150px 0;
+  padding: var(--main-padding-properties);
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  gap: 50px;
+}
+
+.head {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.headline {
+  font-size: 53px;
+  font-weight: bold;
+  font-family: 'GropledBold', sans-serif;
+  background: linear-gradient(to right, #6e6e6e, #151515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.greeting {
+  font-size: 16px;
+  background: linear-gradient(to right, #6e6e6e, #151515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.input {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--grey-font-color);
+  transition: 0.2s;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #EBF0F3;
+  }
+
+  &:focus {
+    outline: none;
+    caret-color: var(--allocation-color);
+  }
+}
+
+.inputGroup {
+  position: relative;
+  height: fit-content;
+}
+
+.error {
+  position: absolute;
+  left: 0;
+  color: red;
+  font-size: 12px;
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px;
+  color: #8e8e8e;
+}
+
+.bottomContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.link{
+    font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  color: #707070;
+}
+
+.linkName{
+  text-decoration: underline;
+color: var(--main-font-color);
+  transition: 0.2s;
+}
+
+.linkName:hover{
+  color: var(--allocation-color);
+}
+
+@media  (max-width: 480px) {
+  .wrapper{
+    padding: 0 20px;
+  }
+    .loginContainer {
+        gap: 20px;
+    }
+    .headline {
+        font-size: 36px;
+    }
+
+
+}
