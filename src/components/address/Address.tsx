@@ -6,7 +6,6 @@ import whiteMarker from '@/assets/icons/whiteMarker.svg';
 import useLoadGoogleMaps from '@/hooks/useLoadGoogleMaps';
 import styles from './Address.module.scss';
 import {AddressProps} from "@/types/address";
-import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
 
 const darkTheme = [
     { elementType: 'geometry', stylers: [{ color: '#212121' }] },

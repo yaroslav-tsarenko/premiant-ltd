@@ -11,9 +11,7 @@ const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, fu
                 <h2 className={styles.headline}>
                     {headline}
                 </h2>
-
                 <div className={styles.divingLine}></div>
-
                 <div className={styles.info}>
                     <div className={styles.prices}>
                         <p>Инвестиции:</p>

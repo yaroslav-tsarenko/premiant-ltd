@@ -9,7 +9,6 @@ import HomeForm from "@/components/home-form/HomeForm";
 import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
 import Address from "@/components/address/Address";
-import CompanyAdvantagesItem from "@/assets/icons/companyAdvantagesItem.svg";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import Activity from "@/components/activity/Activity";
