@@ -3,7 +3,7 @@ import { HeroSectionProps } from "@/types/heroSection";
 import styles from './HeroSection.module.scss';
 import Image from "next/image";
 import dashboardDemo from "@/assets/images/dashboard-demo.svg"
-import dashboardDemo2 from "@/assets/images/demo-dashboard-mobile.svg"
+import dashboardDemo2 from "@/assets/images/hero-bg-mobile.png"
 
 const HeroSection: FC<HeroSectionProps> = ({headline, text, children }) => {
     return (
