@@ -20,7 +20,6 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = [], children}) => {
                             И
                             КРИПТОВАЛЮТНЫХ АКТИВОВ
                         </h1>
-
                         <p className={styles.text}>Наша команда благодаря самым последним аналитическим инструментам и
                             алгоритмам в области
                             искусственного интеллекта и финансов, оценивает и перераспределяет потоки интернет-трафика
@@ -45,8 +44,8 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = [], children}) => {
                             для
                             роста и максимизации доходов.
                         </p>
+                        {children}
                     </div>
-                    {children}
                 </div>
 
 
