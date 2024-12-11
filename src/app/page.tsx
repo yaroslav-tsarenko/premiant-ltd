@@ -11,7 +11,6 @@ import CompanyInfo from "@/components/company-info/CompanyInfo";
 import CompanyFirstImage from "@/assets/images/companyFirstImage.svg"
 import CompanySecondImage from "@/assets/images/companySecondImage.svg"
 import CompanyThirdImage from "@/assets/images/companyThirdImage.svg"
-import CompanyInfoItem from "@/assets/icons/companyInfoItem.svg";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import FrequentlyAskedQuestion from "@/components/frequently-asked-question/FrequentlyAskedQuestion";

@@ -7,7 +7,7 @@ import {FrequentlyAskedQuestionProps} from "@/types/frequentlyAskedQuestion";
 import Dot from "@/components/dot/Dot";
 import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
 
-const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({item, questions = []}) => {
+const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = []}) => {
     const [openAnswerIndex, setOpenAnswerIndex] = useState<number | null>(null);
 
     const toggleAnswer = (index: number) => {
