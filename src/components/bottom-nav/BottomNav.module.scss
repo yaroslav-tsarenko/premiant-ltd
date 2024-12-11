@@ -4,11 +4,16 @@
 
 .nav {
   position: fixed;
+  z-index: 999;
   left: 0;
-  width: 100%;
+  right: 0;
+  width: 95%;
+  margin: 0 auto;
   background-color: white;
   padding: 0 20px;
+  outline: none;
   bottom: 60px;
+  border-radius: 10px;
 }
 
 .links {

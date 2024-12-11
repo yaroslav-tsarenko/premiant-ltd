@@ -17,17 +17,17 @@
   background: var(--primary-color);
   color: var(--secondary-color);
   border-radius: 30px;
-  padding: 15px 15px;
+  padding: 12px 20px;
   border: none;
   font-size: 16px;
   font-weight: bolder;
-  box-shadow: 12px 0 20px 2px rgba(255, 255, 255, 0.5);
+  box-shadow: 5px 0 20px 2px rgba(255, 255, 255, 0.5);
   transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .hero:hover {
-  box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.7);
 }
 
 .companyInfo {

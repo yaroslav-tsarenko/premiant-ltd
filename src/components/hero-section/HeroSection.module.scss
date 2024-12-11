@@ -3,34 +3,45 @@
   src: url('../../assets/fonts/gropled-bold.otf') format('opentype');
 }
 
-.heroSection {
-  height: 100vh;
-  background-image: url('../../assets/images/heroBanner.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.heroWrapper {
   display: flex;
-  margin: 0 30px;
-  overflow: hidden;
-  justify-content: center;
+  padding: 0 30px;
+  flex-direction: column;
+}
+
+.heroSection {
+  max-height: fit-content;
+  background: url("../../assets/images/hero-bg.svg") no-repeat center;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+  width: 100%;
+  flex-direction: column;
   box-sizing: border-box;
+  clip-path: polygon(0 0, 95% 0, 100% 15%, 100% 100%, 5% 100%, 0 87%);
+
+  @media screen and (max-width: 478px) {
+    height: 725px;
+    padding: 0 20px;
+    clip-path: polygon(0 0, 95% 0, 100% 4%, 100% 100%, 5% 100%, 0 93%);
+  }
 }
 
 .content {
-  max-width: 885px;
+  max-width: 985px;
   display: flex;
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 95%;
+  padding: 60px 0;
   flex-direction: column;
-  gap: 30px;
-  margin-top: 40px;
-  box-sizing: border-box;
+  gap: 25px;
 }
 
 .headline {
-  font-size: 3vw;
+  font-size: 3.25rem;
   font-weight: 500;
   color: var(--secondary-font-color);
   text-align: center;
@@ -42,14 +53,32 @@
 }
 
 .text {
-  max-width: 80%;
-  font-size: 1.5vw;
+  font-size: 1.125rem;
   font-weight: 300;
   color: var(--secondary-font-color);
   text-align: center;
-  background: linear-gradient(to right, #ffffff, #151515);
+  background: linear-gradient(to right, #ffffff, #424242);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.image2 {
+  display: none;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  @media screen and (max-width: 478px) {
+    display: flex;
+  }
+}
+
+.image {
+  max-width: 1920px;
+  width: 90%;
+  height: 100%;
+  @media screen and (max-width: 478px) {
+    display: none;
+  }
 }
 
 @media (max-width: 1028px) {
@@ -62,7 +91,7 @@
   }
 
   .text {
-    font-size: 2vw;
+    font-size: 1.5rem;
   }
 }
 
@@ -82,10 +111,10 @@
 
 @media (max-width: 480px) {
   .headline {
-    font-size: 2vw;
+    font-size: 1.5rem;
   }
 
   .text {
-    font-size: 1vw;
+    font-size: 1rem;
   }
 }
