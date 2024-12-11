@@ -1,17 +1,40 @@
 .header {
   display: flex;
+  position: sticky;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  padding: var(--main-padding-properties);
   width: 100%;
+  top: 0;
+  padding: var(--main-padding-properties);
+  transition: all 0.3s ease;
   margin: 0;
   height: 100px;
+}
+
+.headerInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
 .logo {
   width: 382px;
   cursor: pointer;
+  margin: 0 auto;
   justify-content: center;
 }
 

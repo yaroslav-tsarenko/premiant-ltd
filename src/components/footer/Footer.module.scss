@@ -2,7 +2,8 @@
   display: flex;
   padding: 80px 30px;
   width: 100%;
-  background-color: var(--secondary-color);
+  background: url("../../assets/images/footer-bg.png") no-repeat center;
+  background-size: cover;
   flex-direction: column;
   gap: 84px;
 }
@@ -14,6 +15,9 @@
 .desktop {
   display: flex;
   gap: 84px;
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
   flex-direction: column;
 }
 
@@ -62,7 +66,7 @@
   justify-content: space-between;
 }
 
-.telegram{
+.telegram {
   width: 86px;
 }
 
@@ -153,7 +157,7 @@
     display: none;
   }
 
-  .logo{
+  .logo {
     font-size: 58px;
   }
 
@@ -161,11 +165,11 @@
 
 @media (max-width: 480px) {
 
-  .linksMob{
+  .linksMob {
     flex-direction: column;
   }
 
-  .contactsMob{
+  .contactsMob {
     flex-direction: column;
     gap: 20px;
   }

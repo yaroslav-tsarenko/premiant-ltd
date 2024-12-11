@@ -1,5 +1,4 @@
 import React from "react";
-import Header from '../components/header/Header';
 import Button from "@/components/button/Button";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
@@ -12,16 +11,13 @@ import CompanyInfo from "@/components/company-info/CompanyInfo";
 import CompanyFirstImage from "@/assets/images/companyFirstImage.svg"
 import CompanySecondImage from "@/assets/images/companySecondImage.svg"
 import CompanyThirdImage from "@/assets/images/companyThirdImage.svg"
-import CompanyInfoItem from "@/assets/icons/companyInfoItem.svg";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
-import CompanyAdvantagesItem from "@/assets/icons/companyAdvantagesItem.svg";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import FrequentlyAskedQuestion from "@/components/frequently-asked-question/FrequentlyAskedQuestion";
 import FrequentlyAskedQuestionItem from "@/assets/icons/frequentlyAskedQuestionItem.svg";
 import HomeForm from "@/components/home-form/HomeForm";
 import FormItem from "@/assets/icons/formItem.svg";
 import Address from "@/components/address/Address";
-import Footer from "@/components/footer/Footer";
 import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
@@ -29,47 +25,30 @@ import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 export default function Home() {
     return (
         <>
-            <Header
-                headerLinks={[
-                    {name: 'Главная', route: '#'},
-                    {name: 'О Компании', route: '/about'},
-                    {name: 'Инвесторам/Партнерам', route: '#'},
-                    {name: 'FAQ', route: '#'},
-                    {name: 'Контакты', route: '/contacts'},
-                ]}
-            >
-                <Button variant="headerSign">Войти</Button>
-                <Button variant="outline">Регистрация</Button>
-            </Header>
-
             <HeroSection
                 headline="ИНВЕСТИРУЙТЕ С НАМИ И ПРИУМНОЖАЙТЕ СВОЙ КАПИТАЛ"
-                text="присоединяйтесь к платформе уже сегодня и откройте новые возможности для роста!">
+                text="Присоединяйтесь к платформе уже сегодня и откройте новые возможности для роста!"
+            >
                 <Button variant="hero">Начать инвестировать</Button>
             </HeroSection>
-
             <PromoBar
                 price={PricePromo}
                 text="За время перебывания вас на сайте наши партнеры заработали"
                 promoLink={{name: "Присоедениться к нам", route: '#'}}
-                arrowIcon={ArrowRight}/>
-
-            <CompanyInfo item={CompanyInfoItem}
-                         images={[
-                             {image: CompanyFirstImage},
-                             {image: CompanySecondImage},
-                             {image: CompanyThirdImage}
-                         ]}
-            >
+                arrowIcon={ArrowRight}
+            />
+            <CompanyInfo
+                images={[
+                    {image: CompanyFirstImage},
+                    {image: CompanySecondImage},
+                    {image: CompanyThirdImage}
+                ]}>
                 <Button variant={"companyInfo"}>Начать инвестировать</Button>
-
             </CompanyInfo>
-
             <FeaturesInfo
                 item="О НАС"
                 title="ОСНОВНЫЕ ОСОБЕННОСТИ"
-                modTitle="ЗАРАБОТКА"
-            >
+                modTitle="ЗАРАБОТКА">
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>01</h2>
@@ -81,7 +60,6 @@ export default function Home() {
                         высокую отдачу от инвестиций.
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>02</h2>
@@ -93,46 +71,37 @@ export default function Home() {
                         и доходы.
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>03</h2>
                         <p>Гибкость и адаптивность</p>
                     </div>
-
                     <p>
                         Premiant LTD быстро реагирует на изменения рынка, повышая точность таргетинга и эффективность
                         рекламы.
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>04</h2>
                         <p>Инновации для оптимизации</p>
                     </div>
-
                     <p>
                         Современные алгоритмы и машинное обучение делают Premiant LTD лидером в сфере арбитража
                         интернет-трафика.
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="modified">
                     <div>
                         <h2>05</h2>
                         <p>Прозрачность и контроль</p>
                     </div>
-
                     <p>
                         Подробные отчеты обеспечивают полное понимание расходов и результатов кампаний.
                     </p>
                 </CustomBlock>
-
             </FeaturesInfo>
-
             <CompanyAdvantages
-                item={CompanyAdvantagesItem}
                 headline="НАШИ ПРИЕМУЩЕСТВА"
                 content={[
                     {
@@ -169,12 +138,10 @@ export default function Home() {
                     },
                 ]}
             />
-
             <TariffCalculator
                 primaryButton={<Button variant="calculator">Начать инвестировать</Button>}
                 secondaryButton={<Button variant="hero">Оставить заявку</Button>}
             />
-
             <FrequentlyAskedQuestion
                 item={FrequentlyAskedQuestionItem}
                 questions={[
@@ -211,17 +178,14 @@ export default function Home() {
                     },
                 ]}
             />
-
             <HomeForm
                 item={FormItem}
                 headline="ОСТАВЬТЕ ЗАЯВКУ"
                 description="Контролируй свои средства и уверенно двигайся к своим финансовым целям вместе с Skylex LTD.
                  С нами ты получишь надежного партнера, который поможет заставить твои деньги работать на тебя и приносить стабильный
-                  доход."
-            >
+                  доход.">
                 <Button variant="form">Отправить</Button>
             </HomeForm>
-
             <Address
                 firstChildren={
                     <CustomBlock variant="address">
@@ -250,29 +214,6 @@ export default function Home() {
                     </CustomBlock>
                 }
             />
-
-
-
-            <Footer
-                footerLinks={[
-                    {name: 'Главная', route: '#'},
-                    {name: 'О Компании', route: '#'},
-                    {name: 'Инвесторам/Партнерам', route: '#'},
-                    {name: 'FAQ', route: '#'},
-                    {name: 'Контакты', route: '#'},
-                    {name: 'Поддержка', route: '#'},
-                ]}
-                contacts={[
-                    {label: 'E-mail', value: 'premiantltd@gmail.com'},
-                    {label: 'Phone', value: '+38 888 88 88 888'},
-                    {label: 'Telegram', value: '@ltdpr'},
-                ]}
-            >
-
-                <Button variant="hero">Начать инвестировать</Button>
-
-            </Footer>
-
             <BottomNav
                 logo={BottomNuvLogo}
                 links={[

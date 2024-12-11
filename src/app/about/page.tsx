@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '@/components/header/Header';
-import Footer from "@/components/footer/Footer";
 import Button from "@/components/button/Button";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
@@ -20,21 +18,7 @@ import Activity from "@/components/activity/Activity";
 const AboutPage = () => {
     return (
         <>
-            <Header
-                headerLinks={[
-                    {name: 'Главная', route: '#'},
-                    {name: 'О Компании', route: '/about'},
-                    {name: 'Инвесторам/Партнерам', route: '#'},
-                    {name: 'FAQ', route: '#'},
-                    {name: 'Контакты', route: '/contacts'},
-                ]}
-            >
-                <Button variant="headerSign">Войти</Button>
-                <Button variant="outline">Регистрация</Button>
-            </Header>
-
             <HeroSectionAbout/>
-
             <FeaturesInfo
                 item="ПОЧЕМУ МЫ"
                 title="МИССИЯ КОМПАНИИ"
@@ -51,7 +35,6 @@ const AboutPage = () => {
                         технології
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>02</h2>
@@ -63,7 +46,6 @@ const AboutPage = () => {
                         обоснованные решения, укрепляя доверие
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>03</h2>
@@ -74,7 +56,6 @@ const AboutPage = () => {
                         Мы сотрудничаем с ведущими рекламными сетями, обеспечивая качественный трафик со всего мира
                     </p>
                 </CustomBlock>
-
                 <CustomBlock variant="featureScheme">
                     <div>
                         <h2>04</h2>
@@ -86,9 +67,7 @@ const AboutPage = () => {
                         результаты и конкурентные преимущества
                     </p>
                 </CustomBlock>
-
             </FeaturesInfo>
-
             <HomeForm
                 item={FormItem}
                 headline="ОСТАВЬТЕ ЗАЯВКУ"
@@ -98,7 +77,6 @@ const AboutPage = () => {
             >
                 <Button variant="form">Отправить</Button>
             </HomeForm>
-
             <Address
                 firstChildren={
                     <CustomBlock variant="address">
@@ -127,7 +105,6 @@ const AboutPage = () => {
                     </CustomBlock>
                 }
             />
-
             <Activity
                 item="КТО МЫ?"
                 title="ЧЕМ"
@@ -142,14 +119,13 @@ const AboutPage = () => {
                     </div>
                     <p>
                         Мы предлагаем решения для управления рекламными кампаниями и увеличения конверсии, используя
-                        передовые алгоритмы и аналитические инструменты. Анализируем трафик из разных источников и оптимизируем
+                        передовые алгоритмы и аналитические инструменты. Анализируем трафик из разных источников и
+                        оптимизируем
                         доход
                     </p>
                 </CustomBlock>
             </Activity>
-
             <CompanyAdvantages
-                item={CompanyAdvantagesItem}
                 headline="НАШИ ПРИЕМУЩЕСТВА"
                 content={[
                     {
@@ -186,27 +162,6 @@ const AboutPage = () => {
                     },
                 ]}
             />
-
-            <Footer
-                footerLinks={[
-                    {name: 'Главная', route: '#'},
-                    {name: 'О Компании', route: '#'},
-                    {name: 'Инвесторам/Партнерам', route: '#'},
-                    {name: 'FAQ', route: '#'},
-                    {name: 'Контакты', route: '#'},
-                    {name: 'Поддержка', route: '#'},
-                ]}
-                contacts={[
-                    {label: 'E-mail', value: 'premiantltd@gmail.com'},
-                    {label: 'Phone', value: '+38 888 88 88 888'},
-                    {label: 'Telegram', value: '@ltdpr'},
-                ]}
-            >
-
-                <Button variant="hero">Начать инвестировать</Button>
-
-            </Footer>
-
             <BottomNav
                 logo={BottomNuvLogo}
                 links={[

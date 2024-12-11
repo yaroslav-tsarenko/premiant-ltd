@@ -7,11 +7,9 @@
 :root {
     --background: #ffffff;
     --foreground: #000000;
-
-    --main-padding-properties: 0 30px 0 30px;
-
+    --main-padding-properties: 0 30px;
     --primary-color: #ffff;
-    --secondary-color: #151515;
+    --secondary-color: #161f1f;
     --main-font-color: #000000;
     --secondary-font-color: #F4F7FE;
     --allocation-color: #17F4E3;
@@ -31,6 +29,11 @@ body {
     background: var(--background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+button{
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
 }
 
 * {
