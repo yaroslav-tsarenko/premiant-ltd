@@ -84,6 +84,23 @@
   box-shadow: 0 0 30px 10px rgba(21, 149, 140, 0.5);
 }
 
+.authentication{
+  background: #000000;
+  color: var(--primary-color);
+  border-radius: 30px;
+  padding: 15px 15px;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  box-shadow: -12px 0 20px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.authentication:hover {
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.7);
+}
+
 @media (max-width: 768px) {
   .companyInfo{
     width: 100%;

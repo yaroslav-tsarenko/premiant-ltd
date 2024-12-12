@@ -6,11 +6,11 @@
   padding: var(--main-padding-properties);
 }
 
-.loginContainer {
+.registerContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+  max-width: 510px;
   text-align: center;
   gap: 50px;
 }
@@ -19,6 +19,8 @@
   display: flex;
   gap: 20px;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .headline {
@@ -39,8 +41,25 @@
 
 .form {
   display: flex;
-  gap: 16px;
   flex-direction: column;
+  gap: 16px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.formGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fullWidth {
+  grid-column: span 2;
 }
 
 .input {
@@ -64,20 +83,31 @@
   }
 }
 
-.inputGroup {
-    display: flex;
-    flex-direction: column;
-  gap: 10px;
-}
+.inputReferral{
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--grey-font-color);
+  transition: 0.2s;
+  border-radius: 5px;
+  text-align: center;
 
-.error {
-  text-align: left;
-  left: 0;
-  color: red;
-  font-size: 12px;
+  &:hover {
+    background-color: #EBF0F3;
+  }
+
+  &:focus {
+    outline: none;
+    caret-color: var(--allocation-color);
+  }
 }
 
 .passwordWrapper {
+  display: flex;
+  align-items: center;
   position: relative;
 }
 
@@ -89,6 +119,13 @@
   cursor: pointer;
   font-size: 24px;
   color: #8e8e8e;
+}
+
+.error {
+  text-align: left;
+  left: 0;
+  color: red;
+  font-size: 12px;
 }
 
 .bottomContainer {
@@ -117,15 +154,18 @@
 }
 
 @media (max-width: 480px) {
-  .wrapper {
-    padding: 0 20px;
-  }
-  .loginContainer {
-    gap: 20px;
-  }
-  .headline {
-    font-size: 36px;
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
+    .fullWidth {
+        grid-column: span 1;
+    }
 
+  .inputReferral{
+    text-align: left;
+  }
 }
+
