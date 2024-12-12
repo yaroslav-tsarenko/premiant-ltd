@@ -34,7 +34,6 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                     }}
                 >
                     <Form className={styles.form}>
-
                         <div className={styles.inputGroup}>
                             <Field
                                 name="email"
@@ -44,7 +43,6 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                             />
                             <ErrorMessage name="email" component="div" className={styles.error} />
                         </div>
-
                         <div className={styles.inputGroup}>
                             <div className={styles.passwordWrapper}>
                                 <Field
@@ -59,12 +57,10 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                             </div>
                             <ErrorMessage name="password" component="div" className={styles.error} />
                         </div>
-
                     </Form>
                 </Formik>
                 <div className={styles.bottomContainer}>
                     {children}
-
                     {linkRoute.map((link, index) => (
                         <p key={index} className={styles.link}>
                             Или
@@ -74,7 +70,6 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                         </p>
                     ))}
                 </div>
-
             </div>
         </div>
     );
