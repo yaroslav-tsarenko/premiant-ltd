@@ -9,7 +9,7 @@ const RegisterPage = () => {
                 headline="РЕГИСТРАЦИЯ"
                 greeting="Добро пожаловать! Мы рады, что Вы решили присоединиться к нам. Надеемся, что наш сервис принесет Вам удовольствие и пользу!"
                 linkRoute={[
-                {name: 'войти', route: '#'},]}>
+                {name: 'войти', route: '/login'},]}>
                 <Button variant="authentication">Зарегистрироваться</Button>
             </Register>
 

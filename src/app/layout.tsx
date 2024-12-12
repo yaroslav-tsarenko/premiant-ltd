@@ -4,6 +4,7 @@ import Button from "@/components/button/Button";
 import Header from "@/components/header/Header";
 import React from "react";
 import Footer from "@/components/footer/Footer";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Premiant LTD",
@@ -20,21 +21,25 @@ export default function RootLayout({
       <body>
       <Header
           headerLinks={[
-              {name: 'Главная', route: '#'},
+              {name: 'Главная', route: '/'},
               {name: 'О Компании', route: '/about'},
               {name: 'Инвесторам/Партнерам', route: '#'},
               {name: 'FAQ', route: '#'},
               {name: 'Контакты', route: '/contacts'},
           ]}
       >
-          <Button variant="headerSign">Войти</Button>
-          <Button variant="outline">Регистрация</Button>
+          <Link href="/login">
+              <Button variant="headerSign">Войти</Button>
+          </Link>
+          <Link href="/register">
+              <Button variant="outline">Регистрация</Button>
+          </Link>
       </Header>
       {children}
       <Footer
           footerLinks={[
               {name: 'Главная', route: '#'},
-              {name: 'О Компании', route: '#'},
+              {name: 'О Компании', route: '/about'},
               {name: 'Инвесторам/Партнерам', route: '#'},
               {name: 'FAQ', route: '#'},
               {name: 'Контакты', route: '#'},
