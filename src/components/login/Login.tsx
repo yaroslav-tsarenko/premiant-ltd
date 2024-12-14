@@ -57,6 +57,10 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                             </div>
                             <ErrorMessage name="password" component="div" className={styles.error} />
                         </div>
+
+                        <Link href="/forgot-password" legacyBehavior className={styles.forgotPassword}>
+                            <a className={styles.forgotPassword}>Забыли пароль?</a>
+                        </Link>
                     </Form>
                 </Formik>
                 <div className={styles.bottomContainer}>
