@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  padding: var(--main-padding-properties);
+}
+
+.wrapperInner {
+  display: flex;
+  max-width: 1920px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.dashboardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 100%;
+}
