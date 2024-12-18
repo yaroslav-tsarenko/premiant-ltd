@@ -49,7 +49,7 @@
   box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.7);
 }
 
-.form{
+.form {
   background: var(--primary-color);
   color: var(--secondary-color);
   border-radius: 30px;
@@ -68,7 +68,7 @@
   box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.7);
 }
 
-.calculator{
+.calculator {
   background: #17F4E3;
   color: var(--secondary-color);
   border-radius: 30px;
@@ -84,7 +84,7 @@
   box-shadow: 0 0 30px 10px rgba(21, 149, 140, 0.5);
 }
 
-.authentication{
+.authentication {
   background: #000000;
   color: var(--primary-color);
   border-radius: 30px;
@@ -101,8 +101,34 @@
   box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.7);
 }
 
+.check {
+  background: #24CBBF;
+  color: var(--primary-color);
+  border-radius: 30px;
+  padding: 10px 0;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 95%;
+  box-shadow: -12px 0 20px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.check:hover {
+  box-shadow: 0 0 30px 10px var(--allocation-color);
+}
+
+
 @media (max-width: 768px) {
-  .companyInfo{
+  .companyInfo {
     width: 100%;
+  }
+
+  .check{
+    position: absolute;
+    background-color: black;
+    bottom: 36px;
+    width: 72%;
   }
 }

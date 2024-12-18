@@ -1,0 +1,39 @@
+.navigationItem {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: #EBF0F3;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #D3D3D3;
+  }
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--grey-font-color);
+}
+
+.icon {
+  font-size: 24px;
+  color: var(--icon-color);
+}
+
+.ItemGreen {
+  background-color: #299749;
+}
+
+.ItemRed {
+  background-color: #D32F2F;
+}
+
+@media (max-width: 768px) {
+  .navigationItem {
+    width: 100%;
+  }
+}

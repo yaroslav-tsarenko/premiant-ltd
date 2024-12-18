@@ -5,7 +5,6 @@ import Header from "@/components/header/Header";
 import React from "react";
 import Footer from "@/components/footer/Footer";
 import Link from "next/link";
-import Navigation from "@/components/navigation/Navigation";
 
 export const metadata: Metadata = {
   title: "Premiant LTD",
@@ -36,7 +35,6 @@ export default function RootLayout({
               <Button variant="outline">Регистрация</Button>
           </Link>
       </Header>
-
       {children}
       <Footer
           footerLinks={[

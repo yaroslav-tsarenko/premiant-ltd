@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: auto;
   width: 100%;
   padding: var(--main-padding-properties);
 }
@@ -13,12 +13,17 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  gap: 10px;
+  gap: 20px;
 }
 
 .dashboardContent {
   display: flex;
   flex-direction: column;
-  gap: 80px;
   width: 100%;
+}
+
+@media (max-width: 1028px) {
+  .wrapper {
+    padding: 0 20px;
+  }
 }
