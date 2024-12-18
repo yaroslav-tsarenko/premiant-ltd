@@ -33,7 +33,7 @@ const TariffCalculator: FC<TariffCalculatorProps> = ({primaryButton, secondaryBu
                         <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35"/>
                         <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67"/>
                         <TariffComponent headline="МАКСИМУМ" price="15 000" percent="8.68"/>
-                        <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" fullWidth/>
+                        <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" className={styles.fullWidth}/>
                     </section>
                 </div>
             </div>

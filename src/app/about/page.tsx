@@ -12,6 +12,7 @@ import Address from "@/components/address/Address";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import Activity from "@/components/activity/Activity";
+import Roadmap from "@/sections/roadmap/Roadmap";
 
 
 const AboutPage = () => {
@@ -103,12 +104,11 @@ const AboutPage = () => {
                 }
             />
             <Activity
-                item="КТО МЫ?"
                 title="ЧЕМ"
                 modTitle="МЫ ЗАНИМАЕМСЯ"
                 headDescription="В компании Skylex LTD мы специализируемся на арбитраже интернет-трафика и
                    криптовалютных активов, предоставляя инновационные решения для получения прибыли"
-                childrenBtn={<Button variant="form">Отправить</Button>}
+                childrenBtn={<Button variant="check">Проверить компанию</Button>}
             >
                 <CustomBlock variant="featureScheme">
                     <div>
@@ -122,6 +122,7 @@ const AboutPage = () => {
                     </p>
                 </CustomBlock>
             </Activity>
+            <Roadmap/>
             <CompanyAdvantages
                 headline="НАШИ ПРИЕМУЩЕСТВА"
                 content={[

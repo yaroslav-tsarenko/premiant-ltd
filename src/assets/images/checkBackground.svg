@@ -1,0 +1,21 @@
+<svg width="429" height="524" viewBox="0 0 429 524" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-inside-1_6136_2500" fill="white">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M54 54H356.534L384 92.2284V518H78.5817L54 483.786V54Z"/>
+</mask>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M54 54H356.534L384 92.2284V518H78.5817L54 483.786V54Z" fill="#151515"/>
+<path d="M356.534 54L357.346 53.4165L357.047 53H356.534V54ZM54 54V53H53V54H54ZM384 92.2284H385V91.9064L384.812 91.645L384 92.2284ZM384 518V519H385V518H384ZM78.5817 518L77.7696 518.583L78.0688 519H78.5817V518ZM54 483.786H53V484.108L53.1879 484.369L54 483.786ZM356.534 53H54V55H356.534V53ZM384.812 91.645L357.346 53.4165L355.722 54.5835L383.188 92.8119L384.812 91.645ZM385 518V92.2284H383V518H385ZM78.5817 519H384V517H78.5817V519ZM53.1879 484.369L77.7696 518.583L79.3938 517.417L54.8121 483.202L53.1879 484.369ZM53 54V483.786H55V54H53Z" fill="url(#paint0_linear_6136_2500)" fill-opacity="0.5" mask="url(#path-1-inside-1_6136_2500)"/>
+<g filter="url(#filter0_f_6136_2500)">
+<ellipse cx="214.5" cy="262" rx="140.5" ry="188" fill="#25CBBF"/>
+</g>
+<defs>
+<filter id="filter0_f_6136_2500" x="0" y="0" width="429" height="524" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="37" result="effect1_foregroundBlur_6136_2500"/>
+</filter>
+<linearGradient id="paint0_linear_6136_2500" x1="54" y1="53.9676" x2="539.04" y2="423.362" gradientUnits="userSpaceOnUse">
+<stop/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

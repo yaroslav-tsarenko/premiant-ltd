@@ -1,0 +1,74 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--main-padding-properties);
+  overflow: hidden;
+  padding-top: 100px;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding-bottom: 46px;
+  border-bottom: 1px solid var(--grey-font-color);
+}
+
+.title {
+  font-family: 'GropledBold', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  background: linear-gradient(to right, var(--grey-font-color), #151515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.controllers {
+  display: flex;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  color: var(--secondary-color);
+}
+
+.icon:hover {
+  color: var(--allocation-color);
+}
+
+.sliderContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.goals {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  padding-top: 30px;
+}
+
+.goalItem {
+  flex: 0 0 22%;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    flex: 0 0 40%;
+  }
+
+  @media (max-width: 768px) {
+    flex: 0 0 80%;
+  }
+}
+
+.dimmed {
+  opacity: 0.5;
+}
