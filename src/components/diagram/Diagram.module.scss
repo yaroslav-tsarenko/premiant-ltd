@@ -1,0 +1,31 @@
+.circle {
+  width: 100%;
+  min-width: 100px;
+}
+
+.background {
+  fill: none;
+  stroke: var(--primary-color);
+}
+
+.progress {
+  fill: none;
+  stroke: var(--allocation-color);
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(0.75turn);
+  transform-origin: center;
+}
+
+.value {
+  font-size: 34px;
+  background: linear-gradient(to left, var(--grey-font-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .circle {
+    width: 100%;
+  }
+}

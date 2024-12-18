@@ -4,4 +4,5 @@ export interface TariffComponentProps {
     percent: string;
     link?: string;
     fullWidth?: boolean;
+    className?: string
 }
