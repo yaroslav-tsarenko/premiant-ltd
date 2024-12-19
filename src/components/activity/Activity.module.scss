@@ -1,0 +1,225 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  padding: var(--main-padding-properties);
+  padding-top: 80px;
+}
+
+.beanie {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  width: 60%;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  font-size: 40px;
+  color: var(--main-font-color);
+  font-weight: bold;
+  font-family: 'GropledBold', sans-serif;
+}
+
+.modifiedTitle {
+  font-size: 40px;
+  color: var(--grey-font-color);
+  font-weight: bold;
+  font-family: 'GropledBold', sans-serif;
+  width: 480px;
+}
+
+.headDescription {
+  font-size: 16px;
+  color: var(--secondary-color);
+  font-weight: 400;
+  text-align: justify;
+  width: 100%;
+}
+
+.modifiedTitle, .headDescription {
+  padding-left: 80px;
+}
+
+.modifiedContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  width: 100%;
+}
+
+.activityContent {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: end;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: start;
+  justify-content: space-between;
+  gap: 20px
+}
+
+.schemeText {
+  font-size: 16px;
+  color: var(--secondary-color);
+  font-weight: 400;
+  max-width: 330px;
+  width: 100%;
+  text-align: left;
+}
+
+.checkCompany {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: end;
+}
+
+.checkText {
+  font-size: 16px;
+  color: var(--secondary-color);
+  font-weight: 400;
+  max-width: 330px;
+  width: 100%;
+  text-align: right;
+}
+
+.checkContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--secondary-color);
+  max-width: 350px;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0 0, 90% 0, 100% 7%, 100% 100%, 11% 100%, 0 90%);
+  height: 100%;
+  padding: 20px 30px 20px 20px;
+  gap: 10px;
+}
+
+.gradient {
+  position: absolute;
+
+}
+
+.document {
+  z-index: 1000;
+}
+
+@media (max-width: 1280px) {
+  .wrapper {
+    padding: 80px 20px 0 20px;
+  }
+
+  .activityContent {
+    gap: 10px;
+  }
+
+  .content {
+    gap: 10px;
+  }
+
+  .checkCompany {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1028px) {
+  .content {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .beanie {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .modifiedTitle, .headDescription {
+    padding-left: 0;
+  }
+
+  .modifiedContainer {
+    flex-direction: row;
+    max-width: 100%;
+    gap: 15px;
+  }
+
+  .headline {
+    gap: 32px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .wrapper {
+    gap: 32px;
+  }
+
+  .activityContent {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .schemeText {
+    max-width: 100%;
+    text-align: justify;
+
+  }
+
+  .checkCompany {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .checkCompany {
+    flex-direction: column-reverse;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .checkText {
+    text-align: justify;
+    max-width: 100%;
+  }
+
+  .checkContainer {
+    padding: 15px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .modifiedTitle {
+    font-size: 24px;
+    width: 100%;
+  }
+}
+
+
+

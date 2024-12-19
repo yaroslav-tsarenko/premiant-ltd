@@ -2,15 +2,18 @@ import React, {FC} from 'react';
 import styles from './TariffComponent.module.scss';
 import {TariffComponentProps} from '@/types/tariffComponent';
 import Link from 'next/link';
-import classNames from 'classnames';
 
-const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, fullWidth}) => {
+const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, variant = 'wrapper', term}) => {
+
+    const buttonClass = `${styles[variant] || styles.wrapper}`;
+
     return (
-        <div className={classNames(styles.wrapper, { [styles.fullWidth]: fullWidth })}>
+        <div className={buttonClass}>
             <div className={styles.content}>
                 <h2 className={styles.headline}>
                     {headline}
                 </h2>
+
                 <div className={styles.divingLine}></div>
                 <div className={styles.info}>
                     <div className={styles.prices}>
@@ -21,6 +24,12 @@ const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, fu
                         <p>Процент:</p>
                         <p>{percent}% в день</p>
                     </div>
+                    {term && (
+                        <div className={styles.prices}>
+                            <p>Срок</p>
+                            <p>{term} дней</p>
+                        </div>
+                    )}
                 </div>
             </div>
             <Link href="#" legacyBehavior>

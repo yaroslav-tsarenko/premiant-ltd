@@ -8,7 +8,7 @@
 .beanie {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   padding: var(--main-padding-properties);
   justify-content: space-between;
   margin-bottom: 50px;;
@@ -34,6 +34,9 @@
   font-size: 32px;
   font-family: 'GropledBold', sans-serif;
   color: var(--secondary-color);
+  max-width: 450px;
+  width: 100%;
+  text-align: justify;
 }
 
 .calculatorInner {
