@@ -8,17 +8,11 @@
 
 .beanie {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
-}
-
-.item {
-  position: absolute;
-  top: 0;
-  left: 30px;
-
+  width: 70%;
 }
 
 .headline {
@@ -109,6 +103,7 @@
 
   .beanie{
     align-items: flex-start;
+    flex-direction: column;
   }
 
   .item {
