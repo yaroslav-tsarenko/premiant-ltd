@@ -3,11 +3,15 @@ import Metrics from "@/sections/metrics/Metrics";
 import Dashboard from "@/components/dashboard/Dashboard";
 import CustomBlock from "@/components/custom-block/CustomBlock";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
+import Tariff from "@/sections/tariff/Tariff";
 
 const DashboardAccount = () => {
     return (
         <Dashboard>
             <Metrics/>
+
+            <Tariff/>
+
             <FeaturesInfo
                 item="О НАС"
                 title="ОСНОВНЫЕ ОСОБЕННОСТИ"

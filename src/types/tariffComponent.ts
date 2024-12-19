@@ -1,8 +1,11 @@
+import styles from "@/components/tariff-component/TariffComponent.module.scss";
+
 export interface TariffComponentProps {
     headline: string;
-    price: string;
-    percent: string;
+    price?: string;
+    percent?: string;
     link?: string;
     fullWidth?: boolean;
-    className?: string
+    variant?: keyof typeof styles;
+    term?: string
 }
