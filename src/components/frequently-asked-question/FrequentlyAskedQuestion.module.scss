@@ -8,11 +8,13 @@
 }
 
 .headline {
-  font-size: 50px;
+  font-size: 59px;
   font-weight: 700;
   color: var(--main-font-color);
-  width: 430px;
+  max-width: 430px;
+  width: 100%;
   font-family: 'GropledBold', sans-serif;
+  text-align: justify;
 }
 
 .questionText {
