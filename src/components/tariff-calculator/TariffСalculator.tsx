@@ -5,10 +5,12 @@ import {TariffCalculatorProps} from "@/types/tariffCalculator";
 import Image from 'next/image';
 import Grid from '@/assets/images/grid.svg';
 import Dot from "@/components/dot/Dot";
+import CalculatorGradient from "@/assets/images/calculatorGradient.svg";
 
 const TariffCalculator: FC<TariffCalculatorProps> = ({primaryButton, secondaryButton}) => {
     return (
         <div className={styles.wrapper}>
+            <Image src={CalculatorGradient} alt="Gradient" className={styles.gradient}/>
             <div className={styles.beanie}>
                <Dot title="калькулятор"/>
                 <h1 className={styles.headline}>

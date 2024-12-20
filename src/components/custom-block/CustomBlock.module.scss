@@ -8,15 +8,15 @@
 
 .featureScheme {
   width: 330px;
-  height: 250px;
+  height: fit-content;
   background-color: var(--secondary-color);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 56px;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
   color: var(--primary-color);
-  clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
+  clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 100%, 11% 100%, 0 91%);
 
   div {
     align-self: flex-start;
@@ -26,6 +26,7 @@
     font-size: 18px;
     color: var(--primary-color);
     font-weight: bold;
+    text-transform: uppercase;
   }
 
   div h2 {
@@ -33,6 +34,7 @@
     margin-bottom: 10px;
     font-weight: bold;
     color: #999;
+
   }
 ;
 
@@ -40,21 +42,24 @@
     font-size: 16px;
     color: #acacac;
     font-weight: 400;
+    text-align: justify;
+
   }
 
 }
 
 .modified {
-  width: 330px;
-  height: 250px;
+  max-width: 330px;
+  width: 100%;
+  height: auto;
   background-color: #24CBBF;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 56px;
   align-items: center;
   padding: 20px;
   color: var(--primary-color);
-  clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 99%, 11% 100%, 0 91%);
+  clip-path: polygon(0 0, 82% 0, 100% 13%, 100% 100%, 11% 100%, 0 91%);
 
   div {
     align-self: flex-start;
@@ -64,6 +69,7 @@
     font-size: 18px;
     color: var(--primary-color);
     font-weight: bold;
+    text-transform: uppercase;
   }
 
   div h2 {
@@ -71,12 +77,14 @@
     margin-bottom: 10px;
     font-weight: bold;
     color: var(--primary-color);
-  };
+  }
+;
 
   p {
     font-size: 16px;
     color: var(--primary-color);
     font-weight: 100;
+    text-align: justify;
   }
 }
 
