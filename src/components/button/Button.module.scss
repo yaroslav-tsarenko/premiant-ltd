@@ -119,13 +119,78 @@
   box-shadow: 0 0 30px 10px var(--allocation-color);
 }
 
+.defBlackButton {
+  background: black;
+  color: white;
+  border-radius: 30px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+  align-items: center;
+  height: fit-content;
+}
+
+.defBlackButton:hover {
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+}
+
+.backButton {
+  background: var(--main-background-color);
+  color: var(--grey-font-color);
+  border-radius: 30px;
+  border: none;
+  font-size: 45px;
+  font-weight: 100;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: fit-content;
+  padding: 0 20px;
+}
+
+.backButton:hover {
+  box-shadow: 0 0 20px 5px var(--allocation-color);
+}
+
+.payment{
+    background: var(--primary-color);
+    color: var(--grey-font-color);
+    border-radius: 5px;
+    padding: 12px 20px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    transition: box-shadow 0.3s ease-in-out;
+    z-index: 1000;
+    align-items: center;
+    height: fit-content;
+}
+
+.payment:hover {
+    box-shadow: 0 0 20px 2px var(--allocation-color);
+}
+
+@media (max-width: 1028px) {
+
+  .defBlackButton{
+    width: 100%
+  }
+}
+
 
 @media (max-width: 768px) {
   .companyInfo {
     width: 100%;
   }
 
-  .check{
+  .check {
     position: absolute;
     background-color: black;
     bottom: 36px;

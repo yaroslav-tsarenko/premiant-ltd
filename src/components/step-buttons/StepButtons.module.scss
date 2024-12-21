@@ -1,0 +1,14 @@
+.controllers {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+@media (max-width: 320px) {
+    .controllers {
+        flex-direction: column;
+      gap: 10px;
+    }
+
+  
+}
