@@ -4,7 +4,7 @@ import {PaymentMethodsProps} from "@/types/paymentMethods";
 import Button from "@/components/button/Button";
 import Image from 'next/image';
 
-const PaymentMethods: FC<PaymentMethodsProps> = ({icon, currency, description, name, children}) => {
+const PaymentMethods: FC<PaymentMethodsProps> = ({icon, currency, description, name}) => {
     return (
         <div className={styles.methodWrapper}>
             <div className={styles.beanie}>

@@ -2,8 +2,6 @@ import React, {FC} from 'react';
 import styles from './PaymentBeanie.module.scss';
 import {PaymentBeanieProps} from "@/types/paymentBeanie";
 import Dot from "@/components/dot/Dot";
-import Button from "@/components/button/Button";
-import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 
 const PaymentBeanie:FC<PaymentBeanieProps> = ({dotText, title, children}) => {
     return (
