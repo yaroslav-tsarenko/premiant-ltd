@@ -1,23 +1,24 @@
-"use client"
+"use client";
 
 import React, {useState} from 'react';
-import styles from './Payment.module.scss';
+import styles from './Deposit.module.scss';
 import Navigation from "@/components/navigation/Navigation";
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
 import PaymentBeanie from "@/components/payment-beanie/PaymentBeanie";
+import StepButtons from "@/components/step-buttons/StepButtons";
 import PaymentMethods from "@/components/payment-methods/PaymentMethods";
 import Tether from "@/assets/icons/tetherIcon.svg";
+import PerfectMoney from "@/assets/icons/perfectMoneyIcon.svg";
+import Payeer from "@/assets/icons/payeerIcon.svg";
 import Bitcoin from "@/assets/icons/bitcoinIcon.svg";
 import Etherium from "@/assets/icons/etherium.svg";
-import Payeer from "@/assets/icons/payeerIcon.svg";
-import PerfectMoney from "@/assets/icons/perfectMoneyIcon.svg";
 import Visa from "@/assets/icons/visaIcon.svg";
-import StepButtons from "@/components/step-buttons/StepButtons";
-import PaymentForm from "@/components/payment-form/PaymentForm";
 import ApplicationInfo from "@/components/application-info/ApplicationInfo";
+import PaymentForm from "@/components/payment-form/PaymentForm";
 
-const Payment = () => {
+const Deposit = () => {
+
     const [step, setStep] = useState<number>(1);
 
     const handleNextStep = () => {
@@ -34,13 +35,13 @@ const Payment = () => {
                 <Navigation/>
 
                 {step === 1 && (
-                    <div className={styles.paymentContent}>
+                    <div className={styles.depositContent}>
                         <div className={styles.withdrawalInfo}>
                             <BalanceWithdraw/>
                             <div className={styles.steps}>
                                 <PaymentSteps
                                     step={1}
-                                    title="Способ выплаты"
+                                    title="Способ пополнения"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
                                     line={true}
                                     isActive={step === 1}
@@ -59,9 +60,9 @@ const Payment = () => {
                             </div>
                         </div>
 
-                        <div className={styles.paymentContainer}>
+                        <div className={styles.depositContainer}>
                             <PaymentBeanie
-                                dotText="Способ выплаты"
+                                dotText="Способ пополнения"
                                 title="Выберите платежную систему"
                             >
                                 <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
@@ -108,11 +109,12 @@ const Payment = () => {
                                 <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
                             </div>
                         </div>
+
                     </div>
                 )}
 
                 {step === 2 && (
-                    <div className={styles.paymentContent}>
+                    <div className={styles.depositContent}>
                         <div className={styles.withdrawalInfo}>
                             <BalanceWithdraw/>
                             <div className={styles.steps}>
@@ -136,17 +138,17 @@ const Payment = () => {
                                 />
                             </div>
                         </div>
-                        <div className={styles.paymentContainer}>
+                        <div className={styles.depositContainer}>
                             <PaymentBeanie
-                                dotText="Способ выплаты"
-                                title="Введите сумму и кошелек"
+                                dotText="Введите сумму"
+                                title="Введите сумму и подтвердите операцию"
                             >
                                 <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
                             </PaymentBeanie>
 
                             <PaymentForm
                                 placeholders={[
-                                    {label: "Введите сумму вывода"},
+                                    {label: "Введите сумму пополнения"},
                                     {label: "Выберите кошелек"}
                                 ]}
                                 options={[
@@ -166,7 +168,7 @@ const Payment = () => {
                     </div>
                 )}
                 {step === 3 && (
-                    <div className={styles.paymentContent}>
+                    <div className={styles.depositContent}>
                         <div className={styles.withdrawalInfo}>
                             <BalanceWithdraw/>
                             <div className={styles.steps}>
@@ -193,7 +195,7 @@ const Payment = () => {
                         </div>
                         <div className={styles.applicationContent}>
                             <PaymentBeanie
-                                dotText="Способ выплаты"
+                                dotText="Ожидайте получения"
                                 title="Заявка №3827483 в обработке"
                             >
                                 <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
@@ -201,10 +203,16 @@ const Payment = () => {
 
                             <ApplicationInfo texts={
                                 [
-                                    {text: "Благодарим за ваш запрос. После проверки и обработки заявки средства будут перечислены на указанный вами счёт или кошелёк в течение 5-15 минут."},
-                                    {text: "Вы можете отслеживать статус вашей заявки через личный кабинет. Мы обновляем информацию в режиме реального времени, чтобы вы всегда были в курсе."},
-                                    {text: "Пожалуйста, убедитесь, что указанные реквизиты верны и актуальны. Это позволит избежать задержек или ошибок при переводе средств."},
-                                    {text: "Если у вас возникнут вопросы или потребуется дополнительная информация, наша техническая поддержка всегда готова вам помочь. Мы ценим ваше доверие и стараемся сделать процесс вывода максимально быстрым и удобным."}
+                                    {text: "Благодарим за ваше обращение. После поступления средств на наш счёт, заявка будет обработана в течение 5-15 минут. Средства будут переведены на указанный вами кошелёк или счёт."},
+                                    {text: "Вы можете отслеживать статус заявки через ваш личный кабинет, где информация обновляется в реальном времени."},
+                                    {
+                                        text: "Обратите внимание: пожалуйста, убедитесь, что вы не только нажали кнопку \"Я оплатил\", но и действительно " +
+                                            "завершили перевод средств на наш счёт. Это поможет нам избежать задержек в обработке вашей заявки."
+                                    },
+                                    {
+                                        text: "Если у вас возникнут какие-либо вопросы или произойдёт задержка обмена, не стесняйтесь обращаться в " +
+                                            "нашу техническую поддержку. Мы всегда готовы помочь и сделать процесс максимально удобным для вас."
+                                    }
                                 ]
                             }/>
                             <div className={styles.bottomButtons}>
@@ -219,4 +227,4 @@ const Payment = () => {
     );
 };
 
-export default Payment;
+export default Deposit;
