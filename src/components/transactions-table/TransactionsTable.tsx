@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "@/components/transactions-table/TransactionsTable.module.scss";
 
 interface Transaction {
@@ -18,8 +18,6 @@ interface TransactionsTableProps {
 }
 
 const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transactions }) => {
-    const [rows, setRows] = useState(transactions);
-
     const getStatusStyle = (status: string) => {
         return status === "Отклонено" ? styles.redText : styles.greenText;
     };
@@ -44,9 +42,9 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
                 </tr>
                 </thead>
                 <tbody>
-                {rows.map((transaction, index) => (
+                {transactions.map((transaction, index) => (
                     <tr key={index}>
-                        <td className={getStatusStyle(transaction.status)}>{rows.length - index}</td> {/* Динамічне авто-генерування ID */}
+                        <td className={getStatusStyle(transaction.status)}>{transactions.length - index}</td>
                         <td className={getTypeStyle(transaction.type)}>{transaction.type}</td>
                         <td>{transaction.date}</td>
                         <td>{transaction.eps}</td>
