@@ -20,18 +20,6 @@ interface TransactionsTableProps {
 const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transactions }) => {
     const [rows, setRows] = useState(transactions);
 
-    const addRow = () => {
-        const newTransaction: Transaction = {
-            type: "New Type",
-            date: new Date().toLocaleString(),
-            eps: "New EPS",
-            amount: "0.00$",
-            status: "New Status",
-        };
-
-        setRows([newTransaction, ...rows]);
-    };
-
     const getStatusStyle = (status: string) => {
         return status === "Отклонено" ? styles.redText : styles.greenText;
     };
