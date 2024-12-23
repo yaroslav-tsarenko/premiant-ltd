@@ -1,0 +1,31 @@
+.applicationContent {
+  display: flex;
+  flex-direction: column;
+  gap: 73px;
+  align-items: start;
+}
+
+.applicationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text {
+  font-size: 20px;
+  background: linear-gradient(to left, var(--grey-font-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.appeal{
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .applicationContent{
+    gap: 40px;
+  }
+}
