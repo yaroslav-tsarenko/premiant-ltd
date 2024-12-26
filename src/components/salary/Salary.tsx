@@ -6,7 +6,7 @@ const Salary = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.diagram}>
-                <Diagram value={34} size={200} strokeWidth={30}/>
+                <Diagram value={45} size={200} strokeWidth={30}/>
             </div>
             <div className={styles.currentSalary}>
                 <div className={styles.sumContent}>

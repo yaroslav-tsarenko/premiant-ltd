@@ -1,0 +1,128 @@
+.wrapper {
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  padding: 32px 25px;
+  flex-direction: row;
+  background-color: var(--main-background-color);
+  justify-content: space-between;
+  gap: 20px;
+  border-radius: 5px;
+  align-items: start;
+
+  @media (max-width: 1028px) {
+    flex-direction: column;
+  }
+}
+
+.referralProgrammeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.text {
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(to left, var(--grey-font-color), var(--lighter-grey-font-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.table th {
+  border: 1px solid var(--lighter-grey-font-color);
+  width: 100px;
+  padding: 16px 20px;
+  color: var(--grey-font-color);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.table tr {
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  .table th {
+    display: block;
+    width: 100%;
+  }
+}
+
+.value {
+  font-size: 24px;
+  font-weight: 600;
+  background: linear-gradient(to right, var(--secondary-color), rgba(181, 181, 181, 0.87));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
+
+.referralLinkInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.linkContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.link {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--lighter-grey-font-color);
+  padding: 16px 20px;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.copyIcon {
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--grey-font-color);
+  transition: 0.3s;
+}
+
+.copyIcon:hover {
+  color: var(--secondary-color);
+}
+
+.linkActivity {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+gap: 20px;
+}
+
+.activity {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}

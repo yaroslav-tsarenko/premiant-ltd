@@ -11,6 +11,27 @@
   border-radius: 30px;
   padding: 10px;
   border: none;
+  transition: 0.3s ease-in-out;
+}
+
+.outline:hover {
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+}
+
+.headerSign {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.headerSign:hover {
+  transform: scale(1.1);
+  will-change: transform;
 }
 
 .hero {
@@ -158,28 +179,28 @@
   box-shadow: 0 0 20px 5px var(--allocation-color);
 }
 
-.payment{
-    background: var(--primary-color);
-    color: var(--grey-font-color);
-    border-radius: 5px;
-    padding: 12px 20px;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    width: 100%;
-    transition: box-shadow 0.3s ease-in-out;
-    z-index: 1000;
-    align-items: center;
-    height: fit-content;
+.payment {
+  background: var(--primary-color);
+  color: var(--grey-font-color);
+  border-radius: 5px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+  align-items: center;
+  height: fit-content;
 }
 
 .payment:hover {
-    box-shadow: 0 0 20px 2px var(--allocation-color);
+  box-shadow: 0 0 20px 2px var(--allocation-color);
 }
 
 @media (max-width: 1028px) {
 
-  .defBlackButton{
+  .defBlackButton {
     width: 100%
   }
 }

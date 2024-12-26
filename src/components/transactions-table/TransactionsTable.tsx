@@ -4,12 +4,7 @@ import React from "react";
 import styles from "@/components/transactions-table/TransactionsTable.module.scss";
 
 interface Transaction {
-    type: string;
-    date: string;
-    eps: string;
-    amount: string;
-    status: string;
-    percent?: string;
+    [key: string]: string | undefined;
 }
 
 interface TransactionsTableProps {
@@ -34,8 +29,8 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
         <div className={styles.wrapper}>
             <table className={styles.table}>
                 <thead>
-                <tr>
-                    <th>ID</th>
+                <tr className={styles.idColumn}>
+                    <th >ID</th>
                     {headers.map((header, index) => (
                         <th key={index}>{header}</th>
                     ))}
@@ -44,12 +39,12 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
                 <tbody>
                 {transactions.map((transaction, index) => (
                     <tr key={index}>
-                        <td className={getStatusStyle(transaction.status)}>{transactions.length - index}</td>
-                        <td className={getTypeStyle(transaction.type)}>{transaction.type}</td>
-                        <td>{transaction.date}</td>
-                        <td>{transaction.eps}</td>
-                        <td>{transaction.amount}</td>
-                        <td className={getStatusStyle(transaction.status)}>{transaction.status}</td>
+                        <td className={getStatusStyle(transaction.status || '')}>{transactions.length - index}</td>
+                        {Object.keys(transaction).map((key, idx) => (
+                            <td key={idx} className={key === 'status' ? getStatusStyle(transaction[key] || '') : key === 'type' ? getTypeStyle(transaction[key] || '') : ''}>
+                                {transaction[key]}
+                            </td>
+                        ))}
                     </tr>
                 ))}
                 </tbody>
