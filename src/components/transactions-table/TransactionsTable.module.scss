@@ -40,6 +40,10 @@
 .table th:first-child,
 .table td:first-child {
   width: 90px;
+
+  @media (max-width: 768px) {
+    width: fit-content;
+  }
 }
 
 .table th {

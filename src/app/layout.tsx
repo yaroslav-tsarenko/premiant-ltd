@@ -29,7 +29,7 @@ export default function RootLayout({
             ]}
         >
             <Link href="/login">
-                <Button variant="headerSign">Войти</Button>
+                <Button variant="headerSign">Вход</Button>
             </Link>
             <Link href="/register">
                 <Button variant="outline">Регистрация</Button>
