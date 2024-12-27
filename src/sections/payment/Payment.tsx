@@ -16,6 +16,8 @@ import Visa from "@/assets/icons/visaIcon.svg";
 import StepButtons from "@/components/step-buttons/StepButtons";
 import PaymentForm from "@/components/payment-form/PaymentForm";
 import ApplicationInfo from "@/components/application-info/ApplicationInfo";
+import Image from "next/image";
+import ArrowLeft from "@/assets/icons/arrowLeft.svg";
 
 const Payment = () => {
     const [step, setStep] = useState<number>(1);
@@ -64,7 +66,11 @@ const Payment = () => {
                                 dotText="Способ выплаты"
                                 title="Выберите платежную систему"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
                             <div className={styles.methods}>
                                 <PaymentMethods
@@ -105,7 +111,11 @@ const Payment = () => {
                                 />
                             </div>
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
                     </div>
@@ -141,7 +151,11 @@ const Payment = () => {
                                 dotText="Способ выплаты"
                                 title="Введите сумму и кошелек"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
 
                             <PaymentForm
@@ -159,7 +173,11 @@ const Payment = () => {
                                 ]}
                             />
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
 
@@ -196,7 +214,11 @@ const Payment = () => {
                                 dotText="Способ выплаты"
                                 title="Заявка №3827483 в обработке"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
 
                             <ApplicationInfo texts={
@@ -208,7 +230,11 @@ const Payment = () => {
                                 ]
                             }/>
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
 
