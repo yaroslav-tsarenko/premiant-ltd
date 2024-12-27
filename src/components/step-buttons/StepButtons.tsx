@@ -1,21 +1,22 @@
 import React from 'react';
 import Button from "@/components/button/Button";
-import {HiOutlineArrowLongLeft} from "react-icons/hi2";
 import styles from './StepButtons.module.scss';
 
 interface StepButtonsProps {
     onNext: () => void;
     onPrev: () => void;
+    firstButtonContent: React.ReactNode;
+    secondButtonContent: React.ReactNode;
 }
 
-const StepButtons: React.FC<StepButtonsProps> = ({ onNext, onPrev }) => {
+const StepButtons: React.FC<StepButtonsProps> = ({ onNext, onPrev, secondButtonContent, firstButtonContent }) => {
     return (
         <div className={styles.controllers}>
             <Button onClick={onPrev} variant="backButton">
-                <HiOutlineArrowLongLeft />
+                {firstButtonContent}
             </Button>
             <Button onClick={onNext} variant="defBlackButton">
-                Продолжить
+                {secondButtonContent}
             </Button>
         </div>
     );

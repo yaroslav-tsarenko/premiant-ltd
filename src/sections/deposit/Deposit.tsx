@@ -16,6 +16,8 @@ import Etherium from "@/assets/icons/etherium.svg";
 import Visa from "@/assets/icons/visaIcon.svg";
 import ApplicationInfo from "@/components/application-info/ApplicationInfo";
 import PaymentForm from "@/components/payment-form/PaymentForm";
+import ArrowLeft from "@/assets/icons/arrowLeft.svg";
+import Image from 'next/image';
 
 const Deposit = () => {
 
@@ -65,7 +67,11 @@ const Deposit = () => {
                                 dotText="Способ пополнения"
                                 title="Выберите платежную систему"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
                             <div className={styles.methods}>
                                 <PaymentMethods
@@ -106,7 +112,11 @@ const Deposit = () => {
                                 />
                             </div>
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons
+                                    onNext={handleNextStep}
+                                    onPrev={handlePreviousStep}
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                    secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
 
@@ -143,7 +153,9 @@ const Deposit = () => {
                                 dotText="Введите сумму"
                                 title="Введите сумму и подтвердите операцию"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
+                                             firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                             secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
 
                             <PaymentForm
@@ -161,10 +173,11 @@ const Deposit = () => {
                                 ]}
                             />
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
+                                             firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                             secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
-
                     </div>
                 )}
                 {step === 3 && (
@@ -198,7 +211,9 @@ const Deposit = () => {
                                 dotText="Ожидайте получения"
                                 title="Заявка №3827483 в обработке"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
+                                             firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                             secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
 
                             <ApplicationInfo texts={
@@ -216,7 +231,9 @@ const Deposit = () => {
                                 ]
                             }/>
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}/>
+                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
+                                             firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                             secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
 
