@@ -164,15 +164,15 @@
   color: var(--grey-font-color);
   border-radius: 30px;
   border: none;
-  font-size: 45px;
-  font-weight: 100;
+  font-size: 16px;
+  font-weight: 500;
   transition: box-shadow 0.3s ease-in-out;
   z-index: 1000;
   align-items: center;
   justify-content: center;
   display: flex;
   height: fit-content;
-  padding: 0 20px;
+  padding: 12px 20px;
 }
 
 .backButton:hover {

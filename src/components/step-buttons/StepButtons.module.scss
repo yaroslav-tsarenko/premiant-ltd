@@ -4,11 +4,10 @@
   gap: 10px;
   width: 100%;
 }
-@media (max-width: 320px) {
-    .controllers {
-        flex-direction: column;
-      gap: 10px;
-    }
 
-  
+@media (max-width: 320px) {
+  .controllers {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
