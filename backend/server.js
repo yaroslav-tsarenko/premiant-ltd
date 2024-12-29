@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const app = express();
 const port = 8080;
-const origin = 'http://localhost:3000' || 'premiant-ltd.vercel.app';
+const origin = 'premiant-ltd.vercel.app';
 app.use(bodyParser.json());
 app.use(cors({
     origin: origin,
