@@ -1,73 +1,38 @@
-"use client"
-
-import { useEffect, useState } from 'react';
-import { User, UserProvider } from './UserContext';
+import { UserProvider } from './UserContext';
 import { cookies } from 'next/headers';
 
-export function authWrapper<P extends object>(Component: React.ComponentType<P>) {
-    return function WrappedComponent(props: P) {
-        const [user, setUser] = useState<User | null>(null);
-        const [loading, setLoading] = useState(true);
+export function authWrapper(Component: React.ComponentType<any>) {
+    return async function WrappedComponent(props: unknown | any) {
+        let user = null;
 
-        useEffect(() => {
-            const fetchUser = async () => {
-                try {
-                    const cookieStore = await cookies();
-                    const token = cookieStore.get('token')?.value;
+        try {
+            const cookieStore = await cookies();
+            const token = cookieStore.get('token')?.value;
 
-                    if (!token) {
-                        console.error('No token found');
-                        setUser(null);
-                        setLoading(false);
-                        return;
-                    }
+            if (!token) {
+                console.warn("No token found in cookies.");
+                throw new Error("Authentication token missing.");
+            }
 
-                    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/get-user`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                        cache: 'no-store',
-                    });
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/get-user`, {
+                headers: { Authorization: `Bearer ${token}` },
+                cache: 'no-store',
+            });
 
-                    if (!response.ok) {
-                        console.error('Failed to fetch user:', response.statusText);
-                        setUser(null);
-                        setLoading(false);
-                        return;
-                    }
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Fetch failed:", errorText);
+                throw new Error(`Fetch error! Status: ${response.status}`);
+            }
 
-                    const userData = await response.json();
-                    setUser(userData.user as User);
-                } catch (error) {
-                    console.error('Error in authWrapper:', error);
-                    setUser(null);
-                } finally {
-                    setLoading(false);
-                }
-            };
-
-            fetchUser();
-        }, []);
-
-        if (loading) {
-            return <div>Loading...</div>;
+            const data = await response.json();
+            user = data.user;
+        } catch (error) {
+            console.error("Error fetching user:", error);
         }
 
-        const defaultUser: User = {
-            _id: '',
-            name: '',
-            secondName: '',
-            email: '',
-            telegram: '',
-            referralCode: '',
-            balance: 0,
-            earnings: 0,
-            tariff: 0,
-            withdrawals: 0,
-        };
-
         return (
-            <UserProvider user={user || defaultUser}>
+            <UserProvider user={user}>
                 <Component {...props} />
             </UserProvider>
         );

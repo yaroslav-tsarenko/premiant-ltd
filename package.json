@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "nodemon backend/server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,8 +24,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.2",
     "next": "^15.0.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-loader-spinner": "^6.1.6",
     "react-slick": "^0.30.3",

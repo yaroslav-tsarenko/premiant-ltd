@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 
 let token = "";
 if (typeof document !== "undefined") {
@@ -17,16 +16,3 @@ export const newRequest = axios.create({
         Authorization: `Bearer ${token}`,
     }
 });
-
-newRequest.interceptors.response.use(
-    response => response,
-    error => {
-        const router = useRouter();
-        if (error.response.status === 401 && error.response.data.message === 'TokenExpiredError') {
-            router.push('/');
-        } else if (error.response.status === 403) {
-            router.push('/login');
-        }
-        return Promise.reject(error);
-    }
-);

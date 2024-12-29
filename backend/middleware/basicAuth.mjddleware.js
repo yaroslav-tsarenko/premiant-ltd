@@ -6,7 +6,6 @@ const basicAuth = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.redirect('/login');
         return res.status(401).send({ message: 'No auth token provided' });
     }
 
@@ -19,7 +18,6 @@ const basicAuth = async (req, res, next) => {
         if (!user) {
             console.log('User not found for ID:', decoded.userId); // Log user ID for debugging
             return
-                res.redirect('/login');
                 res.status(401).send({ message: 'User not found' });
 
         }
