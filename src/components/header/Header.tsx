@@ -1,23 +1,16 @@
 "use client"
 
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import Image from 'next/image';
 import Link from "next/link";
 import logo from "@/assets/images/logo.svg";
 import styles from './Header.module.scss';
 import {HeaderProps} from "@/types/header";
 import LanguageDropdown from '../language-dropdown/LanguageDropdown';
-import Popup from "@/components/popup/Popup";
-import Button from "@/components/button/Button";
 
 const Header: FC<HeaderProps> = ({headerLinks = [], children}) => {
     const firstPartLinks = headerLinks.slice(0, 3);
     const secondPartLinks = headerLinks.slice(3);
-    const [popup, setPopup] = useState(false);
-
-    const handlePopup = () => {
-        setPopup(!popup);
-    }
 
     const handleScrollToFAQ = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();

@@ -10,7 +10,7 @@ interface StepButtonsProps {
     onSecondButtonClick?: () => void;
 }
 
-const StepButtons: React.FC<StepButtonsProps> = ({ onNext, onPrev, secondButtonContent, firstButtonContent, onSecondButtonClick }) => {
+const StepButtons: React.FC<StepButtonsProps> = ({ onNext, onPrev, secondButtonContent, firstButtonContent}) => {
     return (
         <div className={styles.controllers}>
             <Button onClick={onPrev} variant="backButton">
