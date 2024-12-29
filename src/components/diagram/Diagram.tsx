@@ -12,9 +12,7 @@ const Diagram: React.FC<DiagramProps> = ({value, size, strokeWidth, backgroundSt
     const validSize = isNaN(size) ? 400 : size;
     const validStrokeWidth = isNaN(strokeWidth) ? 10 : strokeWidth;
     const validBackgroundStrokeWidth = backgroundStrokeWidth !== undefined && !isNaN(backgroundStrokeWidth) ? backgroundStrokeWidth : validStrokeWidth / 2;
-
     const validValue = isNaN(value) ? 0 : Math.min(100, Math.max(0, value));
-
     const radius = (validSize - validStrokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (validValue / 100) * circumference;

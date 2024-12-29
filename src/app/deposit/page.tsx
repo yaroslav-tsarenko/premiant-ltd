@@ -3,9 +3,9 @@ import Deposit from "@/sections/deposit/Deposit";
 
 const DepositPage = () => {
     return (
-        <div>
+        <>
             <Deposit/>
-        </div>
+        </>
     );
 };
 

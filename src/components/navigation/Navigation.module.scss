@@ -2,8 +2,10 @@
   display: flex;
   padding: 20px 10px 10px 10px;
   max-width: 75px;
+  top: 0;
+  z-index: 1000;
   width: 100%;
-  height:100vh;
+  height: 95dvh;
   background-color: #EBF0F3;
   border-radius: 5px;
   flex-direction: column;
@@ -91,7 +93,7 @@
 }
 
 @media (max-width: 1028px) {
-  .wrapper{
+  .wrapper {
     display: none;
   }
 

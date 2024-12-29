@@ -1,4 +1,6 @@
-import React from 'react';
+"use client"
+
+import React, { useEffect } from 'react';
 import Metrics from "@/sections/metrics/Metrics";
 import Dashboard from "@/components/dashboard/Dashboard";
 import CustomBlock from "@/components/custom-block/CustomBlock";
@@ -6,12 +8,17 @@ import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import Tariff from "@/sections/tariff/Tariff";
 
 const DashboardAccount = () => {
+    useEffect(() => {
+        if (!sessionStorage.getItem('reloaded')) {
+            sessionStorage.setItem('reloaded', 'true');
+            window.location.reload();
+        }
+    }, []);
+
     return (
         <Dashboard>
             <Metrics/>
-
             <Tariff/>
-
             <FeaturesInfo
                 item="О НАС"
                 title="ОСНОВНЫЕ ОСОБЕННОСТИ"
@@ -68,7 +75,6 @@ const DashboardAccount = () => {
                 </CustomBlock>
             </FeaturesInfo>
         </Dashboard>
-
     );
 };
 

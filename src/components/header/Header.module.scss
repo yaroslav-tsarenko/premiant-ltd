@@ -1,14 +1,19 @@
 .header {
   display: flex;
   position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   width: 100%;
-  top: 0;
   padding: var(--main-padding-properties);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   margin: 0;
+  z-index: 1000;
   height: 100px;
 }
 
@@ -22,7 +27,7 @@
 }
 
 .sticky {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -61,7 +66,29 @@
   transition: transform 0.2s;
   will-change: transform;
   white-space: nowrap;
+}
 
+.accountButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  align-content: center;
+  justify-items: center;
+  font-weight: 500;
+  transition: 0.3s all ease-in-out;
+  cursor: pointer;
+
+  p{
+    display: flex;
+    font-size: 16px;
+    gap: 5px;
+  }
+
+  &:hover{
+    transform: scale(1.02);
+    will-change: transform;
+  }
 }
 
 .link:hover {

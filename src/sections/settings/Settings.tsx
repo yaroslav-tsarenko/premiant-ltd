@@ -2,10 +2,10 @@
 
 import React from 'react';
 import styles from './Settings.module.scss';
-import Navigation from "@/components/navigation/Navigation";
 import StepButtons from "@/components/step-buttons/StepButtons";
 import MainInformation from "@/components/main-information/MainInformation";
 import PaymentDetails from "@/components/payment-details/PaymentDetails";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 const Settings = () => {
     const clearInputs = () => {
@@ -29,9 +29,8 @@ const Settings = () => {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <Dashboard>
             <div className={styles.wrapperInner}>
-                <Navigation/>
                 <div className={styles.settingsContent}>
                     <div className={styles.beanie}>
                         <h1 className={styles.headline}>
@@ -63,7 +62,7 @@ const Settings = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Dashboard>
     );
 };
 

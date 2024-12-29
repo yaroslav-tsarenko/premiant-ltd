@@ -22,24 +22,20 @@ const Metrics = () => {
                     <NavigationItem
                         title="Реквизиты"
                         icon={<PiCreditCardLight/>}
-                        route="#"/>
-                </div>
-                <div className={styles.navigationGroup}>
+                        route="/settings"/>
                     <NavigationItem
                         title="Пополнение"
                         icon={<GoArrowDownLeft/>}
                         route="/deposit"
-                        type={"ItemGreen"}
+                        color={"ItemGreen"}
                     />
                     <NavigationItem
                         title="Вывод"
                         icon={<GoArrowUpRight/>}
                         route="/payment"
-                        type={"ItemRed"}
+                        color={"ItemRed"}
                     />
                 </div>
-
-
             </div>
         </div>
     );

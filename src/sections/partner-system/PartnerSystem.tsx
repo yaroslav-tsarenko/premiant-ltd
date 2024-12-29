@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './PartnerSystem.module.scss';
 import Balance from "@/components/balance/Balance";
-import Navigation from "@/components/navigation/Navigation";
 import ReferralProgramme from "@/components/referral-programme/ReferralProgramme";
 import TransactionsTable from "@/components/transactions-table/TransactionsTable";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 const PartnerSystem = () => {
 
@@ -24,9 +24,8 @@ const PartnerSystem = () => {
     ];
 
     return (
-        <div className={styles.wrapper}>
+        <Dashboard>
             <div className={styles.wrapperInner}>
-                <Navigation/>
                 <div className={styles.partnerSystemContent}>
                     <div className={styles.partnerSystem}>
                         <Balance/>
@@ -46,7 +45,7 @@ const PartnerSystem = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Dashboard>
     );
 };
 

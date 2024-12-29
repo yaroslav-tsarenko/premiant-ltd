@@ -5,22 +5,42 @@ import styles from './Login.module.scss';
 import { AuthenticationProps } from '@/types/authentication';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { TbEyeClosed } from "react-icons/tb";
-import { TbEye } from "react-icons/tb";
+import { TbEyeClosed, TbEye } from "react-icons/tb";
 import Link from "next/link";
+import Button from "@/components/button/Button";
+import Alert from '@/components/alert/Alert';
+import { newRequest } from "@/utils/newRequest";
+import { useRouter } from "next/navigation";
 
-const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, children }) => {
+const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
     const [showPassword, setShowPassword] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+    const router = useRouter();
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Не верный E-mail').required('Введите E-mail'),
         password: Yup.string().min(6, 'Пароль должен быть минимум 6 символов').required('Введите пароль'),
     });
 
-    const togglePasswordVisibility = () => setShowPassword(!showPassword);
+    const handleLogin = async (values: { email: string; password: string }) => {
+        setProcessing(true);
+        setAlert(null);
+        try {
+            const response = await newRequest.post('/auth/login', values);
+            console.log(response.data);
+            setAlert({ title: 'Успех!', description: 'Вход выполнен успешно!' });
+            router.push('/account');
+        } catch (error) {
+            console.error(error);
+            setAlert({ title: 'Ошибка', description: 'Неверные учетные данные' });
+        }
+        setProcessing(false);
+    };
 
     return (
         <div className={styles.wrapper}>
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             <div className={styles.loginContainer}>
                 <div className={styles.head}>
                     <h1 className={styles.headline}>{headline}</h1>
@@ -29,9 +49,7 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                 <Formik
                     initialValues={{ email: '', password: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
+                    onSubmit={handleLogin}
                 >
                     <Form className={styles.form}>
                         <div className={styles.inputGroup}>
@@ -51,20 +69,18 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, childre
                                     className={styles.input}
                                     placeholder="Пароль"
                                 />
-                                <span className={styles.icon} onClick={togglePasswordVisibility}>
+                                <span className={styles.icon} onClick={() => setShowPassword(!showPassword)}>
                                     {showPassword ? <TbEye /> : <TbEyeClosed />}
                                 </span>
                             </div>
                             <ErrorMessage name="password" component="div" className={styles.error} />
                         </div>
-
-                        <Link href="/forgot-password" legacyBehavior className={styles.forgotPassword}>
-                            <a className={styles.forgotPassword}>Забыли пароль?</a>
-                        </Link>
+                        <Button type="submit" variant="authentication">
+                            {processing ? 'Вход...' : 'Войти'}
+                        </Button>
                     </Form>
                 </Formik>
                 <div className={styles.bottomContainer}>
-                    {children}
                     {linkRoute.map((link, index) => (
                         <p key={index} className={styles.link}>
                             Или
