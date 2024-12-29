@@ -31,7 +31,8 @@
     "react-slick": "^0.30.3",
     "sass": "^1.81.1",
     "slick-carousel": "^1.8.1",
-    "yup": "^1.5.0"
+    "yup": "^1.5.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@types/google.maps": "^3.58.1",

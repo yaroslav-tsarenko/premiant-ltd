@@ -21,6 +21,7 @@ import Address from "@/components/address/Address";
 import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
+import CookiePopup from "@/components/cookie-popup/CookiePopup";
 
 export default function Home() {
     return (
@@ -238,6 +239,7 @@ export default function Home() {
                 ]}
                 burgerIcon={<GiHamburgerMenu/>}
             />
+            <CookiePopup />
         </>
     );
 }
