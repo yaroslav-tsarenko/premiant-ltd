@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from 'react';
 import { User, UserProvider } from './UserContext';
 import { cookies } from 'next/headers';
