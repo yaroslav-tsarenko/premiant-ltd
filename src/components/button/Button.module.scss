@@ -5,6 +5,8 @@
   font-size: 16px;
 }
 
+
+
 .outline {
   background: black;
   color: white;
@@ -24,6 +26,11 @@
   border-radius: 30px;
   border: none;
   font-size: 16px;
+  gap: 5px;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
   font-weight: 600;
   transition: 0.3s ease-in-out;
   cursor: pointer;

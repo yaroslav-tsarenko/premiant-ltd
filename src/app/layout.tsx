@@ -4,37 +4,32 @@ import Button from "@/components/button/Button";
 import Header from "@/components/header/Header";
 import React from "react";
 import Footer from "@/components/footer/Footer";
-import Link from "next/link";
+import {authWrapper} from "@/utils/AuthWrapper";
 
 export const metadata: Metadata = {
     title: "Premiant LTD",
     description: "ИНВЕСТИРУЙТЕ С НАМИ И ПРИУМНОЖАЙТЕ СВОЙ КАПИТАЛ",
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+type RootLayoutProps = {
     children: React.ReactNode;
-}>) {
+};
+
+function RootLayout({ children }: RootLayoutProps): React.ReactElement {
+
     return (
         <html lang="en">
         <body>
-        <Header
-            headerLinks={[
-                {name: 'Главная', route: '/'},
-                {name: 'О Компании', route: '/about'},
-                {name: 'Инвесторам/Партнерам', route: '#'},
-                {name: 'FAQ', route: '#'},
-                {name: 'Контакты', route: '/contacts'},
-            ]}
-        >
-            <Link href="/login">
-                <Button variant="headerSign">Вход</Button>
-            </Link>
-            <Link href="/register">
-                <Button variant="outline">Регистрация</Button>
-            </Link>
-        </Header>
+            <Header
+                headerLinks={[
+                    { name: 'Главная', route: '/' },
+                    { name: 'О Компании', route: '/about' },
+                    { name: 'Инвесторам/Партнерам', route: '#' },
+                    { name: 'FAQ', route: '#' },
+                    { name: 'Контакты', route: '/contacts' },
+                ]}
+            />
+
         {children}
         <Footer
             footerLinks={[
@@ -51,11 +46,10 @@ export default function RootLayout({
                 {label: 'Telegram', value: '@ltdpr'},
             ]}
         >
-
             <Button variant="hero">Начать инвестировать</Button>
-
         </Footer>
         </body>
         </html>
     );
 }
+export default authWrapper(RootLayout);

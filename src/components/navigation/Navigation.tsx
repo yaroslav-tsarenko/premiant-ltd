@@ -11,27 +11,29 @@ const Navigation = () => {
         <div className={styles.wrapper}>
             <div className={styles.head}>
                 <h1 className={styles.headline}>
-                    LTD
+                    <Link href="/">
+                        LTD
+                    </Link>
                 </h1>
                 <div className={styles.buttonsContainer}>
-                    <Link href="#" legacyBehavior>
+                    <Link href="/account" legacyBehavior>
                         <a className={styles.link}>
                             <GrHomeRounded/>
                         </a>
                     </Link>
-                    <Link href="#" legacyBehavior>
+                    <Link href="/transactions" legacyBehavior>
                         <a className={styles.link}>
                             <PiArrowsDownUp/>
                         </a>
                     </Link>
-                    <Link href="#" legacyBehavior>
+                    <Link href="/partner-system" legacyBehavior>
                         <a className={styles.link}>
                             <LuUsersRound/>
                         </a>
                     </Link>
                 </div>
             </div>
-            <Link href="#" legacyBehavior>
+            <Link href="/settings" legacyBehavior>
                 <a className={styles.link}>
                     <IoSettingsOutline/>
                 </a>

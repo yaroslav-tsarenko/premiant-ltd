@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "@/sections/transactions/Transactions.module.scss";
-import Navigation from "@/components/navigation/Navigation";
 import SortTransactions from "@/components/sort-transactions/SortTransactions";
 import TransactionsTable from "@/components/transactions-table/TransactionsTable";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 const Transactions = () => {
     const tableHeaders = ["Тип транзакции", "Дата", "ЭПС", "Сумма", "Статус оплаты"];
@@ -14,15 +14,14 @@ const Transactions = () => {
     ];
 
     return (
-        <div className={styles.wrapper}>
+        <Dashboard>
             <div className={styles.wrapperInner}>
-                <Navigation />
                 <div className={styles.transactionsContent}>
                     <SortTransactions />
                     <TransactionsTable headers={tableHeaders} transactions={transactions} />
                 </div>
             </div>
-        </div>
+        </Dashboard>
     );
 };
 

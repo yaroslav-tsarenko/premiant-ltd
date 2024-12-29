@@ -7,6 +7,7 @@
   background-color: #EBF0F3;
   align-items: center;
   transition: 0.2s ease-in-out;
+  border-radius: 5px;
 
   &:hover {
     background-color: #D3D3D3;
@@ -15,8 +16,7 @@
 
 .title {
   font-size: 13px;
-  font-weight: 500;
-  color: var(--grey-font-color);
+  font-weight: 600;
 }
 
 .icon {
@@ -25,11 +25,21 @@
 }
 
 .ItemGreen {
-  background-color: #299749;
+  background-color: #acffcd;
+  color: #63b977;
+
+  &:hover {
+    background-color: #8cffba;
+  }
 }
 
 .ItemRed {
-  background-color: #D32F2F;
+  background-color: #ffc0bc;
+  color: #d9534f;
+
+  &:hover {
+    background-color: #ffaba6;
+  }
 }
 
 @media (max-width: 768px) {

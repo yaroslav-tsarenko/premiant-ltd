@@ -2,7 +2,6 @@
 
 import React, {useState} from 'react';
 import styles from './Payment.module.scss';
-import Navigation from "@/components/navigation/Navigation";
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
 import PaymentBeanie from "@/components/payment-beanie/PaymentBeanie";
@@ -18,9 +17,10 @@ import PaymentForm from "@/components/payment-form/PaymentForm";
 import ApplicationInfo from "@/components/application-info/ApplicationInfo";
 import Image from "next/image";
 import ArrowLeft from "@/assets/icons/arrowLeft.svg";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 const Payment = () => {
-    const [step, setStep] = useState<number>(1);
+    const [step, setStep] = useState<number>(3);
 
     const handleNextStep = () => {
         setStep((prev) => prev + 1);
@@ -31,10 +31,8 @@ const Payment = () => {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <Dashboard>
             <div className={styles.wrapperInner}>
-                <Navigation/>
-
                 {step === 1 && (
                     <div className={styles.paymentContent}>
                         <div className={styles.withdrawalInfo}>
@@ -241,7 +239,7 @@ const Payment = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </Dashboard>
     );
 };
 

@@ -1,17 +1,25 @@
 "use client";
 
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import styles from './Register.module.scss';
 import { AuthenticationProps } from '@/types/authentication';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TbEyeClosed, TbEye } from "react-icons/tb";
 import Link from "next/link";
+import Button from "@/components/button/Button";
+import Alert from '@/components/alert/Alert';
+import {newRequest} from "@/utils/newRequest";
+import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
+import {useRouter} from "next/navigation";
 
-const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, children }) => {
-
+const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+    const router = useRouter();
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Введите имя'),
@@ -22,11 +30,46 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, chil
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
             .required('Повторите пароль'),
-        referralCode: Yup.string().required('Введите реферальный код'),
+        referralCode: Yup.string(),
     });
+
+    const handleRegister = async (values: {
+        name: string;
+        secondName: string;
+        email: string;
+        telegram: string;
+        password: string;
+        confirmPassword: string;
+        referralCode?: string;
+    }) => {
+        setProcessing(true);
+        setAlert(null);
+        try {
+            const response = await newRequest.post('/auth/register', values);
+            console.log(response.data);
+            document.cookie = `token=${response.data.token}; path=/;`;
+            newRequest.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+            setAlert({ title: 'Успех!', description: 'Спасибо за регистрацию!' });
+            setTimeout(() => {
+                setTimeout(() => {
+                    setRedirect(true);
+                    router.push('/login');
+                }, 1000);
+            }, 300);
+        } catch (error) {
+            console.error(error);
+            if (error) {
+                setAlert({ title: 'Упс!', description: "Пользователь существует" });
+            } else {
+                setAlert({ title: 'Error', description: 'Register Failure' });
+            }
+        }
+        setProcessing(false);
+    };
 
     return (
         <div className={styles.wrapper}>
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             <div className={styles.registerContainer}>
                 <div className={styles.head}>
                     <h1 className={styles.headline}>{headline}</h1>
@@ -41,11 +84,14 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, chil
                         password: '',
                         confirmPassword: '',
                         referralCode: '',
+                        balance: 0,
+                        referrals: '',
+                        tariff: 0,
+                        earnings: 0,
+                        withdrawals: 0
                     }}
                     validationSchema={validationSchema}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
+                    onSubmit={handleRegister}
                 >
                     <Form className={styles.form}>
                         <div className={styles.gridContainer}>
@@ -66,50 +112,53 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, chil
                                 <ErrorMessage name="telegram" component="div" className={styles.error}/>
                             </div>
                             <div className={styles.formGroup}>
-                                    <Field
-                                        name="password"
-                                        type={showPassword ? 'text' : 'password'}
-                                        placeholder="Пароль"
-                                        className={styles.input}
-                                    />
-                                    <div
-                                        className={styles.icon}
-                                        onClick={() => setShowPassword(!showPassword)}
-                                    >
-                                        {showPassword ? <TbEye/> : <TbEyeClosed/>}
-                                    </div>
+                                <Field
+                                    name="password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="Пароль"
+                                    className={styles.input}
+                                />
+                                <div
+                                    className={styles.icon}
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <TbEye/> : <TbEyeClosed/>}
+                                </div>
                                 <ErrorMessage name="password" component="div" className={styles.error}/>
                             </div>
                             <div className={styles.formGroup}>
-                                    <Field
-                                        name="confirmPassword"
-                                        type={showConfirmPassword ? 'text' : 'password'}
-                                        placeholder="Повторите пароль"
-                                        className={styles.input}
-                                    />
-                                    <div
-                                        className={styles.icon}
-                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    >
-                                        {showConfirmPassword ? <TbEye/> : <TbEyeClosed/>}
-                                    </div>
+                                <Field
+                                    name="confirmPassword"
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    placeholder="Повторите пароль"
+                                    className={styles.input}
+                                />
+                                <div
+                                    className={styles.icon}
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                    {showConfirmPassword ? <TbEye/> : <TbEyeClosed/>}
+                                </div>
                                 <ErrorMessage name="confirmPassword" component="div" className={styles.error}/>
                             </div>
                             <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                                 <Field
                                     name="referralCode"
                                     type="text"
-                                    placeholder="Реферальный код"
+                                    placeholder="Реферальный код (не обязательно)"
                                     className={styles.inputReferral}
                                 />
                                 <ErrorMessage name="referralCode" component="div" className={styles.error}/>
                             </div>
                         </div>
+                        <Button type="submit" variant="authentication">
+                            {processing ? (
+                                redirect ? <RotatingLinesLoader title="Переадресация..." /> : <RotatingLinesLoader title="Обработка..." />
+                            ) : 'Зарегистрироваться'}
+                        </Button>
                     </Form>
                 </Formik>
-
                 <div className={styles.bottomContainer}>
-                    {children}
                     {linkRoute.map((link, index) => (
                         <p key={index} className={styles.link}>
                             Или

@@ -2,7 +2,6 @@
 
 import React, {useState} from 'react';
 import styles from './Deposit.module.scss';
-import Navigation from "@/components/navigation/Navigation";
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
 import PaymentBeanie from "@/components/payment-beanie/PaymentBeanie";
@@ -18,6 +17,7 @@ import ApplicationInfo from "@/components/application-info/ApplicationInfo";
 import PaymentForm from "@/components/payment-form/PaymentForm";
 import ArrowLeft from "@/assets/icons/arrowLeft.svg";
 import Image from 'next/image';
+import Dashboard from "@/components/dashboard/Dashboard";
 
 const Deposit = () => {
 
@@ -32,10 +32,8 @@ const Deposit = () => {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <Dashboard>
             <div className={styles.wrapperInner}>
-                <Navigation/>
-
                 {step === 1 && (
                     <div className={styles.depositContent}>
                         <div className={styles.withdrawalInfo}>
@@ -240,7 +238,7 @@ const Deposit = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </Dashboard>
     );
 };
 
