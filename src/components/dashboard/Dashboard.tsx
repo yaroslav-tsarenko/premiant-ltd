@@ -7,7 +7,7 @@ const Dashboard:FC <DashboardProps> = ({children}) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.wrapperInner}>
-                <Navigation/>
+                <Navigation type={"dashboard"}/>
                 <div className={styles.dashboardContent}>
                     {children}
                 </div>
