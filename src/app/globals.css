@@ -9,12 +9,14 @@
     --foreground: #000000;
     --main-padding-properties: 0 30px;
     --primary-color: #ffff;
-    --secondary-color: #161f1f;
+    --secondary-color: #151515;
     --main-font-color: #000000;
     --secondary-font-color: #F4F7FE;
     --allocation-color: #17F4E3;
     --icon-color: #333333;
     --grey-font-color: #6E6E6E;
+    --main-background-color: #EBF0F3;
+    --lighter-grey-font-color: #B3B3B3;
 }
 
 html,

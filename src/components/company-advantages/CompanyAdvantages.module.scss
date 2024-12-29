@@ -3,28 +3,44 @@
   flex-direction: column;
   padding: var(--main-padding-properties);
   position: relative;
-  margin: 80px 0 140px 0;;
+  margin: 120px 0 140px 0;;
+
+    @media (max-width: 768px) {
+      margin: 0;
+    }
 }
 
 .beanie {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
+  flex-direction: row;
+  align-items: start;
+  gap: 260px;
+  width: 100%;
 
-.item {
-  position: absolute;
-  top: 0;
-  left: 30px;
+  @media (max-width: 1028px) {
+    gap: 20px;
 
+  }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 }
 
 .headline {
   font-family: 'GropledBold', sans-serif;
   font-size: 49px;
   font-weight: bold;
+  width: 60%;
+  text-align: justify;
+
+  @media (max-width: 1028px) {
+    width: 100%;
+  }
+}
+
+.modHeadline{
+  color: lighten(#000000, 50%);
 }
 
 .content {
@@ -36,14 +52,14 @@
 
 .paragraph {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
-  text-align: left;
   justify-content: space-between;
   color: var(--main-font-color);
   padding: 15px;cursor: pointer;
   transition: 0.3s ease;
   border-bottom: 1px solid var(--main-font-color);
+  align-items: center;
 }
 
 .paragraph:hover {
@@ -61,15 +77,24 @@
   align-items: center;
 }
 
+.paragraph:hover .paragraphHeadline::before {
+  border-color: gray;
+}
+
 .paragraphHeadline {
   font-size: 24px;
   font-weight: bold;
   font-family: 'GropledBold', sans-serif;
   position: relative;
-  padding: 0 0 0 15px;
+  padding: 0 0 0 20px;
+  flex-direction: row;
+  align-items: center;
+  max-width: 440px;
+  width: 100%;
+  text-transform: uppercase;
 
   @media screen and (max-width: 478px) {
-    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -78,20 +103,23 @@
   position: absolute;
   font-size: 24px;
   font-weight: bold;
-  width: 7px;
-  height: 7px;
-  border-radius: 3px;
-  border: 3px solid var(--main-font-color);
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  border: 4px solid var(--main-font-color);
   left: -5px;
   top: 50%;
   transform: translateY(-50%);
   background: white;
-  box-shadow: inset 0 0 0 3px white; /* Creates an inner border radius */
+  box-shadow: inset 0 0 0 3px white;
+  transition: 0.3s ease;
 }
 
 .paragraphText {
   font-size: 16px;
   font-weight: 500;
+  max-width: 560px;
+  width: 100%;
   @media screen and (max-width: 478px) {
     width: 100%;
   }
@@ -109,6 +137,7 @@
 
   .beanie{
     align-items: flex-start;
+    flex-direction: column;
   }
 
   .item {

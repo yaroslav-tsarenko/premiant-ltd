@@ -1,17 +1,17 @@
 .wrapper {
   display: flex;
-  margin: 120px 0;
+  margin: 120px 0 0 120px;
   flex-direction: column;
   padding: var(--main-padding-properties);
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 50px;
 }
 
 .beanie {
   display: flex;
   flex-direction: row;
   gap: 25px;
-  width: 100%;
+  width: 70%;
   align-items: self-start;
   justify-content: space-between;
 }
@@ -35,15 +35,16 @@
 .headline {
   font-size: 40px;
   font-weight: bold;
-  color: lighten(#000000, 50%);
-  width: 70%;
+  color: #000000;
+  width: 67%;
   font-family: 'GropledBold', sans-serif;
+  text-align: justify;
 }
 
 .modTitle {
   font-size: 40px;
   font-weight: bold;
-  color: #000000;
+  color: lighten(#000000, 50%);
   font-family: 'GropledBold', sans-serif;
 }
 
@@ -77,6 +78,15 @@
 
   .scheme {
     gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 26px;
+  }
+  .modTitle {
+    font-size: 26px;
   }
 }
 

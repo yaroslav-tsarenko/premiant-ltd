@@ -1,0 +1,161 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  padding: var(--main-padding-properties);
+  margin-bottom: 50px;
+}
+
+.wrapperInner {
+  display: flex;
+  max-width: 1920px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.depositContent {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+
+.withdrawalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 335px;
+  width: 100%;
+}
+
+.depositContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 73px;
+}
+
+.methods {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  gap: 20px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.input {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--grey-font-color);
+  transition: 0.2s;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #EBF0F3;
+  }
+
+  &:focus {
+    outline: none;
+    caret-color: var(--allocation-color);
+  }
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.bottomButtons {
+  display: none;
+  width: 100%;
+}
+
+.applicationContent{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 73px;
+
+  @media (max-width: 768px) {
+    gap: 40px;
+  }
+}
+
+.applicationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text {
+  font-size: 20px;
+  background: linear-gradient(to left, var(--grey-font-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.appeal{
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+@media (max-width: 1028px) {
+  .bottomButtons {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .depositContent {
+    flex-direction: column;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .depositContainer {
+    gap: 50px;
+  }
+
+  .withdrawalInfo {
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  .inputContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .applicationContent{
+    gap: 40px;
+  }
+}

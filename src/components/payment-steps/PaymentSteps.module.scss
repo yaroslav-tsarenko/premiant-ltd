@@ -1,0 +1,96 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-background-color);
+  max-width: 335px;
+  width: 100%;
+  align-items: center;
+}
+
+.step {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: var(--main-background-color);
+  padding: 24px 10px;
+}
+
+.stepNumber {
+  font-size: 36px;
+  font-weight: 600;
+  color: rgba(161, 161, 161, 0.65);
+}
+
+.stepInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.line {
+  max-width: 215px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, var(--grey-font-color), var(--primary-color));
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  background: linear-gradient(to right, #cccccc, #979797);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 400;
+  background: linear-gradient(to right, #acacac, #979797);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.active{
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+  }
+
+  .stepNumber {
+    font-size: 36px;
+    font-weight: 600;
+    color: #24CBBF;
+  }
+
+  .description {
+    font-size: 14px;
+    font-weight: 400;
+    background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+
+  .line{
+    display: none;
+  }
+
+  .active {
+    display: block;
+    max-width: 100%;
+  }
+}
+

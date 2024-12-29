@@ -1,0 +1,55 @@
+.methodWrapper {
+  display: flex;
+  max-width: 296px;
+  width: 100%;
+  height: fit-content;
+  flex-direction: column;
+  background-color: var(--main-background-color);
+  padding: 15px 20px;
+  gap: 12px;
+  border-radius: 5px;
+}
+
+.beanie {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.platform {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+.platformName {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--main-text-color);
+  font-family: 'GropledBold', sans-serif;
+  text-transform: uppercase;
+}
+
+.currency {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--grey-font-color);
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 400;
+  background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .methodWrapper {
+        max-width: 100%;
+    }
+}

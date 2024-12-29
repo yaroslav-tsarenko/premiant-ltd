@@ -5,12 +5,40 @@
   font-size: 16px;
 }
 
+
+
 .outline {
   background: black;
   color: white;
   border-radius: 30px;
   padding: 10px;
   border: none;
+  transition: 0.3s ease-in-out;
+}
+
+.outline:hover {
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+}
+
+.headerSign {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  gap: 5px;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.headerSign:hover {
+  transform: scale(1.1);
+  will-change: transform;
 }
 
 .hero {
@@ -42,14 +70,14 @@
   transition: box-shadow 0.3s ease-in-out;
   width: fit-content;
   margin-top: 35px;
-  z-index: 1000;
+  z-index: 99;
 }
 
 .companyInfo:hover {
   box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.7);
 }
 
-.form{
+.form {
   background: var(--primary-color);
   color: var(--secondary-color);
   border-radius: 30px;
@@ -68,7 +96,7 @@
   box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.7);
 }
 
-.calculator{
+.calculator {
   background: #17F4E3;
   color: var(--secondary-color);
   border-radius: 30px;
@@ -84,8 +112,160 @@
   box-shadow: 0 0 30px 10px rgba(21, 149, 140, 0.5);
 }
 
+.authentication {
+  background: #000000;
+  color: var(--primary-color);
+  border-radius: 30px;
+  padding: 15px 15px;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  box-shadow: -12px 0 20px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 99;
+}
+
+.authentication:hover {
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.7);
+}
+
+.authenticationNoShadow {
+  background: #000000;
+  color: var(--primary-color);
+  border-radius: 30px;
+  padding: 15px 15px;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  z-index: 99;
+  transition: 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    max-width: 380px;
+  }
+}
+
+.authenticationNoShadow:hover {
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.7);
+}
+
+.check {
+  background: #24CBBF;
+  color: var(--primary-color);
+  border-radius: 30px;
+  padding: 10px 0;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 95%;
+  box-shadow: -12px 0 20px 2px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 99;
+}
+
+.check:hover {
+  box-shadow: 0 0 30px 10px var(--allocation-color);
+}
+
+.defBlackButton {
+  background: black;
+  color: white;
+  border-radius: 30px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 99;
+  align-items: center;
+  height: fit-content;
+}
+
+.defBlackButton:hover {
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+}
+
+.backButton {
+  background: var(--main-background-color);
+  color: var(--grey-font-color);
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: fit-content;
+  padding: 12px 20px;
+}
+
+.backButton:hover {
+  box-shadow: 0 0 20px 5px var(--allocation-color);
+}
+
+.cancellation {
+  background: var(--main-background-color);
+  color: var(--grey-font-color);
+  border-radius: 30px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  max-width: 300px;
+  width: 100%;
+  transition: 0.3s ease-in-out;
+  z-index: 99;
+  align-items: center;
+  height: fit-content;
+
+  @media (max-width: 768px) {
+    max-width: 380px;
+  }
+}
+
+.cancellation:hover {
+  box-shadow: 0 0 20px 5px var(--allocation-color);
+}
+
+.payment {
+  background: var(--primary-color);
+  color: var(--grey-font-color);
+  border-radius: 5px;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 99;
+  align-items: center;
+  height: fit-content;
+}
+
+.payment:hover {
+  box-shadow: 0 0 20px 2px var(--allocation-color);
+}
+
+@media (max-width: 1028px) {
+
+  .defBlackButton {
+    width: 100%
+  }
+}
+
+
 @media (max-width: 768px) {
-  .companyInfo{
+  .companyInfo {
     width: 100%;
+  }
+
+  .check {
+    position: absolute;
+    background-color: black;
+    bottom: 36px;
+    width: 72%;
   }
 }
