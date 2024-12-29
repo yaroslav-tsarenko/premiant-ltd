@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './Navigation.module.scss';
 import Link from 'next/link';
 import { IoSettingsOutline } from "react-icons/io5";
 import {GrHomeRounded} from 'react-icons/gr';
 import {LuUsersRound} from "react-icons/lu";
 import {PiArrowsDownUp} from "react-icons/pi";
+import { PiUserLight } from "react-icons/pi";
 
-const Navigation = () => {
+interface NavigationType {
+    type?: string;
+}
+
+const Navigation:FC<NavigationType> = ({type}) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.head}>
@@ -14,28 +19,39 @@ const Navigation = () => {
                     LTD
                 </h1>
                 <div className={styles.buttonsContainer}>
-                    <Link href="#" legacyBehavior>
+                    <Link href="/" legacyBehavior>
                         <a className={styles.link}>
                             <GrHomeRounded/>
                         </a>
                     </Link>
-                    <Link href="#" legacyBehavior>
+                    <Link href="/transactions" legacyBehavior>
                         <a className={styles.link}>
                             <PiArrowsDownUp/>
                         </a>
                     </Link>
-                    <Link href="#" legacyBehavior>
+                    <Link href="/partner-system" legacyBehavior>
                         <a className={styles.link}>
                             <LuUsersRound/>
                         </a>
                     </Link>
                 </div>
             </div>
-            <Link href="#" legacyBehavior>
-                <a className={styles.link}>
-                    <IoSettingsOutline/>
-                </a>
-            </Link>
+
+            {type === 'dashboard' ? (
+                <Link href="/settings" legacyBehavior>
+                    <a className={styles.link}>
+                        <IoSettingsOutline/>
+                    </a>
+                </Link>
+            ) : (
+                <Link href="/dashboard-account" legacyBehavior>
+                    <a className={styles.link}>
+                        <PiUserLight/>
+                    </a>
+                </Link>
+            )}
+
+
         </div>
     );
 };

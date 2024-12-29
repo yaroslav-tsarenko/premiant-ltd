@@ -3,9 +3,9 @@ import Payment from "@/sections/payment/Payment";
 
 const PaymentPage = () => {
     return (
-        <Payment>
-
-        </Payment>
+        <>
+            <Payment/>
+        </>
     );
 };
 

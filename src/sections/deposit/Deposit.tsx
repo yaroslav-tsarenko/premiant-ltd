@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './Deposit.module.scss';
 import Navigation from "@/components/navigation/Navigation";
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
@@ -18,10 +18,12 @@ import ApplicationInfo from "@/components/application-info/ApplicationInfo";
 import PaymentForm from "@/components/payment-form/PaymentForm";
 import ArrowLeft from "@/assets/icons/arrowLeft.svg";
 import Image from 'next/image';
+import Button from "@/components/button/Button";
+import Popup from "@/components/popup/Popup";
 
 const Deposit = () => {
-
     const [step, setStep] = useState<number>(1);
+    const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
 
     const handleNextStep = () => {
         setStep((prev) => prev + 1);
@@ -29,6 +31,15 @@ const Deposit = () => {
 
     const handlePreviousStep = () => {
         setStep((prev) => prev - 1);
+    };
+
+    const handlePaymentConfirmation = () => {
+        setIsPopupVisible(true);
+    };
+
+    const handleNextStepAndClosePopup = () => {
+        setIsPopupVisible(false);
+        handleNextStep();
     };
 
     return (
@@ -119,7 +130,6 @@ const Deposit = () => {
                                     secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
-
                     </div>
                 )}
 
@@ -153,9 +163,9 @@ const Deposit = () => {
                                 dotText="Введите сумму"
                                 title="Введите сумму и подтвердите операцию"
                             >
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
+                                <StepButtons onNext={handlePaymentConfirmation} onPrev={handlePreviousStep}
                                              firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                             secondButtonContent={"Продолжить"}/>
+                                             secondButtonContent={"Я оплатил"}/>
                             </PaymentBeanie>
 
                             <PaymentForm
@@ -173,9 +183,9 @@ const Deposit = () => {
                                 ]}
                             />
                             <div className={styles.bottomButtons}>
-                                <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
+                                <StepButtons onNext={handlePaymentConfirmation} onPrev={handlePreviousStep}
                                              firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                             secondButtonContent={"Продолжить"}/>
+                                             secondButtonContent={"Я оплатил"} />
                             </div>
                         </div>
                     </div>
@@ -236,9 +246,27 @@ const Deposit = () => {
                                              secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
-
                     </div>
                 )}
+
+                {isPopupVisible && (
+                    <Popup
+                        title={"Этот способ недоступен"}
+                        description={"К сожалению, данный способ сейчас недоступен в вашем регионе. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"}
+                        firstChildren={
+                            <Button variant="cancellation" onClick={() => setIsPopupVisible(false)}>
+                                Отмена
+                            </Button>
+
+                        }
+                        secondChildren={
+                            <Button variant="authenticationNoShadow" onClick={handleNextStepAndClosePopup}>
+                                Использовать Tether (TRC20)
+                            </Button>
+                        }
+                    />
+                )}
+
             </div>
         </div>
     );

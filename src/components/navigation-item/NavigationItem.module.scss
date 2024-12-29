@@ -9,13 +9,13 @@
   transition: 0.2s ease-in-out;
 
   &:hover {
-    background-color: #D3D3D3;
+    background-color: var(--allocation-color);
   }
 }
 
 .title {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--grey-font-color);
 }
 
@@ -25,11 +25,19 @@
 }
 
 .ItemGreen {
-  background-color: #299749;
+  background-color: #ACFFCD;
+
+  .title, .icon {
+    color: #065F09;
+  }
 }
 
 .ItemRed {
-  background-color: #D32F2F;
+  background-color: #B86563;
+
+  .title, .icon {
+    color: #710A0A;
+  }
 }
 
 @media (max-width: 768px) {

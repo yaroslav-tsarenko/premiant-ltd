@@ -5,6 +5,7 @@ import Header from "@/components/header/Header";
 import React from "react";
 import Footer from "@/components/footer/Footer";
 import Link from "next/link";
+import CheckLocation from "@/components/check-location/CheckLocation";
 
 export const metadata: Metadata = {
     title: "Premiant LTD",
@@ -16,16 +17,18 @@ export default function RootLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
+
     return (
         <html lang="en">
         <body>
+        <CheckLocation/>
         <Header
             headerLinks={[
                 {name: 'Главная', route: '/'},
                 {name: 'О Компании', route: '/about'},
-                {name: 'Инвесторам/Партнерам', route: '#'},
+                {name: 'Инвесторам/Партнерам', route: '/partner-system'},
                 {name: 'FAQ', route: '#'},
-                {name: 'Контакты', route: '/contacts'},
+                {name: 'Контакты', route: ''},
             ]}
         >
             <Link href="/login">

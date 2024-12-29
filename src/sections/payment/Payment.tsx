@@ -18,9 +18,12 @@ import PaymentForm from "@/components/payment-form/PaymentForm";
 import ApplicationInfo from "@/components/application-info/ApplicationInfo";
 import Image from "next/image";
 import ArrowLeft from "@/assets/icons/arrowLeft.svg";
+import Popup from "@/components/popup/Popup";
+import Button from "@/components/button/Button";
 
 const Payment = () => {
     const [step, setStep] = useState<number>(1);
+    const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
 
     const handleNextStep = () => {
         setStep((prev) => prev + 1);
@@ -28,6 +31,14 @@ const Payment = () => {
 
     const handlePreviousStep = () => {
         setStep((prev) => prev - 1);
+    };
+
+    const handleSelectMethod = (methodName: string) => {
+        setSelectedMethod(methodName);
+    };
+
+    const handleClosePopup = () => {
+        setSelectedMethod(null);
     };
 
     return (
@@ -38,7 +49,7 @@ const Payment = () => {
                 {step === 1 && (
                     <div className={styles.paymentContent}>
                         <div className={styles.withdrawalInfo}>
-                            <BalanceWithdraw/>
+                            <BalanceWithdraw />
                             <div className={styles.steps}>
                                 <PaymentSteps
                                     step={1}
@@ -69,9 +80,11 @@ const Payment = () => {
                                 <StepButtons
                                     onNext={handleNextStep}
                                     onPrev={handlePreviousStep}
-                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                    secondButtonContent={"Продолжить"}/>
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left" />}
+                                    secondButtonContent={"Продолжить"}
+                                />
                             </PaymentBeanie>
+
                             <div className={styles.methods}>
                                 <PaymentMethods
                                     icon={Tether.src}
@@ -84,41 +97,66 @@ const Payment = () => {
                                     name="PerfectMoney"
                                     currency="USD"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handleSelectMethod}
                                 />
                                 <PaymentMethods
                                     icon={Payeer.src}
                                     name="Payeer"
                                     currency="USD"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handleSelectMethod}
                                 />
                                 <PaymentMethods
                                     icon={Bitcoin.src}
                                     name="Bitcoin"
                                     currency="BTC"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handleSelectMethod}
                                 />
                                 <PaymentMethods
                                     icon={Etherium.src}
                                     name="Etherium"
                                     currency="ETC"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handleSelectMethod}
                                 />
                                 <PaymentMethods
                                     icon={Visa.src}
                                     name="Visa"
                                     currency="RUB"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handleSelectMethod}
                                 />
                             </div>
+
                             <div className={styles.bottomButtons}>
                                 <StepButtons
                                     onNext={handleNextStep}
                                     onPrev={handlePreviousStep}
-                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                    secondButtonContent={"Продолжить"}/>
+                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left" />}
+                                    secondButtonContent={"Продолжить"}
+                                />
                             </div>
                         </div>
                     </div>
+                )}
+
+                {selectedMethod && (
+                    <Popup
+                           title={"Этот способ недоступен"}
+                           description={"К сожалению, данный способ сейчас недоступен в вашем регионе. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"}
+                           firstChildren={
+                               <Button variant="cancellation" onClick={handleClosePopup}>
+                                   Отмена
+                               </Button>
+
+                           }
+                           secondChildren={
+                               <Button variant="authenticationNoShadow" onClick={handleClosePopup}>
+                                   Использовать Tether (TRC20)
+                               </Button>
+                           }
+                    />
                 )}
 
                 {step === 2 && (
