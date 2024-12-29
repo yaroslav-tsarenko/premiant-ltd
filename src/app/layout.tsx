@@ -15,21 +15,20 @@ type RootLayoutProps = {
     children: React.ReactNode;
 };
 
-function RootLayout({ children }: RootLayoutProps): React.ReactElement {
+function RootLayout({children}: RootLayoutProps): React.ReactElement {
 
     return (
         <html lang="en">
         <body>
-            <Header
-                headerLinks={[
-                    { name: 'Главная', route: '/' },
-                    { name: 'О Компании', route: '/about' },
-                    { name: 'Инвесторам/Партнерам', route: '#' },
-                    { name: 'FAQ', route: '#' },
-                    { name: 'Контакты', route: '/contacts' },
-                ]}
-            />
-
+        <Header
+            headerLinks={[
+                {name: 'Главная', route: '/'},
+                {name: 'О Компании', route: '/about'},
+                {name: 'Инвесторам/Партнерам', route: '#'},
+                {name: 'FAQ', route: '#'},
+                {name: 'Контакты', route: '/contacts'},
+            ]}
+        />
         {children}
         <Footer
             footerLinks={[
@@ -52,4 +51,5 @@ function RootLayout({ children }: RootLayoutProps): React.ReactElement {
         </html>
     );
 }
+
 export default authWrapper(RootLayout);
