@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from "next/link";
 import logo from "@/assets/images/logo.svg";
@@ -18,11 +18,23 @@ const Header: FC<HeaderProps> = ({ headerLinks = [] }) => {
     const user = useUser();
     const firstPartLinks = headerLinks.slice(0, 3);
     const secondPartLinks = headerLinks.slice(3);
+    const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsSticky(window.scrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
         <>
             {!hideHeaderRoutes.includes(pathname) && (
-                <header className={styles.header}>
+                <header className={`${styles.header} ${isSticky ? styles.sticky : ''}`}>
                     <div className={styles.headerInner}>
                         <nav className={styles.links}>
                             <ul>
@@ -73,7 +85,6 @@ const Header: FC<HeaderProps> = ({ headerLinks = [] }) => {
                         </nav>
                     </div>
                 </header>
-                
             )}
         </>
     );
