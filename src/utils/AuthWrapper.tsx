@@ -1,5 +1,6 @@
 import { UserProvider } from './UserContext';
 import { cookies } from 'next/headers';
+import {BACKEND_URL} from "@/constants/constants";
 
 export function authWrapper(Component: React.ComponentType<any>) {
     return async function WrappedComponent(props: unknown | any) {
@@ -14,7 +15,7 @@ export function authWrapper(Component: React.ComponentType<any>) {
                 throw new Error("Authentication token missing.");
             }
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/get-user`, {
+            const response = await fetch(`${BACKEND_URL}/user/get-user`, {
                 headers: { Authorization: `Bearer ${token}` },
                 cache: 'no-store',
             });
