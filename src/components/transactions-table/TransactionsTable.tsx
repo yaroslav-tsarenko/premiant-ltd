@@ -30,7 +30,7 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
             <table className={styles.table}>
                 <thead>
                 <tr className={styles.idColumn}>
-                    <th >ID</th>
+                    <th>ID</th>
                     {headers.map((header, index) => (
                         <th key={index}>{header}</th>
                     ))}
@@ -39,7 +39,7 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
                 <tbody>
                 {transactions.map((transaction, index) => (
                     <tr key={index}>
-                        <td className={getStatusStyle(transaction.status || '')}>{transactions.length - index}</td>
+                        <td className={getStatusStyle(transaction.status || '')}>{index + 1}</td>
                         {Object.keys(transaction).map((key, idx) => (
                             <td key={idx} className={key === 'status' ? getStatusStyle(transaction[key] || '') : key === 'type' ? getTypeStyle(transaction[key] || '') : ''}>
                                 {transaction[key]}

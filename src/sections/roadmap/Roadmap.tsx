@@ -75,9 +75,7 @@ const Roadmap = () => {
                         </div>
                     ))}
                 </div>
-
                 <Image src={Line} alt={"Line"} />
-
             </div>
         </div>
     );

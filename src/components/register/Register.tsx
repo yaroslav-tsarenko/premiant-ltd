@@ -9,12 +9,12 @@ import {TbEyeClosed, TbEye} from "react-icons/tb";
 import Link from "next/link";
 import Button from "@/components/button/Button";
 import Alert from '@/components/alert/Alert';
-import {newRequest} from "@/utils/newRequest";
 import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
 import Validation from "@/components/validation-component/Validation";
 import {useUser} from "@/utils/UserContext";
+import {BACKEND_URL} from "@/constants/constants";
 
-const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
+const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute, referralCode}) => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [processing, setProcessing] = useState(false);
@@ -25,12 +25,15 @@ const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
         secondName: Yup.string().required('Введите фамилию'),
         email: Yup.string().email('Неверный E-mail').required('Введите E-mail'),
         telegram: Yup.string().required('Введите Telegram'),
+        curator: Yup.string().optional(),
         password: Yup.string().min(6, 'Пароль должен быть минимум 8 символов').required('Введите пароль'),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
             .required('Повторите пароль'),
-        referralCode: Yup.string(),
+        referralCode: Yup.string().optional(),
     });
+
+    console.log("REFERRAL ON COMPONENT: " + referralCode);
 
     const handleRegister = async (values: {
         name: string;
@@ -39,26 +42,40 @@ const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
         telegram: string;
         password: string;
         confirmPassword: string;
+        curator?: string;
         referralCode?: string;
     }) => {
         setProcessing(true);
         setAlert(null);
         try {
-            const response = await newRequest.post('/auth/register', values);
-            console.log(response.data);
-            document.cookie = `token=${response.data.token}; path=/;`;
-            newRequest.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-            setAlert({title: 'Успех!', description: 'Спасибо за регистрацию!'});
-            setTimeout(() =>{
+            const response = await fetch(`${BACKEND_URL}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log(data);
+            document.cookie = `token=${data.token}; path=/;`;
+            setAlert({ title: 'Успех!', description: 'Спасибо за регистрацию!' });
+            setTimeout(() => {
                 window.location.href = '/login';
-            })
+            });
         } catch (error) {
             console.error(error);
             if (error) {
-                setAlert({title: 'Упс!', description: "Пользователь существует"});
+                setAlert({ title: 'Упс!', description: 'Пользователь уже существует или произошла ошибка на сервере' });
             } else {
-                setAlert({title: 'Error', description: 'Register Failure'});
+                setAlert({ title: 'Error', description: 'Register Failure' });
             }
+        } finally {
+            setProcessing(false);
         }
     };
 
@@ -66,7 +83,7 @@ const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
         <div className={styles.wrapper}>
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
             {user ?
-                <Validation title="Вы уже зарегистрированы"/>
+                <Validation title="Вы уже зарегистрированы, спасибо за регистрацию!"/>
                 :
                 <div className={styles.registerContainer}>
                     <div className={styles.head}>
@@ -81,7 +98,8 @@ const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
                             telegram: '',
                             password: '',
                             confirmPassword: '',
-                            referralCode: '',
+                            referralCode: referralCode || '',
+                            curator: referralCode || '',
                             balance: 0,
                             referrals: '',
                             tariff: 0,
@@ -142,12 +160,12 @@ const Register: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
                                 </div>
                                 <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                                     <Field
-                                        name="referralCode"
+                                        name="curator"
                                         type="text"
                                         placeholder="Реферальный код (не обязательно)"
                                         className={styles.inputReferral}
                                     />
-                                    <ErrorMessage name="referralCode" component="div" className={styles.error}/>
+                                    <ErrorMessage name="curator" component="div" className={styles.error}/>
                                 </div>
                             </div>
                             <Button type="submit" variant="authentication">

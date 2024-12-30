@@ -7,11 +7,19 @@ const userSchema = new mongoose.Schema({
     telegram: { type: String, required: true },
     password: { type: String, required: true },
     referralCode: { type: String },
+    curator: { type: String },
     balance: { type: Number, default: '0' },
     referrals: { type: Array, default: [] },
-    tariff: { type: Number, default: '0' },
+    tariff: { type: String, required: true, enum: ['start', 'comfort', 'maximum', 'exclusive', 'premium'], default: 'start' },
     earnings: { type: Number, default: '0' },
     withdrawals: { type: Number, default: '0' },
+    usdtWallet: { type: String },
+    btcWallet: { type: String },
+    perfectMoneyWallet: { type: String },
+    ethereumWallet: { type: String },
+    payeerWallet: { type: String },
+    card: { type: String },
+    createdAt: { type: Date, default: Date.now }
 });
 
 const User = mongoose.model('User', userSchema);

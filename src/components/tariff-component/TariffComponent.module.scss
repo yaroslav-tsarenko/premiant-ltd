@@ -49,6 +49,10 @@
   }
 }
 
+.highlight {
+  border: 2px solid #FFD700; /* Example highlight style */
+}
+
 .btn {
   display: flex;
   justify-content: center;
@@ -60,7 +64,6 @@
   font-size: 14px;
   background-color: var(--primary-color);
   color: black;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 6% 100%, 2% 42%);
   transition: 0.2s ease-in-out;
 }
 

@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const moment = require('moment');
 
 const router = express.Router();
 
@@ -19,7 +20,6 @@ const validationSchemaRegistration = [
         }
         return true;
     }),
-    body('referralCode').optional().trim().escape(),
 ];
 
 const validationSchemaLogin = [
@@ -29,37 +29,26 @@ const validationSchemaLogin = [
 
 const JWT_SECRET = process.env.JWT_SECRET || "4c025b65c5cc41dafdd9b7eafb297d97df58c367eb9d924757072761e6c5e8e41531550eb0d95a0e1161a22b5929d9a38a8af9c65ce23be91d10c3b9fd482d05";
 
-router.post('/register', validationSchemaRegistration, async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+router.post('/register', async (req, res) => {
+    const { name, secondName, email, telegram, password } = req.body;
 
     try {
-        const { name, secondName, email, telegram, password, referralCode } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         const newUser = new User({
             name,
             secondName,
             email,
             telegram,
-            password: hashedPassword,
-            referralCode,
+            password,
+            createdAt: new Date()
         });
 
         await newUser.save();
 
         const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: '7d' });
-        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-
         res.status(201).json({ message: 'User registered successfully', token });
     } catch (error) {
         console.error('Error:', error);
-        if (error.code === 11000) {
-            return res.status(400).json({ error: 'User already exists' });
-        }
-        res.status(500).send('Server error');
+        res.status(500).json({ message: 'Server error', error });
     }
 });
 
@@ -83,8 +72,7 @@ router.post('/login', validationSchemaLogin, async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' });
-        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-        res.status(200).json({ message: 'Login successful'});
+        res.status(200).json({ message: 'Login successful', token, redirectUrl: '/account' });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Server error');

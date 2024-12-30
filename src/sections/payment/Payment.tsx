@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './Payment.module.scss';
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
@@ -18,20 +18,83 @@ import ApplicationInfo from "@/components/application-info/ApplicationInfo";
 import Image from "next/image";
 import ArrowLeft from "@/assets/icons/arrowLeft.svg";
 import Dashboard from "@/components/dashboard/Dashboard";
+import Alert from "@/components/alert/Alert";
+import {useUser} from "@/utils/UserContext";
+import {BACKEND_URL} from "@/constants/constants";
 
 const Payment = () => {
-    const [step, setStep] = useState<number>(3);
-
+    const [step, setStep] = useState<number>(1);
+    const user = useUser();
+    const [selectedPayment, setSelectedPayment] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
+    const [withdrawId, setWithdrawId] = useState<string>('');
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+    console.log(loading)
     const handleNextStep = () => {
-        setStep((prev) => prev + 1);
+        setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
 
     const handlePreviousStep = () => {
-        setStep((prev) => prev - 1);
+        setStep((prev) => (prev > 1 ? prev - 1 : 1));
+    };
+
+    const submitFormRef = useRef<() => void>();
+    const handleButtonClick = () => {
+        if (submitFormRef.current) {
+            submitFormRef.current();
+        }
+    };
+
+    const handlePaymentMethodClick = (paymentMethod: string) => {
+        setSelectedPayment(paymentMethod);
+        handleNextStep();
+    };
+
+    const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
+        setLoading(true);
+        const withdrawId = Math.floor(1000000 + Math.random() * 9000000).toString();
+        setWithdrawId(withdrawId);
+
+        try {
+            const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+            if (!token) {
+                throw new Error('Token not found');
+            }
+
+            const response = await fetch(`${BACKEND_URL}/withdraw/create-withdraw`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    userId: user?._id,
+                    email: user?.email,
+                    amount: values.amount,
+                    walletType: selectedPayment,
+                    walletAddress: values.wallet,
+                    status: 'pending',
+                    withdrawId: withdrawId
+                })
+            });
+
+            if (response.status === 200) {
+                handleNextStep();
+                setAlert({
+                    title: 'Успех!',
+                    description: 'Заява на вывод оформленна успешно'
+                });
+            }
+        } catch (error) {
+            console.error('Error creating withdraw:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <Dashboard>
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
             <div className={styles.wrapperInner}>
                 {step === 1 && (
                     <div className={styles.paymentContent}>
@@ -76,36 +139,48 @@ const Payment = () => {
                                     name="Tether"
                                     currency="TRC"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handlePaymentMethodClick}
+                                    selected={selectedPayment === "Tether"}
                                 />
                                 <PaymentMethods
                                     icon={PerfectMoney.src}
                                     name="PerfectMoney"
                                     currency="USD"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handlePaymentMethodClick}
+                                    selected={selectedPayment === "PerfectMoney"}
                                 />
                                 <PaymentMethods
                                     icon={Payeer.src}
                                     name="Payeer"
                                     currency="USD"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handlePaymentMethodClick}
+                                    selected={selectedPayment === "Payeer"}
                                 />
                                 <PaymentMethods
                                     icon={Bitcoin.src}
                                     name="Bitcoin"
                                     currency="BTC"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handlePaymentMethodClick}
+                                    selected={selectedPayment === "Bitcoin"}
                                 />
                                 <PaymentMethods
                                     icon={Etherium.src}
                                     name="Etherium"
                                     currency="ETC"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handlePaymentMethodClick}
+                                    selected={selectedPayment === "Etherium"}
                                 />
                                 <PaymentMethods
                                     icon={Visa.src}
                                     name="Visa"
                                     currency="RUB"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    onSelect={handlePaymentMethodClick}
+                                    selected={selectedPayment === "Visa"}
                                 />
                             </div>
                             <div className={styles.bottomButtons}>
@@ -146,14 +221,12 @@ const Payment = () => {
                         </div>
                         <div className={styles.paymentContainer}>
                             <PaymentBeanie
-                                dotText="Способ выплаты"
-                                title="Введите сумму и кошелек"
+                                dotText="Введите сумму"
+                                title="Введите сумму и подтвердите операцию"
                             >
-                                <StepButtons
-                                    onNext={handleNextStep}
-                                    onPrev={handlePreviousStep}
-                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                    secondButtonContent={"Продолжить"}/>
+                                <StepButtons onNext={handleButtonClick} onPrev={handlePreviousStep}
+                                             firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                             secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
 
                             <PaymentForm
@@ -169,16 +242,18 @@ const Payment = () => {
                                     {value: "etherium", label: "Etherium"},
                                     {value: "visa", label: "Visa"}
                                 ]}
+                                initialValues={{amount: '', wallet: selectedPayment}}
+                                onSubmit={handleFormSubmit}
+                                submitForm={(submit: () => void) => {
+                                    submitFormRef.current = submit;
+                                }}
                             />
                             <div className={styles.bottomButtons}>
-                                <StepButtons
-                                    onNext={handleNextStep}
-                                    onPrev={handlePreviousStep}
-                                    firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                    secondButtonContent={"Продолжить"}/>
+                                <StepButtons onNext={handleButtonClick} onPrev={handlePreviousStep}
+                                             firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
+                                             secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
-
                     </div>
                 )}
                 {step === 3 && (
@@ -210,15 +285,14 @@ const Payment = () => {
                         <div className={styles.applicationContent}>
                             <PaymentBeanie
                                 dotText="Способ выплаты"
-                                title="Заявка №3827483 в обработке"
+                                title={`Заявка №${withdrawId} в обработке`}
                             >
                                 <StepButtons
                                     onNext={handleNextStep}
                                     onPrev={handlePreviousStep}
                                     firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                    secondButtonContent={"Продолжить"}/>
+                                    secondButtonContent={"Начало"}/>
                             </PaymentBeanie>
-
                             <ApplicationInfo texts={
                                 [
                                     {text: "Благодарим за ваш запрос. После проверки и обработки заявки средства будут перечислены на указанный вами счёт или кошелёк в течение 5-15 минут."},
@@ -235,7 +309,6 @@ const Payment = () => {
                                     secondButtonContent={"Продолжить"}/>
                             </div>
                         </div>
-
                     </div>
                 )}
             </div>

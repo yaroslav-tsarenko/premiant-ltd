@@ -4,4 +4,5 @@ export interface PaymentMethodsProps {
     currency: string;
     description: string;
     children?: React.ReactNode;
+    selected?: boolean;
     onSelect?: (name: string) => void;}

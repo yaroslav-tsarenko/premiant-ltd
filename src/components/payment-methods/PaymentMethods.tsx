@@ -4,7 +4,7 @@ import { PaymentMethodsProps } from "@/types/paymentMethods";
 import Button from "@/components/button/Button";
 import Image from "next/image";
 
-const PaymentMethods: FC<PaymentMethodsProps> = ({ icon, currency, description, name, onSelect }) => {
+const PaymentMethods: FC<PaymentMethodsProps> = ({ icon, name, currency, description, onSelect, selected }) => {
     const handleClick = () => {
         if (onSelect) onSelect(name);
     };
@@ -19,8 +19,10 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({ icon, currency, description, 
                 <p className={styles.currency}>{currency}</p>
             </div>
             <p className={styles.description}>{description}</p>
-            <Button variant="payment" onClick={handleClick}>
-                Выбрать способ выплаты
+            <Button
+                variant="payment"
+                onClick={handleClick}>
+                {selected ? "Выбрано" : "Выбрать способ выплаты"}
             </Button>
         </div>
     );

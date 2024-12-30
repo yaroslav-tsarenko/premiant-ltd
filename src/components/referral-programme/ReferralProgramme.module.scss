@@ -73,6 +73,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   width: fit-content;
+  display: flex;
+  gap: 5px;
 }
 
 .referralLinkInfo {
@@ -118,7 +120,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-gap: 20px;
+  gap: 20px;
 }
 
 .activity {

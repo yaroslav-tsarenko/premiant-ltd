@@ -1,11 +1,10 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import styles from './TariffComponent.module.scss';
-import {TariffComponentProps} from '@/types/tariffComponent';
+import { TariffComponentProps } from '@/types/tariffComponent';
 import Link from 'next/link';
 
-const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, variant = 'wrapper', term}) => {
-
-    const buttonClass = `${styles[variant] || styles.wrapper}`;
+const TariffComponent: FC<TariffComponentProps> = ({ headline, price, percent, variant = 'wrapper', term, currentTariff }) => {
+    const buttonClass = `${styles[variant] || styles.wrapper} ${currentTariff === headline.toLowerCase() ? styles.highlight : ''}`;
 
     return (
         <div className={buttonClass}>
@@ -13,7 +12,6 @@ const TariffComponent: FC<TariffComponentProps> = ({headline, price, percent, va
                 <h2 className={styles.headline}>
                     {headline}
                 </h2>
-
                 <div className={styles.divingLine}></div>
                 <div className={styles.info}>
                     <div className={styles.prices}>

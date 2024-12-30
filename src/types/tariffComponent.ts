@@ -8,4 +8,5 @@ export interface TariffComponentProps {
     fullWidth?: boolean;
     variant?: keyof typeof styles;
     term?: string
+    currentTariff?: string;
 }
