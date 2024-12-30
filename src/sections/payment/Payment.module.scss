@@ -89,6 +89,13 @@
   font-size: 14px;
 }
 
+.submitButton{
+  position: absolute;
+    right: 0;
+    bottom: 0;
+  visibility: hidden;
+}
+
 .bottomButtons {
   display: none;
   width: 100%;

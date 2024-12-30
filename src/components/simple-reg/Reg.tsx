@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import {BACKEND_URL} from "@/constants/constants";
 
 const SimpleRegister: FC = () => {
     const validationSchema = Yup.object({
@@ -26,7 +27,7 @@ const SimpleRegister: FC = () => {
         referralCode?: string;
     }) => {
         try {
-            const response = await axios.post(`http://localhost:8080/register`, values, {
+            const response = await axios.post(`${BACKEND_URL}/register`, values, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',

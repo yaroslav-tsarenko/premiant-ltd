@@ -1,10 +1,40 @@
-import React from 'react';
+"use client";
+
+import { transliterate } from 'transliteration';
+import React, {useState} from 'react';
 import styles from './ReferralProgramme.module.scss';
-import {PiCopySimple} from "react-icons/pi";
+import { PiCopySimple } from "react-icons/pi";
+import { useUser } from "@/utils/UserContext";
+import Alert from "@/components/alert/Alert";
+import {useReferral} from "@/utils/ReferralContext";
+import {FRONTEND_URL} from "@/constants/constants";
 
 const ReferralProgramme = () => {
+    const user = useUser();
+    const referral = useReferral();
+    const referralLink = `${FRONTEND_URL}/${user?.referralCode}`;
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(referralLink).then(() => {
+            setAlert({ title: 'сыллка скопирована!', description: 'Скорее делись с ней с друзями и начинайте зарабатывать!' });
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            setAlert({ title: 'Error', description: 'Failed to copy referral link.' });
+        });
+    };
+    const transliterateToRussian = (curator: string): string => {
+        const [name, secondName] = curator.split('.');
+        const transliteratedName = transliterate(name);
+        const transliteratedSecondName = transliterate(secondName);
+        return `${transliteratedName} ${transliteratedSecondName}`;
+    };
+
+    const curatorName = user?.curator ? transliterateToRussian(user.curator) : 'Нет куратора';
+
     return (
         <div className={styles.wrapper}>
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             <div className={styles.referralProgrammeInfo}>
                 <div className={styles.statistics}>
                     <p className={styles.text}>
@@ -26,7 +56,7 @@ const ReferralProgramme = () => {
                         Ваш куратор
                     </p>
                     <h2 className={styles.value}>
-                        Корсов Даниил
+                        {curatorName}
                     </h2>
                 </div>
             </div>
@@ -35,9 +65,9 @@ const ReferralProgramme = () => {
                     <p className={styles.text}>
                         Ваша реферальная ссылка
                     </p>
-                    <div className={styles.link}>
+                    <div className={styles.link} onClick={copyToClipboard}>
                         <p className={styles.linkText}>
-                            https://premiant-ltd.com/daniil.kurs
+                            {user?.referralCode ? referralLink : 'Ваша ссылка генерируеться, это может занять 5 минут'}
                         </p>
                         <PiCopySimple className={styles.copyIcon}/>
                     </div>
@@ -48,7 +78,7 @@ const ReferralProgramme = () => {
                             Клики по ссылке
                         </p>
                         <p className={styles.value}>
-                            2456
+                            {referral?.clicks || 0}
                         </p>
                     </div>
                     <div className={styles.activity}>
@@ -56,7 +86,7 @@ const ReferralProgramme = () => {
                             Активные
                         </p>
                         <p className={styles.value}>
-                            26
+                            {referral?.active || 0}
                         </p>
                     </div>
                     <div className={styles.activity}>
@@ -64,7 +94,7 @@ const ReferralProgramme = () => {
                             Неактивные
                         </p>
                         <p className={styles.value}>
-                            567
+                            {referral?.unActive || 0}
                         </p>
                     </div>
                 </div>

@@ -9,9 +9,17 @@ export type User = {
     telegram: string;
     referralCode: string;
     balance: number;
+    curator: string;
     earnings: number;
-    tariff: number;
+    tariff: string;
     withdrawals: number;
+    usdtWallet: string;
+    btcWallet: string;
+    perfectMoneyWallet: string;
+    ethereumWallet: string;
+    date: string;
+    payeerWallet: string;
+    card: string;
 };
 export const UserContext = createContext<User | undefined>(undefined);
 

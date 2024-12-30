@@ -28,6 +28,7 @@ const Alert: FC<AlertProps> = ({ title, description, onClose }) => {
         <div className={`${styles.alert} ${visible ? styles.show : styles.hide}`}>
             <h2 className={styles.headline}>{title}</h2>
             <p className={styles.description}>{description}</p>
+            <button className={styles.closeButton} onClick={handleClose}>×</button>
         </div>
     );
 };

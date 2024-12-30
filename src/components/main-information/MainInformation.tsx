@@ -1,12 +1,25 @@
-import React, {useState} from 'react';
+"use client"
+
+import React, { useImperativeHandle, forwardRef, useState } from 'react';
 import styles from './MainInformation.module.scss';
 import Dot from "@/components/dot/Dot";
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import {TbEye, TbEyeClosed} from "react-icons/tb";
+import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
+import { TbEye, TbEyeClosed } from "react-icons/tb";
 import * as Yup from "yup";
+import { useUser } from "@/utils/UserContext";
 
-const MainInformation = () => {
+interface MainInformationProps {
+    name: string;
+    secondName: string;
+    email: string;
+    telegram: string;
+    oldPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+}
 
+const MainInformation = forwardRef((props, ref) => {
+    const user = useUser();
     const [passwordVisibility, setPasswordVisibility] = useState({
         oldPassword: false,
         newPassword: false,
@@ -30,19 +43,19 @@ const MainInformation = () => {
         oldPassword: Yup.string().min(6, 'Пароль должен быть минимум 8 символов').required('Введите пароль'),
         newPassword: Yup.string().min(6, 'Пароль должен быть минимум 8 символов').required('Введите пароль'),
         confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
+            .oneOf([Yup.ref('newPassword')], 'Пароли должны совпадать')
             .required('Повторите пароль'),
     });
 
     return (
         <div className={styles.wrapper}>
-            <Dot title={"Основная информация"}/>
+            <Dot title={"Основная информация"} />
             <Formik
                 initialValues={{
-                    name: '',
-                    secondName: '',
-                    email: '',
-                    telegram: '',
+                    name: user?.name || '',
+                    secondName: user?.secondName || '',
+                    email: user?.email || '',
+                    telegram: user?.telegram || '',
                     oldPassword: '',
                     newPassword: '',
                     confirmPassword: '',
@@ -52,78 +65,89 @@ const MainInformation = () => {
                     console.log(values);
                 }}
             >
-                <Form className={styles.form}>
-                    <div className={styles.userInfo}>
-                        <div className={styles.formUserGroup}>
-                            <Field name="name" type="text" placeholder="Имя" className={styles.inputUserInfo}/>
-                            <ErrorMessage name="name" component="div" className={styles.error}/>
-                        </div>
-                        <div className={styles.formUserGroup}>
-                            <Field name="secondName" type="text" placeholder="Фамилия"
-                                   className={styles.inputUserInfo}/>
-                            <ErrorMessage name="secondName" component="div" className={styles.error}/>
-                        </div>
-                        <div className={styles.formUserGroup}>
-                            <Field name="email" type="email" placeholder="E-mail" className={styles.inputUserInfo}/>
-                            <ErrorMessage name="email" component="div" className={styles.error}/>
-                        </div>
-                        <div className={styles.formUserGroup}>
-                            <Field name="telegram" type="text" placeholder="Telegram" className={styles.inputUserInfo}/>
-                            <ErrorMessage name="telegram" component="div" className={styles.error}/>
-                        </div>
-                    </div>
+                {(formik: FormikProps<MainInformationProps>) => {
+                    useImperativeHandle(ref, () => ({
+                        setData: (data: MainInformationProps) => {
+                            formik.setValues(data);
+                        },
+                        getData: () => {
+                            return formik.values;
+                        }
+                    }));
+                    return (
+                        <Form className={styles.form}>
+                            <div className={styles.userInfo}>
+                                <div className={styles.formUserGroup}>
+                                    <Field name="name" type="text" placeholder="Имя" className={styles.inputUserInfo} />
+                                    <ErrorMessage name="name" component="div" className={styles.error} />
+                                </div>
+                                <div className={styles.formUserGroup}>
+                                    <Field name="secondName" type="text" placeholder="Фамилия" className={styles.inputUserInfo} />
+                                    <ErrorMessage name="secondName" component="div" className={styles.error} />
+                                </div>
+                                <div className={styles.formUserGroup}>
+                                    <Field name="email" type="email" placeholder="E-mail" className={styles.inputUserInfo} />
+                                    <ErrorMessage name="email" component="div" className={styles.error} />
+                                </div>
+                                <div className={styles.formUserGroup}>
+                                    <Field name="telegram" type="text" placeholder="Telegram" className={styles.inputUserInfo} />
+                                    <ErrorMessage name="telegram" component="div" className={styles.error} />
+                                </div>
+                            </div>
 
-                    <div className={styles.passwordContainer}>
-                        <div className={styles.formGroup}>
-                            <Field
-                                name="oldPassword"
-                                type={passwordVisibility.oldPassword ? 'text' : 'password'}
-                                placeholder="Пароль"
-                                className={styles.input}
-                            />
-                            <div
-                                className={styles.icon}
-                                onClick={() => togglePasswordVisibility('oldPassword')}
-                            >
-                                {passwordVisibility.oldPassword ? <TbEye/> : <TbEyeClosed/>}
+                            <div className={styles.passwordContainer}>
+                                <div className={styles.formGroup}>
+                                    <Field
+                                        name="oldPassword"
+                                        type={passwordVisibility.oldPassword ? 'text' : 'password'}
+                                        placeholder="Пароль"
+                                        className={styles.input}
+                                    />
+                                    <div
+                                        className={styles.icon}
+                                        onClick={() => togglePasswordVisibility('oldPassword')}
+                                    >
+                                        {passwordVisibility.oldPassword ? <TbEye /> : <TbEyeClosed />}
+                                    </div>
+                                    <ErrorMessage name="oldPassword" component="div" className={styles.error} />
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <Field
+                                        name="newPassword"
+                                        type={passwordVisibility.newPassword ? 'text' : 'password'}
+                                        placeholder="Новый пароль"
+                                        className={styles.input}
+                                    />
+                                    <div
+                                        className={styles.icon}
+                                        onClick={() => togglePasswordVisibility('newPassword')}
+                                    >
+                                        {passwordVisibility.newPassword ? <TbEye /> : <TbEyeClosed />}
+                                    </div>
+                                    <ErrorMessage name="newPassword" component="div" className={styles.error} />
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <Field
+                                        name="confirmPassword"
+                                        type={passwordVisibility.confirmPassword ? 'text' : 'password'}
+                                        placeholder="Повторите пароль"
+                                        className={styles.input}
+                                    />
+                                    <div
+                                        className={styles.icon}
+                                        onClick={() => togglePasswordVisibility('confirmPassword')}
+                                    >
+                                        {passwordVisibility.confirmPassword ? <TbEye /> : <TbEyeClosed />}
+                                    </div>
+                                    <ErrorMessage name="confirmPassword" component="div" className={styles.error} />
+                                </div>
                             </div>
-                            <ErrorMessage name="oldPassword" component="div" className={styles.error}/>
-                        </div>
-                        <div className={styles.formGroup}>
-                            <Field
-                                name="newPassword"
-                                type={passwordVisibility.newPassword ? 'text' : 'password'}
-                                placeholder="Новый пароль"
-                                className={styles.input}
-                            />
-                            <div
-                                className={styles.icon}
-                                onClick={() => togglePasswordVisibility('newPassword')}
-                            >
-                                {passwordVisibility.newPassword ? <TbEye/> : <TbEyeClosed/>}
-                            </div>
-                            <ErrorMessage name="newPassword" component="div" className={styles.error}/>
-                        </div>
-                        <div className={styles.formGroup}>
-                            <Field
-                                name="confirmPassword"
-                                type={passwordVisibility.confirmPassword ? 'text' : 'password'}
-                                placeholder="Повторите пароль"
-                                className={styles.input}
-                            />
-                            <div
-                                className={styles.icon}
-                                onClick={() => togglePasswordVisibility('confirmPassword')}
-                            >
-                                {passwordVisibility.confirmPassword ? <TbEye/> : <TbEyeClosed/>}
-                            </div>
-                            <ErrorMessage name="confirmPassword" component="div" className={styles.error}/>
-                        </div>
-                    </div>
-                </Form>
+                        </Form>
+                    );
+                }}
             </Formik>
         </div>
     );
-};
+});
 
 export default MainInformation;

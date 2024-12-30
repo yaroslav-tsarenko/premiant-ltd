@@ -5,11 +5,15 @@ import { Field, Formik, Form } from "formik";
 import styles from "./SortTransactions.module.scss";
 import Button from "@/components/button/Button";
 
-const SortTransactions = () => {
+interface SortTransactionsProps {
+    onSort: (sortKey: string) => void;
+}
+
+const SortTransactions: React.FC<SortTransactionsProps> = ({ onSort }) => {
     const initialValues = { sort: "" };
 
     const handleSubmit = (values: { sort: string }) => {
-        console.log("Submitted values:", values);
+        onSort(values.sort);
     };
 
     return (
@@ -30,11 +34,11 @@ const SortTransactions = () => {
                                     <option value="amount" label="По сумме"/>
                                 </Field>
                             </div>
+                            <Button type="submit" variant="payment">Сортировать</Button>
                         </Form>
                     )}
                 </Formik>
             </div>
-            <Button variant="payment">Сортировать</Button>
         </div>
     );
 };
