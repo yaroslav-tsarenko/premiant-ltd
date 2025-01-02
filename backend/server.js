@@ -1,18 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const referalRoutes = require('./routes/referal');
 const depositRoutes = require('./routes/deposit');
-const { updateUserBalances } = require('./controllers/userController');
 const withdrawRoutes = require('./routes/withdraw');
 const cron = require('node-cron');
+const totalBalanceRoutes = require('./routes/totalBalance');
+const { updateUserBalances } = require('./controllers/userController');
+const { updateTotalBalance } = require('./controllers/totalBalanceController');
 const generateReferralCodes = require('./utils/generateReferralCodes');
-require('dotenv').config();
 
 const app = express();
 const port = 8080;
@@ -48,13 +50,17 @@ cron.schedule('*/5 * * * *', () => {
     console.log('Running generateReferralCodes...⚙️');
     generateReferralCodes();
 });
+cron.schedule('*/1 * * * *', () => {
+    console.log('Running updateTotalBalance...');
+    updateTotalBalance();
+});
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/deposit', depositRoutes);
 app.use('/referral', referalRoutes);
 app.use('/withdraw', withdrawRoutes);
-
+app.use('/total-balance', totalBalanceRoutes);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}✅ `);

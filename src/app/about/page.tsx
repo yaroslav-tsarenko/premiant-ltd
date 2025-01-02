@@ -4,8 +4,6 @@ import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import HeroSectionAbout from "@/components/hero-section-about/HeroSectionAbout";
-import FormItem from "@/assets/icons/formItem.svg";
-import HomeForm from "@/components/home-form/HomeForm";
 import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
 import Address from "@/components/address/Address";
@@ -20,61 +18,8 @@ const AboutPage = () => {
         <>
             <HeroSectionAbout/>
             <FeaturesInfo
-                item="ПОЧЕМУ МЫ"
                 title="МИССИЯ КОМПАНИИ"
-                modTitle="PREMIANT LTD"
-            >
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>01</h2>
-                        <p>Максимальная выгода от арбитража трафика и криптоактивов</p>
-                    </div>
-
-                    <p>
-                        Забезпечуємо максимальну прибутковість для клієнтів через інноваційні стратегії та сучасні
-                        технології
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>02</h2>
-                        <p>Прозрачность и доверие: контроль и отчеты для клиентов</p>
-                    </div>
-
-                    <p>
-                        Детализированные отчеты и полный контроль помогают клиентам отслеживать результаты и принимать
-                        обоснованные решения, укрепляя доверие
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>03</h2>
-                        <p>Успешное партнерство для глобального роста</p>
-                    </div>
-                    <p>
-                        Мы сотрудничаем с ведущими рекламными сетями, обеспечивая качественный трафик со всего мира
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>04</h2>
-                        <p>Инновации и адаптация к рынку</p>
-                    </div>
-                    <p>
-                        Мы внедряем современные алгоритмы и следим за тенденциями, чтобы обеспечивать клиентам лучшие
-                        результаты и конкурентные преимущества
-                    </p>
-                </CustomBlock>
-            </FeaturesInfo>
-            <HomeForm
-                item={FormItem}
-                headline="ОСТАВЬТЕ ЗАЯВКУ"
-                description="Контролируй свои средства и уверенно двигайся к своим финансовым целям вместе с Skylex LTD.
-                 С нами ты получишь надежного партнера, который поможет заставить твои деньги работать на тебя и приносить стабильный
-                  доход."
-            >
-                <Button variant="form">Отправить</Button>
-            </HomeForm>
+                modTitle="PREMIANT LTD"/>
             <Address
                 firstChildren={
                     <CustomBlock variant="address">

@@ -12,6 +12,7 @@
 
 .textWrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
@@ -35,7 +36,7 @@
 .images {
   display: flex;
   gap: 30px;
-  margin-left: 100px;
+  margin-left: 6%;
 }
 
 .image {

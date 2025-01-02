@@ -6,12 +6,12 @@ import Gradient from "@/assets/icons/gradient.svg";
 import Dot from "@/components/dot/Dot";
 import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
 
-const CompanyInfo: FC<CompanyInfoProps> = ({images = [], children}) => {
+const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
     return (
         <ContainerWrapper noPadding={true}>
             <div className={styles.info}>
                 <Image src={Gradient} alt="Gradient" className={styles.gradient}/>
-                <Dot title="о нас"/>
+                <Dot title="о нас" absolute/>
                 <div className={styles.textWrapper}>
                     <span className={styles.modified}>PREMIANT LTD - ЭТО КОМПАНИЯ,</span>
                     <div className={styles.textContainer}>
@@ -44,12 +44,12 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = [], children}) => {
                             для
                             роста и максимизации доходов.
                         </p>
-                        {children}
                     </div>
                 </div>
                 <div className={styles.images}>
                     {images.map((image, index) => (
-                        <Image key={index} src={image.image} alt={`Company Image ${index}`} className={styles.image}/>
+                        <Image key={index} src={image.image} alt={`Company Image ${index}`}
+                               className={styles.image}/>
                     ))}
                 </div>
             </div>

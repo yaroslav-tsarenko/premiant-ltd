@@ -4,8 +4,8 @@
   flex-direction: row;
   margin-top: 100px;
   width: 100%;
+  position: relative;
   justify-content: space-between;
-
 }
 
 .form {
@@ -15,7 +15,9 @@
   margin-left: auto;
   background: var(--secondary-color);
   padding: 20px;
-  clip-path: polygon(100% 0, 100% 92%, 91% 100%, 0 100%, 0 0);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%, 0% 50%);
+  box-shadow: 20px 20px 20px 20px black;
+  border: 2px solid var(--secondary-color);
 }
 
 .headline {

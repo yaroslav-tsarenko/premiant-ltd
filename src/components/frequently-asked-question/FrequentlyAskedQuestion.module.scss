@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   padding: var(--main-padding-properties);
-  margin-top: 100px;
   gap: 70px;
-  margin-bottom: 93px;
+  max-width: 1920px;
+  margin: 100px auto 93px auto;
 }
 
 .headline {

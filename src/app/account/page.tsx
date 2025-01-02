@@ -20,7 +20,6 @@ const DashboardAccount = () => {
             <Metrics/>
             <Tariff/>
             <FeaturesInfo
-                item="О НАС"
                 title="ОСНОВНЫЕ ОСОБЕННОСТИ"
                 modTitle="ЗАРАБОТКА">
                 <CustomBlock variant="featureScheme">

@@ -7,9 +7,13 @@ const CompanyAdvantages: FC<CompanyAdvantagesProps> = ({headline, modHeadline, c
     return (
             <div className={styles.wrapper}>
                 <div className={styles.beanie}>
-                    <Dot title="вам понравится"/>
-                    <h2 className={styles.headline}>{headline} <span className={styles.modHeadline}>{modHeadline}</span></h2>
-
+                    <Dot title="вам понравится" absolute/>
+                    <h2 className={styles.headline}>
+                        {headline}
+                        <span className={styles.modHeadline}>
+                            {modHeadline}
+                        </span>
+                    </h2>
                 </div>
                 <div className={styles.content}>
                     {content.map(({paragraph, text}, index) => (
