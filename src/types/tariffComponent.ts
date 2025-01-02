@@ -9,4 +9,5 @@ export interface TariffComponentProps {
     variant?: keyof typeof styles;
     term?: string
     currentTariff?: string;
+    alwaysHighlighted?: boolean;
 }

@@ -19,7 +19,7 @@ const Tariff = () => {
             <div className={styles.tariffs}>
                 <div className={styles.tariffsContainer}>
                     <div className={styles.tariffsContent}>
-                        <TariffComponent headline="СТАРТ" price="100" percent="2" variant="minWidth" term="5" currentTariff={currentTariff}/>
+                        <TariffComponent headline="СТАРТ" price="100" percent="2" variant="minWidth" term="5" currentTariff={currentTariff} alwaysHighlighted={true}/>
                         <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35" variant="fullWidth" term="5" currentTariff={currentTariff}/>
                         <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="minWidth" term="5" currentTariff={currentTariff}/>
                     </div>

@@ -5,6 +5,11 @@
   padding: var(--main-padding-properties);
   flex-wrap: wrap;
   gap: 50px;
+  height: auto;
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
 }
 
 .beanie {
@@ -48,22 +53,34 @@
   font-family: 'GropledBold', sans-serif;
 }
 
+.keyBenefits {
+  display: flex;
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.keyBenefitsMob {
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+  }
+}
+
 .highlight {
   color: var(--main-font-color);
 }
 
 .scheme {
   display: flex;
-  flex-wrap: wrap;
-  gap: 100px;
-  flex-direction: row;
+  gap: 55px;
+  height: fit-content;
   justify-content: center;
-}
-
-@media (max-width: 1024px) {
-  .scheme {
-    gap: 50px;
-  }
 }
 
 @media (max-width: 768px) {

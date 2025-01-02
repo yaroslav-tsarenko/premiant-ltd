@@ -28,7 +28,7 @@ const BottomNav: FC<BottomNavProps> = ({ logo, burgerIcon, links = [] }) => {
             </nav>
 
             <div className={styles.bottomBurgerMenu}>
-                {logo && <Image src={logo} alt="Логотип" className={styles.logo}/>}
+                {logo && <Image src={logo} alt="logo" className={styles.logo}/>}
                 <button className={styles.burgerIcon} onClick={handleNavToggle}>
                     {burgerIcon}
                 </button>
