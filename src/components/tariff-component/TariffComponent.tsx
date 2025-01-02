@@ -3,8 +3,8 @@ import styles from './TariffComponent.module.scss';
 import { TariffComponentProps } from '@/types/tariffComponent';
 import Link from 'next/link';
 
-const TariffComponent: FC<TariffComponentProps> = ({ headline, price, percent, variant = 'wrapper', term, currentTariff }) => {
-    const buttonClass = `${styles[variant] || styles.wrapper} ${currentTariff === headline.toLowerCase() ? styles.highlight : ''}`;
+const TariffComponent: FC<TariffComponentProps> = ({ headline, price, percent, variant = 'wrapper', term, currentTariff, alwaysHighlighted }) => {
+    const buttonClass = `${styles[variant] || styles.wrapper} ${currentTariff === headline.toLowerCase() ? styles.highlight : ''} ${alwaysHighlighted ? styles.alwaysHighlight : ''}`;
 
     return (
         <div className={buttonClass}>

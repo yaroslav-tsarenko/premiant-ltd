@@ -53,6 +53,13 @@
   border: 2px solid #FFD700; /* Example highlight style */
 }
 
+.alwaysHighlight {
+  /* apply the same styles as hover */
+  background-color: #f0f0f0; /* example hover style */
+  border: 1px solid #ccc; /* example hover style */
+  /* add other hover styles here */
+}
+
 .btn {
   display: flex;
   justify-content: center;

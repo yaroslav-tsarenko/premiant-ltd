@@ -6,6 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { newRequest } from "@/utils/newRequest";
 import CopyCodePopup from "@/components/copy-code-popup/CopyCodePopup";
 import {BACKEND_URL} from "@/constants/constants";
+import suspense from "@/components/suspense/SuspenseWrapper";
 
 const RegisterPage = () => {
     const searchParams = useSearchParams();
@@ -77,4 +78,4 @@ const RegisterPage = () => {
     );
 };
 
-export default RegisterPage;
+export default suspense(RegisterPage);
