@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Button from "@/components/button/Button";
 import Header from "@/components/header/Header";
-import React from "react";
 import Footer from "@/components/footer/Footer";
 import { authWrapper } from "@/utils/AuthWrapper";
+import LenisScriptLoader from "@/utils/LenisScriptLoader";
 
 export const metadata: Metadata = {
     title: "Premiant LTD",
@@ -19,6 +19,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en">
         <body>
+        <LenisScriptLoader />
         <Header
             headerLinks={[
                 { name: 'Главная', route: '/' },

@@ -1,11 +1,13 @@
 .wrapper {
   display: flex;
-  margin: 120px 0 0 120px;
+  margin: 120px auto 120px auto;
   flex-direction: column;
   padding: var(--main-padding-properties);
   flex-wrap: wrap;
   gap: 50px;
   height: auto;
+  max-width: 1920px;
+  position: relative;
 
   @media screen and (max-width: 768px) {
     margin: 0;
@@ -40,10 +42,16 @@
 .headline {
   font-size: 40px;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
   color: #000000;
-  width: 67%;
+  margin: 0 auto auto 24%;
   font-family: 'GropledBold', sans-serif;
-  text-align: justify;
+  word-spacing: 150px;
+
+  span{
+    word-spacing: 0;
+  }
 }
 
 .modTitle {
@@ -55,7 +63,7 @@
 
 .keyBenefits {
   display: flex;
-  width: 100%;
+  width: fit-content;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -78,6 +86,7 @@
 
 .scheme {
   display: flex;
+  flex-direction: column;
   gap: 55px;
   height: fit-content;
   justify-content: center;

@@ -1,16 +1,13 @@
 import React, {FC} from 'react';
 import {FormProps} from "@/types/form";
 import styles from './HomeForm.module.scss';
-import Image from 'next/image';
+import Dot from "@/components/dot/Dot";
 
-const HomeForm: FC<FormProps> = ({item, headline, children, description}) => {
-
-    const imageUrl = item || '/default-image-path.jpg';
+const HomeForm: FC<FormProps> = ({headline, children, description}) => {
 
     return (
-        <div className={styles.wrapper}>
-            <Image src={imageUrl} alt="Form Item" className={styles.item}/>
-
+        <div className={styles.wrapper} id="qoute">
+            <Dot title="форма" absolute/>
             <form className={styles.form}>
                 <h1 className={styles.headline}>{headline}</h1>
                 <p className={styles.text}>{description}</p>

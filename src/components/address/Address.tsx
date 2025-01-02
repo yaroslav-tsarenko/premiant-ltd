@@ -6,6 +6,8 @@ import whiteMarker from '@/assets/icons/whiteMarker.svg';
 import useLoadGoogleMaps from '@/hooks/useLoadGoogleMaps';
 import styles from './Address.module.scss';
 import {AddressProps} from "@/types/address";
+import HomeForm from "@/components/home-form/HomeForm";
+import Button from "@/components/button/Button";
 
 const darkTheme = [
     { elementType: 'geometry', stylers: [{ color: '#212121' }] },
@@ -39,6 +41,14 @@ const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
+        <div className={styles.containerWrapper}>
+            <HomeForm
+                headline="ОСТАВЬТЕ ЗАЯВКУ"
+                description="Контролируй свои средства и уверенно двигайся к своим финансовым целям вместе с Skylex LTD.
+                 С нами ты получишь надежного партнера, который поможет заставить твои деньги работать на тебя и приносить стабильный
+                  доход.">
+                <Button variant="form">Отправить</Button>
+            </HomeForm>
             <div className={styles.wrapper}>
                 {firstChildren}
                 <GoogleMap
@@ -64,6 +74,7 @@ const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
                 </GoogleMap>
                 {secondChildren}
             </div>
+        </div>
     );
 };
 

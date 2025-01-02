@@ -8,7 +8,6 @@ const HeroSectionAbout = () => {
             <h1 className={styles.headline}>
                 О КОМПАНИИ
             </h1>
-
             <div className={styles.scrollDown}>
                 <TfiMouseAlt className={styles.icon}/>
                 <p className={styles.text}>Прокрутите вниз</p>

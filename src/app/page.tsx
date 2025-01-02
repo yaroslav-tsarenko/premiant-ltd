@@ -15,8 +15,6 @@ import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import FrequentlyAskedQuestion from "@/components/frequently-asked-question/FrequentlyAskedQuestion";
 import FrequentlyAskedQuestionItem from "@/assets/icons/frequentlyAskedQuestionItem.svg";
-import HomeForm from "@/components/home-form/HomeForm";
-import FormItem from "@/assets/icons/formItem.svg";
 import Address from "@/components/address/Address";
 import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
@@ -35,7 +33,7 @@ export default function Home() {
             <PromoBar
                 price={PricePromo}
                 text="За время перебывания вас на сайте наши партнеры заработали"
-                promoLink={{name: "Присоедениться к нам", route: '#'}}
+                promoLink={{name: "Присоедениться к нам", route: '/register'}}
                 arrowIcon={ArrowRight}
             />
             <CompanyInfo
@@ -47,12 +45,12 @@ export default function Home() {
                 <Button variant={"companyInfo"}>Начать инвестировать</Button>
             </CompanyInfo>
             <FeaturesInfo
-                title="КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА "
+                title="КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА"
                 modTitle="РАБОТЫ С PREMIANT LTD">
             </FeaturesInfo>
             <CompanyAdvantages
-                headline="НАШИ КЛЮЧИВЫЕ"
-                modHeadline="ФЫКТОРЫ УСПЕХА НА РЫНКЕ"
+                headline="СЕКРЕТЫ НАШЕГО"
+                modHeadline="ПРЕВОСОДСТВА"
                 content={[
                     {
                         paragraph: "Высокая рентабельность",
@@ -88,10 +86,7 @@ export default function Home() {
                     },
                 ]}
             />
-            <TariffCalculator
-                primaryButton={<Button variant="calculator">Начать инвестировать</Button>}
-                secondaryButton={<Button variant="hero">Оставить заявку</Button>}
-            />
+            <TariffCalculator/>
             <FrequentlyAskedQuestion
                 item={FrequentlyAskedQuestionItem}
                 questions={[
@@ -128,14 +123,6 @@ export default function Home() {
                     },
                 ]}
             />
-            <HomeForm
-                item={FormItem}
-                headline="ОСТАВЬТЕ ЗАЯВКУ"
-                description="Контролируй свои средства и уверенно двигайся к своим финансовым целям вместе с Skylex LTD.
-                 С нами ты получишь надежного партнера, который поможет заставить твои деньги работать на тебя и приносить стабильный
-                  доход.">
-                <Button variant="form">Отправить</Button>
-            </HomeForm>
             <Address
                 firstChildren={
                     <CustomBlock variant="address">
