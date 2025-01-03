@@ -15,6 +15,10 @@
 
 .headline {
   width: 70%;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .headline h1 {
@@ -95,12 +99,16 @@
   }
 
   .groupTariffs {
-    display: flex;
-    flex-direction: row;
     gap: 20px;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .groupTariffs > *:last-child {
+    grid-column: span 2;
   }
 }
 

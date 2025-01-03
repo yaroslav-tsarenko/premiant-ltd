@@ -1,4 +1,4 @@
 export interface DotProps {
-    title: string;
+    title?: string;
     absolute?: boolean;
 }

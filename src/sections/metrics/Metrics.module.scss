@@ -5,6 +5,11 @@
   max-height: 240px;
   height: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    max-height: fit-content;
+
+  }
 }
 
 .navigation {
@@ -12,6 +17,10 @@
   flex-direction: column;
   gap: 20px;
   width: 30%;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .navigationGroup {
@@ -19,6 +28,11 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+
+  @media screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+  }
 }
 
 @media (max-width: 1028px) {
@@ -30,14 +44,5 @@
 @media (max-width: 768px) {
   .wrapper {
     flex-direction: column;
-  }
-
-  .navigation {
-    width: 768px;
-    flex-direction: row;
-  }
-
-  .navigationGroup {
-    gap: 10px;
   }
 }

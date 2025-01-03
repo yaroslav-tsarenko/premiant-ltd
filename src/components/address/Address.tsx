@@ -34,10 +34,9 @@ const darkTheme = [
 ];
 
 const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
+
     const isLoaded = useLoadGoogleMaps("AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM");
-
     const [center] = useState({ lat: 53.515028, lng: -1.122465 });
-
     if (!isLoaded) return <div>Loading...</div>;
 
     return (

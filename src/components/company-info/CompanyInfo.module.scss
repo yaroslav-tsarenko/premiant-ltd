@@ -4,10 +4,15 @@
   width: 100%;
   flex-direction: column;
   margin: 40px 0 0 0;
-  padding: var(--main-padding-properties);
   justify-content: center;
   gap: 40px;
   position: relative;
+  padding: var(--main-padding-properties);
+
+  @media screen and (max-width: 768px) {
+    padding: 50px 30px;
+
+  }
 }
 
 .textWrapper {

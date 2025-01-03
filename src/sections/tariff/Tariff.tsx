@@ -35,10 +35,10 @@ const Tariff = () => {
 
             <div className={styles.responsiveTariffs}>
                 <div className={styles.groupTariffs}>
-                    <TariffComponent headline="СТАРТ" price="100" percent="2" variant="minWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35" variant="minWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="minWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="МАКСИМУМ" price="15 000" percent="154" variant="minWidth" term="5" currentTariff={currentTariff}/>
+                    <TariffComponent headline="СТАРТ" price="100" percent="2" variant="fullWidth" term="5" currentTariff={currentTariff}/>
+                    <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35" variant="fullWidth" term="5" currentTariff={currentTariff}/>
+                    <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="fullWidth" term="5" currentTariff={currentTariff}/>
+                    <TariffComponent headline="МАКСИМУМ" price="15 000" percent="154" variant="fullWidth" term="5" currentTariff={currentTariff}/>
                     <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="172" variant="fullWidth" term="5" currentTariff={currentTariff}/>
                 </div>
             </div>

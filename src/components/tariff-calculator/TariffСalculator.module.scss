@@ -182,6 +182,10 @@
   align-items: flex-start;
   box-sizing: border-box;
   padding-bottom: 86px;
+
+  @media screen and (max-width: 768px) {
+    margin: 0 0 0 0;
+  }
 }
 
 .title {

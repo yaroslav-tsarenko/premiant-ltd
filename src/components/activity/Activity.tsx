@@ -10,7 +10,7 @@ const Activity: FC<ActivityProps> = ({children, childrenBtn, headDescription, ti
     return (
         <div className={styles.wrapper}>
             <div className={styles.beanie}>
-                <Dot title="КТО МЫ?"/>
+                <Dot title="КТО МЫ?" absolute/>
                 <div className={styles.headline}>
                     <div className={styles.modifiedContainer}>
                         <span className={styles.title}>
@@ -23,24 +23,32 @@ const Activity: FC<ActivityProps> = ({children, childrenBtn, headDescription, ti
                     <p className={styles.headDescription}>{headDescription}</p>
                 </div>
             </div>
-
             <div className={styles.content}>
                 <div className={styles.activityContent}>
                     <div className={styles.scheme}>
                         {children}
                     </div>
                     <p className={styles.schemeText}>
-                        Premiant LTD работает с ведущими рекламными сетями и платформами по всему миру. Мы применяем
-                        методы машинного обучения для достижения высокой рентабельности
+                        Мы предлагаем комплексные решения, которые помогают нашим клиентам эффективно управлять
+                        инвестициями и рекламными кампаниями. Наши специалисты анализируют потоки трафика из разных
+                        источников, таких как социальные сети, поисковые системы и мобильные приложения, обеспечивая
+                        максимальные результаты.
+
+                        Мы используем передовые технологии и алгоритмы, включая методы машинного обучения и аналитики.
+                        Это позволяет оптимизировать рекламные кампании и инвестиционные стратегии, достигая высокой
+                        рентабельности и стабильной прибыли.
                     </p>
                 </div>
-
                 <div className={styles.checkCompany}>
                     <p className={styles.checkText}>
-                        Мы постоянно совершенствуем свои услуги, включая арбитраж интернет-трафика и криптовалютных
-                        активов, чтобы обеспечивать клиентам конкурентные преимущества и максимальную прибыль
-                    </p>
+                        Мы нацелены на долгосрочный успех наших клиентов, постоянно совершенствуя наши услуги и внедряя
+                        современные технологии. Благодаря гибкому подходу и оперативной адаптации к изменениям на рынке,
+                        мы помогаем клиентам достигать поставленных целей.
 
+                        Наша компания гарантирует прозрачность и доверие, предоставляя детализированные отчеты и
+                        контроль на каждом этапе сотрудничества. Это позволяет нашим клиентам уверенно управлять своими
+                        инвестициями и видеть реальные результаты.
+                    </p>
                     <div className={styles.checkContainer}>
                         <Image src={CheckGradient} alt="Check Gradient" className={styles.gradient}/>
                         <Image src={CheckDocument} alt="Check Gradient" className={styles.document}/>
