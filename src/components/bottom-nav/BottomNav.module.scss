@@ -4,7 +4,6 @@
 
 .nav {
   position: fixed;
-  z-index: 999;
   left: 0;
   right: 0;
   width: 95%;
@@ -12,8 +11,22 @@
   background-color: white;
   padding: 0 20px;
   outline: none;
+  z-index: 9999;
   bottom: 60px;
   border-radius: 10px;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 .links {
@@ -28,6 +41,12 @@
   padding: 10px;
   border-bottom: 1px solid #ccc;
   font-size: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover{
+    background-color: #24cbbf;
+    color: white;
+  }
 
 }
 
@@ -37,10 +56,11 @@
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  bottom: 1%;
+  bottom: 0;
   left: 0;
   background-color: var(--primary-color);
   z-index: 1000;
+  border-radius: 25px 25px 0 0;
   padding: 10px 70px;
 
   @media screen and (max-width: 768px) {

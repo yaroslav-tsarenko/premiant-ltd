@@ -5,6 +5,8 @@
   padding: var(--main-padding-properties);
   overflow: hidden;
   padding-top: 100px;
+  max-width: 1920px;
+  margin: 100px auto auto auto;
 }
 
 .head {
@@ -24,6 +26,10 @@
   background: linear-gradient(to right, var(--grey-font-color), #151515);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 }
 
 .controllers {
@@ -46,9 +52,18 @@
 
 .sliderContainer {
   width: 100%;
-  overflow: hidden;
+  max-width: 1920px;
   position: relative;
+  overflow-y: scroll;
 }
+
+.scroll {
+  display: flex;
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
+}
+
 
 .goals {
   display: flex;

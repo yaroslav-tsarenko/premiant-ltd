@@ -25,6 +25,7 @@
 
 @media (max-width: 1028px) {
   .wrapper {
-    padding: 0 20px;
+    flex-direction: column;
+    padding: 30px 20px;
   }
 }

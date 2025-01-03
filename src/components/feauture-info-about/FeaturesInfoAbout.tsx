@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import styles from './FeaturesInfo.module.scss';
+import styles from './FeaturesInfoAbout.module.scss';
 import {FeaturesInfoProps} from "@/types/featuresInfo";
 import Dot from "@/components/dot/Dot";
 import Image from "next/image";
 
 
-const FeaturesInfo: FC<FeaturesInfoProps> = ({title, modTitle, dotText, mainImg, mobImg}) => {
+const FeaturesInfoAbout: FC<FeaturesInfoProps> = ({title, modTitle, dotText, mainImg, mobImg}) => {
     return (
         <div className={styles.wrapper}>
             <Dot title={dotText} absolute/>
@@ -21,4 +21,4 @@ const FeaturesInfo: FC<FeaturesInfoProps> = ({title, modTitle, dotText, mainImg,
     );
 };
 
-export default FeaturesInfo;
+export default FeaturesInfoAbout;

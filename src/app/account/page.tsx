@@ -1,11 +1,15 @@
 "use client"
 
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Metrics from "@/sections/metrics/Metrics";
 import Dashboard from "@/components/dashboard/Dashboard";
-import CustomBlock from "@/components/custom-block/CustomBlock";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import Tariff from "@/sections/tariff/Tariff";
+import account from "@/assets/images/accountDesk.svg"
+import accountMob from "@/assets/images/accountMob.svg"
+import BottomNav from "@/components/bottom-nav/BottomNav";
+import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
+import {GiHamburgerMenu} from "react-icons/gi";
 
 const DashboardAccount = () => {
     useEffect(() => {
@@ -20,59 +24,24 @@ const DashboardAccount = () => {
             <Metrics/>
             <Tariff/>
             <FeaturesInfo
+                dotText="арбитраж трафика"
                 title="ОСНОВНЫЕ ОСОБЕННОСТИ"
-                modTitle="ЗАРАБОТКА">
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>01</h2>
-                        <p>Максимизация прибыли через трафик</p>
-                    </div>
-                    <p>
-                        Premiant LTD повышает конверсии и рентабельность рекламных кампаний, обеспечивая клиентам
-                        высокую отдачу от инвестиций.
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>02</h2>
-                        <p>Глобальный охват аудитории</p>
-                    </div>
-
-                    <p>
-                        Сотрудничество с крупными сетями позволяет привлекать трафик со всего мира, увеличивая конверсии
-                        и доходы.
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>03</h2>
-                        <p>Гибкость и адаптивность</p>
-                    </div>
-                    <p>
-                        Premiant LTD быстро реагирует на изменения рынка, повышая точность таргетинга и эффективность
-                        рекламы.
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="featureScheme">
-                    <div>
-                        <h2>04</h2>
-                        <p>Инновации для оптимизации</p>
-                    </div>
-                    <p>
-                        Современные алгоритмы и машинное обучение делают Premiant LTD лидером в сфере арбитража
-                        интернет-трафика.
-                    </p>
-                </CustomBlock>
-                <CustomBlock variant="modified">
-                    <div>
-                        <h2>05</h2>
-                        <p>Прозрачность и контроль</p>
-                    </div>
-                    <p>
-                        Подробные отчеты обеспечивают полное понимание расходов и результатов кампаний.
-                    </p>
-                </CustomBlock>
+                modTitle="ЗАРАБОТКА"
+                mainImg={account}
+                mobImg={accountMob}
+            >
             </FeaturesInfo>
+            <BottomNav
+                logo={BottomNuvLogo}
+                links={[
+                    {name: 'Аккаунт', route: '/account'},
+                    {name: 'Рефералы', route: '/partner-system'},
+                    {name: 'Транзакции', route: '/transactions'},
+                    {name: 'Настройки', route: '/settings'},
+                    {name: 'Главная Страница', route: '/'},
+                ]}
+                burgerIcon={<GiHamburgerMenu/>}
+            />
         </Dashboard>
     );
 };

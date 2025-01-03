@@ -8,18 +8,24 @@ import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
 import Address from "@/components/address/Address";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
-import FeaturesInfo from "@/components/features-info/FeaturesInfo";
 import Activity from "@/components/activity/Activity";
 import Roadmap from "@/sections/roadmap/Roadmap";
+import mission from "@/assets/images/missionPremiant.svg";
+import missionMob from "@/assets/images/missionPremiantMob.svg";
+import FeaturesInfoAbout from "@/components/feauture-info-about/FeaturesInfoAbout";
 
 
 const AboutPage = () => {
     return (
         <>
             <HeroSectionAbout/>
-            <FeaturesInfo
+            <FeaturesInfoAbout
                 title="МИССИЯ КОМПАНИИ"
-                modTitle="PREMIANT LTD"/>
+                modTitle="PREMIANT LTD"
+                mainImg={mission}
+                dotText="о нас"
+                mobImg={missionMob}
+            />
             <Address
                 firstChildren={
                     <CustomBlock variant="address">
@@ -69,7 +75,8 @@ const AboutPage = () => {
             </Activity>
             <Roadmap/>
             <CompanyAdvantages
-                headline="НАШИ ПРИЕМУЩЕСТВА"
+                headline="СЕКРЕТЫ НАШЕГО "
+                modHeadline="ПРЕВОСХОДСТВА"
                 content={[
                     {
                         paragraph: "Высокая рентабельность",

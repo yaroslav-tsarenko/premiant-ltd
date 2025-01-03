@@ -10,6 +10,8 @@ import ArrowRight from "@/assets/icons/arrowRight.svg";
 import CompanyInfo from "@/components/company-info/CompanyInfo";
 import CompanyFirstImage from "@/assets/images/companyFirstImage.svg"
 import CompanySecondImage from "@/assets/images/companySecondImage.svg"
+import customBlocksImage from "@/assets/images/key-benefits.svg"
+import customBlocksImageMob from "@/assets/images/key-benefits-mob.svg"
 import CompanyThirdImage from "@/assets/images/companyThirdImage.svg"
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
@@ -26,9 +28,7 @@ export default function Home() {
         <>
             <HeroSection
                 headline="ИНВЕСТИРУЙТЕ С НАМИ И ПРИУМНОЖАЙТЕ СВОЙ КАПИТАЛ"
-                text="Присоединяйтесь к платформе уже сегодня и откройте новые возможности для роста!"
-            >
-                <Button variant="hero">Начать инвестировать</Button>
+                text="Присоединяйтесь к платформе уже сегодня и откройте новые возможности для роста!">
             </HeroSection>
             <PromoBar
                 price={PricePromo}
@@ -45,8 +45,12 @@ export default function Home() {
                 <Button variant={"companyInfo"}>Начать инвестировать</Button>
             </CompanyInfo>
             <FeaturesInfo
+                dotText="арбитраж трафика"
                 title="КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА"
-                modTitle="РАБОТЫ С PREMIANT LTD">
+                modTitle="РАБОТЫ С PREMIANT LTD"
+                mainImg={customBlocksImage}
+                mobImg={customBlocksImageMob}
+                >
             </FeaturesInfo>
             <CompanyAdvantages
                 headline="СЕКРЕТЫ НАШЕГО"

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import Image from 'next/image';
-import { BottomNavProps } from '@/types/bottomNav';
+import {BottomNavProps} from '@/types/bottomNav';
 import styles from './BottomNav.module.scss';
 
-const BottomNav: FC<BottomNavProps> = ({ logo, burgerIcon, links = [] }) => {
+const BottomNav: FC<BottomNavProps> = ({logo, burgerIcon, links = []}) => {
     const [isNavOpen, setIsNavOpen] = React.useState(false);
 
     const handleNavToggle = () => {
@@ -13,8 +13,8 @@ const BottomNav: FC<BottomNavProps> = ({ logo, burgerIcon, links = [] }) => {
     };
 
     return (
-
         <div className={styles.bottomNav}>
+            {isNavOpen && <div className={styles.overlay} onClick={handleNavToggle}></div>}
             <nav className={styles.nav}>
                 {isNavOpen && (
                     <ul className={styles.links}>
@@ -26,13 +26,11 @@ const BottomNav: FC<BottomNavProps> = ({ logo, burgerIcon, links = [] }) => {
                     </ul>
                 )}
             </nav>
-
             <div className={styles.bottomBurgerMenu}>
                 {logo && <Image src={logo} alt="logo" className={styles.logo}/>}
                 <button className={styles.burgerIcon} onClick={handleNavToggle}>
                     {burgerIcon}
                 </button>
-
             </div>
         </div>
     );
