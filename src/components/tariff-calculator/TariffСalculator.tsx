@@ -11,10 +11,10 @@ import CalculatorGradient from "@/assets/images/calculatorGradient.svg";
 import Button from "@/components/button/Button";
 import {useRouter} from "next/navigation";
 
-const TariffCalculator: FC<TariffCalculatorProps> = () => {
+const TariffCalculator: FC<TariffCalculatorProps> = ({handleNav}) => {
     const router = useRouter();
 
-    const handleNav = (str: string) =>{
+    const handleNavigation = (str: string) => {
         router.push(str);
     }
 
@@ -22,7 +22,7 @@ const TariffCalculator: FC<TariffCalculatorProps> = () => {
         <div className={styles.wrapper}>
             <Image src={CalculatorGradient} alt="Gradient" className={styles.gradient}/>
             <div className={styles.beanie}>
-               <Dot title="калькулятор"/>
+                <Dot title="калькулятор"/>
                 <h1 className={styles.headline}>
                     ВОЗМОЖНЫЕ ТАРИФЫ ВАШЕГО УЧАСТИЯ
                 </h1>
@@ -38,14 +38,19 @@ const TariffCalculator: FC<TariffCalculatorProps> = () => {
                             <div className={styles.divingLine}></div>
                             <input type="text" placeholder="Укажите размер инвестиций"/>
                         </div>
-                        <Button variant="calculator" onClick={() => handleNav("/register")}>Начать инвестировать</Button>
+                        <Button variant="calculator" onClick={() => handleNavigation("/register")}>Начать
+                            инвестировать</Button>
                     </aside>
                     <section className={styles.tariffs}>
-                        <TariffComponent headline="СТАРТ" price="100" percent="2"/>
-                        <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35"/>
-                        <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67"/>
-                        <TariffComponent headline="МАКСИМУМ" price="15 000" percent="8.68"/>
-                        <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" variant="fullWidthClip"/>
+                        <TariffComponent headline="СТАРТ" variant="fullWidthClip" price="100" percent="2" term="28"/>
+                        <TariffComponent headline="КОМФОРТ" variant="fullWidthClip" price="2 000" percent="3.35"
+                                         term="24"/>
+                        <TariffComponent headline="ПРЕМИУМ" variant="fullWidthClip" price="7 000" percent="5.67"
+                                         term="17"/>
+                        <TariffComponent headline="МАКСИМУМ" variant="fullWidthClip" price="15 000" percent="8.68"
+                                         term="9"/>
+                        <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" variant="fullWidthClip"
+                                         term="6"/>
                     </section>
                 </div>
             </div>
@@ -55,9 +60,12 @@ const TariffCalculator: FC<TariffCalculatorProps> = () => {
                         Инвестируйте уверенно с Premiant LTD
                     </h1>
                     <p className={styles.text}>
-                        Выбери тарифный план, который идеально подходит для ваших целей, и начните управлять своими инвестициями уже сегодня
+                        Выбери тарифный план, который идеально подходит для ваших целей, и начните управлять своими
+                        инвестициями уже сегодня
                     </p>
-                    <Button variant="hero" onClick={() => handleNav("#qoute")}>Оставить заявку</Button>
+                    <Button variant="hero" onClick={handleNav}>
+                        Оставить заявку
+                    </Button>
                 </div>
             </div>
         </div>

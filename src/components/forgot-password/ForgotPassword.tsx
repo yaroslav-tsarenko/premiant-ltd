@@ -1,11 +1,13 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "./ForgotPassword.module.scss";
-import axios from "axios";
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {TbEye, TbEyeClosed} from "react-icons/tb";
+import { TbEye, TbEyeClosed } from "react-icons/tb";
+import { newRequest } from "@/utils/newRequest";
+import Alert from "@/components/alert/Alert";
+import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
 
 type FormData = {
     email: string;
@@ -22,6 +24,8 @@ const ForgotPassword = () => {
         newPassword: "",
         confirmPassword: "",
     });
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const validationSchemas = [
         Yup.object({
@@ -40,9 +44,28 @@ const ForgotPassword = () => {
         }),
     ];
 
-    const handleNextStep = (values: Partial<FormData>) => {
-        setFormData({...formData, ...values});
-        setStep((prev) => prev + 1);
+    const handleNextStep = async (values: Partial<FormData>) => {
+        setFormData({ ...formData, ...values });
+        setLoading(true);
+        if (step === 1) {
+            try {
+                await newRequest.post("/user/request-password-reset", { email: values.email });
+                setStep((prev) => prev + 1);
+            } catch (error) {
+                console.error("Error requesting password reset:", error);
+            } finally {
+                setLoading(false);
+            }
+        } else if (step === 2) {
+            try {
+                await newRequest.post("/user/verify-code", { email: formData.email, verificationCode: values.verificationCode });
+                setStep((prev) => prev + 1);
+            } catch (error) {
+                console.error("Error verifying code:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
     };
 
     const handlePreviousStep = () => {
@@ -50,11 +73,14 @@ const ForgotPassword = () => {
     };
 
     const handleSubmit = async () => {
+        setLoading(true);
         try {
-            const response = await axios.post("/api/reset-password", formData);
-            console.log("Password reset successful:", response.data);
+            await newRequest.post("/user/reset-password", { email: formData.email, newPassword: formData.newPassword });
+            setAlert({ title: "Success", description: "Password reset successful" });
         } catch (error) {
             console.error("Error resetting password:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -96,12 +122,12 @@ const ForgotPassword = () => {
                                         placeholder="E-mail"
                                         className={styles.input}
                                     />
-                                    <ErrorMessage name="email" component="div" className={styles.error}/>
+                                    <ErrorMessage name="email" component="div" className={styles.error} />
                                 </div>
 
                                 <div className={styles.bottomSection}>
-                                    <button type="submit" className={styles.button}>
-                                        Восстановить пароль
+                                    <button type="submit" className={styles.button} disabled={loading}>
+                                        {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
@@ -114,7 +140,6 @@ const ForgotPassword = () => {
                                         </button>
                                     </p>
                                 </div>
-
                             </div>
                         )}
 
@@ -137,7 +162,7 @@ const ForgotPassword = () => {
                                             className={styles.input}
                                             readOnly
                                         />
-                                        <ErrorMessage name="email" component="div" className={styles.error}/>
+                                        <ErrorMessage name="email" component="div" className={styles.error} />
                                     </div>
 
                                     <div className={styles.inputGroup}>
@@ -156,8 +181,8 @@ const ForgotPassword = () => {
                                 </div>
 
                                 <div className={styles.bottomSection}>
-                                    <button type="submit" className={styles.button}>
-                                        Восстановить пароль
+                                    <button type="submit" className={styles.button} disabled={loading}>
+                                        {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
@@ -193,9 +218,9 @@ const ForgotPassword = () => {
                                                 placeholder="Новый пароль"
                                             />
                                             <span className={styles.icon} onClick={toggleNewPasswordVisibility}>
-                                                {showNewPassword ? <TbEye/> : <TbEyeClosed/>}</span>
+                                                {showNewPassword ? <TbEye /> : <TbEyeClosed />}</span>
                                         </div>
-                                        <ErrorMessage name="newPassword" component="div" className={styles.error}/>
+                                        <ErrorMessage name="newPassword" component="div" className={styles.error} />
                                     </div>
 
                                     <div className={styles.inputGroup}>
@@ -207,7 +232,7 @@ const ForgotPassword = () => {
                                                 className={styles.input}
                                             />
                                             <span className={styles.icon} onClick={toggleConfirmPasswordVisibility}>
-                                                {showConfirmPassword ? <TbEye/> : <TbEyeClosed/>}</span>
+                                                {showConfirmPassword ? <TbEye /> : <TbEyeClosed />}</span>
                                         </div>
                                         <ErrorMessage
                                             name="confirmPassword"
@@ -217,8 +242,8 @@ const ForgotPassword = () => {
                                     </div>
                                 </div>
                                 <div className={styles.bottomSection}>
-                                    <button type="submit" className={styles.button}>
-                                        Восстановить пароль
+                                    <button type="submit" className={styles.button} disabled={loading}>
+                                        {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
@@ -237,6 +262,7 @@ const ForgotPassword = () => {
                     </Form>
                 )}
             </Formik>
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
         </div>
     );
 };

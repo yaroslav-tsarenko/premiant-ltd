@@ -27,6 +27,8 @@ const AboutPage = () => {
                 mobImg={missionMob}
             />
             <Address
+                formTitle="Инвестируйте в технологии, которые работают на вас"
+                formDescription="Выберите тарифный план, который идеально подходит для ваших целей, и начните управлять своими инвестициями уже сегодня"
                 firstChildren={
                     <CustomBlock variant="address">
                         <div>
@@ -44,11 +46,11 @@ const AboutPage = () => {
                             </div>
                             <div>
                                 <p className={styles.label}>Phone</p>
-                                <p className={styles.value}>+38 888 88 88 888</p>
+                                <p className={styles.value}>+447813243472</p>
                             </div>
                             <div>
                                 <p className={styles.label}>Telegram</p>
-                                <p className={styles.value}>@ltdpr</p>
+                                <p className={styles.value}>@PremiantLTD</p>
                             </div>
                         </div>
                     </CustomBlock>
@@ -57,8 +59,10 @@ const AboutPage = () => {
             <Activity
                 title="ЧЕМ"
                 modTitle="МЫ ЗАНИМАЕМСЯ"
-                headDescription="В компании Skylex LTD мы специализируемся на арбитраже интернет-трафика и
-                   криптовалютных активов, предоставляя инновационные решения для получения прибыли"
+                headDescription="Premiant LTD предоставляет инновационные решения для эффективного управления
+                рекламным трафиком и криптовалютными активами. Мы используем передовые алгоритмы и технологии
+                машинного обучения (Искусственный Интеллект), чтобы обеспечивать нашим клиентам стабильный доход
+                и максимальную прибыль."
                 childrenBtn={<Button variant="check">Проверить компанию</Button>}
             >
                 <CustomBlock variant="featureScheme">

@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
     earnings: { type: Number, default: '0' },
     withdrawals: { type: Number, default: '0' },
     usdtWallet: { type: String },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
     btcWallet: { type: String },
     perfectMoneyWallet: { type: String },
     ethereumWallet: { type: String },

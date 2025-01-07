@@ -16,9 +16,7 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
                     <span className={styles.modified}>PREMIANT LTD - ЭТО КОМПАНИЯ,</span>
                     <div className={styles.textContainer}>
                         <h1 className={styles.headline}>
-                            <span className={styles.highlight}> СПЕЦИАЛИЗИРУЮЩАЯСЯ</span> НА АРБИТРАЖЕ ИНТЕРНЕТ-ТРАФИКА
-                            И
-                            КРИПТОВАЛЮТНЫХ АКТИВОВ
+                            <span className={styles.highlight}>  специализирующаяся на арбитраже интернет-трафика и криптовалютных активов при помощи Искуственного Интеллекта</span>
                         </h1>
                         <p className={styles.text}>Наша команда благодаря самым последним аналитическим инструментам и
                             алгоритмам в области

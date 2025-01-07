@@ -6,7 +6,7 @@ const updateTotalBalance = async () => {
         if (!totalBalance) {
             totalBalance = new TotalBalance();
         }
-        totalBalance.totalBalance = parseFloat((totalBalance.totalBalance * 1.05).toFixed(0));
+        totalBalance.totalBalance = parseFloat((totalBalance.totalBalance * 1.01).toFixed(0));
         await totalBalance.save();
         console.log('Total balance updated:', totalBalance.totalBalance);
     } catch (error) {

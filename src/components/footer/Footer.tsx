@@ -1,15 +1,21 @@
-import React, { FC } from 'react';
-import styles from './Footer.module.scss';
-import { FooterProps } from '@/types/footer';
-import Link from 'next/link';
+"use client"
 
-const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) => {
+import React, {FC} from 'react';
+import styles from './Footer.module.scss';
+import {FooterProps} from '@/types/footer';
+import Link from 'next/link';
+import Button from "@/components/button/Button";
+import {useRouter} from "next/navigation";
+
+const Footer: FC<FooterProps> = ({footerLinks = [], children, contacts = []}) => {
+    const router = useRouter();
     const firstPartLinks = footerLinks.slice(0, 3);
     const secondPartLinks = footerLinks.slice(3, 6);
-
     const firstPartContacts = contacts.slice(0, 2);
     const secondPartContacts = contacts.slice(2, 3);
-
+    const handleNav = (route: string) => {
+        router.push(route);
+    }
     return (
         <footer className={styles.footer}>
             <div className={styles.desktop}>
@@ -23,7 +29,7 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                             </li>
                         ))}
                     </ul>
-                    {children}
+                    <Button variant="hero" onClick={() => handleNav("/register")}>Начать инвестировать</Button>
                 </nav>
                 <div className={styles.content}>
                     <div className={styles.headline}>

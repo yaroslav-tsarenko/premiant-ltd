@@ -63,18 +63,20 @@ router.post('/login', validationSchemaLogin, async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
+            console.error('User not found:', email);
             return res.status(400).json({ error: 'Invalid credentials' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            console.error('Password does not match for user:', email);
             return res.status(400).json({ error: 'Invalid credentials' });
         }
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' });
-        res.status(200).json({ message: 'Login successful', token, redirectUrl: '/account' });
+        res.status(201).json({ message: 'User logged in successfully', token });
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error during login:', error);
         res.status(500).send('Server error');
     }
 });
