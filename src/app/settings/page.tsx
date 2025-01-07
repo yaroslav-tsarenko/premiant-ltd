@@ -16,11 +16,8 @@ const SettingsPage = () => {
                     {name: 'Рефералы', route: '/partner-system'},
                     {name: 'Транзакции', route: '/transactions'},
                     {name: 'Настройки', route: '/settings'},
-                    {name: 'Главная Страница', route: '/'},
-                ]}
-                burgerIcon={<GiHamburgerMenu/>}
-            />
-
+                    {name: 'Главная Страница', route: '/'},]}
+                burgerIcon={<GiHamburgerMenu/>}/>
         </>
     );
 };

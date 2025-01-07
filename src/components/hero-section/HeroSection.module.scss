@@ -44,6 +44,7 @@
   font-size: 3.25rem;
   font-weight: 500;
   color: var(--secondary-font-color);
+  text-transform: uppercase;
   text-align: center;
   font-family: 'GropledBold', sans-serif;
   background: linear-gradient(to right, #ffffff, #151515);
@@ -56,6 +57,7 @@
   font-weight: 300;
   color: var(--secondary-font-color);
   text-align: center;
+  max-width: 555px;
   background: linear-gradient(to right, #ffffff, #424242);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

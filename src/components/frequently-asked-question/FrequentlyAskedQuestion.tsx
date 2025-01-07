@@ -14,14 +14,14 @@ const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = 
     };
 
     return (
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} id="faq">
                 <div className={styles.beanie}>
                     <h1 className={styles.headline}>
                         ВОПРОСЫ И ОТВЕТЫ
                     </h1>
                 </div>
                 <div className={styles.content}>
-                    <Dot title="Ответы на ваши вопросы"/>
+                    <Dot title="FAQ"/>
                     <div className={styles.faq}>
                         {questions.map(({question, answer}, index) => (
                             <div key={index} className={styles.question}>

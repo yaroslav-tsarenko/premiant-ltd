@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const FeaturesInfo: FC<FeaturesInfoProps> = ({title, modTitle, dotText, mainImg, mobImg}) => {
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} id="features">
             <Dot title={dotText} absolute/>
             <div className={styles.scheme}>
                 <h1 className={styles.headline}>

@@ -7,7 +7,6 @@ import useLoadGoogleMaps from '@/hooks/useLoadGoogleMaps';
 import styles from './Address.module.scss';
 import {AddressProps} from "@/types/address";
 import HomeForm from "@/components/home-form/HomeForm";
-import Button from "@/components/button/Button";
 
 const darkTheme = [
     { elementType: 'geometry', stylers: [{ color: '#212121' }] },
@@ -33,20 +32,17 @@ const darkTheme = [
     { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#3d3d3d' }] }
 ];
 
-const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren}) => {
+const Address: React.FC<AddressProps> = ({ firstChildren, secondChildren, formTitle, formDescription}) => {
 
     const isLoaded = useLoadGoogleMaps("AIzaSyDVNDAsPWNwktSF0f7KnAKO5hr8cWSJmNM");
     const [center] = useState({ lat: 53.515028, lng: -1.122465 });
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
-        <div className={styles.containerWrapper}>
+        <div className={styles.containerWrapper} id="address">
             <HomeForm
-                headline="ОСТАВЬТЕ ЗАЯВКУ"
-                description="Контролируй свои средства и уверенно двигайся к своим финансовым целям вместе с Skylex LTD.
-                 С нами ты получишь надежного партнера, который поможет заставить твои деньги работать на тебя и приносить стабильный
-                  доход.">
-                <Button variant="form">Отправить</Button>
+                headline={formTitle}
+                description={formDescription}>
             </HomeForm>
             <div className={styles.wrapper}>
                 {firstChildren}

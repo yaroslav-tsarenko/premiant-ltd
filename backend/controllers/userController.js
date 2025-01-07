@@ -1,5 +1,6 @@
 const User = require('../models/User');
-
+const crypto = require('crypto');
+const sendEmail = require('../utils/sendEmail')
 const getUser = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -99,8 +100,88 @@ const updateUserBalances = async () => {
     }
 };
 
+const requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const verificationCode = crypto.randomInt(100000, 999999).toString();
+        user.resetPasswordToken = verificationCode;
+        user.resetPasswordExpires = Date.now() + 3600000;
+
+        await user.save();
+
+        await sendEmail(
+            user.email,
+            'Password Reset Verification Code',
+            `Your verification code is ${verificationCode}`
+        );
+
+        res.status(200).json({ message: 'Verification code sent to email' });
+    } catch (error) {
+        console.error('Error requesting password reset:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+const verifyCode = async (req, res) => {
+    const { email, verificationCode } = req.body;
+    try {
+        const user = await User.findOne({
+            email,
+            resetPasswordToken: verificationCode,
+            resetPasswordExpires: { $gt: Date.now() },
+        });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid or expired verification code' });
+        }
+
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.status(200).json({ message: 'Verification code is valid' });
+    } catch (error) {
+        console.error('Error verifying code:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    const { email, newPassword } = req.body;
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (!newPassword) {
+            return res.status(400).json({ message: 'New password is required' });
+        }
+
+        user.password = newPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Password reset successful' });
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 module.exports = {
     getUser,
     updateUser,
-    updateUserBalances
+    updateUserBalances,
+    requestPasswordReset,
+    verifyCode,
+    resetPassword,
 };

@@ -21,7 +21,7 @@ const Roadmap = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.head}>
-                <h1 className={styles.title}>ДОРОЖНАЯ КАРТА</h1>
+                <h1 className={styles.title}>КАРТА РАЗВИТИЯ ПРОЕКТА </h1>
                 <div className={styles.controllers}>
                     <GoArrowLeft className={styles.icon} onClick={handlePrev} />
                     <GoArrowRight className={styles.icon} onClick={handleNext} />

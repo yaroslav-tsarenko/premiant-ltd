@@ -28,6 +28,7 @@
   font-size: 50px;
   font-weight: 700;
   color: var(--primary-color);
+  text-transform: uppercase;
   width: 100%;
   font-family: 'GropledBold', sans-serif;
 }
@@ -37,6 +38,7 @@
   font-weight: 400;
   color: #b5b5b5;
   width: 100%;
+  max-width: 455px;
 }
 
 .dividingLine {
@@ -66,6 +68,11 @@
     color: #ffffff;
     font-size: 16px;
   }
+}
+
+.error{
+    color: red;
+    font-size: 14px;
 }
 
 @media (max-width: 1028px) {

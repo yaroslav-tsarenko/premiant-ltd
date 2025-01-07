@@ -92,6 +92,10 @@ const Login: FC<AuthenticationProps> = ({headline, greeting, linkRoute}) => {
                                 <Link href={link.route} legacyBehavior>
                                     <a className={styles.linkName}>{link.name}</a>
                                 </Link>
+                                Забыли пароль?
+                                <Link href={"/forgot-password"} legacyBehavior>
+                                    <a className={styles.linkName}>Восстановить пароль</a>
+                                </Link>
                             </p>
                         ))}
                     </div>

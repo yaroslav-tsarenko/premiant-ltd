@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { FC, useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import Button from "@/components/button/Button";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useUser } from "@/utils/UserContext";
 import { usePathname } from "next/navigation";
+import { Link as ScrollLink } from 'react-scroll';
 
 const Header: FC<HeaderProps> = ({ headerLinks = [] }) => {
     const pathname = usePathname();
@@ -54,9 +55,20 @@ const Header: FC<HeaderProps> = ({ headerLinks = [] }) => {
                             <ul>
                                 {secondPartLinks.map((link, index) => (
                                     <li key={index} className={styles.link}>
-                                        <Link href={link.route} legacyBehavior>
-                                            <a>{link.name}</a>
-                                        </Link>
+                                        {link.route.startsWith('#') ? (
+                                            <ScrollLink
+                                                to={link.route.substring(1)}
+                                                smooth={true}
+                                                duration={500}
+                                                offset={-70}
+                                            >
+                                                {link.name}
+                                            </ScrollLink>
+                                        ) : (
+                                            <Link href={link.route} legacyBehavior>
+                                                <a>{link.name}</a>
+                                            </Link>
+                                        )}
                                     </li>
                                 ))}
                                 <LanguageDropdown />
