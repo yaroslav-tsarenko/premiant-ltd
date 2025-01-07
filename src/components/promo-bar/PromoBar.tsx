@@ -11,7 +11,7 @@ const PromoBar: FC<PromoBarProps> = ({ text, promoLink, arrowIcon }) => {
     const [totalBalance, setTotalBalance] = useState<number | null>(null);
 
     useEffect(() => {
-        const ws = new WebSocket(`ws://${BACKEND_URL.replace('http://', '')}`);
+        const ws = new WebSocket(`wss://${BACKEND_URL.replace('http://', '').replace('https://', '')}/ws`);
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
