@@ -1,13 +1,13 @@
 "use client"
 
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import styles from './Footer.module.scss';
-import {FooterProps} from '@/types/footer';
+import { FooterProps } from '@/types/footer';
 import Link from 'next/link';
 import Button from "@/components/button/Button";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const Footer: FC<FooterProps> = ({footerLinks = [], children, contacts = []}) => {
+const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) => {
     const router = useRouter();
     const firstPartLinks = footerLinks.slice(0, 3);
     const secondPartLinks = footerLinks.slice(3, 6);
@@ -45,7 +45,11 @@ const Footer: FC<FooterProps> = ({footerLinks = [], children, contacts = []}) =>
                         {contacts.map((contact, index) => (
                             <div key={index} className={styles.contact}>
                                 <p className={styles.label}>{contact.label}</p>
-                                <p className={styles.value}>{contact.value}</p>
+                                <p className={styles.value}>
+                                    {contact.label === 'E-mail' && <a href={`mailto:${contact.value}`}>{contact.value}</a>}
+                                    {contact.label === 'Phone' && <a href={`tel:${contact.value}`}>{contact.value}</a>}
+                                    {contact.label === 'Telegram' && <a href={`https://t.me/${contact.value.replace('@', '')}`} target="_blank" rel="noopener noreferrer">{contact.value}</a>}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -77,7 +81,11 @@ const Footer: FC<FooterProps> = ({footerLinks = [], children, contacts = []}) =>
                         {firstPartContacts.map((contact, index) => (
                             <div key={index} className={styles.contact}>
                                 <p className={styles.label}>{contact.label}</p>
-                                <p className={styles.value}>{contact.value}</p>
+                                <p className={styles.value}>
+                                    {contact.label === 'E-mail' && <a href={`mailto:${contact.value}`}>{contact.value}</a>}
+                                    {contact.label === 'Phone' && <a href={`tel:${contact.value}`}>{contact.value}</a>}
+                                    {contact.label === 'Telegram' && <a href={`https://t.me/${contact.value.replace('@', '')}`} target="_blank" rel="noopener noreferrer">{contact.value}</a>}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -85,7 +93,11 @@ const Footer: FC<FooterProps> = ({footerLinks = [], children, contacts = []}) =>
                         {secondPartContacts.map((contact, index) => (
                             <div key={index} className={styles.contact}>
                                 <p className={styles.label}>{contact.label}</p>
-                                <p className={styles.value}>{contact.value}</p>
+                                <p className={styles.value}>
+                                    {contact.label === 'E-mail' && <a href={`mailto:${contact.value}`}>{contact.value}</a>}
+                                    {contact.label === 'Phone' && <a href={`tel:${contact.value}`}>{contact.value}</a>}
+                                    {contact.label === 'Telegram' && <a href={`https://t.me/${contact.value.replace('@', '')}`} target="_blank" rel="noopener noreferrer">{contact.value}</a>}
+                                </p>
                             </div>
                         ))}
                     </div>

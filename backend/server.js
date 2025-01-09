@@ -50,7 +50,7 @@ mongoose.connect(`mongodb+srv://yaroslavdev:1234567890@premiant.vpogw.mongodb.ne
 }).catch(err => console.log(err));
 
 cron.schedule('*/1 * * * *', () => {
-    console.log('Running updateUserBalances...');
+    console.log('Running updateUserBalances...⚙️');
     updateUserBalances();
 });
 cron.schedule('*/5 * * * *', () => {
@@ -58,9 +58,9 @@ cron.schedule('*/5 * * * *', () => {
     generateReferralCodes();
 });
 setInterval(() => {
-    console.log('Running updateTotalBalance...');
+    console.log('Running updateTotalBalance...⚙️');
     updateTotalBalance();
-}, 360000); // Update every second
+}, 1000); // Update every second
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);

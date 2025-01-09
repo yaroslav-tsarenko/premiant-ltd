@@ -15,7 +15,6 @@ const LanguageDropdown = () => {
             <select value={selectedLanguage} onChange={handleLanguageChange}>
                 <option value="RU">RU</option>
                 <option value="EN">EN</option>
-                <option value="UA">UA</option>
             </select>
         </div>
     );

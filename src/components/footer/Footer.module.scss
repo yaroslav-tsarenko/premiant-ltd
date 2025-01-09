@@ -104,6 +104,14 @@
 .value {
   font-size: 16px;
   color: var(--primary-color);
+
+
+  a{
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
 }
 
 .linksMob {

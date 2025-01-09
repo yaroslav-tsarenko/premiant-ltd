@@ -11,20 +11,17 @@ const PromoBar: FC<PromoBarProps> = ({ text, promoLink, arrowIcon }) => {
     const [totalBalance, setTotalBalance] = useState<number | null>(null);
 
     useEffect(() => {
-        const ws = new WebSocket(`wss://${BACKEND_URL.replace('http://', '').replace('https://', '')}/ws`);
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`);
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
             setTotalBalance(data.totalBalance);
         };
 
-        ws.onclose = () => {
-            console.log('WebSocket connection closed');
-        };
+        ws.onclose = () => console.log('WebSocket connection closed');
 
-        return () => {
-            ws.close();
-        };
+        return () => ws.close();
     }, []);
 
     return (

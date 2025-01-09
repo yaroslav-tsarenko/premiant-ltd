@@ -23,9 +23,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             headerLinks={[
                 { name: 'Главная', route: '/' },
                 { name: 'О Компании', route: '/about' },
-                { name: 'Инвесторам/Партнерам', route: '#features' },
-                { name: 'FAQ', route: '#faq' },
-                { name: 'Контакты', route: '#address' },
+                { name: 'Инвесторам/Партнерам', route: '/#features' },
+                { name: 'FAQ', route: '/#faq' },
+                { name: 'Контакты', route: '/#address' },
             ]}
         />
         {children}
@@ -36,7 +36,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                 { name: 'Инвесторам/Партнерам', route: '#features' },
                 { name: 'FAQ', route: '#faq' },
                 { name: 'Контакты', route: '#address' },
-                { name: 'Поддержка', route: '#support' },
+                { name: 'Поддержка', route: '#address' },
             ]}
             contacts={[
                 { label: 'E-mail', value: 'premiantltd@gmail.com' },

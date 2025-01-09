@@ -6,6 +6,7 @@ export interface TariffComponentProps {
     percent?: string;
     link?: string;
     fullWidth?: boolean;
+    active?: boolean;
     variant?: keyof typeof styles;
     term?: string
     currentTariff?: string;

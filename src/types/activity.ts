@@ -3,5 +3,4 @@ export interface ActivityProps {
     modTitle: string;
     headDescription: string;
     children: React.ReactNode;
-    childrenBtn: React.ReactNode;
 }
