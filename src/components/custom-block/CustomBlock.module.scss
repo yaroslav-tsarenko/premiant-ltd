@@ -142,6 +142,10 @@
     color: var(--secondary-color);
     font-size: 18px;
     font-weight: 500;
+
+    &:hover{
+      text-decoration: underline;
+    }
   }
 }
 

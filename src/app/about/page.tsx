@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from "@/components/button/Button";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
 import BottomNav from "@/components/bottom-nav/BottomNav";
@@ -42,15 +41,17 @@ const AboutPage = () => {
                         <div>
                             <div>
                                 <p className={styles.label}>E-mail</p>
-                                <p className={styles.value}>premiantltd@gmail.com</p>
+                                <a href="mailto:premiantltd@gmail.com"
+                                   className={styles.value}>premiantltd@gmail.com</a>
                             </div>
                             <div>
                                 <p className={styles.label}>Phone</p>
-                                <p className={styles.value}>+447813243472</p>
+                                <a href="tel:+447813243472" className={styles.value}>+447813243472</a>
                             </div>
                             <div>
                                 <p className={styles.label}>Telegram</p>
-                                <p className={styles.value}>@PremiantLTD</p>
+                                <a href="https://t.me/PremiantLTD" className={styles.value} target="_blank"
+                                   rel="noopener noreferrer">@PremiantLTD</a>
                             </div>
                         </div>
                     </CustomBlock>
@@ -63,9 +64,8 @@ const AboutPage = () => {
                 рекламным трафиком и криптовалютными активами. Мы используем передовые алгоритмы и технологии
                 машинного обучения (Искусственный Интеллект), чтобы обеспечивать нашим клиентам стабильный доход
                 и максимальную прибыль."
-                childrenBtn={<Button variant="check">Проверить компанию</Button>}
             >
-                <CustomBlock variant="featureScheme">
+            <CustomBlock variant="featureScheme">
                     <div>
                         <p>ЭФФЕКТИВНЫЕ РЕКЛАМНЫЕ РЕШЕНИЯ</p>
                     </div>

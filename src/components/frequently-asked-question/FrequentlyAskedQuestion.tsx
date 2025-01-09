@@ -24,12 +24,11 @@ const FrequentlyAskedQuestion: FC<FrequentlyAskedQuestionProps> = ({questions = 
                     <Dot title="FAQ"/>
                     <div className={styles.faq}>
                         {questions.map(({question, answer}, index) => (
-                            <div key={index} className={styles.question}>
+                            <div key={index} className={styles.question} onClick={() => toggleAnswer(index)}>
                                 <div className={styles.questionHeader}>
                                     <h3 className={styles.questionText}>{question}</h3>
                                     <button
                                         className={styles.questionButton}
-                                        onClick={() => toggleAnswer(index)}
                                     >
                                         <BsPlusLg
                                             className={`${styles.icon} ${
