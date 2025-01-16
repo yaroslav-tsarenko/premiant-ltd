@@ -39,6 +39,10 @@ const Payment = () => {
         setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
 
+    const handleNextStepAndClosePopup = () => {
+        setStep((prev) => (prev < 3 ? prev + 1 : 1));
+        setPopup(false)
+    }
 
     const handleReturnToDashboard = () => {
         router.push('/account');
@@ -151,7 +155,7 @@ const Payment = () => {
                     description="К сожалению, данный способ выплаты сейчас недоступен в связи с техническим обслуживанием. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"
                     onClose={() => setAlert(null)}
                     firstChildren={<Button variant="popupGrey" onClick={() => setPopup(false)}>Отменить</Button>}
-                    secondChildren={<Button variant="popupBlack" onClick={() => setPopup(false)}>Использовать Tether (TRC-20)</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={handleNextStepAndClosePopup}>Использовать Tether (TRC-20)</Button>}
                 />
             )}
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
