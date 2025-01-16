@@ -2,10 +2,7 @@
 
 import React from "react";
 import styles from "@/components/transactions-table/TransactionsTable.module.scss";
-
-interface Transaction {
-    [key: string]: string | undefined;
-}
+import { Transaction } from "@/types/transaction";
 
 interface TransactionsTableProps {
     headers: string[];
@@ -37,16 +34,22 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
                 </tr>
                 </thead>
                 <tbody>
-                {transactions.map((transaction, index) => (
-                    <tr key={index}>
-                        <td className={getStatusStyle(transaction.status || '')}>{index + 1}</td>
-                        {Object.keys(transaction).map((key, idx) => (
-                            <td key={idx} className={key === 'status' ? getStatusStyle(transaction[key] || '') : key === 'type' ? getTypeStyle(transaction[key] || '') : ''}>
-                                {transaction[key]}
-                            </td>
-                        ))}
+                {transactions.length > 0 ? (
+                    transactions.map((transaction, index) => (
+                        <tr key={index}>
+                            <td className={getStatusStyle(transaction.status)}>{index + 1}</td>
+                            {Object.keys(transaction).map((key, idx) => (
+                                <td key={idx} className={key === 'status' ? getStatusStyle(transaction[key] || '') : key === 'type' ? getTypeStyle(transaction[key] || '') : ''}>
+                                    {transaction[key] || "Данных нету"}
+                                </td>
+                            ))}
+                        </tr>
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan={headers.length + 1} className={styles.noData}>Данных пока нету</td>
                     </tr>
-                ))}
+                )}
                 </tbody>
             </table>
         </div>

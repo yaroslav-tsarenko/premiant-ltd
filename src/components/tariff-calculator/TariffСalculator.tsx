@@ -58,11 +58,11 @@ const TariffCalculator: FC<TariffCalculatorProps> = ({ handleNav }) => {
                         <Button variant="calculator" onClick={handleButtonClick}>Начать инвестировать</Button>
                     </aside>
                     <section className={styles.tariffs}>
-                        <TariffComponent headline="СТАРТ" variant="fullWidthClip" price="100" percent="2" term="28" active={investment !== null && investment >= 100 && investment < 2000} />
-                        <TariffComponent headline="КОМФОРТ" variant="fullWidthClip" price="2 000" percent="3.35" term="24" active={investment !== null && investment >= 2000 && investment < 7000} />
-                        <TariffComponent headline="ПРЕМИУМ" variant="fullWidthClip" price="7 000" percent="5.67" term="17" active={investment !== null && investment >= 7000 && investment < 15000} />
-                        <TariffComponent headline="МАКСИМУМ" variant="fullWidthClip" price="15 000" percent="8.68" term="9" active={investment !== null && investment >= 15000 && investment < 40000} />
-                        <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" variant="fullWidthClip" term="6" active={investment !== null && investment >= 40000} />
+                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="СТАРТ" variant="fullWidthClip" price="100" percent="2" term="28" active={investment !== null && investment >= 100 && investment < 2000} />
+                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="КОМФОРТ" variant="fullWidthClip" price="2 000" percent="3.35" term="24" active={investment !== null && investment >= 2000 && investment < 7000} />
+                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="ПРЕМИУМ" variant="fullWidthClip" price="7 000" percent="5.67" term="17" active={investment !== null && investment >= 7000 && investment < 15000} />
+                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="МАКСИМУМ" variant="fullWidthClip" price="15 000" percent="8.68" term="9" active={investment !== null && investment >= 15000 && investment < 40000} />
+                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" variant="fullWidthClip" term="6" active={investment !== null && investment >= 40000} />
                     </section>
                 </div>
             </div>

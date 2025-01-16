@@ -9,19 +9,19 @@ const Balance = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.head}>
-                <h1 className={styles.title}>Ваш текущий баланс</h1>
+                <h5 className={styles.title}>Ваш текущий баланс</h5>
                 <p className={styles.currentSum}>
-                    {user?.balance}$
+                    {user?.balance.toFixed(2)}$
                 </p>
             </div>
             <div className={styles.info}>
                 <div className={styles.details}>
                     <p className={styles.headline}>доступно</p>
-                    <p className={styles.sum}>{user?.balance}$</p>
+                    <p className={styles.sum}>{user?.balance.toFixed(2)}$</p>
                 </div>
                 <div className={styles.details}>
-                    <p className={styles.headline}>выведено</p>
-                    <p className={styles.sum}>{user?.withdrawals}$</p>
+                <p className={styles.headline}>выведено</p>
+                    <p className={styles.sum}>{user?.withdrawals.toFixed(2)}$</p>
                 </div>
             </div>
         </div>

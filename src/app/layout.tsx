@@ -18,29 +18,21 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en">
         <body>
-        <LenisScriptLoader />
-        <Header
-            headerLinks={[
-                { name: 'Главная', route: '/' },
-                { name: 'О Компании', route: '/about' },
-                { name: 'Инвесторам/Партнерам', route: '/#features' },
-                { name: 'FAQ', route: '/#faq' },
-                { name: 'Контакты', route: '/#address' },
-            ]}
-        />
+        <LenisScriptLoader/>
+        <Header/>
         {children}
         <Footer
             footerLinks={[
                 { name: 'Главная', route: '/' },
                 { name: 'О Компании', route: '/about' },
-                { name: 'Инвесторам/Партнерам', route: '#features' },
-                { name: 'FAQ', route: '#faq' },
-                { name: 'Контакты', route: '#address' },
-                { name: 'Поддержка', route: '#address' },
+                { name: 'Инвесторам', route: '/#features' },
+                { name: 'FAQ', route: '/#faq' },
+                { name: 'Контакты', route: '/#address' },
+                { name: 'Поддержка', route: '/#address' },
             ]}
             contacts={[
                 { label: 'E-mail', value: 'premiantltd@gmail.com' },
-                { label: 'Phone', value: '+447813243472' },
+                { label: 'Phone', value: '+44 781 3243472' },
                 { label: 'Telegram', value: '@PremiantLTD' },
             ]}
         >

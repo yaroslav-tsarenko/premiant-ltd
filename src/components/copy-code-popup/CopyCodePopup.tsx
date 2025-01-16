@@ -28,7 +28,7 @@ const CopyCodePopup: FC<CopyCodePopupProps> = ({ code, onClose }) => {
         <div className={styles.overlay}>
             <div className={styles.popup}>
                 <h1>ВНИМАНИЕ!</h1>
-                <p>Вы перешли по реферальное ссылке! Для того что-бы продолжить вам нужно скопировать код ниже использовать его при регистрации</p>
+                <p>Вы перешли по реферальное ссылке! Для того что-бы продолжить вам нужно скопировать код ниже и использовать его при регистрации</p>
                 <div className={styles.codeContainer}>
                     {code}
                     <PiCopySimple className={styles.copyIcon} onClick={handleCopy} />

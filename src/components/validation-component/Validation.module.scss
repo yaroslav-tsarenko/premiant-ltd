@@ -6,6 +6,8 @@
   align-content: center;
   align-items: center;
   justify-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .headline {
@@ -16,4 +18,11 @@
   background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media screen and (max-width: 768px) {
+    font-size: 25px;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
 }

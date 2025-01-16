@@ -26,10 +26,15 @@
 .headline {
   font-size: 53px;
   font-weight: bold;
+  text-transform: uppercase;
   font-family: 'GropledBold', sans-serif;
   background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media screen and (max-width: 768px) {
+    font-size: 35px;
+  }
 }
 
 .greeting {
@@ -56,6 +61,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: space-between;
 }
 
 .fullWidth {
@@ -113,10 +119,10 @@
 
 .icon {
   position: absolute;
-  right: 10px;
-  top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  right: 3%;
+  top: 50%;
   font-size: 24px;
   color: #8e8e8e;
 }
@@ -133,6 +139,12 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
+}
+
+.verificationContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .link {

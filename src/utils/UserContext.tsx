@@ -18,6 +18,7 @@ export type User = {
     perfectMoneyWallet: string;
     ethereumWallet: string;
     date: string;
+    tariffExpirationDate: string;
     payeerWallet: string;
     card: string;
 };

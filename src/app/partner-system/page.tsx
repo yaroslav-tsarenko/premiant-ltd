@@ -3,11 +3,17 @@ import PartnerSystem from "@/sections/partner-system/PartnerSystem";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
 import BottomNav from "@/components/bottom-nav/BottomNav";
+import {CuratorProvider} from "@/utils/CuratorContext";
+import {UsersProvider} from "@/utils/UsersContext";
 
 const PartnerSystemPage = () => {
     return (
         <>
-            <PartnerSystem/>
+            <UsersProvider>
+                <CuratorProvider>
+                    <PartnerSystem/>
+                </CuratorProvider>
+            </UsersProvider>
             <BottomNav
                 logo={BottomNuvLogo}
                 links={[

@@ -6,9 +6,9 @@ const BalanceWithdraw = () => {
     const user = useUser();
     return (
         <div className={styles.wrapper}>
-            <h1 className={styles.headline}>
+            <h5 className={styles.headline}>
                 Доступ к выводу
-            </h1>
+            </h5>
             <p className={styles.balance}>
                 {user?.balance}$
             </p>

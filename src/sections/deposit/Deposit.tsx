@@ -21,14 +21,19 @@ import Image from 'next/image';
 import Dashboard from "@/components/dashboard/Dashboard";
 import {useUser} from "@/utils/UserContext";
 import {BACKEND_URL} from "@/constants/constants";
+import Popup from "@/components/popup/Popup";
+import Button from "@/components/button/Button";
+import {useRouter} from "next/navigation";
 
 const Deposit = () => {
     const [step, setStep] = useState<number>(1);
     const user = useUser();
+    const router = useRouter();
+    const [popup, setPopup] = useState<boolean>(false);
     const [selectedPayment, setSelectedPayment] = useState<string>('');
     const [depositId, setDepositId] = useState<string>('');
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
-
+    const [alertPopup, setAlertPopup] = useState<boolean>(false);
     const handleNextStep = () => {
         setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
@@ -36,6 +41,10 @@ const Deposit = () => {
     const handlePreviousStep = () => {
         setStep((prev) => (prev > 1 ? prev - 1 : 1));
     };
+
+    const handleReturnToDashboard = () => {
+        router.push('/account');
+    }
 
     const submitFormRef = useRef<() => void>();
     const handleButtonClick = () => {
@@ -45,16 +54,46 @@ const Deposit = () => {
     };
 
     const handlePaymentMethodClick = (paymentMethod: string) => {
-        setSelectedPayment(paymentMethod);
-        handleNextStep();
+        if (paymentMethod !== "Tether") {
+            setPopup(true);
+        } else {
+            setSelectedPayment(paymentMethod);
+            handleNextStep();
+        }
     };
 
     const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
+        setAlertPopup(true);
+
+        await new Promise<void>((resolve) => {
+            const observer = setInterval(() => {
+                if (!alertPopup) {
+                    clearInterval(observer);
+                    resolve();
+                }
+            }, 1000);
+        });
+
+        if (
+            !user?.usdtWallet ||
+            !user?.btcWallet ||
+            !user?.perfectMoneyWallet ||
+            !user?.ethereumWallet ||
+            !user?.payeerWallet ||
+            !user?.card
+        ) {
+            setAlert({
+                title: 'Упс!',
+                description: 'Вы не указали платежные данные'
+            });
+            return;
+        }
+
         const depositId = Math.floor(1000000 + Math.random() * 9000000).toString();
         setDepositId(depositId);
 
         try {
-            const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+            const token = document.cookie.split('; ').find((row) => row.startsWith('token='))?.split('=')[1];
             if (!token) {
                 throw new Error('Token not found');
             }
@@ -63,7 +102,7 @@ const Deposit = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     userId: user?._id,
@@ -75,11 +114,12 @@ const Deposit = () => {
                     depositId: depositId
                 })
             });
+
             console.log('Response:', response);
             handleNextStep();
             setAlert({
                 title: 'Успех!',
-                description: 'Заявка на вывод оформленна успешно!.'
+                description: 'Заявка на депозит оформленна успешно!'
             });
         } catch (error) {
             console.error('Error creating deposit:', error);
@@ -88,6 +128,26 @@ const Deposit = () => {
 
     return (
         <Dashboard>
+            {popup && (
+                <Popup
+                    title="Этот способ недоступен"
+                    description="К сожалению, данный способ выплаты сейчас недоступен в связи с техническим обслуживанием. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"
+                    onClose={() => setAlert(null)}
+                    firstChildren={<Button variant="popupGrey" onClick={() => setPopup(false)}>Отменить</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={(() => setPopup(false))}>Использовать Tether
+                        (TRC-20)</Button>}
+                />
+            )}
+            {alertPopup && (
+                <Popup
+                    title="Проверьте перевод и данные"
+                    description="Вы уверены, что перевели сумму на указанный кошелёк и проверили его корректность? В случае, если средства не поступят, мы не сможем зачислить их на ваш баланс. Пожалуйста, убедитесь в правильности перевода!"
+                    onClose={() => setAlert(null)}
+                    firstChildren={<Button variant="popupGrey" onClick={() => setAlertPopup(false)}>Отменить</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={() => setAlertPopup(false)}>Я уверен,
+                        продолжить</Button>}
+                />
+            )}
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
             <div className={styles.wrapperInner}>
                 {step === 1 && (
@@ -122,7 +182,7 @@ const Deposit = () => {
                             >
                                 <StepButtons
                                     onNext={handleNextStep}
-                                    onPrev={handlePreviousStep}
+                                    onPrev={handleReturnToDashboard}
                                     firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
                                     secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
@@ -179,7 +239,7 @@ const Deposit = () => {
                             <div className={styles.bottomButtons}>
                                 <StepButtons
                                     onNext={handleNextStep}
-                                    onPrev={handlePreviousStep}
+                                    onPrev={handleReturnToDashboard}
                                     firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
                                     secondButtonContent={"Продолжить"}/>
                             </div>
@@ -221,21 +281,13 @@ const Deposit = () => {
                                              firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
                                              secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
-
                             <PaymentForm
                                 placeholders={[
                                     {label: "Введите сумму пополнения"},
-                                    {label: "Выберите кошелек"}
+                                    {label: "Введите адрес кошелька"}
                                 ]}
-                                options={[
-                                    {value: "tether", label: "Tether"},
-                                    {value: "perfectMoney", label: "PerfectMoney"},
-                                    {value: "payeer", label: "Payeer"},
-                                    {value: "bitcoin", label: "Bitcoin"},
-                                    {value: "etherium", label: "Etherium"},
-                                    {value: "visa", label: "Visa"}
-                                ]}
-                                initialValues={{amount: '', wallet: selectedPayment}}
+                                options={[]}
+                                initialValues={{amount: '', wallet: ''}}
                                 onSubmit={handleFormSubmit}
                                 submitForm={(submit) => {
                                     submitFormRef.current = submit;
@@ -285,8 +337,12 @@ const Deposit = () => {
                             </PaymentBeanie>
 
                             <ApplicationInfo texts={[
-                                {text: `Заявка №${depositId} в обработке`},
-                                {text: 'Пожалуйста, дождитесь завершения операции — это займет немного времени'}
+                                {text: `Благодарим за ваш запрос!`},
+                                {text: '\n' + 'После проверки и обработки заявки средства будут перечислены на выбранный вами способ оплаты в течение 5-15 минут.'},
+                                {text: "Вы можете отслеживать статус вашей заявки через личный кабинет. Мы обновляем информацию в режиме реального времени, чтобы вы всегда были в курсе."},
+                                {text: "Пожалуйста, убедитесь, что указанные реквизиты верны и актуальны. Это позволит избежать задержек или ошибок при переводе средств"},
+                                {text: "Если у вас возникнут вопросы или потребуется дополнительная информация, наша техническая поддержка всегда готова вам помочь. Мы ценим ваше доверие и стараемся сделать процесс вывода максимально быстрым и удобным."},
+
                             ]}/>
                             <div className={styles.bottomButtons}>
                                 <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
