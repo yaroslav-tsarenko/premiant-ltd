@@ -58,8 +58,8 @@ body {
 
 
 
-h1{
-    font-family: 'GropledBold' !important;
+h1, h2{
+    font-family: 'GropledBold', sans-serif;
 }
 
 button{

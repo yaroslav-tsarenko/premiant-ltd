@@ -1,7 +1,12 @@
-import React from 'react';
+"use client"
+
+import React, {useEffect} from 'react';
 import Login from "@/components/login/Login";
 
 const LoginPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <Login

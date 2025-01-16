@@ -43,15 +43,15 @@ const Header: FC = () => {
         };
     }, []);
 
-
     const handleLinkClick = (route: string) => (e: React.MouseEvent) => {
         e.preventDefault();
         if (route.startsWith("/#")) {
             const id = route.substring(2);
-            window.location.href = route; // Redirect to the route
-            setTimeout(() => smoothScrollTo(id), 100); // Scroll to the section after redirection
+            window.location.href = route;
+            setTimeout(() => smoothScrollTo(id), 100);
         }
     };
+
     return (
         <>
             {!hideHeaderRoutes.includes(pathname) && (

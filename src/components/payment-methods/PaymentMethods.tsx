@@ -4,10 +4,16 @@ import { PaymentMethodsProps } from "@/types/paymentMethods";
 import Button from "@/components/button/Button";
 import Image from "next/image";
 
-const PaymentMethods: FC<PaymentMethodsProps> = ({ icon, name, currency, description, onSelect, selected }) => {
+interface ExtendedPaymentMethodsProps extends PaymentMethodsProps {
+    type: "deposit" | "withdraw";
+}
+
+const PaymentMethods: FC<ExtendedPaymentMethodsProps> = ({ icon, name, currency, description, onSelect, selected, type }) => {
     const handleClick = () => {
         if (onSelect) onSelect(name);
     };
+
+    const buttonText = selected ? "Выбрано" : type === "deposit" ? "Выбрать способ пополнения" : "Выбрать способ выплаты";
 
     return (
         <div className={styles.methodWrapper}>
@@ -22,7 +28,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({ icon, name, currency, descrip
             <Button
                 variant="payment"
                 onClick={handleClick}>
-                {selected ? "Выбрано" : "Выбрать способ выплаты"}
+                {buttonText}
             </Button>
         </div>
     );

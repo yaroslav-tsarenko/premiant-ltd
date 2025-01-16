@@ -7,6 +7,21 @@ import Link from 'next/link';
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 
+const smoothScrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+        const headerOffset = document.querySelector("header")?.offsetHeight || 0;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+        });
+    } else {
+        setTimeout(() => smoothScrollTo(id), 100);
+    }
+};
+
 const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) => {
     const router = useRouter();
     const firstPartLinks = footerLinks.slice(0, 3);
@@ -16,6 +31,16 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
     const handleNav = (route: string) => {
         router.push(route);
     }
+    const handleLinkClick = (route: string) => (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (route.startsWith("/#")) {
+            const id = route.substring(2);
+            window.location.href = route;
+            setTimeout(() => smoothScrollTo(id), 100);
+        } else {
+            window.location.href = route;
+        }
+    };
     return (
         <footer className={styles.footer}>
             <div className={styles.desktop}>
@@ -23,8 +48,8 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                     <ul>
                         {footerLinks.map((link, index) => (
                             <li key={index} className={styles.link}>
-                                <Link href={link.route} legacyBehavior>
-                                    <a>{link.name}</a>
+                                <Link href={link.route} onClick={handleLinkClick(link.route)} legacyBehavior>
+                                    <a onClick={handleLinkClick(link.route)}>{link.name}</a>
                                 </Link>
                             </li>
                         ))}
@@ -61,7 +86,7 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                         {firstPartLinks.map((link, index) => (
                             <li key={index} className={styles.link}>
                                 <Link href={link.route} legacyBehavior>
-                                    <a>{link.name}</a>
+                                    <a onClick={handleLinkClick(link.route)}>{link.name}</a>
                                 </Link>
                             </li>
                         ))}

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './Payment.module.scss';
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
@@ -44,7 +44,6 @@ const Payment = () => {
         router.push('/account');
     }
 
-
     const handlePreviousStep = () => {
         setStep((prev) => (prev > 1 ? prev - 1 : 1));
     };
@@ -65,9 +64,13 @@ const Payment = () => {
         }
     };
 
-    const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
-        setAlertPopup(true);
+    useEffect(() => {
+        if (step === 2) {
+            setTimeout(() => setAlertPopup(true), 2000);
+        }
+    }, [step]);
 
+    const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
         await new Promise<void>((resolve) => {
             const observer = setInterval(() => {
                 if (!alertPopup) {
@@ -193,8 +196,9 @@ const Payment = () => {
                                 <PaymentMethods
                                     icon={Tether.src}
                                     name="Tether"
-                                    currency="TRC"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    currency="USDT"
+                                    type="withdraw"
+                                    description="Криптовалюта Tether (USDT) на сети TRC-20, с низкими комиссиями и быстрыми транзакциями"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Tether"}
                                 />
@@ -202,7 +206,8 @@ const Payment = () => {
                                     icon={PerfectMoney.src}
                                     name="PerfectMoney"
                                     currency="USD"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="withdraw"
+                                    description="Система международных переводов с мин. комиссиями, предоставляющая возможности для мгновенных выплат"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "PerfectMoney"}
                                 />
@@ -210,7 +215,8 @@ const Payment = () => {
                                     icon={Payeer.src}
                                     name="Payeer"
                                     currency="USD"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="withdraw"
+                                    description="Универсальная система с различными способами пополнения и вывода средств"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Payeer"}
                                 />
@@ -218,15 +224,17 @@ const Payment = () => {
                                     icon={Bitcoin.src}
                                     name="Bitcoin"
                                     currency="BTC"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="withdraw"
+                                    description="Известная криптовалюта для безопасных и децентрализованных переводов"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Bitcoin"}
                                 />
                                 <PaymentMethods
                                     icon={Etherium.src}
                                     name="Etherium"
-                                    currency="ETC"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    currency="ETH"
+                                    type="withdraw"
+                                    description="Криптовалюта для быстрых транзакций и смарт-контрактов"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Etherium"}
                                 />
@@ -234,7 +242,8 @@ const Payment = () => {
                                     icon={Visa.src}
                                     name="Visa"
                                     currency="RUB"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="withdraw"
+                                    description="Удобный способ вывода средств на банковские карты"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Visa"}
                                 />

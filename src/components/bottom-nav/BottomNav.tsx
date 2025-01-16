@@ -19,7 +19,6 @@ const BottomNav: FC<BottomNavProps> = ({logo, burgerIcon, links = []}) => {
                 method: 'POST',
                 credentials: 'include',
             });
-
             if (response.ok) {
                 console.log('Logout successful');
                 router.push('/');

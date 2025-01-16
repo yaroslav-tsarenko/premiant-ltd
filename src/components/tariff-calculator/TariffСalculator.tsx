@@ -62,7 +62,7 @@ const TariffCalculator: FC<TariffCalculatorProps> = ({ handleNav }) => {
                         <TariffComponent onClick={()=> handleNavigation("/register")} headline="КОМФОРТ" variant="fullWidthClip" price="2 000" percent="3.35" term="24" active={investment !== null && investment >= 2000 && investment < 7000} />
                         <TariffComponent onClick={()=> handleNavigation("/register")} headline="ПРЕМИУМ" variant="fullWidthClip" price="7 000" percent="5.67" term="17" active={investment !== null && investment >= 7000 && investment < 15000} />
                         <TariffComponent onClick={()=> handleNavigation("/register")} headline="МАКСИМУМ" variant="fullWidthClip" price="15 000" percent="8.68" term="9" active={investment !== null && investment >= 15000 && investment < 40000} />
-                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="ЕКСКЛЮЗИВ" price="40 000" percent="12.34" variant="fullWidthClip" term="6" active={investment !== null && investment >= 40000} />
+                        <TariffComponent onClick={()=> handleNavigation("/register")} headline="ЭКСКЛЮЗИВ" price="50 000" percent="12.34" variant="fullWidthClip" term="6" active={investment !== null && investment >= 40000} />
                     </section>
                 </div>
             </div>
@@ -73,7 +73,7 @@ const TariffCalculator: FC<TariffCalculatorProps> = ({ handleNav }) => {
                         Инвестируйте уверенно с Premiant LTD
                     </h1>
                     <p className={styles.text}>
-                        Выбери тарифный план, который идеально подходит для ваших целей, и начните управлять своими инвестициями уже сегодня
+                        Выберите тарифный план, который идеально подходит для ваших целей, и начните управлять своими инвестициями уже сегодня
                     </p>
                     <Button variant="hero" onClick={handleNav}>
                         Оставить заявку

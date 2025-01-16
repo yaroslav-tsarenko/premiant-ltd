@@ -4,4 +4,5 @@ export interface PaymentFormProps {
     initialValues: { amount?: string | undefined; wallet?: string };
     onSubmit: (values: { amount: string; wallet: string }) => void;
     submitForm: (submit: () => void) => void;
+    type?: 'deposit' | 'withdraw';
 }

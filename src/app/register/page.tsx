@@ -5,21 +5,26 @@ import Register from "@/components/register/Register";
 import { usePathname, useSearchParams } from "next/navigation";
 import { newRequest } from "@/utils/newRequest";
 import CopyCodePopup from "@/components/copy-code-popup/CopyCodePopup";
-import {BACKEND_URL} from "@/constants/constants";
+import { BACKEND_URL } from "@/constants/constants";
 import suspense from "@/components/suspense/SuspenseWrapper";
 
 const RegisterPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const [referral, setReferral] = useState<string>("");
     const [referralCode, setReferralCode] = useState<string>("");
     const [popup, setPopup] = useState<boolean>(false);
+    const [referralClickCounted, setReferralClickCounted] = useState<boolean>(false);
 
     const countReferralClick = async (code: string | null) => {
         try {
-            if (code) {
+            if (code && !referralClickCounted) {
                 const response = await newRequest.put(`/referral/referral-click/${code}`);
                 console.log('Referral click counted:', response.data);
+                setReferralClickCounted(true);
             }
         } catch (error) {
             console.error('Error counting referral click:', error);
@@ -40,11 +45,6 @@ const RegisterPage = () => {
         }
     };
 
-    setTimeout(() => {
-        getRefferral(referral);
-        countReferralClick(referral);
-    }, 200);
-
     useEffect(() => {
         const referralCode = searchParams.get("referralCode");
         if (referralCode && referralCode !== "register") {
@@ -61,19 +61,26 @@ const RegisterPage = () => {
         }
     }, [searchParams, pathname]);
 
+    useEffect(() => {
+        if (referral) {
+            getRefferral(referral);
+            countReferralClick(referral);
+        }
+    }, [referral]);
+
     return (
         <>
             {popup &&
                 <CopyCodePopup code={referralCode} onClose={() => setPopup(false)} />
             }
-                <Register
-                    headline="РЕГИСТРАЦИЯ"
-                    referralCode={referralCode}
-                    greeting="Добро пожаловать! Мы рады, что Вы решили присоединиться к нам. Надеемся, что наш сервис принесет Вам удовольствие и пользу!"
-                    linkRoute={[
-                        { name: "войти", route: "/login" },
-                    ]}
-                />
+            <Register
+                headline="РЕГИСТРАЦИЯ"
+                referralCode={referralCode}
+                greeting="Добро пожаловать! Мы рады, что Вы решили присоединиться к нам. Надеемся, что наш сервис принесет Вам удовольствие и пользу!"
+                linkRoute={[
+                    { name: "войти", route: "/login" },
+                ]}
+            />
         </>
     );
 };

@@ -4,10 +4,11 @@ import styles from './Alert.module.scss';
 interface AlertProps {
     title: string;
     description: string;
+    bottomText?: string;
     onClose: () => void;
 }
 
-const Alert: FC<AlertProps> = ({ title, description, onClose }) => {
+const Alert: FC<AlertProps> = ({ title, description, bottomText, onClose }) => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -28,6 +29,7 @@ const Alert: FC<AlertProps> = ({ title, description, onClose }) => {
         <div className={`${styles.alert} ${visible ? styles.show : styles.hide}`}>
             <h2 className={styles.headline}>{title}</h2>
             <p className={styles.description}>{description}</p>
+            <h4 className={styles.bottomText}>{bottomText}</h4>
             <button className={styles.closeButton} onClick={handleClose}>×</button>
         </div>
     );

@@ -1,12 +1,19 @@
-import React from 'react';
+
+"use client"
+
+import React, {useEffect} from 'react';
 import Deposit from "@/sections/deposit/Deposit";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
 import BottomNav from "@/components/bottom-nav/BottomNav";
+import {StaticTRcProvider} from "@/utils/StaticTrcContext";
 
 const DepositPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
-        <>
+        <StaticTRcProvider>
             <Deposit/>
             <BottomNav
                 logo={BottomNuvLogo}
@@ -19,7 +26,7 @@ const DepositPage = () => {
                 ]}
                 burgerIcon={<GiHamburgerMenu/>}
             />
-        </>
+        </StaticTRcProvider>
     );
 };
 

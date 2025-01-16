@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './Deposit.module.scss';
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
@@ -24,6 +24,7 @@ import {BACKEND_URL} from "@/constants/constants";
 import Popup from "@/components/popup/Popup";
 import Button from "@/components/button/Button";
 import {useRouter} from "next/navigation";
+import axios from "axios";
 
 const Deposit = () => {
     const [step, setStep] = useState<number>(1);
@@ -34,9 +35,28 @@ const Deposit = () => {
     const [depositId, setDepositId] = useState<string>('');
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
     const [alertPopup, setAlertPopup] = useState<boolean>(false);
+    const [trcAddress, setTrcAddress] = useState<string>('');
+    const submitFormRef = useRef<() => void>();
+
     const handleNextStep = () => {
         setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
+
+    useEffect(() => {
+        axios.get(`${BACKEND_URL}/trc/get-trc`)
+            .then(response => {
+                setTrcAddress(response.data.address);
+                console.log("Static trc:", response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching TRC address:', error);
+            });
+    }, []);
+
+    const handleNextStepAndClosePopup = () => {
+        setStep((prev) => (prev < 3 ? prev + 1 : 1));
+        setPopup(false)
+    }
 
     const handlePreviousStep = () => {
         setStep((prev) => (prev > 1 ? prev - 1 : 1));
@@ -46,12 +66,15 @@ const Deposit = () => {
         router.push('/account');
     }
 
-    const submitFormRef = useRef<() => void>();
     const handleButtonClick = () => {
         if (submitFormRef.current) {
             submitFormRef.current();
         }
     };
+
+    useEffect(() => {
+
+    }, []);
 
     const handlePaymentMethodClick = (paymentMethod: string) => {
         if (paymentMethod !== "Tether") {
@@ -62,8 +85,15 @@ const Deposit = () => {
         }
     };
 
-    const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
-        setAlertPopup(true);
+    const handleFormSubmit = async (values: { amount: string }) => {
+        const amount = parseFloat(values.amount);
+        if (amount < 100) {
+            setAlert({
+                title: 'Упс!',
+                description: 'Минимальная сумма пополнения 100$'
+            });
+            return;
+        }
 
         await new Promise<void>((resolve) => {
             const observer = setInterval(() => {
@@ -109,7 +139,6 @@ const Deposit = () => {
                     email: user?.email,
                     amount: values.amount,
                     walletType: selectedPayment,
-                    walletAddress: values.wallet,
                     status: 'pending',
                     depositId: depositId
                 })
@@ -126,6 +155,12 @@ const Deposit = () => {
         }
     };
 
+    useEffect(() => {
+        if (step === 2) {
+            setTimeout(() => setAlertPopup(true), 2000);
+        }
+    }, [step]);
+
     return (
         <Dashboard>
             {popup && (
@@ -134,7 +169,8 @@ const Deposit = () => {
                     description="К сожалению, данный способ выплаты сейчас недоступен в связи с техническим обслуживанием. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"
                     onClose={() => setAlert(null)}
                     firstChildren={<Button variant="popupGrey" onClick={() => setPopup(false)}>Отменить</Button>}
-                    secondChildren={<Button variant="popupBlack" onClick={(() => setPopup(false))}>Использовать Tether
+                    secondChildren={<Button variant="popupBlack" onClick={handleNextStepAndClosePopup}>Использовать
+                        Tether
                         (TRC-20)</Button>}
                 />
             )}
@@ -190,8 +226,9 @@ const Deposit = () => {
                                 <PaymentMethods
                                     icon={Tether.src}
                                     name="Tether"
-                                    currency="TRC"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    currency="USDT"
+                                    type="deposit"
+                                    description="Криптовалюта Tether (USDT) на сети TRC-20, с низкими комиссиями и быстрыми транзакциями"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Tether"}
                                 />
@@ -199,7 +236,8 @@ const Deposit = () => {
                                     icon={PerfectMoney.src}
                                     name="PerfectMoney"
                                     currency="USD"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="deposit"
+                                    description="Система международных переводов с мин. комиссиями, предоставляющая возможности для мгновенных выплат"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "PerfectMoney"}
                                 />
@@ -207,7 +245,8 @@ const Deposit = () => {
                                     icon={Payeer.src}
                                     name="Payeer"
                                     currency="USD"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="deposit"
+                                    description="Универсальная система с различными способами пополнения и вывода средств"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Payeer"}
                                 />
@@ -215,15 +254,17 @@ const Deposit = () => {
                                     icon={Bitcoin.src}
                                     name="Bitcoin"
                                     currency="BTC"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="deposit"
+                                    description="Известная криптовалюта для безопасных и децентрализованных переводов"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Bitcoin"}
                                 />
                                 <PaymentMethods
                                     icon={Etherium.src}
                                     name="Etherium"
-                                    currency="ETC"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    currency="ETH"
+                                    type="deposit"
+                                    description="Криптовалюта для быстрых транзакций и смарт-контрактов"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Etherium"}
                                 />
@@ -231,7 +272,8 @@ const Deposit = () => {
                                     icon={Visa.src}
                                     name="Visa"
                                     currency="RUB"
-                                    description="Выберите удобный для вас метод оплаты из доступных вариантов"
+                                    type="deposit"
+                                    description="Удобный способ вывода средств на банковские карты"
                                     onSelect={handlePaymentMethodClick}
                                     selected={selectedPayment === "Visa"}
                                 />
@@ -246,7 +288,6 @@ const Deposit = () => {
                         </div>
                     </div>
                 )}
-
                 {step === 2 && (
                     <div className={styles.depositContent}>
                         <div className={styles.withdrawalInfo}>
@@ -254,7 +295,7 @@ const Deposit = () => {
                             <div className={styles.steps}>
                                 <PaymentSteps
                                     step={1}
-                                    title="Способ выплаты"
+                                    title="Способ пополнения"
                                     description="Выберите удобный для вас метод оплаты из доступных вариантов"
                                     line={true}
                                 />
@@ -279,15 +320,15 @@ const Deposit = () => {
                             >
                                 <StepButtons onNext={handleButtonClick} onPrev={handlePreviousStep}
                                              firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                             secondButtonContent={"Продолжить"}/>
+                                             secondButtonContent={"Я оплатил"}/>
                             </PaymentBeanie>
                             <PaymentForm
                                 placeholders={[
                                     {label: "Введите сумму пополнения"},
-                                    {label: "Введите адрес кошелька"}
                                 ]}
                                 options={[]}
-                                initialValues={{amount: '', wallet: ''}}
+                                type={'deposit'}
+                                initialValues={{amount: '', wallet: trcAddress}}
                                 onSubmit={handleFormSubmit}
                                 submitForm={(submit) => {
                                     submitFormRef.current = submit;
@@ -329,13 +370,11 @@ const Deposit = () => {
                         <div className={styles.depositContainer}>
                             <PaymentBeanie
                                 dotText="Ожидайте получения"
-                                title={`Заявка №${depositId} в обработке`}
-                            >
+                                title={`Заявка №${depositId} в обработке`}>
                                 <StepButtons onNext={handleNextStep} onPrev={handlePreviousStep}
                                              firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
                                              secondButtonContent={"Начало"}/>
                             </PaymentBeanie>
-
                             <ApplicationInfo texts={[
                                 {text: `Благодарим за ваш запрос!`},
                                 {text: '\n' + 'После проверки и обработки заявки средства будут перечислены на выбранный вами способ оплаты в течение 5-15 минут.'},
