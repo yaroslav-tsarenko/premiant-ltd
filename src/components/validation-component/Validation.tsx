@@ -19,7 +19,7 @@ const Validation:FC<ValidationProps> = ({title}) => {
 
     return (
         <div className={styles.wrapper}>
-            <h1 className={styles.headline}>{title}</h1>
+            <h2 className={styles.headline}>{title}</h2>
             <Button variant="outline" onClick={() => handleNav("/account")}>Перейти в личный кабинет</Button>
         </div>
     );

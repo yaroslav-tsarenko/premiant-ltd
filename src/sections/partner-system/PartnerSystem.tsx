@@ -35,7 +35,14 @@ const PartnerSystem = () => {
     const referralsTransactions: Transaction[] = users.map(user => ({
         userName: user.name,
         curatorName: user.curator,
-        date: user.createdAt.toString(),
+        date: new Date(user.createdAt).toLocaleString('en-GB', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).replace(',', ''),
         amount: user.totalDeposit,
         percent: user.percent,
         paid: user.totalWithdrawal,
@@ -45,7 +52,14 @@ const PartnerSystem = () => {
     const partnersTransactions: Transaction[] = randomUsers.map(user => ({
         userName: user.name,
         transactionType: mapStatus(user.averagePaymentStatus),
-        date: user.createdAt.toString(),
+        date: new Date(user.createdAt).toLocaleString('en-GB', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).replace(',', ''),
         eps: "Tether (TRC20)",
         amount: user.totalDeposit,
         status: mapStatus(user.averagePaymentStatus),

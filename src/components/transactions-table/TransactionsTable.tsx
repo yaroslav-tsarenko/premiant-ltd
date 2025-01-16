@@ -40,14 +40,14 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ headers, transact
                             <td className={getStatusStyle(transaction.status)}>{index + 1}</td>
                             {Object.keys(transaction).map((key, idx) => (
                                 <td key={idx} className={key === 'status' ? getStatusStyle(transaction[key] || '') : key === 'type' ? getTypeStyle(transaction[key] || '') : ''}>
-                                    {transaction[key] || "Данных нету"}
+                                    {transaction[key] || "Данные отсутствуют"}
                                 </td>
                             ))}
                         </tr>
                     ))
                 ) : (
                     <tr>
-                        <td colSpan={headers.length + 1} className={styles.noData}>Данных пока нету</td>
+                        <td colSpan={headers.length + 1} className={styles.noData}>Данные отсутствуют</td>
                     </tr>
                 )}
                 </tbody>

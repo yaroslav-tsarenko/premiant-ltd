@@ -1,10 +1,16 @@
-import React from 'react';
+
+"use client";
+
+import React, {useEffect} from 'react';
 import Payment from "@/sections/payment/Payment";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 
 const PaymentPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <Payment/>

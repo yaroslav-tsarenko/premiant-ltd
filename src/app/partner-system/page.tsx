@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, {useEffect} from 'react';
 import PartnerSystem from "@/sections/partner-system/PartnerSystem";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
@@ -7,6 +8,9 @@ import {CuratorProvider} from "@/utils/CuratorContext";
 import {UsersProvider} from "@/utils/UsersContext";
 
 const PartnerSystemPage = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <UsersProvider>

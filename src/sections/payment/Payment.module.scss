@@ -59,8 +59,18 @@
 .inputGroup {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 10px;
   width: 100%;
+}
+
+.copyButton {
+  background: none;
+  font-size: 16px;
+  border: none;
+  position: absolute;
+  right: 2%;
+  color: var(--secondary-color);
 }
 
 .input {

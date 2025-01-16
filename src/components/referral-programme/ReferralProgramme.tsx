@@ -13,11 +13,11 @@ const ReferralProgramme = () => {
     const user = useUser();
     const referral = useReferral();
     const referralLink = `${FRONTEND_URL}/${user?.referralCode}`;
-    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+    const [alert, setAlert] = useState<{ title: string, description: string, bottomText?: string } | null>(null);
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(referralLink).then(() => {
-            setAlert({ title: 'сыллка скопирована!', description: 'Скорее делись с ней с друзями и начинайте зарабатывать!' });
+            setAlert({ title: 'ссылка скопирована!', description: 'Скорее делись с ней с друзями и начинайте зарабатывать!', bottomText: 'Приглашайте новых пользователей и увеличивайте свой доход' });
         }).catch(err => {
             console.error('Failed to copy: ', err);
             setAlert({ title: 'Error', description: 'Failed to copy referral link.' });

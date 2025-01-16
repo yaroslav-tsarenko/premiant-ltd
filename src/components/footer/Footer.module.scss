@@ -25,6 +25,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
   justify-content: space-between;
 }
 
@@ -43,6 +44,11 @@
 .link {
   font-size: 16px;
   color: var(--primary-color);
+  cursor: pointer;
+
+    &:hover{
+        text-decoration: underline;
+    }
 }
 
 .content {
