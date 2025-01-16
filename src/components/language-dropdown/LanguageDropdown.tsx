@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './LanguageDropdown.module.scss';
+import Button from "@/components/button/Button";
+import Popup from "@/components/popup/Popup";
 
 const LanguageDropdown = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('RU');
@@ -31,16 +33,12 @@ const LanguageDropdown = () => {
             setShowPopup(true);
         } else {
             setSelectedLanguage(language);
-            if (language === 'EN') {
-                document.querySelector('.goog-te-combo')?.setAttribute('value', 'en');
-                const event = new Event('change');
-                document.querySelector('.goog-te-combo')?.dispatchEvent(event);
+            const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+            if (combo) {
+                combo.value = language.toLowerCase();
+                combo.dispatchEvent(new Event('change'));
             }
         }
-    };
-
-    const handleClosePopup = () => {
-        setShowPopup(false);
     };
 
     useEffect(() => {
@@ -63,12 +61,12 @@ const LanguageDropdown = () => {
                 <option value="ZH">ZH</option>
             </select>
             {showPopup && (
-                <div className={styles.overlay} onClick={handleClosePopup}>
-                    <div className={styles.content}>
-                        <h1>Ошибка</h1>
-                        <p>Этот язык пока недоступен</p>
-                    </div>
-                </div>
+                <Popup
+                    title="Этот язык недоступен"
+                    description="К сожалению, данный язык пока не доступен. Выберите другой язык."
+                    firstChildren={<Button variant="popupGrey" onClick={() => setShowPopup(false)}>Закрыть</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={() => setShowPopup(false)}>Хорошо</Button>}
+                />
             )}
             <div id="google_translate_element" style={{ display: 'none' }}></div>
         </div>
