@@ -15,11 +15,20 @@
   text-align: start;
   justify-items: flex-start;
   align-items: flex-start;
+  
+  @media screen and (max-width: 768px) {
+    margin: 0 auto;
+  }
 }
 
 .show {
   right: 20px;
   opacity: 1;
+
+  @media screen and (max-width: 768px) {
+    right: 15px;
+    width: 80%;
+  }
 }
 
 .hide {
@@ -30,18 +39,28 @@
 .headline {
   font-size: 35px;
   font-weight: bold;
+  margin: 0 20px 0 0;
   font-family: 'GropledBold', sans-serif;
   background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
   -webkit-background-clip: text;
   text-transform: uppercase;
   -webkit-text-fill-color: transparent;
+
+
+  @media screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 }
 
-.greeting {
+.description {
   font-size: 16px;
   background: linear-gradient(to right, #6e6e6e, #151515);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 }
 
 .closeButton {

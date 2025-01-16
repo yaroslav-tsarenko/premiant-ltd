@@ -11,6 +11,7 @@
 }
 
 .content {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -54,13 +55,12 @@
 }
 
 .alwaysHighlight {
-  /* apply the same styles as hover */
   background-color: #f0f0f0; /* example hover style */
   border: 1px solid #ccc; /* example hover style */
-  /* add other hover styles here */
 }
 
 .btn {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,6 +73,26 @@
   color: black;
   transition: 0.2s ease-in-out;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 5% 100%, 0 16%);
+}
+
+.clipPathOff {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  background: var(--primary-color);
+  color: black;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--allocation-color);
+    color: var(--secondary-color);
+  }
 }
 
 .btn:hover {
@@ -89,7 +109,7 @@
   clip-path: polygon(0 0, 93% 0, 100% 19%, 100% 100%, 6% 100%, 0 85%);
   flex-direction: column;
   gap: 30px;
-  width: 92%
+  width: 92%;
 }
 
 .fullWidth {
@@ -106,7 +126,8 @@
   box-sizing: border-box;
 }
 
-.fullWidth:hover {
+.fullWidth:hover,
+.fullWidth.picked {
   opacity: 100%;
 }
 
@@ -125,7 +146,8 @@
   transition: 0.2s ease-in-out;
 }
 
-.fullHeight:hover {
+.fullHeight:hover,
+.fullHeight.picked {
   opacity: 100%;
 }
 
@@ -144,10 +166,19 @@
   min-width: 187px;
 }
 
-.minWidth:hover {
+.minWidth:hover,
+.minWidth.picked {
   opacity: 100%;
 }
 
+.pickedButton {
+  background-color: #17f4e3;
+  color: white;
+}
+
+.opacity100:hover {
+  opacity: 100%;
+}
 
 @media (max-width: 1028px) {
   .wrapper {
@@ -176,13 +207,13 @@
     max-width: 394px;
   }
 
-    .fullWidth p {
-        font-size: 14px;
-    }
+  .fullWidth p {
+    font-size: 14px;
+  }
 
-    .fullWidth h2 {
-        font-size: 24px;
-    }
+  .fullWidth h2 {
+    font-size: 24px;
+  }
 }
 
 .active {
@@ -191,4 +222,3 @@
   -moz-box-shadow: 0px 0px 78px 5px rgba(23,244,227,1);
   box-shadow: 0 0 30px 10px rgba(21, 149, 140, 0.5);
 }
-

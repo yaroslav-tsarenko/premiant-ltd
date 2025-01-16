@@ -1,32 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/sections/transactions/Transactions.module.scss";
 import SortTransactions from "@/components/sort-transactions/SortTransactions";
 import TransactionsTable from "@/components/transactions-table/TransactionsTable";
 import Dashboard from "@/components/dashboard/Dashboard";
+import { useTransaction } from "@/utils/TransactionContext";
+import { Transaction } from "@/types/transaction";
 
 const Transactions = () => {
     const tableHeaders = ["Тип транзакции", "Дата", "ЭПС", "Сумма", "Статус оплаты"];
-    const initialTransactions = [
-        { type: "Снятие", date: "14.10.2024, 22:36", eps: "Tether (TRC20)", amount: "140,00$", status: "Выполнено" },
-        { type: "Снятие", date: "14.10.2024, 22:36", eps: "Tether (TRC20)", amount: "140,00$", status: "Отклонено" },
-        { type: "Начисление", date: "14.10.2024, 22:34", eps: "Tether (TRC20)", amount: "20,00$", status: "Выполнено" },
-        { type: "Инвестиция", date: "13.10.2024, 22:34", eps: "Tether (TRC20)", amount: "20,00$", status: "Выполнено" },
-    ];
+    const { transactions } = useTransaction();
+    const [sortedTransactions, setSortedTransactions] = useState<Transaction[]>([]);
 
-    const [transactions, setTransactions] = useState(initialTransactions);
+    useEffect(() => {
+        const filteredTransactions = transactions.map(({ transactionType, date, walletType, amount, status }) => ({
+            transactionType: transactionType === "withdraw" ? "Снятие" : transactionType === "deposit" ? "Пополнение" : "Неизвестно",
+            date,
+            walletType,
+            amount,
+            status: status === "applied" ? "Принято" : status === "denied" ? "Отклонено" : "В обработке"
+        }));
+        setSortedTransactions(filteredTransactions as Transaction[]);
+    }, [transactions]);
 
     const handleSort = (sortKey: string) => {
-        const sortedTransactions = [...transactions].sort((a, b) => {
+        const sorted = [...sortedTransactions].sort((a, b) => {
             if (sortKey === "date") {
                 return new Date(a.date).getTime() - new Date(b.date).getTime();
             } else if (sortKey === "amount") {
-                return parseFloat(a.amount.replace(/[^0-9.-]+/g, "")) - parseFloat(b.amount.replace(/[^0-9.-]+/g, ""));
+                return a.amount - b.amount;
             }
             return 0;
         });
-        setTransactions(sortedTransactions);
+        setSortedTransactions(sorted);
     };
 
     return (
@@ -34,7 +41,7 @@ const Transactions = () => {
             <div className={styles.wrapperInner}>
                 <div className={styles.transactionsContent}>
                     <SortTransactions onSort={handleSort} />
-                    <TransactionsTable headers={tableHeaders} transactions={transactions} />
+                    <TransactionsTable headers={tableHeaders} transactions={sortedTransactions} />
                 </div>
             </div>
         </Dashboard>

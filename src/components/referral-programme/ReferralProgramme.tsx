@@ -23,6 +23,7 @@ const ReferralProgramme = () => {
             setAlert({ title: 'Error', description: 'Failed to copy referral link.' });
         });
     };
+
     const transliterateToRussian = (curator: string): string => {
         const [name, secondName] = curator.split('.');
         const transliteratedName = transliterate(name);
@@ -30,7 +31,9 @@ const ReferralProgramme = () => {
         return `${transliteratedName} ${transliteratedSecondName}`;
     };
 
-    const curatorName = user?.curator ? transliterateToRussian(user.curator) : 'Нет куратора';
+    const curatorName = user?.curator
+        ? transliterateToRussian(user.curator)
+        : `${user?.name || 'Нет имени'} ${user?.secondName || 'Нет фамилии'}`;
 
     return (
         <div className={styles.wrapper}>

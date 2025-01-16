@@ -28,6 +28,10 @@ const PaymentDetails = forwardRef((props, ref) => {
             .required('Введите номер карты Visa / Mastercard'),
     });
 
+    const formatCardNumber = (value: string) => {
+        return value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+    };
+
     return (
         <div className={styles.wrapper}>
             <Dot title={"Платежные реквизиты"} />
@@ -80,7 +84,17 @@ const PaymentDetails = forwardRef((props, ref) => {
                                     <ErrorMessage name="ethereum" component="div" className={styles.error} />
                                 </div>
                                 <div className={styles.formUserGroup}>
-                                    <Field name="visaMastercard" type="text" placeholder="Visa / Mastercard" className={styles.inputUserInfo} />
+                                    <Field
+                                        name="visaMastercard"
+                                        type="text"
+                                        placeholder="Visa / Mastercard"
+                                        className={styles.inputUserInfo}
+                                        maxLength={19} // 16 digits + 3 spaces
+                                        onChange={(e: any) => {
+                                            const formattedValue = formatCardNumber(e.target.value);
+                                            formik.setFieldValue('visaMastercard', formattedValue);
+                                        }}
+                                    />
                                     <ErrorMessage name="visaMastercard" component="div" className={styles.error} />
                                 </div>
                             </div>

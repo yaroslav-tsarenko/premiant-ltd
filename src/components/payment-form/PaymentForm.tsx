@@ -4,7 +4,12 @@ import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import styles from "@/sections/payment/Payment.module.scss";
 import * as Yup from "yup";
 
-const PaymentForm: FC<PaymentFormProps> = ({ placeholders = [], options = [], initialValues, onSubmit, submitForm }) => {
+const isValidTRCAddress = (address: string) => {
+    const trcAddressRegex = /^T[1-9A-HJ-NP-Za-km-z]{33}$/;
+    return trcAddressRegex.test(address);
+};
+
+const PaymentForm: FC<PaymentFormProps> = ({ placeholders = [], initialValues, onSubmit, submitForm }) => {
     const formikRef = useRef<FormikProps<{ amount: string; wallet: string }>>(null);
 
     useEffect(() => {
@@ -18,8 +23,13 @@ const PaymentForm: FC<PaymentFormProps> = ({ placeholders = [], options = [], in
     }, [submitForm]);
 
     const validationSchema = Yup.object({
-        amount: Yup.number().required('Сумма обязательна').positive('Сумма должна быть положительной'),
-        wallet: Yup.string().required('Кошелек обязателен')
+        amount: Yup.number()
+            .required('Сумма обязательна')
+            .positive('Сумма должна быть положительной')
+            .typeError('Сумма должна быть числом'),
+        wallet: Yup.string()
+            .required('Кошелек обязателен')
+            .test('is-valid-trc-address', 'Введите действительный TRC адрес', isValidTRCAddress)
     });
 
     return (
@@ -35,21 +45,21 @@ const PaymentForm: FC<PaymentFormProps> = ({ placeholders = [], options = [], in
             <Form className={styles.inputContainer}>
                 <div className={styles.inputGroup}>
                     <Field
-                        type="text"
+                        type="number"
                         name="amount"
                         placeholder={placeholders.find(p => p.label === "Введите сумму пополнения")?.label || "Введите сумму вывода"}
                         className={styles.input}
                     />
-                    <ErrorMessage name="amount" component="div" className={styles.error} />
+                    <ErrorMessage name="amount" component="div" className={styles.error}/>
                 </div>
                 <div className={styles.inputGroup}>
-                    <Field as="select" name="wallet" className={styles.input}>
-                        <option value="" label={placeholders.find(p => p.label === "Выберите кошелек")?.label || "Выберите кошелек"} />
-                        {options.map(option => (
-                            <option key={option.value} value={option.value} label={option.label} />
-                        ))}
-                    </Field>
-                    <ErrorMessage name="wallet" component="div" className={styles.error} />
+                    <Field
+                        type="text"
+                        name="wallet"
+                        placeholder={placeholders.find(p => p.label === "Введите адрес кошелька")?.label || "Введите адрес кошелька"}
+                        className={styles.input}
+                    />
+                    <ErrorMessage name="wallet" component="div" className={styles.error}/>
                 </div>
                 <button type="submit" className={styles.submitButton}>Продолжить</button>
             </Form>

@@ -19,27 +19,27 @@ const Tariff = () => {
             <div className={styles.tariffs}>
                 <div className={styles.tariffsContainer}>
                     <div className={styles.tariffsContent}>
-                        <TariffComponent headline="СТАРТ" price="100" percent="2" variant="minWidth" term="5" currentTariff={currentTariff} alwaysHighlighted={true}/>
-                        <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35" variant="fullWidth" term="5" currentTariff={currentTariff}/>
-                        <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="minWidth" term="5" currentTariff={currentTariff}/>
+                        <TariffComponent buttonClass={"clipPathOff"} headline="СТАРТ" price="100" percent="2" variant="minWidth" term="28" picked={currentTariff === "start"}  alwaysHighlighted={true}/>
+                        <TariffComponent buttonClass={"clipPathOff"} headline="КОМФОРТ" price="2 000" percent="3.35" variant="fullWidth" term="24" picked={currentTariff === "comfort"} currentTariff={currentTariff}/>
+                        <TariffComponent buttonClass={"clipPathOff"} headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="minWidth" term="17" picked={currentTariff === "premium"}/>
                     </div>
                     <div className={styles.tariffsContent}>
                         <div className={styles.emptyTariff}>
-                            <p>ДАЛЕЕ БУДЕТ...</p>
+                            <p>В РАЗРАБОТКЕ PREMIANT VIP INVEST</p>
                         </div>
-                        <TariffComponent headline="МАКСИМУМ" price="15 000" percent="154" variant="fullWidth" term="5" currentTariff={currentTariff}/>
+                        <TariffComponent buttonClass={"clipPathOff"} headline="МАКСИМУМ" price="15 000" percent="154" variant="fullWidth" term="9" picked={currentTariff === "maximum"}/>
                     </div>
                 </div>
-                <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="172" variant="fullHeight" term="5" currentTariff={currentTariff}/>
+                <TariffComponent buttonClass={"clipPathOff"} headline="ЭКСКЛЮЗИВ" price="40 000" percent="172" variant="fullHeight" term="6" picked={currentTariff === "exclusive"}/>
             </div>
 
             <div className={styles.responsiveTariffs}>
                 <div className={styles.groupTariffs}>
-                    <TariffComponent headline="СТАРТ" price="100" percent="2" variant="fullWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="КОМФОРТ" price="2 000" percent="3.35" variant="fullWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="fullWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="МАКСИМУМ" price="15 000" percent="154" variant="fullWidth" term="5" currentTariff={currentTariff}/>
-                    <TariffComponent headline="ЕКСКЛЮЗИВ" price="40 000" percent="172" variant="fullWidth" term="5" currentTariff={currentTariff}/>
+                    <TariffComponent buttonClass={"clipPathOff"} headline="СТАРТ" price="100" percent="2" variant="fullWidth" term="28"          picked={currentTariff === "start"}/>
+                    <TariffComponent buttonClass={"clipPathOff"} headline="КОМФОРТ" price="2 000" percent="3.35" variant="fullWidth" term="24"   picked={currentTariff === "comfort"}/>
+                    <TariffComponent buttonClass={"clipPathOff"} headline="ПРЕМИУМ" price="7 000" percent="5.67" variant="fullWidth" term="17"   picked={currentTariff === "premium"}/>
+                    <TariffComponent buttonClass={"clipPathOff"} headline="МАКСИМУМ" price="15 000" percent="154" variant="fullWidth" term="9"  picked={currentTariff === "maximum"}/>
+                    <TariffComponent buttonClass={"clipPathOff"} headline="ЭКСКЛЮЗИВ" price="40 000" percent="172" variant="fullWidth" term="6" picked={currentTariff === "exclusive"}/>
                 </div>
             </div>
         </div>

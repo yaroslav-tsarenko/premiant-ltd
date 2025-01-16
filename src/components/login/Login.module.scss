@@ -104,6 +104,10 @@
   display: flex;
   gap: 5px;
   color: #707070;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .linkName {

@@ -5,12 +5,43 @@
   font-size: 16px;
 }
 
+.popupBlack{
+  background: black;
+  color: white;
+  border-radius: 30px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+  }
+}
+
+.popupGrey{
+  background: #ebf0f3;
+  color: #7f8283;
+  border-radius: 30px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 20px 5px rgb(127, 130, 131);
+  }
+}
+
 .outline {
   background: black;
   color: white;
   border-radius: 30px;
   padding: 10px;
   border: none;
+  font-size: 16px;
   transition: 0.3s ease-in-out;
 }
 
@@ -264,10 +295,5 @@
     width: 100%;
   }
 
-  .check {
-    position: absolute;
-    background-color: black;
-    bottom: 36px;
-    width: 72%;
-  }
+
 }

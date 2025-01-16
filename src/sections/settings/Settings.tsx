@@ -73,6 +73,9 @@ const Settings = () => {
             });
             console.log(response.data);
             setAlert({ title: 'Успех!', description: 'Данные обновлены!' });
+            setTimeout(() =>{
+                window.location.reload();
+            }, 500);
         } catch (error) {
             console.error('Error updating user:', error);
             if (error) {

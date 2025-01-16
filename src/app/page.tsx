@@ -25,10 +25,12 @@ import CustomBlock from "@/components/custom-block/CustomBlock";
 import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 import CookiePopup from "@/components/cookie-popup/CookiePopup";
+import {useUser} from "@/utils/UserContext";
 
 export default function Home() {
 
     const addressRef = useRef<HTMLDivElement>(null);
+    const user = useUser();
 
     const handleNav = () => {
         if (addressRef.current) {
@@ -142,14 +144,14 @@ export default function Home() {
                         answer: "Условия досрочного вывода инвестиций зависят от выбранного вами тарифного плана. Для получения детальной информации о возможности и условиях досрочного вывода, пожалуйста, свяжитесь с нашей службой поддержки."
                     }, {
                         question: "Какие гарантии безопасности моих инвестиций?",
-                        answer: "Premiant LTD использует современные технологии безопасности, включая шифрование данных и двухфакторную аутентификацию, чтобы гарантировать сохранность ваших инвестиций. Наша команда постоянно следит за безопасностью платформы и проводит регулярные аудиты."
+                        answer: "Premiant LTD использует современные технологии безопасности, включая шифрование данных и двухфакторную аутентификацию, чтобы гарантировать сохранность ваших инвестиций. Наша команда постоянно следит за безопасностью платформы и проводит регулярные аудиты. (FCA, UK GAAP, HMRC, ICARA, ESG, AML)"
                     },
                 ]}
             />
             <div ref={addressRef}>
                 <Address
                     formTitle="Остались вопросы?"
-                    formDescription="Просто оставьте заявку, наша служба поддержки всегда готова вам помочь!"
+                    formDescription="Просто оставьте заявку, наша служба поддержки всегда готова Вам помочь!"
                     firstChildren={
                         <CustomBlock variant="address">
                             <div>
@@ -163,15 +165,22 @@ export default function Home() {
                             <div>
                                 <div>
                                     <p className={styles.label}>E-mail</p>
-                                    <p className={styles.value}>premiantltd@gmail.com</p>
+                                    <p className={styles.value}>
+                                        <a href="mailto:premiantltd@gmail.com">premiantltd@gmail.com</a>
+                                    </p>
                                 </div>
                                 <div>
                                     <p className={styles.label}>Phone</p>
-                                    <p className={styles.value}>+447813243472</p>
+                                    <p className={styles.value}>
+                                        <a href="tel:+44 7813 243472">+44 7813 243472</a>
+                                    </p>
                                 </div>
                                 <div>
                                     <p className={styles.label}>Telegram</p>
-                                    <p className={styles.value}>@PremiantLTD</p>
+                                    <p className={styles.value}>
+                                        <a href="https://t.me/PremiantLTD" target="_blank"
+                                           rel="noopener noreferrer">@PremiantLTD</a>
+                                    </p>
                                 </div>
                             </div>
                         </CustomBlock>
@@ -181,13 +190,17 @@ export default function Home() {
             <BottomNav
                 logo={BottomNuvLogo}
                 links={[
-                    {name: 'Главная', route: '#'},
-                    {name: 'О Компании', route: '/about'},
-                    {name: 'Инвесторам/Партнерам', route: '#'},
-                    {name: 'FAQ', route: '#'},
-                    {name: 'Контакты', route: '/contacts'},
+                    { name: 'Главная', route: '/' },
+                    { name: 'О Компании', route: '/about' },
+                    { name: 'Инвесторам', route: '/#features' },
+                    { name: 'FAQ', route: '/#faq' },
+                    { name: 'Контакты', route: '/#address' },
+                    ...(user ? [{ name: 'Мой аккаунт', route: '/account' }] : [
+                        { name: 'Логин', route: '/login' },
+                        { name: 'Регистрация', route: '/register' }
+                    ])
                 ]}
-                burgerIcon={<GiHamburgerMenu/>}
+                burgerIcon={<GiHamburgerMenu />}
             />
             <CookiePopup/>
         </>

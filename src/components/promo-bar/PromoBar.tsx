@@ -29,7 +29,7 @@ const PromoBar: FC<PromoBarProps> = ({ text, promoLink, arrowIcon }) => {
             <div className={styles.promo}>
                 <div>
                     <p className={styles.price}>
-                        {totalBalance !== null ? <span>{totalBalance.toLocaleString('en-US').replace(/,/g, ' ')}$</span> : 'Идёт подсчёт...'}
+                        {totalBalance !== null ? <span>+{totalBalance.toLocaleString('en-US').replace(/,/g, ' ')}$</span> : 'Идёт подсчёт...'}
                     </p>
                     <p className={styles.text}>{text}</p>
                 </div>

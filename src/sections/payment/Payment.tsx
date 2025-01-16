@@ -21,18 +21,29 @@ import Dashboard from "@/components/dashboard/Dashboard";
 import Alert from "@/components/alert/Alert";
 import {useUser} from "@/utils/UserContext";
 import {BACKEND_URL} from "@/constants/constants";
+import Popup from "@/components/popup/Popup";
+import Button from "@/components/button/Button";
+import {useRouter} from "next/navigation";
 
 const Payment = () => {
     const [step, setStep] = useState<number>(1);
     const user = useUser();
+    const [popup, setPopup] = useState<boolean>(false);
     const [selectedPayment, setSelectedPayment] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false);
     const [withdrawId, setWithdrawId] = useState<string>('');
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
-    console.log(loading)
+    const [alertPopup, setAlertPopup] = useState<boolean>(false);
+    const router = useRouter();
+
     const handleNextStep = () => {
         setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
+
+
+    const handleReturnToDashboard = () => {
+        router.push('/account');
+    }
+
 
     const handlePreviousStep = () => {
         setStep((prev) => (prev > 1 ? prev - 1 : 1));
@@ -46,14 +57,44 @@ const Payment = () => {
     };
 
     const handlePaymentMethodClick = (paymentMethod: string) => {
-        setSelectedPayment(paymentMethod);
-        handleNextStep();
+        if (paymentMethod !== "Tether") {
+            setPopup(true);
+        } else {
+            setSelectedPayment(paymentMethod);
+            handleNextStep();
+        }
     };
 
     const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
-        setLoading(true);
+        setAlertPopup(true);
+
+        await new Promise<void>((resolve) => {
+            const observer = setInterval(() => {
+                if (!alertPopup) {
+                    clearInterval(observer);
+                    resolve();
+                }
+            }, 1000);
+        });
+
         const withdrawId = Math.floor(1000000 + Math.random() * 9000000).toString();
         setWithdrawId(withdrawId);
+
+        if (user?.balance === 0) {
+            setAlert({
+                title: 'Упс!',
+                description: 'У вас недостаточно средств'
+            });
+            return;
+        }
+
+        if (!user?.usdtWallet || !user?.btcWallet || !user?.perfectMoneyWallet || !user?.ethereumWallet || !user?.payeerWallet || !user?.card) {
+            setAlert({
+                title: 'Упс!',
+                description: 'Вы не указали платежные данные'
+            });
+            return;
+        }
 
         try {
             const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
@@ -82,18 +123,34 @@ const Payment = () => {
                 handleNextStep();
                 setAlert({
                     title: 'Успех!',
-                    description: 'Заява на вывод оформленна успешно'
+                    description: 'Заявка на вывод оформленна успешно!'
                 });
             }
         } catch (error) {
             console.error('Error creating withdraw:', error);
-        } finally {
-            setLoading(false);
         }
     };
-
     return (
         <Dashboard>
+            {alertPopup && (
+                <Popup
+                    title="Проверьте перевод и данные"
+                    description="Вы уверены, что перевели сумму на указанный кошелёк и проверили его корректность? В случае, если средства не поступят, мы не сможем зачислить их на ваш баланс. Пожалуйста, убедитесь в правильности перевода!"
+                    onClose={() => setAlert(null)}
+                    firstChildren={<Button variant="popupGrey" onClick={() => setAlertPopup(false)}>Отменить</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={() => setAlertPopup(false)}>Я уверен,
+                        продолжить</Button>}
+                />
+            )}
+            {popup && (
+                <Popup
+                    title="Этот способ недоступен"
+                    description="К сожалению, данный способ выплаты сейчас недоступен в связи с техническим обслуживанием. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"
+                    onClose={() => setAlert(null)}
+                    firstChildren={<Button variant="popupGrey" onClick={() => setPopup(false)}>Отменить</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={() => setPopup(false)}>Использовать Tether (TRC-20)</Button>}
+                />
+            )}
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
             <div className={styles.wrapperInner}>
                 {step === 1 && (
@@ -121,7 +178,6 @@ const Payment = () => {
                                 />
                             </div>
                         </div>
-
                         <div className={styles.paymentContainer}>
                             <PaymentBeanie
                                 dotText="Способ выплаты"
@@ -129,7 +185,7 @@ const Payment = () => {
                             >
                                 <StepButtons
                                     onNext={handleNextStep}
-                                    onPrev={handlePreviousStep}
+                                    onPrev={handleReturnToDashboard}
                                     firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
                                     secondButtonContent={"Продолжить"}/>
                             </PaymentBeanie>
@@ -186,7 +242,7 @@ const Payment = () => {
                             <div className={styles.bottomButtons}>
                                 <StepButtons
                                     onNext={handleNextStep}
-                                    onPrev={handlePreviousStep}
+                                    onPrev={handleReturnToDashboard}
                                     firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
                                     secondButtonContent={"Продолжить"}/>
                             </div>
@@ -242,7 +298,7 @@ const Payment = () => {
                                     {value: "etherium", label: "Etherium"},
                                     {value: "visa", label: "Visa"}
                                 ]}
-                                initialValues={{amount: '', wallet: selectedPayment}}
+                                initialValues={{amount: '', wallet: ''}}
                                 onSubmit={handleFormSubmit}
                                 submitForm={(submit: () => void) => {
                                     submitFormRef.current = submit;
