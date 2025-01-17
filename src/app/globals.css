@@ -56,10 +56,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2{
-    font-family: 'GropledBold', sans-serif;
-}
-
 button{
     font-family: 'Manrope', sans-serif;
     cursor: pointer;
@@ -74,10 +70,4 @@ button{
 a {
     color: inherit;
     text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
 }
