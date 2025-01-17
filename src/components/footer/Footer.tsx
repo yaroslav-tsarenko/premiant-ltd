@@ -59,7 +59,7 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                 <div className={styles.content}>
                     <div className={styles.headline}>
                         <p className={styles.copyright}>
-                            © PremiantLTD 2021-2024
+                            © PremiantLTD 2019-2025
                         </p>
                         <h1 className={styles.logo}>
                             PREMIANT LTD
@@ -128,9 +128,9 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                     </div>
                 </div>
                 {children}
-                <div className={styles.headline}>
+                <div className={styles.headlбіьine}>
                     <p className={styles.copyright}>
-                        © PremiantLTD 2021-2024
+                        © PremiantLTD 2019-2025
                     </p>
                     <h1 className={styles.logo}>
                         PREMIANT LTD
