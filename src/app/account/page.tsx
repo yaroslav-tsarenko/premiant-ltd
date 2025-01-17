@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import Metrics from "@/sections/metrics/Metrics";
 import Dashboard from "@/components/dashboard/Dashboard";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
@@ -12,12 +12,6 @@ import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
 
 const DashboardAccount = () => {
-    useEffect(() => {
-        if (!sessionStorage.getItem('reloaded')) {
-            sessionStorage.setItem('reloaded', 'true');
-            window.location.reload();
-        }
-    }, []);
 
     return (
         <Dashboard>

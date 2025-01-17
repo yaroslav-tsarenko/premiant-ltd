@@ -7,7 +7,6 @@ import Warning from "@/components/warning/Warning";
 
 const Dashboard: FC<DashboardProps> = ({children}) => {
     const user = useUser();
-
     const showWarning = !user?.usdtWallet && !user?.btcWallet && !user?.perfectMoneyWallet && !user?.ethereumWallet && !user?.payeerWallet && !user?.card;
     const showAlert = user?.tariff === 'none';
 
