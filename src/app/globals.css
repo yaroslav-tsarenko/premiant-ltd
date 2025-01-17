@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 @font-face {
-    font-family: 'GropledBold', sans-serif;
+    font-family: 'GropledBold', sans-serif !important;
     src: url('../assets/fonts/gropled-bold.otf') format('opentype');
     font-display: swap;
     font-weight: normal;
@@ -36,6 +36,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 img {
@@ -59,12 +62,6 @@ body {
 button{
     font-family: 'Manrope', sans-serif;
     cursor: pointer;
-}
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
 }
 
 a {

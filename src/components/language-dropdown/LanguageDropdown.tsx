@@ -8,7 +8,6 @@ import Popup from "@/components/popup/Popup";
 const LanguageDropdown = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('RU');
     const [showPopup, setShowPopup] = useState(false);
-
     useEffect(() => {
         const addGoogleTranslateScript = () => {
             const script = document.createElement('script');
@@ -23,7 +22,6 @@ const LanguageDropdown = () => {
                 'google_translate_element'
             );
         };
-
         addGoogleTranslateScript();
     }, []);
 

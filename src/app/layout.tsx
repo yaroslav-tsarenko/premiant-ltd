@@ -7,7 +7,7 @@ import LenisScriptLoader from "@/utils/LenisScriptLoader";
 
 export const metadata: Metadata = {
     title: "Premiant LTD",
-    description: "ИНВЕСТИРУЙТЕ С НАМИ И ПРИУМНОЖАЙТЕ СВОЙ КАПИТАЛ",
+    description: "Invest in technologies that deliver results | Traffic | Crypto | AI",
 };
 
 type RootLayoutProps = {
@@ -34,7 +34,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                 {name: 'Инвесторам', route: '/#features'},
                 {name: 'FAQ', route: '/#faq'},
                 {name: 'Контакты', route: '/#address'},
-                {name: 'Поддержка', route: '/#address'},
+                {name: 'Поддержка', route: 'https://t.me/PremiantLTD'},
             ]}
             contacts={[
                 {label: 'E-mail', value: 'premiantltd@gmail.com'},
