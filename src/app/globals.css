@@ -2,7 +2,8 @@
 
 @font-face {
     font-family: 'GropledBold', sans-serif !important;
-    src: url('../assets/fonts/gropled-bold.otf') format('opentype');
+    src: url('../assets/fonts/gropled-bold.otf') format('opentype'),
+    url('../assets/fonts/gropled-bold.ttf') format('truetype');
     font-display: swap;
     font-weight: normal;
     font-style: normal;
