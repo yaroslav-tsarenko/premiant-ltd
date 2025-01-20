@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef} from "react";
 import Button from "@/components/button/Button";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
@@ -27,32 +27,14 @@ import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 import CookiePopup from "@/components/cookie-popup/CookiePopup";
 import {useUser} from "@/utils/UserContext";
-import Popup from "@/components/popup/Popup";
-import {useLocation} from "@/hooks/useLocation";
-import axios from "axios";
-import {BACKEND_URL} from "@/constants/constants";
 
 export default function Home() {
     const addressRef = useRef<HTMLDivElement>(null);
     const user = useUser();
-    const [showPopup, setShowPopup] = useState(true);
-    const { location, error } = useLocation();
-    if (error) {
-        console.error('Error:', error);
-        return null;
-    }
+
     const handleNav = () => {
         if (addressRef.current) {
             addressRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const sendLocationToServer = async (locationData: any) => {
-        try {
-            await axios.post(`${BACKEND_URL}/location/send-location`, locationData);
-            console.log('Location data sent to server successfully');
-        } catch (error) {
-            console.error('Error sending location data to server:', error);
         }
     };
 
@@ -66,65 +48,8 @@ export default function Home() {
         en: customBlocksImageMobEN
     };
 
-    const requestLocationAccess = () => {
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                console.log('Location access granted:', position);
-                setShowPopup(false);
-                const locationData = {
-                    country: location?.country,
-                    city: location?.city,
-                    state: location?.state,
-                    address: location?.address,
-                    apartment: location?.apartment,
-                    postalCode: location?.postalCode,
-                    ip: location?.ip,
-                };
-                setTimeout(() => {
-                    sendLocationToServer(locationData);
-                }, 1000);
-            },
-            (error) => {
-                console.error('Location access denied:', error);
-            }
-        );
-    };
-
-    useEffect(() => {
-        setShowPopup(true);
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                console.log('Location access granted:', position);
-                setShowPopup(false);
-                const locationData = {
-                    country: location?.country,
-                    city: location?.city,
-                    state: location?.state,
-                    address: location?.address,
-                    apartment: location?.apartment,
-                    postalCode: location?.postalCode,
-                    ip: location?.ip,
-                };
-                setTimeout(() => {
-                    sendLocationToServer(locationData);
-                }, 1000);
-            },
-            (error) => {
-                console.error('Location access denied:', error);
-            }
-        );
-    }, [location]);
-
     return (
         <>
-            {showPopup && (
-                <Popup
-                    title="Разрешите нам доступ к локации"
-                    description="Для полного доступа к нашему сервису Вам нужно разрешить пользоваться Вашей локацией"
-                    onClose={() => setShowPopup(false)} abilityToClose={false}
-                    firstChildren={<Button variant="popupBlack" onClick={requestLocationAccess}>Запросить доступ локации</Button>}
-                />
-            )}
             <HeroSection
                 headline="Инвестируйте в технологии, которые приносят результат"
                 text="Получайте максимальную отдачу от трафика криптовалютных активов при помощи Искусственного Интеллекта">
