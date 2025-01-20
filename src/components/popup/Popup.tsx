@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import styles from './Popup.module.scss';
 import { PopupProps } from "@/types/popup";
 
-const Popup: FC<PopupProps> = ({ title, description, secondChildren, firstChildren, onClose, type = 'default' }) => {
+const Popup: FC<PopupProps> = ({ title, description, secondChildren, firstChildren, onClose, type = 'default', abilityToClose = true }) => {
 
     const handleWrapperClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === e.currentTarget) {
+        if (abilityToClose && e.target === e.currentTarget) {
             onClose?.();
         }
     };

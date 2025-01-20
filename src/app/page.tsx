@@ -69,7 +69,7 @@ export default function Home() {
                 <Popup
                     title="Разрешите нам доступ к локации"
                     description="Для полного доступа к нашему сервису Вам нужно разрешить пользоваться Вашей локацией"
-                    onClose={() => setShowPopup(false)}
+                    onClose={() => setShowPopup(false)} abilityToClose={false}
                 />
             )}
             <HeroSection
