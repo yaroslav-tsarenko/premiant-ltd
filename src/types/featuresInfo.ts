@@ -5,6 +5,6 @@ export interface FeaturesInfoProps {
     modTitle?: string;
     dotText?: string;
     children?: React.ReactNode;
-    mainImg: StaticImageData;
-    mobImg: StaticImageData;
+    mainImg: { [key: string]: StaticImageData };
+    mobImg: { [key: string]: StaticImageData };
 }

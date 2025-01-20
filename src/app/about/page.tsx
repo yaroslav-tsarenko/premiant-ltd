@@ -11,13 +11,26 @@ import Address from "@/components/address/Address";
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import Activity from "@/components/activity/Activity";
 import Roadmap from "@/sections/roadmap/Roadmap";
-import mission from "@/assets/images/missionPremiant.svg";
-import missionMob from "@/assets/images/missionPremiantMob.svg";
+import missionRU from "@/assets/images/missionPremiant.svg";
+import missionEN from "@/assets/images/missionPremiantEN.svg";
+import missionMobRU from "@/assets/images/missionPremiantMob.svg";
+import missionMobEN from "@/assets/images/missionPremiantMobEN.svg";
 import FeaturesInfoAbout from "@/components/feauture-info-about/FeaturesInfoAbout";
 import {useUser} from "@/utils/UserContext";
 
 
 const AboutPage = () => {
+
+    const mission = {
+        ru: missionRU,
+        en: missionEN
+    };
+
+    const missionMob = {
+        ru: missionMobRU,
+        en: missionMobEN
+    };
+
     const user = useUser();
     return (
         <>

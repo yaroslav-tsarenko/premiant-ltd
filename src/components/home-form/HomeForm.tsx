@@ -20,7 +20,7 @@ const HomeForm: FC<FormProps> = ({ headline, description }) => {
             setName('');
             setEmail('');
         } catch (error) {
-            setAlert({ title: 'Упс!', description: 'Вы не ввели нужные данные или ошибка насервере' });
+            setAlert({ title: 'Упс!', description: 'Вы не ввели нужные данные или ошибка на сервере' });
             console.error(error);
         }
     };

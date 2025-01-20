@@ -8,7 +8,13 @@ import Popup from "@/components/popup/Popup";
 const LanguageDropdown = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('RU');
     const [showPopup, setShowPopup] = useState(false);
+
     useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage');
+        if (storedLanguage) {
+            setSelectedLanguage(storedLanguage);
+        }
+
         const addGoogleTranslateScript = () => {
             const script = document.createElement('script');
             script.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
@@ -31,6 +37,7 @@ const LanguageDropdown = () => {
             setShowPopup(true);
         } else {
             setSelectedLanguage(language);
+            localStorage.setItem('selectedLanguage', language);
             const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
             if (combo) {
                 combo.value = language.toLowerCase();

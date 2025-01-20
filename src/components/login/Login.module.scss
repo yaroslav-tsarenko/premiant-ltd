@@ -104,6 +104,7 @@
   display: flex;
   gap: 5px;
   color: #707070;
+  flex-direction: column;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;

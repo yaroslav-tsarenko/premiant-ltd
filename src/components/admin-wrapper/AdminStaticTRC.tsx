@@ -1,0 +1,69 @@
+"use client"
+
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, Field } from 'formik';
+import Dot from "@/components/dot/Dot";
+import axios from "axios";
+import styles from './AdminStaticTRC.module.scss';
+import { BACKEND_URL } from "@/constants/constants";
+import AdminBeanie from "@/components/admin-beanie/AdminBeanie";
+import Alert from "@/components/alert/Alert";
+
+const AdminStaticTRC = () => {
+    const [trcAddress, setTrcAddress] = useState<string>('');
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+
+    useEffect(() => {
+        axios.get(`${BACKEND_URL}/trc/get-trc`)
+            .then(response => {
+                setTrcAddress(response.data.address);
+                console.log("Static trc:", response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching TRC address:', error);
+            });
+    }, []);
+
+    const handleApplyChanges = async (values: { trcAddress: string }) => {
+        try {
+            await axios.put(`${BACKEND_URL}/trc/update-trc`, { address: values.trcAddress });
+            setAlert({ title: 'Success!', description: 'TRC address updated successfully' });
+        } catch (error) {
+            console.error('Error updating TRC address:', error);
+            setAlert({ title: 'Error', description: 'An error occurred while updating the address' });
+        }
+    };
+
+    return (
+        <>
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
+            <div className={styles.wrapper}>
+                <Formik
+                    initialValues={{ trcAddress: trcAddress || '' }}
+                    enableReinitialize
+                    onSubmit={(values) => {
+                        handleApplyChanges(values);
+                    }}
+                >
+                    {({ isSubmitting }) => (
+                        <Form className={styles.form}>
+                            <AdminBeanie title="Details" onApplyChanges={() => handleApplyChanges({ trcAddress })} />
+                            <Dot textTransform="none" title="Enter the details where users will send money" />
+                            <div className={styles.inputGroup}>
+                                <Field
+                                    name="trcAddress"
+                                    type="text"
+                                    className={styles.input}
+                                    placeholder="TRC-20 Wallet"
+                                />
+                            </div>
+                            <button type="submit" disabled={isSubmitting} style={{ display: 'none' }}></button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        </>
+    );
+};
+
+export default AdminStaticTRC;

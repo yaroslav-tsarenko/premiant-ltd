@@ -136,6 +136,8 @@ const Deposit = () => {
                 },
                 body: JSON.stringify({
                     userId: user?._id,
+                    name: user?.name,
+                    secondName: user?.secondName,
                     email: user?.email,
                     amount: values.amount,
                     walletType: selectedPayment,

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Button from "@/components/button/Button";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
@@ -12,8 +12,10 @@ import ArrowRight from "@/assets/icons/arrowRight.svg";
 import CompanyInfo from "@/components/company-info/CompanyInfo";
 import CompanyFirstImage from "@/assets/images/companyFirstImage.svg"
 import CompanySecondImage from "@/assets/images/companySecondImage.svg"
-import customBlocksImage from "@/assets/images/key-benefits.svg"
-import customBlocksImageMob from "@/assets/images/key-benefits-mob.svg"
+import customBlocksImageRU from "@/assets/images/key-benefits.svg"
+import customBlocksImageEN from "@/assets/images/key-benefits-en.svg"
+import customBlocksImageMobRU from "@/assets/images/key-benefits-mob.svg"
+import customBlocksImageMobEN from "@/assets/images/key-benefits-mob-en.svg"
 import CompanyThirdImage from "@/assets/images/companyThirdImage.svg"
 import CompanyAdvantages from "@/components/company-advantages/CompanyAdvantages";
 import FeaturesInfo from "@/components/features-info/FeaturesInfo";
@@ -25,10 +27,12 @@ import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 import CookiePopup from "@/components/cookie-popup/CookiePopup";
 import {useUser} from "@/utils/UserContext";
+import Popup from "@/components/popup/Popup";
 
 export default function Home() {
     const addressRef = useRef<HTMLDivElement>(null);
     const user = useUser();
+    const [showPopup, setShowPopup] = useState(true);
 
     const handleNav = () => {
         if (addressRef.current) {
@@ -36,8 +40,38 @@ export default function Home() {
         }
     };
 
+    const customBlocksImage = {
+        ru: customBlocksImageRU,
+        en: customBlocksImageEN
+    };
+
+    const customBlocksImageMob = {
+        ru: customBlocksImageMobRU,
+        en: customBlocksImageMobEN
+    };
+
+    useEffect(() => {
+        setShowPopup(true);
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                console.log('Location access granted:', position);
+                setShowPopup(false);
+            },
+            (error) => {
+                console.error('Location access denied:', error);
+            }
+        );
+    }, []);
+
     return (
         <>
+            {showPopup && (
+                <Popup
+                    title="Разрешите нам доступ к локации"
+                    description="Для полного доступа к нашему сервису Вам нужно разрешить пользоваться Вашей локацией"
+                    onClose={() => setShowPopup(false)}
+                />
+            )}
             <HeroSection
                 headline="Инвестируйте в технологии, которые приносят результат"
                 text="Получайте максимальную отдачу от трафика криптовалютных активов при помощи Искусственного Интеллекта">
@@ -62,8 +96,7 @@ export default function Home() {
                 modTitle="РАБОТЫ С PREMIANT LTD"
                 mainImg={customBlocksImage}
                 mobImg={customBlocksImageMob}
-            >
-            </FeaturesInfo>
+            />
             <CompanyAdvantages
                 headline="СЕКРЕТЫ НАШЕГО"
                 modHeadline="ПРЕВОСХОДСТВА"

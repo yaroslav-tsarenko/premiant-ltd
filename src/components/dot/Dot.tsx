@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import styles from "./Dot.module.scss";
 import { DotProps } from "@/types/dot";
 
-const Dot: FC<DotProps> = ({ title, absolute = false }) => {
+const Dot: FC<DotProps> = ({ title, absolute = false, textTransform = 'uppercase' }) => {
     return (
         <div className={`${styles.item} ${absolute ? styles.absolute : ''}`}>
             <span></span>
-            <p>{title}</p>
+            <p style={{ textTransform }}>{title}</p>
         </div>
     );
 };
