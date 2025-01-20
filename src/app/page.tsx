@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef} from "react";
 import Button from "@/components/button/Button";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
@@ -27,7 +27,6 @@ import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 import CookiePopup from "@/components/cookie-popup/CookiePopup";
 import {useUser} from "@/utils/UserContext";
-import RequestLocation from "@/components/request-location/RequestLocation";
 
 export default function Home() {
     const addressRef = useRef<HTMLDivElement>(null);
@@ -51,7 +50,6 @@ export default function Home() {
 
     return (
         <>
-            <RequestLocation/>
             <HeroSection
                 headline="Инвестируйте в технологии, которые приносят результат"
                 text="Получайте максимальную отдачу от трафика криптовалютных активов при помощи Искусственного Интеллекта">

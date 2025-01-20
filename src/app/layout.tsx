@@ -4,6 +4,8 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { authWrapper } from "@/utils/AuthWrapper";
 import LenisScriptLoader from "@/utils/LenisScriptLoader";
+import RequestLocation from "@/components/request-location/RequestLocation";
+import React from "react";
 
 export const metadata: Metadata = {
     title: "Premiant LTD",
@@ -23,6 +25,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                   crossOrigin="anonymous"/>
         </head>
         <body>
+        <RequestLocation/>
         <LenisScriptLoader/>
         <Header/>
         {children}

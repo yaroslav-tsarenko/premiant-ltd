@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from "@/hooks/useLocation";
 import axios from "axios";
