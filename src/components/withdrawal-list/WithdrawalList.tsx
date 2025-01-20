@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import React from 'react';
 import styles from './WithdrawalList.module.scss';
@@ -11,22 +11,26 @@ const WithdrawalList: React.FC = () => {
 
     return (
         <div className={styles.withdrawalList}>
-            {withdrawals.map((withdrawal: Withdrawal, index: number) => (
-                <div key={index} className={styles.withdrawalItem}>
-                    <UserEntity
-                        type={'deposit'}
-                        id={index}
-                        userId={withdrawal.userId}
-                        name={withdrawal.name}
-                        secondName={withdrawal.secondName}
-                        amount={withdrawal.amount}
-                        date={withdrawal.date}
-                        status={withdrawal.status}
-                        walletAddress={withdrawal.walletAddress}
-                        email={withdrawal.email}
-                    />
-                </div>
-            ))}
+            {withdrawals.length === 0 ? (
+                <h5>Данные отсутствуют</h5>
+            ) : (
+                withdrawals.map((withdrawal: Withdrawal, index: number) => (
+                    <div key={index} className={styles.withdrawalItem}>
+                        <UserEntity
+                            type={'deposit'}
+                            id={index}
+                            userId={withdrawal.userId}
+                            name={withdrawal.name}
+                            secondName={withdrawal.secondName}
+                            amount={withdrawal.amount}
+                            date={withdrawal.date}
+                            status={withdrawal.status}
+                            walletAddress={withdrawal.walletAddress}
+                            email={withdrawal.email}
+                        />
+                    </div>
+                ))
+            )}
         </div>
     );
 };
