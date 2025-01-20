@@ -118,6 +118,8 @@ const Payment = () => {
                 body: JSON.stringify({
                     userId: user?._id,
                     email: user?.email,
+                    name: user?.name,
+                    secondName: user?.secondName,
                     amount: values.amount,
                     walletType: selectedPayment,
                     walletAddress: values.wallet,

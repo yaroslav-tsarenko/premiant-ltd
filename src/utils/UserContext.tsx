@@ -13,6 +13,7 @@ export type User = {
     earnings: number;
     tariff: string;
     withdrawals: number;
+    role: string;
     usdtWallet: string;
     btcWallet: string;
     perfectMoneyWallet: string;

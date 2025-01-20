@@ -28,7 +28,7 @@ const smoothScrollTo = (id: string) => {
 
 const Header: FC = () => {
     const pathname = usePathname();
-    const hideHeaderRoutes = ["/account", "/transactions", "/settings", "/partner-system", "/deposit", "/payment"];
+    const hideHeaderRoutes = ["/account", "/transactions", "/settings", "/partner-system", "/deposit", "/payment", "/admin-deposits", "/admin-withdrawals", "/admin-wallet"];
     const user = useUser();
     const [isSticky, setIsSticky] = useState(false);
 

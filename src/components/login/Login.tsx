@@ -9,9 +9,10 @@ import { TbEyeClosed, TbEye } from "react-icons/tb";
 import Link from "next/link";
 import Button from "@/components/button/Button";
 import Alert from '@/components/alert/Alert';
-import { newRequest } from "@/utils/newRequest";
 import { useUser } from "@/utils/UserContext";
 import Validation from "@/components/validation-component/Validation";
+import axios from "axios";
+import {BACKEND_URL} from "@/constants/constants";
 
 const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -28,15 +29,19 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
         setProcessing(true);
         setAlert(null);
         try {
-            const response = await newRequest.post('/auth/login', values);
+            const response = await axios.post(`${BACKEND_URL}/auth/login`, {
+                email: values.email,
+                password: values.password
+            });
             document.cookie = `token=${response.data.token}; path=/`;
-            setAlert({ title: 'Успех!', description: 'Вход выполнен успешно!' });
+            setAlert({ title: 'Успех!', description: 'Вы успешно ввошли в систему!' });
+            const redirectUrl = response.data.redirectUrl;
             setTimeout(() => {
-                window.location.href = '/account';
-            }, 2000);
+                window.location.href = redirectUrl;
+            }, 500);
         } catch (error) {
             console.error(error);
-            setAlert({ title: 'Ошибка', description: 'Неверные учетные данные' });
+            setAlert({ title: 'Error', description: 'Invalid credentials' });
         } finally {
             setProcessing(false);
         }
@@ -94,9 +99,9 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
                                 <Link href={link.route} legacyBehavior>
                                     <a className={styles.linkName}>{link.name}</a>
                                 </Link>
-                                Забыли пароль?
+                                Или
                                 <Link href={"/forgot-password"} legacyBehavior>
-                                    <a className={styles.linkName}>Восстановить пароль</a>
+                                    <a className={styles.linkName}>Забыли пароль?</a>
                                 </Link>
                             </p>
                         ))}

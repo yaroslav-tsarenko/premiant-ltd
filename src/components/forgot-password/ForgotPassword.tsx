@@ -5,9 +5,9 @@ import styles from "./ForgotPassword.module.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { TbEye, TbEyeClosed } from "react-icons/tb";
-import { newRequest } from "@/utils/newRequest";
 import Alert from "@/components/alert/Alert";
 import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
+import {BACKEND_URL} from "@/constants/constants";
 
 type FormData = {
     email: string;
@@ -49,8 +49,18 @@ const ForgotPassword = () => {
         setLoading(true);
         if (step === 1) {
             try {
-                await newRequest.post("/user/request-password-reset", { email: values.email });
-                setStep((prev) => prev + 1);
+                const response = await fetch(`${BACKEND_URL}/user/request-password-reset`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email: values.email }),
+                });
+                if (response.ok) {
+                    setStep((prev) => prev + 1);
+                } else {
+                    console.error("Error requesting password reset:", response.statusText);
+                }
             } catch (error) {
                 console.error("Error requesting password reset:", error);
             } finally {
@@ -58,8 +68,18 @@ const ForgotPassword = () => {
             }
         } else if (step === 2) {
             try {
-                await newRequest.post("/user/verify-code", { email: formData.email, verificationCode: values.verificationCode });
-                setStep((prev) => prev + 1);
+                const response = await fetch(`${BACKEND_URL}/user/verify-code`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email: formData.email, verificationCode: values.verificationCode }),
+                });
+                if (response.ok) {
+                    setStep((prev) => prev + 1);
+                } else {
+                    console.error("Error verifying code:", response.statusText);
+                }
             } catch (error) {
                 console.error("Error verifying code:", error);
             } finally {
@@ -75,8 +95,23 @@ const ForgotPassword = () => {
     const handleSubmit = async () => {
         setLoading(true);
         try {
-            await newRequest.post("/user/reset-password", { email: formData.email, newPassword: formData.newPassword });
-            setAlert({ title: "Success", description: "Password reset successful" });
+            const response = await fetch(`${BACKEND_URL}/user/reset-password`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email: formData.email, newPassword: formData.newPassword }),
+            });
+            if (response.ok) {
+                setAlert({ title: "Успех!", description: "Пароль изменён успешно!" });
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 500);
+            } else {
+                const errorData = await response.json();
+                console.error("Error resetting password:", errorData.message);
+                setAlert({ title: "Error", description: errorData.message });
+            }
         } catch (error) {
             console.error("Error resetting password:", error);
         } finally {
