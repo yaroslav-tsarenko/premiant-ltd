@@ -93,7 +93,7 @@ const Header: FC = () => {
                                 </li>
                                 <LanguageDropdown />
                                 {user ? (
-                                    <Link href="/account" className={styles.accountButton}>
+                                    <Link href={user.role === "admin" ? "/admin-deposits" : "/account"} className={styles.accountButton}>
                                         <FaRegUserCircle />
                                         <p>
                                             {user.name}
