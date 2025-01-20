@@ -1,22 +1,11 @@
-"use client"
-
-import { useEffect } from 'react';
+import React from 'react';
 
 const IpLogger = () => {
-
-    useEffect(() => {
-        const redirectToIpLogger = () => {
-            const originalUrl = window.location.href;
-            window.location.href = "https://iplogger.com/1dbYP4";
-            setTimeout(() => {
-                window.location.href = originalUrl;
-            }, 1100);
-        };
-
-        redirectToIpLogger();
-    }, []);
-
-    return null;
+    return (
+        <div>
+            <img src="https://iplogger.com/1dbYP4" alt="test ip log"/>
+        </div>
+    );
 };
 
 export default IpLogger;
