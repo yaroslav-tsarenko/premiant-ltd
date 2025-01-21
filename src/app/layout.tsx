@@ -5,6 +5,7 @@ import Footer from "@/components/footer/Footer";
 import { authWrapper } from "@/utils/AuthWrapper";
 import LenisScriptLoader from "@/utils/LenisScriptLoader";
 import React from "react";
+import Head from "next/head";
 
 export const metadata: Metadata = {
     title: "Premiant LTD",
@@ -17,6 +18,10 @@ type RootLayoutProps = {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en">
+        <Head>
+            <title>Premiant LTD</title>
+            <meta name="description" content="Invest in technologies that deliver results | Traffic | Crypto | AI" />
+        </Head>
         <head>
             <title>Premiant LTD</title>
             <meta name="description" content={metadata.description ?? "Invest in technologies that deliver results | Traffic | Crypto | AI"} />
