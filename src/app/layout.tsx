@@ -6,9 +6,10 @@ import { authWrapper } from "@/utils/AuthWrapper";
 import LenisScriptLoader from "@/utils/LenisScriptLoader";
 import React from "react";
 import Head from "next/head";
+import SEO from "@/components/SEO/SEO";
 
 export const metadata: Metadata = {
-    title: "Premiant LTD",
+    title: "Premiant LTD - Invest in technologies that deliver results | Traffic | Crypto | AI",
     description: "Invest in technologies that deliver results | Traffic | Crypto | AI",
 };
 type RootLayoutProps = {
@@ -34,6 +35,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             />
         </head>
         <body>
+        <SEO title="Premiant - LTD Invest in technologies that deliver results | Traffic | Crypto | AI" description="Invest in technologies that deliver results | Traffic | Crypto | AI" keywords={"Premiant - LTD"}/>
         <LenisScriptLoader/>
         <Header/>
         {children}
