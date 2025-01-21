@@ -145,7 +145,10 @@
   width: 100%;
   padding: 20px 20px;
   box-sizing: border-box;
-  justify-content: space-around;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
   clip-path: polygon(0 0, 94% 0, 100% 12%, 100% 100%, 8% 100%, 0 93%);
   position: relative;
   z-index: 2;
@@ -153,7 +156,7 @@
 
   & > :last-child {
     grid-column: span 2;
-    width: 100%;
+    width: 96%;
   }
 
   @media screen and (max-width: 478px) {

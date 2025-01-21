@@ -53,6 +53,9 @@ const Footer: FC<FooterProps> = ({ footerLinks = [], children, contacts = [] }) 
                                 </Link>
                             </li>
                         ))}
+                        <li className={styles.link}>
+                            <a href="mailto:support@gmail.com">Поддержка</a>
+                        </li>
                     </ul>
                     <Button variant="hero" onClick={() => handleNav("/register")}>Начать инвестировать</Button>
                 </nav>

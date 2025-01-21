@@ -39,10 +39,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                 { name: "Инвесторам", route: "/#features" },
                 { name: "FAQ", route: "/#faq" },
                 { name: "Контакты", route: "/#address" },
-                { name: "Поддержка", route: "https://t.me/PremiantLTD" },
             ]}
             contacts={[
-                { label: "E-mail", value: "premiantltd@gmail.com" },
+                { label: "E-mail", value: "support@premiant.ltd" },
                 { label: "Phone", value: "+44 781 3243472" },
                 { label: "Telegram", value: "@PremiantLTD" },
             ]}
