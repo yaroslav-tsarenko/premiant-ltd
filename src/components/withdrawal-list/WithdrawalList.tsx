@@ -17,7 +17,7 @@ const WithdrawalList: React.FC = () => {
                 withdrawals.map((withdrawal: Withdrawal, index: number) => (
                     <div key={index} className={styles.withdrawalItem}>
                         <UserEntity
-                            type={'deposit'}
+                            type={'withdraw'}
                             id={index}
                             userId={withdrawal.userId}
                             name={withdrawal.name}

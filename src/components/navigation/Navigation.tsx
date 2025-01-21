@@ -27,7 +27,7 @@ const Navigation: FC<NavigationProps> = ({userType}) => {
                 router.push('/');
                 setTimeout(() => {
                     window.location.reload();
-                }, 1300);
+                }, 1000);
             } else {
                 console.error('Logout error:', response.data.message);
             }
