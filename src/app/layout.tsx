@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     title: "Premiant LTD",
     description: "Invest in technologies that deliver results | Traffic | Crypto | AI",
 };
-
 type RootLayoutProps = {
     children: React.ReactNode;
 };
