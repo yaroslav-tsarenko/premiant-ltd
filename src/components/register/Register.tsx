@@ -33,7 +33,9 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, refe
         name: Yup.string().required('Введите имя'),
         secondName: Yup.string().required('Введите фамилию'),
         email: Yup.string().email('Неверный E-mail').required('Введите E-mail'),
-        telegram: Yup.string().required('Введите Telegram'),
+        telegram: Yup.string()
+            .matches(/^@[a-zA-Z0-9]+$/, 'Telegram должен начинаться с @ и содержать только латинские буквы и цифры')
+            .required('Введите Telegram'),
         curator: Yup.string().optional(),
         password: Yup.string().min(6, 'Пароль должен быть минимум 8 символов').required('Введите пароль'),
         confirmPassword: Yup.string()
