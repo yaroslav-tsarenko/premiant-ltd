@@ -19,6 +19,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
         <html lang="en">
         <head>
             <title>Premiant LTD</title>
+            <meta name="description" content={metadata.description ?? "Invest in technologies that deliver results | Traffic | Crypto | AI"} />
             <link
                 rel="preload"
                 href="../assets/fonts/gropled-bold.otf"
@@ -28,21 +29,21 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             />
         </head>
         <body>
-        <LenisScriptLoader />
-        <Header />
+        <LenisScriptLoader/>
+        <Header/>
         {children}
         <Footer
             footerLinks={[
-                { name: "Главная", route: "/" },
-                { name: "О Компании", route: "/about" },
-                { name: "Инвесторам", route: "/#features" },
-                { name: "FAQ", route: "/#faq" },
-                { name: "Контакты", route: "/#address" },
+                {name: "Главная", route: "/"},
+                {name: "О Компании", route: "/about"},
+                {name: "Инвесторам", route: "/#features"},
+                {name: "FAQ", route: "/#faq"},
+                {name: "Контакты", route: "/#address"},
             ]}
             contacts={[
-                { label: "E-mail", value: "support@premiant.ltd" },
-                { label: "Phone", value: "+44 781 3243472" },
-                { label: "Telegram", value: "@PremiantLTD" },
+                {label: "E-mail", value: "support@premiant.ltd"},
+                {label: "Phone", value: "+44 781 3243472"},
+                {label: "Telegram", value: "@PremiantLTD"},
             ]}
         />
         </body>
