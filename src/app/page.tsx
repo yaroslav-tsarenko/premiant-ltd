@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useRef} from "react";
-import Button from "@/components/button/Button";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
@@ -66,7 +65,6 @@ export default function Home() {
                     {image: CompanySecondImage},
                     {image: CompanyThirdImage}
                 ]}>
-                <Button variant={"companyInfo"}>Начать инвестировать</Button>
             </CompanyInfo>
             <FeaturesInfo
                 dotText="арбитраж трафика"

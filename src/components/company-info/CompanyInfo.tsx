@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Gradient from "@/assets/icons/gradient.svg";
 import Dot from "@/components/dot/Dot";
 import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
+import Button from "@/components/button/Button";
 
 const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
     return (
@@ -13,7 +14,7 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
                 <Image src={Gradient} alt="Gradient" className={styles.gradient}/>
                 <Dot title="о нас" absolute/>
                 <div className={styles.textWrapper}>
-                    <span className={styles.modified}>PREMIANT LTD - ЭТО КОМПАНИЯ,</span>
+                    <span className={styles.modified}>PREMIANT LTD - ЭТО ИННОВАЦИОННАЯ КОМПАНИЯ,</span>
                     <div className={styles.textContainer}>
                         <h1 className={styles.headline}>
                             <span className={styles.highlight}>  специализирующаяся на арбитраже интернет-трафика и криптовалютных активов при помощи Искуственного Интеллекта</span>
@@ -22,7 +23,7 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
                             алгоритмам в области
                             искусственного интеллекта и финансов, оценивает и перераспределяет потоки интернет-трафика
                             из
-                            различных источников для достижения наилучших результатов, обеспечивая нашим клиентам
+                            различных источников для  достижения наилучших результатов, обеспечивая нашим клиентам
                             максимальную
                             отдачу от инвестиций в краткие промежутки времени.</p>
                         <p className={styles.text}>Мы постоянно внедряем и тестируем новые стратегии и инструменты,
@@ -42,6 +43,7 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
                             для
                             роста и максимизации доходов.
                         </p>
+                        <Button variant={"companyInfo"}>Начать инвестировать</Button>
                     </div>
                 </div>
                 <div className={styles.images}>
