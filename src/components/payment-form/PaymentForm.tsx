@@ -73,7 +73,7 @@ const PaymentForm: FC<PaymentFormProps> = ({
             {alertVisible && (
                 <Alert
                     title="АДРЕС СКОПИРОВАН!"
-                    description="После оплаты на адресс деньги будут зачислены как только система их обработает"
+                    description="После оплаты на адрес деньги будут зачислены как только система их обработает"
                     onClose={() => setAlertVisible(false)}
                 />
             )}

@@ -8,6 +8,7 @@ import { TbEye, TbEyeClosed } from "react-icons/tb";
 import Alert from "@/components/alert/Alert";
 import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
 import {BACKEND_URL} from "@/constants/constants";
+import {useRouter} from "next/navigation";
 
 type FormData = {
     email: string;
@@ -18,6 +19,7 @@ type FormData = {
 
 const ForgotPassword = () => {
     const [step, setStep] = useState<number>(1);
+    const router = useRouter();
     const [formData, setFormData] = useState<FormData>({
         email: "",
         verificationCode: "",
@@ -88,6 +90,10 @@ const ForgotPassword = () => {
         }
     };
 
+    const handleNav = (str: string) => {
+        router.push(str);
+    }
+
     const handlePreviousStep = () => {
         setStep((prev) => prev - 1);
     };
@@ -149,7 +155,6 @@ const ForgotPassword = () => {
                                         восстановлением доступа. Все просто и быстро!
                                     </p>
                                 </div>
-
                                 <div className={styles.inputGroup}>
                                     <Field
                                         type="email"
@@ -159,17 +164,16 @@ const ForgotPassword = () => {
                                     />
                                     <ErrorMessage name="email" component="div" className={styles.error} />
                                 </div>
-
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
                                         {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
                                     </button>
-
                                     <p className={styles.bottomText}>
                                         Или {" "}
                                         <button
                                             type="button"
                                             className={styles.link}
+                                            onClick={() => handleNav('/login')}
                                         >
                                             вернуться назад
                                         </button>

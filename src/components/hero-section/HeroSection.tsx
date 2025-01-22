@@ -5,9 +5,9 @@ import { HeroSectionProps } from "@/types/heroSection";
 import styles from './HeroSection.module.scss';
 import Image from "next/image";
 import dashboardDemo from "@/assets/images/dashboard-demo.svg";
-import dashboardDemo2 from "@/assets/images/hero-bg-mobile.png";
+import dashboardDemo2 from "@/assets/images/dashboard-demo-mobile-ru.svg";
 import dashboardDemoEn from "@/assets/images/dashboard-demo-eng.svg";
-import dashboardDemo2En from "@/assets/images/dashboard-demo-eng-mobile.svg";
+import dashboardDemo2En from "@/assets/images/dashboard-demo-mobile-eng.svg";
 import Button from "@/components/button/Button";
 import { useRouter } from "next/navigation";
 

@@ -13,7 +13,6 @@ const AdminStaticTRC = () => {
     const [trcAddress, setTrcAddress] = useState<string>("");
     const [alert, setAlert] = useState<{ title: string; description: string, bottomText: string } | null>(null);
 
-    // Fetch the current TRC address
     useEffect(() => {
         axios
             .get(`${BACKEND_URL}/trc/get-trc`)
@@ -54,8 +53,8 @@ const AdminStaticTRC = () => {
                 >
                     {({ isSubmitting, handleSubmit }) => (
                         <Form className={styles.form}>
-                            <AdminBeanie title="Details" onApplyChanges={handleSubmit} /> {/* Trigger form submission */}
-                            <Dot textTransform="none" title="Enter the details where users will send money" />
+                            <AdminBeanie title="Реквизиты" onApplyChanges={handleSubmit} />
+                            <Dot textTransform="none" title="Введите реквизиты, на которые пользователи будут отправлять $" />
                             <div className={styles.inputGroup}>
                                 <Field
                                     name="trcAddress"

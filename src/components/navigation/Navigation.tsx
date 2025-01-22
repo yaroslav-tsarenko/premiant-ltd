@@ -6,6 +6,7 @@ import {GrHomeRounded} from 'react-icons/gr';
 import {LuUsersRound} from "react-icons/lu";
 import {CiCreditCard1, CiLogout} from "react-icons/ci";
 import {PiArrowsDownUp} from "react-icons/pi";
+import Cookies from 'js-cookie';
 import {BACKEND_URL} from "@/constants/constants";
 import {useRouter} from "next/navigation";
 import axios from "axios";
@@ -24,15 +25,21 @@ const Navigation: FC<NavigationProps> = ({userType}) => {
             const response = await axios.post(`${BACKEND_URL}/auth/logout`, {}, {withCredentials: true});
             if (response.status === 200) {
                 console.log('Logout successful');
-                router.push('/');
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
+                router.push('/');
             } else {
                 console.error('Logout error:', response.data.message);
+                Cookies.remove('token');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+                router.push('/');
             }
         } catch (error) {
             console.error('Network error during logout:', error);
+            Cookies.remove('token');
         }
     };
 

@@ -82,6 +82,21 @@
   position: relative;
 }
 
+.forgotPasswordLinkBlock{
+  width: 100%;
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+  align-items: flex-end;
+  justify-items: flex-end;
+}
+
+.forgotPasswordLink{
+  width: fit-content;
+  display: flex;
+  margin: 0 0 0 auto;
+}
+
 .icon {
   position: absolute;
   right: 10px;
@@ -104,7 +119,6 @@
   display: flex;
   gap: 5px;
   color: #707070;
-  flex-direction: column;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;

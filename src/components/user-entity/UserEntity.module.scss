@@ -32,11 +32,17 @@
 .bottom {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 568px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .userCredentials {
   display: flex;
-  gap: 50px;
+  gap: 45px;
+  flex-wrap: wrap;
 
   span{
     display: flex;
@@ -45,6 +51,10 @@
     align-content: center;
     justify-items: center;
     gap: 15px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    gap: 20px;
   }
 }
 

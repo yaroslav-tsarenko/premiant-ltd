@@ -17,7 +17,7 @@ const ReferralProgramme = () => {
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(referralLink).then(() => {
-            setAlert({ title: 'ссылка скопирована!', description: 'Скорее делись с ней с друзями и начинайте зарабатывать!', bottomText: 'Приглашайте новых пользователей и увеличивайте свой доход' });
+            setAlert({ title: 'ссылка скопирована!', description: 'Приглашайте новых пользователей и увеличивайте свой доход!'});
         }).catch(err => {
             console.error('Failed to copy: ', err);
             setAlert({ title: 'Error', description: 'Failed to copy referral link.' });
