@@ -58,8 +58,8 @@ const AboutPage = () => {
                         <div>
                             <div>
                                 <p className={styles.label}>E-mail</p>
-                                <a href="mailto:premiantltd@gmail.com"
-                                   className={styles.value}>premiantltd@gmail.com</a>
+                                <a href="mailto:support@premiant.ltd"
+                                   className={styles.value}>support@premiant.ltd</a>
                             </div>
                             <div>
                                 <p className={styles.label}>Phone</p>

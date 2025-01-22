@@ -171,7 +171,7 @@ export default function Home() {
                                 <div>
                                     <p className={styles.label}>E-mail</p>
                                     <p className={styles.value}>
-                                        <a href="mailto:premiantltd@gmail.com">premiantltd@gmail.com</a>
+                                        <a href="mailto:support@premiant.ltd">support@premiant.ltd</a>
                                     </p>
                                 </div>
                                 <div>
