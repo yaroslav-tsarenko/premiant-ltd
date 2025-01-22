@@ -15,7 +15,7 @@ const DashboardAccount = () => {
 
     const customBlocksImage = {
         ru: account,
-        en: accountMob
+        en: account
     };
 
     const customBlocksImageMob = {
