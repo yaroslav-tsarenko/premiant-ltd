@@ -44,6 +44,7 @@ const LanguageDropdown = () => {
                 combo.dispatchEvent(new Event('change'));
             }
         }
+        window.location.reload();
     };
 
     useEffect(() => {
