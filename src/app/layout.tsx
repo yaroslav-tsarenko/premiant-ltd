@@ -3,24 +3,21 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { authWrapper } from "@/utils/AuthWrapper";
 import LenisScriptLoader from "@/utils/LenisScriptLoader";
-import Head from "next/head";
 import React from "react";
+import type { Metadata } from "next";
 
 type RootLayoutProps = {
     children: React.ReactNode;
 };
 
+export const metadata: Metadata = {
+    title: "Premiant LTD - Invest in technologies that deliver results | Traffic | Crypto | AI",
+    description: "Invest in technologies that deliver results | Traffic | Crypto | AI",
+};
+
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en">
-        <Head>
-            <title>Premiant LTD - Invest in technologies that deliver results | Traffic | Crypto | AI</title>
-            <meta
-                name="description"
-                content="Invest in technologies that deliver results | Traffic | Crypto | AI"
-            />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
         <body>
         <LenisScriptLoader />
         <Header />
