@@ -11,7 +11,6 @@
 
   @media screen and (max-width: 768px) {
     padding: 50px 30px;
-
   }
 }
 
@@ -28,6 +27,7 @@
   display: flex;
   flex-direction: column;
   margin-left: auto;
+  text-align: justify;
   margin-right: auto;
   gap: 25px;
   padding: 0 70px;
@@ -52,17 +52,32 @@
   font-weight: bold;
   font-family: 'GropledBold', sans-serif;
   font-size: 40px;
+  word-spacing: 10px;
+  text-align: justify;
 }
 
 .headline {
   font-size: 40px;
   font-weight: 400;
   font-family: 'GropledBold', sans-serif;
+  word-spacing: 20px;
+
+  @media (max-width: 768px) {
+    .text {
+      text-align: justify;
+    }
+  }
 }
 
 .highlight {
   color: lighten(#000000, 50%);
   text-transform: uppercase;
+}
+
+.space{
+  display: flex;
+  width: 30px;
+  margin: 0 10px 0 10px;
 }
 
 .text {
