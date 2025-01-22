@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './Payment.module.scss';
 import BalanceWithdraw from "@/components/balance-withdraw/BalanceWithdraw";
 import PaymentSteps from "@/components/payment-steps/PaymentSteps";
@@ -33,16 +33,12 @@ const Payment = () => {
     const [withdrawId, setWithdrawId] = useState<string>('');
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
     const [alertPopup, setAlertPopup] = useState<boolean>(false);
+    const [clickCount, setClickCount] = useState(0);
     const router = useRouter();
 
     const handleNextStep = () => {
         setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
-
-    const handleNextStepAndClosePopup = () => {
-        setStep((prev) => (prev < 3 ? prev + 1 : 1));
-        setPopup(false)
-    }
 
     const handleReturnToDashboard = () => {
         router.push('/account');
@@ -53,9 +49,16 @@ const Payment = () => {
     };
 
     const submitFormRef = useRef<() => void>();
+
     const handleButtonClick = () => {
-        if (submitFormRef.current) {
-            submitFormRef.current();
+        if (clickCount === 0) {
+            setAlertPopup(true);
+            setClickCount(1);
+        } else if (clickCount === 1) {
+            if (submitFormRef.current) {
+                submitFormRef.current();
+            }
+            setClickCount(0);
         }
     };
 
@@ -67,12 +70,6 @@ const Payment = () => {
             handleNextStep();
         }
     };
-
-    useEffect(() => {
-        if (step === 2) {
-            setTimeout(() => setAlertPopup(true), 2000);
-        }
-    }, [step]);
 
     const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
         await new Promise<void>((resolve) => {
@@ -95,7 +92,7 @@ const Payment = () => {
             return;
         }
 
-        if (!user?.usdtWallet || !user?.btcWallet || !user?.perfectMoneyWallet || !user?.ethereumWallet || !user?.payeerWallet || !user?.card) {
+        if (!user?.usdtWallet) {
             setAlert({
                 title: 'Упс!',
                 description: 'Вы не указали платежные данные'
@@ -157,7 +154,7 @@ const Payment = () => {
                     description="К сожалению, данный способ выплаты сейчас недоступен в связи с техническим обслуживанием. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"
                     onClose={() => setAlert(null)}
                     firstChildren={<Button variant="popupGrey" onClick={() => setPopup(false)}>Отменить</Button>}
-                    secondChildren={<Button variant="popupBlack" onClick={handleNextStepAndClosePopup}>Использовать Tether (TRC-20)</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={() => setPopup(false)}>Использовать Tether (TRC-20)</Button>}
                 />
             )}
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}

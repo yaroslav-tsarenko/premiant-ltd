@@ -41,7 +41,7 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
             }, 500);
         } catch (error) {
             console.error(error);
-            setAlert({ title: 'Error', description: 'Invalid credentials' });
+            setAlert({ title: 'Ошибка', description: 'Неверные данные' });
         } finally {
             setProcessing(false);
         }
@@ -86,6 +86,9 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
                                     </span>
                                 </div>
                                 <ErrorMessage name="password" component="div" className={styles.error} />
+                                <Link href={"/forgot-password"} className={styles.forgotPasswordLinkBlock} legacyBehavior>
+                                    <a className={styles.forgotPasswordLink}>Забыли пароль?</a>
+                                </Link>
                             </div>
                             <Button type="submit" variant="authentication">
                                 {processing ? 'Вход...' : 'Войти'}
@@ -99,10 +102,7 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
                                 <Link href={link.route} legacyBehavior>
                                     <a className={styles.linkName}>{link.name}</a>
                                 </Link>
-                                Или
-                                <Link href={"/forgot-password"} legacyBehavior>
-                                    <a className={styles.linkName}>Забыли пароль?</a>
-                                </Link>
+
                             </p>
                         ))}
                     </div>

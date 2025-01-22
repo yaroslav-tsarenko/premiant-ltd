@@ -7,10 +7,10 @@ const BalanceWithdraw = () => {
     return (
         <div className={styles.wrapper}>
             <h5 className={styles.headline}>
-                Доступ к выводу
+                Доступно к выводу
             </h5>
             <p className={styles.balance}>
-                {user?.balance}$
+                {user?.balance.toFixed(2)}$
             </p>
         </div>
     );

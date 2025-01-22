@@ -25,17 +25,17 @@ const Navigation: FC<NavigationProps> = ({userType}) => {
             const response = await axios.post(`${BACKEND_URL}/auth/logout`, {}, {withCredentials: true});
             if (response.status === 200) {
                 console.log('Logout successful');
-                router.push('/');
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
+                router.push('/');
             } else {
                 console.error('Logout error:', response.data.message);
                 Cookies.remove('token');
-                router.push('/');
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
+                router.push('/');
             }
         } catch (error) {
             console.error('Network error during logout:', error);

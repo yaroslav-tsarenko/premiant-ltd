@@ -7,6 +7,8 @@ import styles from './BottomNav.module.scss';
 import {useUser} from "@/utils/UserContext";
 import {useRouter} from "next/navigation";
 import {BACKEND_URL} from "@/constants/constants";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const BottomNav: FC<BottomNavProps> = ({logo, burgerIcon, links = []}) => {
     const [isNavOpen, setIsNavOpen] = React.useState(false);
@@ -15,22 +17,24 @@ const BottomNav: FC<BottomNavProps> = ({logo, burgerIcon, links = []}) => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch(`${BACKEND_URL}/auth/logout`, {
-                method: 'POST',
-                credentials: 'include',
-            });
-            if (response.ok) {
+            const response = await axios.post(`${BACKEND_URL}/auth/logout`, {}, {withCredentials: true});
+            if (response.status === 200) {
                 console.log('Logout successful');
-                router.push('/');
                 setTimeout(() => {
                     window.location.reload();
-                }, 500);
+                }, 1000);
+                router.push('/');
             } else {
-                const data = await response.json();
-                console.error('Logout error:', data.message);
+                console.error('Logout error:', response.data.message);
+                Cookies.remove('token');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+                router.push('/');
             }
         } catch (error) {
             console.error('Network error during logout:', error);
+            Cookies.remove('token');
         }
     };
     const handleNavToggle = () => {

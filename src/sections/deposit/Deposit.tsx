@@ -35,6 +35,7 @@ const Deposit = () => {
     const [depositId, setDepositId] = useState<string>('');
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
     const [alertPopup, setAlertPopup] = useState<boolean>(false);
+    const [clickCount, setClickCount] = useState(0);
     const [trcAddress, setTrcAddress] = useState<string>('');
     const submitFormRef = useRef<() => void>();
 
@@ -67,15 +68,16 @@ const Deposit = () => {
     }
 
     const handleButtonClick = () => {
-        if (submitFormRef.current) {
-            submitFormRef.current();
+        if (clickCount === 0) {
+            setAlertPopup(true);
+            setClickCount(1);
+        } else if (clickCount === 1) {
+            if (submitFormRef.current) {
+                submitFormRef.current();
+            }
+            setClickCount(0);
         }
     };
-
-    useEffect(() => {
-
-    }, []);
-
     const handlePaymentMethodClick = (paymentMethod: string) => {
         if (paymentMethod !== "Tether") {
             setPopup(true);
@@ -105,12 +107,7 @@ const Deposit = () => {
         });
 
         if (
-            !user?.usdtWallet ||
-            !user?.btcWallet ||
-            !user?.perfectMoneyWallet ||
-            !user?.ethereumWallet ||
-            !user?.payeerWallet ||
-            !user?.card
+            !user?.usdtWallet
         ) {
             setAlert({
                 title: 'Упс!',
@@ -156,12 +153,6 @@ const Deposit = () => {
             console.error('Error creating deposit:', error);
         }
     };
-
-    useEffect(() => {
-        if (step === 2) {
-            setTimeout(() => setAlertPopup(true), 2000);
-        }
-    }, [step]);
 
     return (
         <Dashboard>
@@ -339,7 +330,7 @@ const Deposit = () => {
                             <div className={styles.bottomButtons}>
                                 <StepButtons onNext={handleButtonClick} onPrev={handlePreviousStep}
                                              firstButtonContent={<Image src={ArrowLeft} alt="Arrow Left"/>}
-                                             secondButtonContent={"Продолжить"}/>
+                                             secondButtonContent={"Я оплатил"}/>
                             </div>
                         </div>
                     </div>

@@ -5,18 +5,34 @@
   align-items: center;
   justify-items: center;
 
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    gap: 30px;
+  }
+
   h3 {
     font-size: 40px;
     font-weight: 700;
     margin: 0;
     font-family: 'GropledBold', sans-serif;
     text-transform: uppercase;
+
+    @media screen and (max-width: 915px) {
+      max-width: 200px;
+      font-size: 30px;
+      width: 100%;
+    }
   }
 }
 
 .buttons {
   display: flex;
   gap: 10px;
+
+  @media screen and (max-width: 918px) {
+    flex-direction: column-reverse;
+  }
 }
 
 .line {
