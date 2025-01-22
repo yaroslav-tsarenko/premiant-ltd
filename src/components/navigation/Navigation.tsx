@@ -6,6 +6,7 @@ import {GrHomeRounded} from 'react-icons/gr';
 import {LuUsersRound} from "react-icons/lu";
 import {CiCreditCard1, CiLogout} from "react-icons/ci";
 import {PiArrowsDownUp} from "react-icons/pi";
+import Cookies from 'js-cookie';
 import {BACKEND_URL} from "@/constants/constants";
 import {useRouter} from "next/navigation";
 import axios from "axios";
@@ -30,9 +31,15 @@ const Navigation: FC<NavigationProps> = ({userType}) => {
                 }, 1000);
             } else {
                 console.error('Logout error:', response.data.message);
+                Cookies.remove('token');
+                router.push('/');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
         } catch (error) {
             console.error('Network error during logout:', error);
+            Cookies.remove('token');
         }
     };
 
