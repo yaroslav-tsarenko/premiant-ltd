@@ -74,6 +74,8 @@
 .description {
   font-size: 16px;
   font-weight: 500;
+  flex-direction: column;
+  gap: 20px;
   background: linear-gradient(to right, var(--grey-font-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -81,6 +83,10 @@
   width: 100%;
   margin: 10px 0 0 0;
   text-align: center;
+
+  p{
+    margin: 10px 0 0 0;
+  }
 }
 
 .buttonsContainer {

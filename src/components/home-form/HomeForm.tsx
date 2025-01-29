@@ -16,7 +16,7 @@ const HomeForm: FC<FormProps> = ({ headline, description }) => {
         try {
             const response = await newRequest.post('/form/create-form', { name, email });
             console.log(response);
-            setAlert({ title: 'Успех', description: "Форма успешно сохранена!" });
+            setAlert({ title: 'Успех', description: "Форма успешно отправлена!" });
             setName('');
             setEmail('');
         } catch (error) {

@@ -69,9 +69,10 @@
 
 .keyBenefits {
   display: flex;
-  width: fit-content;
   user-select: none;
   pointer-events: none;
+  max-width: 1380px;
+  width: 100%;
 
   @media screen and (max-width: 768px) {
     display: none;

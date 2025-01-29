@@ -33,9 +33,8 @@ const Payment = () => {
     const [withdrawId, setWithdrawId] = useState<string>('');
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
     const [alertPopup, setAlertPopup] = useState<boolean>(false);
-    const [clickCount, setClickCount] = useState(0);
     const router = useRouter();
-
+    const [submitOnClose, setSubmitOnClose] = useState(false);
     const handleNextStep = () => {
         setStep((prev) => (prev < 3 ? prev + 1 : 1));
     };
@@ -51,14 +50,15 @@ const Payment = () => {
     const submitFormRef = useRef<() => void>();
 
     const handleButtonClick = () => {
-        if (clickCount === 0) {
-            setAlertPopup(true);
-            setClickCount(1);
-        } else if (clickCount === 1) {
-            if (submitFormRef.current) {
-                submitFormRef.current();
-            }
-            setClickCount(0);
+        setAlertPopup(true);
+        setSubmitOnClose(true);
+    };
+
+    const handleClosePopup = () => {
+        setAlertPopup(false);
+        if (submitOnClose && submitFormRef.current) {
+            submitFormRef.current();
+            setSubmitOnClose(false);
         }
     };
 
@@ -84,6 +84,8 @@ const Payment = () => {
         const withdrawId = Math.floor(1000000 + Math.random() * 9000000).toString();
         setWithdrawId(withdrawId);
 
+        const amount = parseFloat(values.amount);
+
         if (user?.balance === 0) {
             setAlert({
                 title: 'Упс!',
@@ -92,10 +94,10 @@ const Payment = () => {
             return;
         }
 
-        if (!user?.usdtWallet) {
+        if (!user || user.balance === undefined || user.balance < amount) {
             setAlert({
                 title: 'Упс!',
-                description: 'Вы не указали платежные данные'
+                description: 'У вас недостаточно средств'
             });
             return;
         }
@@ -136,17 +138,18 @@ const Payment = () => {
             console.error('Error creating withdraw:', error);
         }
     };
+
     return (
         <Dashboard>
             {alertPopup && (
                 <Popup
                     title="Проверьте перевод и данные"
-                    description="Вы уверены, что совершаете перевод в сети TRC-20 на указанный нами кошелёк? Проверьте его на корректность! Т.к. средства могут быть утеряны при неправильном вводе адреса или сети перевода! Также, в случае, если средства не поступят, мы не сможем зачислить их на ваш баланс. Пожалуйста, убедитесь в правильности перевода!"
+                    description="Проверьте адрес кошелька на корректность и убедитесь в правильности сети (TRC-20)
+Средства могут быть утеряны при неправильном вводе адреса или сети перевода!"
                     onClose={() => setAlert(null)}
                     firstChildren={<Button variant="popupGrey" onClick={() => setAlertPopup(false)}>Отменить</Button>}
-                    secondChildren={<Button variant="popupBlack" onClick={() => setAlertPopup(false)}>Я уверен,
-                        продолжить</Button>}
-                />
+                    secondChildren={<Button variant="popupBlack" onClick={handleClosePopup}>Я уверен,
+                        продолжить</Button>}/>
             )}
             {popup && (
                 <Popup

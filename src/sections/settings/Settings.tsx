@@ -67,7 +67,12 @@ const Settings = () => {
         console.log("user id:", user?._id);
         const filteredFormData = Object.fromEntries(
             Object.entries(formData).filter(([, value]) => value !== undefined && value !== '')
-        );
+        ) as { [key: string]: string };
+
+        if (filteredFormData.visaMastercard && filteredFormData.visaMastercard.replace(/\s/g, '').length < 16) {
+            setAlert({title: 'Ошибка', description: 'Нельзя сохранить изменения, номер карты должен содержать 16 цифр'});
+            return;
+        }
 
         const token = document.cookie
             .split('; ')

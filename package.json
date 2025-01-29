@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/material": "^6.4.1",
     "@react-google-maps/api": "^2.20.3",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
@@ -16,6 +17,7 @@
     "classnames": "^2.5.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "deepl": "^1.0.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",

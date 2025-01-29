@@ -25,7 +25,8 @@ const PaymentDetails = forwardRef((props, ref) => {
         ethereum: Yup.string().required('Введите адрес кошелька Ethereum'),
         visaMastercard: Yup.string()
             .matches(/^(?:\d{4} ){3}\d{4}$/, 'Неверный номер карты Visa / Mastercard')
-            .required('Введите номер карты Visa / Mastercard'),
+            .required('Введите номер карты Visa / Mastercard')
+            .test('len', 'Номер карты должен содержать минимум 16 цифр', val => (val ? val.replace(/\s/g, '').length >= 16 : false)),
     });
 
     const formatCardNumber = (value: string) => {

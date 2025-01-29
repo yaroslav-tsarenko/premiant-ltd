@@ -116,7 +116,7 @@ const ForgotPassword = () => {
             } else {
                 const errorData = await response.json();
                 console.error("Error resetting password:", errorData.message);
-                setAlert({ title: "Error", description: errorData.message });
+                setAlert({ title: "Произошла ошибка при смене пароля", description: "Такого аккаунта нету в системе" });
             }
         } catch (error) {
             console.error("Error resetting password:", error);
@@ -166,7 +166,7 @@ const ForgotPassword = () => {
                                 </div>
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
-                                        {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
+                                        {loading ? <RotatingLinesLoader title="Обработка..." /> : "Восстановить пароль"}
                                     </button>
                                     <p className={styles.bottomText}>
                                         Или {" "}
@@ -221,7 +221,7 @@ const ForgotPassword = () => {
 
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
-                                        {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
+                                        {loading ? <RotatingLinesLoader title="Обработка..." /> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
@@ -282,7 +282,7 @@ const ForgotPassword = () => {
                                 </div>
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
-                                        {loading ? <RotatingLinesLoader title="Processing..." /> : "Восстановить пароль"}
+                                        {loading ? <RotatingLinesLoader title="Обработка..." /> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
