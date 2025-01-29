@@ -31,6 +31,20 @@ const LanguageDropdown = () => {
         addGoogleTranslateScript();
     }, []);
 
+    useEffect(() => {
+        let hasReloaded = false;
+
+        if (selectedLanguage === 'EN') {
+            const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+            if (combo) {
+                combo.value = 'en';
+                combo.dispatchEvent(new Event('change'));
+            }
+        } else if (selectedLanguage === 'RU' && !hasReloaded) {
+            hasReloaded = true;
+        }
+    }, [selectedLanguage]);
+
     const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const language = event.target.value;
         if (language !== 'RU' && language !== 'EN') {
@@ -38,13 +52,16 @@ const LanguageDropdown = () => {
         } else {
             setSelectedLanguage(language);
             localStorage.setItem('selectedLanguage', language);
-            const combo = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-            if (combo) {
-                combo.value = language.toLowerCase();
-                combo.dispatchEvent(new Event('change'));
+            if (language === 'RU') {
+                const script = document.querySelector('script[src*="translate.google.com"]');
+                if (script) {
+                    script.remove();
+                }
             }
+            setTimeout(() => {
+                window.location.reload();
+            }, 700);
         }
-        window.location.reload();
     };
 
     useEffect(() => {
@@ -58,7 +75,7 @@ const LanguageDropdown = () => {
     return (
         <div className={styles.languageDropdown}>
             <select value={selectedLanguage} onChange={handleLanguageChange}>
-                <option value="RU">RU</option>
+                <option value="RU">{selectedLanguage === 'EN' ? "РУ" : "RU"}</option>
                 <option value="EN">EN</option>
                 <option value="ES">ES</option>
                 <option value="DE">DE</option>
@@ -74,7 +91,7 @@ const LanguageDropdown = () => {
                     secondChildren={<Button variant="popupBlack" onClick={() => setShowPopup(false)}>Хорошо</Button>}
                 />
             )}
-            <div id="google_translate_element" style={{ display: 'none' }}></div>
+            <div id="google_translate_element" style={{ display: selectedLanguage === 'RU' ? 'none' : 'block', position: "absolute", right: "-200%" }}></div>
         </div>
     );
 };

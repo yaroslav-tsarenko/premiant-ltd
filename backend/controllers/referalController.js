@@ -18,6 +18,20 @@ const countReferralClick = async (req, res) => {
     }
 };
 
+const updateActiveReferrals = async () => {
+    try {
+        const referrals = await Referal.find();
+        for (const referral of referrals) {
+            const users = await User.find({ curator: referral.referralCode });
+            referral.active = users.length;
+            await referral.save();
+        }
+        console.log('Referral active counts updated');
+    } catch (error) {
+        console.error('Error updating referral active counts:', error);
+    }
+};
+
 const getCurrentReferral = async (req, res) => {
     try {
         const referral = await Referal.findOne({ userId: req.user.id });
@@ -48,5 +62,6 @@ const getReferalByCode = async (req, res) => {
 module.exports = {
     getCurrentReferral,
     getReferalByCode,
-    countReferralClick
+    countReferralClick,
+    updateActiveReferrals
 };

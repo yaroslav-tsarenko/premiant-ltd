@@ -28,6 +28,7 @@ import CookiePopup from "@/components/cookie-popup/CookiePopup";
 import {useUser} from "@/utils/UserContext";
 
 export default function Home() {
+
     const addressRef = useRef<HTMLDivElement>(null);
     const user = useUser();
 

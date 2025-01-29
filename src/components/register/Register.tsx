@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styles from './Register.module.scss';
 import { AuthenticationProps } from '@/types/authentication';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -29,6 +29,18 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, refe
         console.error('Error:', error);
         return null;
     }
+    const scrollPage = (direction: 'top' | 'bottom') => {
+        if (direction === 'top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (direction === 'bottom') {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+    };
+    useEffect(() => {
+        setTimeout(() => {
+            scrollPage("top")
+        }, 300)
+    }, []);
     const validationSchema = Yup.object({
         name: Yup.string().required('Введите имя'),
         secondName: Yup.string().required('Введите фамилию'),

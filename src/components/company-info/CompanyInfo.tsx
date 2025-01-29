@@ -6,8 +6,15 @@ import Gradient from "@/assets/icons/gradient.svg";
 import Dot from "@/components/dot/Dot";
 import ContainerWrapper from "@/components/container-wrapper/ContainerWrapper";
 import Button from "@/components/button/Button";
+import {useRouter} from "next/navigation";
 
 const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
+
+    const router = useRouter();
+
+    const handleNav = (str: string) =>{
+        router.push(str);
+    }
     return (
         <ContainerWrapper noPadding={true}>
             <div className={styles.info}>
@@ -43,7 +50,7 @@ const CompanyInfo: FC<CompanyInfoProps> = ({images = []}) => {
                             для
                             роста и максимизации доходов.
                         </p>
-                        <Button variant={"companyInfo"}>Начать инвестировать</Button>
+                        <Button variant={"companyInfo"} onClick={()=>(handleNav("/register"))}>Начать инвестировать</Button>
                     </div>
                 </div>
                 <div className={styles.images}>

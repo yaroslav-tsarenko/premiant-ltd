@@ -2,7 +2,6 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { authWrapper } from "@/utils/AuthWrapper";
-import LenisScriptLoader from "@/utils/LenisScriptLoader";
 import React from "react";
 import type { Metadata } from "next";
 
@@ -19,7 +18,6 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en">
         <body>
-        <LenisScriptLoader />
         <Header />
         {children}
         <Footer
@@ -34,8 +32,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                 { label: "E-mail", value: "support@premiant.ltd" },
                 { label: "Phone", value: "+44 781 3243472" },
                 { label: "Telegram", value: "@PremiantLTD" },
-            ]}
-        />
+            ]}/>
         </body>
         </html>
     );

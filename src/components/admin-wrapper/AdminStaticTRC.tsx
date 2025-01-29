@@ -28,7 +28,7 @@ const AdminStaticTRC = () => {
     const handleApplyChanges = async (values: { trcAddress: string }) => {
         try {
             await axios.put(`${BACKEND_URL}/trc/update-trc`, { address: values.trcAddress });
-            setAlert({ title: "Успех!", description: "TRC адрес обновлён успещно на:", bottomText: values.trcAddress });
+            setAlert({ title: "Успех!", description: "TRC адрес обновлён успешно на:", bottomText: values.trcAddress });
             console.log(values.trcAddress);
             setTrcAddress(values.trcAddress);
             setTimeout(() => {

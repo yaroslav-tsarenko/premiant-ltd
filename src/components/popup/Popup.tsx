@@ -17,9 +17,11 @@ const Popup: FC<PopupProps> = ({ title, description, secondChildren, firstChildr
                     <h1 className={styles.headline}>
                         {title}
                     </h1>
-                    <p className={styles.description}>
-                        {description}
-                    </p>
+                    <div className={styles.description}>
+                        {Array.isArray(description) ? description.map((desc, index) => (
+                            <p key={index}>{desc}</p>
+                        )) : <p>{description}</p>}
+                    </div>
                 </div>
                 <div className={styles.buttonsContainer}>
                     {firstChildren}

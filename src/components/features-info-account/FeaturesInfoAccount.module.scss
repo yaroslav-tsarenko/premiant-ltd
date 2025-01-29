@@ -99,6 +99,11 @@
   gap: 55px;
   height: fit-content;
   justify-content: center;
+  margin: 50px 0 0 0;
+
+  @media screen and (max-width: 768px ) {
+    margin: 0;
+  }
 }
 
 @media (max-width: 768px) {

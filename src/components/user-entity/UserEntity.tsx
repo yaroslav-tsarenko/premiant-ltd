@@ -39,6 +39,9 @@ const UserEntity: FC<UserEntityProps> = ({name, secondName, amount, date, wallet
                 description: `Статус обновлён для ${email} на`,
                 bottomText: status === 'applied' ? 'Подтверждено' : 'Отклонено'
             });
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000)
         } catch (error) {
             console.error('Error updating status:', error);
             if (error instanceof Error) {

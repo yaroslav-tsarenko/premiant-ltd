@@ -1,23 +1,21 @@
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (to, subject, text) => {
-
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: 'smtp.hostinger.com',
         port: 587,
         secure: false,
         auth: {
-            user: 'openshipai@gmail.com',
-            pass: 'ikug wqac hidc gian'
+            user: 'support@premiant.ltd',
+            pass: 'Premiant12345!'
         },
         tls: {
             rejectUnauthorized: false
         }
     });
 
-
     const mailOptions = {
-        from: 'premiantltd@gmail.com',
+        from: 'support@premiant.ltd',
         to,
         subject,
         text

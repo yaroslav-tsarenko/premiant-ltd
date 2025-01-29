@@ -5,8 +5,8 @@ const transactionSchema = new mongoose.Schema({
     email: {type: String, required: true},
     amount: {type: Number, required: true},
     date: {type: Date, default: Date.now},
-    status: { type: String, required: true, enum: ['pending', 'applied', 'denied'] },
-    walletType: {type: String, required: true},
+    status: { type: String, required: true, enum: ['pending', 'applied', 'denied'], default: 'pending' },
+    walletType: {type: String},
     transactionType: {type: String, required: true, enum: ['withdraw', 'deposit']},
     walletAddress: {type: String, required: true},
 });

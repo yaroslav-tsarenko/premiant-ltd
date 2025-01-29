@@ -4,8 +4,10 @@ import React from 'react';
 import Metrics from "@/sections/metrics/Metrics";
 import Dashboard from "@/components/dashboard/Dashboard";
 import Tariff from "@/sections/tariff/Tariff";
+import accountEN from "@/assets/images/accountDeskEn.svg"
 import account from "@/assets/images/accountDesk.svg"
 import accountMob from "@/assets/images/accountMob.svg"
+import accountMobEN from "@/assets/images/accountDeskMobEn.svg"
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import BottomNuvLogo from "@/assets/images/bottomNuvLogo.svg";
 import {GiHamburgerMenu} from "react-icons/gi";
@@ -15,12 +17,12 @@ const DashboardAccount = () => {
 
     const customBlocksImage = {
         ru: account,
-        en: account
+        en: accountEN
     };
 
     const customBlocksImageMob = {
         ru: accountMob,
-        en: accountMob
+        en: accountMobEN
     };
 
     return (
