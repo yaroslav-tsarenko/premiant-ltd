@@ -32,7 +32,6 @@ const Tariff = () => {
                 </div>
                 <TariffComponent buttonClass={"clipPathOff"} headline="ЭКСКЛЮЗИВ" price="40 000" percent="172" variant="fullHeight" term="6" picked={currentTariff === "exclusive"}/>
             </div>
-
             <div className={styles.responsiveTariffs}>
                 <div className={styles.groupTariffs}>
                     <TariffComponent buttonClass={"clipPathOff"} headline="СТАРТ" price="100" percent="2" variant="fullWidth" term="28"          picked={currentTariff === "start"}/>

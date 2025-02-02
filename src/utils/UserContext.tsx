@@ -11,6 +11,7 @@ export type User = {
     balance: number;
     curator: string;
     earnings: number;
+    tariffBalance: number;
     tariff: string;
     withdrawals: number;
     role: string;
