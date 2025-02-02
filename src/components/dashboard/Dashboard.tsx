@@ -12,7 +12,7 @@ const Dashboard: FC<DashboardProps> = ({ children }) => {
     const user = useUser();
     const router = useRouter();
     const showWarning = !user?.usdtWallet && !user?.btcWallet && !user?.perfectMoneyWallet && !user?.ethereumWallet && !user?.payeerWallet && !user?.card;
-    const showAlert = user?.tariff === 'none';
+    const showAlert = user?.balance === 0;
 
     useEffect(() => {
         let token = "";

@@ -4,6 +4,7 @@
   width: 90%;
   padding: 17px 20px;
   background-color: #EBF0F3;
+  position: relative;
   gap: 30px;
   height: 100%;
   border-radius: 15px;
@@ -19,6 +20,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.widthdrawButton{
+  display: flex;
+  position: absolute;
+  top: 10%;
+  gap: 5px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  font-weight: bold;
+  background: none;
+  color: green;
+  font-size: 15px;
+  outline: none;
+  border-radius: 50px;
+  border: none;
+  right: 2%;
+  padding: 10px 15px;
+  transition: 0.3s all ease-in-out;
+
+  &:hover {
+    background: #D3D3D3;
+  }
+
+  @media screen and (max-width: 1028px) {
+    left: 2%;
+    top: 2%;
+    right: unset;
+  }
 }
 
 .currentSalary {
