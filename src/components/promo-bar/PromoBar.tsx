@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useRef } from 'react';
 import { PromoBarProps } from "@/types/promoBar";
 import Image from 'next/image';
 import Link from "next/link";
@@ -8,20 +8,38 @@ import styles from './PromoBar.module.scss';
 import { BACKEND_URL } from "@/constants/constants";
 
 const PromoBar: FC<PromoBarProps> = ({ text, promoLink, arrowIcon }) => {
-    const [totalBalance, setTotalBalance] = useState<number | null>(null);
+    const [totalBalance, setTotalBalance] = useState<number | null>(() => {
+        const savedBalance = localStorage.getItem('totalBalance');
+        return savedBalance ? parseFloat(savedBalance) : null;
+    });
+    const [isFetching, setIsFetching] = useState<boolean>(true);
+    const wsRef = useRef<WebSocket | null>(null);
 
     useEffect(() => {
         const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`);
+        wsRef.current = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`);
 
-        ws.onmessage = (event) => {
+        wsRef.current.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            setTotalBalance(data.totalBalance);
+            setTotalBalance((prevBalance) => {
+                if (prevBalance !== data.totalBalance) {
+                    if (data.totalBalance !== undefined && data.totalBalance !== null) {
+                        localStorage.setItem('totalBalance', data.totalBalance.toString());
+                    }
+                    setIsFetching(false);
+                    return data.totalBalance;
+                }
+                return prevBalance;
+            });
         };
 
-        ws.onclose = () => console.log('WebSocket connection closed');
+        wsRef.current.onclose = () => console.log('WebSocket connection closed');
 
-        return () => ws.close();
+        return () => {
+            if (wsRef.current) {
+                wsRef.current.close();
+            }
+        };
     }, []);
 
     return (
@@ -29,7 +47,15 @@ const PromoBar: FC<PromoBarProps> = ({ text, promoLink, arrowIcon }) => {
             <div className={styles.promo}>
                 <div>
                     <p className={styles.price}>
-                        {totalBalance !== null ? <span>+{totalBalance.toLocaleString('en-US').replace(/,/g, ' ')}$</span> : 'Идёт подсчёт...'}
+                        {isFetching ? (
+                            'Идёт подсчёт...'
+                        ) : (
+                            totalBalance !== null && totalBalance !== undefined ? (
+                                <span>+{totalBalance.toLocaleString('en-US').replace(/,/g, ' ')}$</span>
+                            ) : (
+                                'Идёт подсчёт...'
+                            )
+                        )}
                     </p>
                     <p className={styles.text}>{text}</p>
                 </div>
