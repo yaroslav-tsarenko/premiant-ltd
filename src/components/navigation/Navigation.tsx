@@ -22,16 +22,21 @@ const Navigation: FC<NavigationProps> = ({userType}) => {
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post(`${BACKEND_URL}/auth/logout`, {}, {withCredentials: true});
+            const response = await axios.post(`${BACKEND_URL}/auth/logout`, {}, { withCredentials: true });
             if (response.status === 200) {
                 console.log('Logout successful');
+                Object.keys(Cookies.get()).forEach(cookieName => {
+                    Cookies.remove(cookieName);
+                });
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
                 router.push('/');
             } else {
                 console.error('Logout error:', response.data.message);
-                Cookies.remove('token');
+                Object.keys(Cookies.get()).forEach(cookieName => {
+                    Cookies.remove(cookieName);
+                });
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
@@ -39,7 +44,10 @@ const Navigation: FC<NavigationProps> = ({userType}) => {
             }
         } catch (error) {
             console.error('Network error during logout:', error);
-            Cookies.remove('token');
+            // Clear all cookies
+            Object.keys(Cookies.get()).forEach(cookieName => {
+                Cookies.remove(cookieName);
+            });
         }
     };
 

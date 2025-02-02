@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BACKEND_URL} from "@/constants/constants";
+import { BACKEND_URL } from "@/constants/constants";
 
 let token = "";
 if (typeof document !== "undefined") {
@@ -14,6 +14,6 @@ export const newRequest = axios.create({
     timeout: 5000,
     withCredentials: true,
     headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token ? `Bearer ${token}` : "",
     }
 });

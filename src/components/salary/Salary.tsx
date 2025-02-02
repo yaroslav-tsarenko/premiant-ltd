@@ -12,12 +12,8 @@ import { BACKEND_URL } from "@/constants/constants";
 const Salary = () => {
     const user = useUser();
     const [tariffBalance, setTariffBalance] = useState(user?.tariffBalance ?? 0);
-    const earnings = user?.earnings ?? 0;
-    const balance = user?.balance ?? 0;
     const tariff = user?.tariff ?? '';
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
-    const difference = earnings - balance;
-    const percentage = balance ? Math.floor((difference / balance) * 100) : 0;
 
     useEffect(() => {
         const ws = new WebSocket(`${BACKEND_URL.replace(/^http/, 'ws')}`);
@@ -50,6 +46,35 @@ const Salary = () => {
                 return "Данные отсутствуют";
         }
     };
+
+    const calculatePercentage = (tariff: string, tariffBalance: number) => {
+        let baseValue = 0;
+
+        switch (tariff) {
+            case 'start':
+                baseValue = 100;
+                break;
+            case 'comfort':
+                baseValue = 2000;
+                break;
+            case 'premium':
+                baseValue = 7000;
+                break;
+            case 'maximum':
+                baseValue = 15000;
+                break;
+            case 'exclusive':
+                baseValue = 40000;
+                break;
+            default:
+                return 0;
+        }
+
+        const difference = tariffBalance - baseValue;
+        return Math.floor((difference / baseValue) * 100);
+    };
+
+    const percentage = calculatePercentage(tariff, tariffBalance);
 
     const handleWithdraw = async () => {
         if (user?.tariffBalance === 0) {
