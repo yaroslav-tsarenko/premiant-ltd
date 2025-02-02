@@ -1,5 +1,5 @@
 export const FRONTEND_URL = "https://premiant.ltd";
-export const BACKEND_URL = "http://localhost:8080";
+export const BACKEND_URL = "https://backend.premiant.ltd";
 
 /*
 http://localhost:3000
