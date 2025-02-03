@@ -127,7 +127,7 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, refe
         <div className={styles.wrapper}>
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             {user ?
-                <Validation title="Вы уже зарегистрированы, спасибо за регистрацию!" />
+                <Validation title="Переадресация..." button={false} redirect={true}/>
                 :
                 <div className={styles.registerContainer}>
                     {step === 1 ? (

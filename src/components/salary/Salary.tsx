@@ -14,7 +14,6 @@ const Salary = () => {
     const [tariffBalance, setTariffBalance] = useState(user?.tariffBalance ?? 0);
     const tariff = user?.tariff ?? '';
     const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
-
     useEffect(() => {
         const ws = new WebSocket(`${BACKEND_URL.replace(/^http/, 'ws')}`);
 
@@ -47,34 +46,12 @@ const Salary = () => {
         }
     };
 
-    const calculatePercentage = (tariff: string, tariffBalance: number) => {
-        let baseValue = 0;
-
-        switch (tariff) {
-            case 'start':
-                baseValue = 100;
-                break;
-            case 'comfort':
-                baseValue = 2000;
-                break;
-            case 'premium':
-                baseValue = 7000;
-                break;
-            case 'maximum':
-                baseValue = 15000;
-                break;
-            case 'exclusive':
-                baseValue = 40000;
-                break;
-            default:
-                return 0;
-        }
-
-        const difference = tariffBalance - baseValue;
-        return Math.floor((difference / baseValue) * 100);
+    const calculatePercentage = (numA: number, numB: number) => {
+        const difference = numA - numB;
+        return Math.floor((difference / numB) * 100);
     };
 
-    const percentage = calculatePercentage(tariff, tariffBalance);
+    const percentage = calculatePercentage(tariffBalance, user?.tariffFirstDeposit || 0);
 
     const handleWithdraw = async () => {
         if (user?.tariffBalance === 0) {
@@ -107,23 +84,23 @@ const Salary = () => {
     };
 
     const calculateRemainingDays = (tariff: string) => {
-        let daysDiff = 0;
+        let daysDiff = "";
 
         switch (tariff) {
             case 'start':
-                daysDiff = 28;
+                daysDiff = "28 дней";
                 break;
             case 'comfort':
-                daysDiff = 24;
+                daysDiff = "24 дня";
                 break;
             case 'premium':
-                daysDiff = 17;
+                daysDiff = "17 дней";
                 break;
             case 'maximum':
-                daysDiff = 9;
+                daysDiff = "9 дней";
                 break;
             case 'exclusive':
-                daysDiff = 6;
+                daysDiff = "6 дней";
                 break;
             default:
                 return "Неизвестно";
@@ -164,7 +141,7 @@ const Salary = () => {
                             До конца тарифа осталось:
                         </p>
                         <p className={styles.title}>
-                            {remainingDays !== "Неизвестно" ? `${remainingDays} дней` : "Данные отсутствуют"}
+                            {remainingDays !== "Неизвестно" ? `${remainingDays}` : "Данные отсутствуют"}
                         </p>
                     </div>
                 </div>
