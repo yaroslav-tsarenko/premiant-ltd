@@ -12,6 +12,7 @@ export type User = {
     curator: string;
     earnings: number;
     tariffBalance: number;
+    tariffFirstDeposit: number;
     tariff: string;
     withdrawals: number;
     role: string;
