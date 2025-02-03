@@ -120,7 +120,7 @@ const Salary = () => {
 
         const { rate, min, next } = tariffs[tariff as keyof typeof tariffs];
         if (!next) return "Вы уже на максимальном тарифе";
-        if (balance < min) return `Минимальная сумма для ${tariff} — ${min}$`;
+        if (balance < min) return `Данные отсутствуют`;
 
         let days = 0;
         let currentBalance = balance;
@@ -133,7 +133,6 @@ const Salary = () => {
     };
 
     const remainingDays = calculateDays(user?.tariffBalance || 0, user?.tariff || "");
-
 
     return (
         <>
