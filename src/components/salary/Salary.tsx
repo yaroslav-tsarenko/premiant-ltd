@@ -10,6 +10,14 @@ import Alert from "@/components/alert/Alert";
 import { BACKEND_URL } from "@/constants/constants";
 
 const Salary = () => {
+    const tariffs = {
+        start: { rate: 2 / 100, min: 100, next: 2000 },
+        comfort: { rate: 3.35 / 100, min: 2000, next: 5000 },
+        premium: { rate: 5.67 / 100, min: 5000, next: 10000 },
+        maximum: { rate: 154 / 100, min: 10000, next: 50000 },
+        exclusive: { rate: 172 / 100, min: 50000, next: null },
+    };
+
     const user = useUser();
     const [tariffBalance, setTariffBalance] = useState(user?.tariffBalance ?? 0);
     const tariff = user?.tariff ?? '';
@@ -46,12 +54,29 @@ const Salary = () => {
         }
     };
 
-    const calculatePercentage = (numA: number, numB: number) => {
-        const difference = numA - numB;
-        return Math.floor((difference / numB) * 100);
+    const baseValue = (tariff: string) =>{
+        switch (tariff){
+            case "start":
+             return 2000
+            case "comfort":
+                return 7000
+            case "premium":
+                return 15000
+            case "maximum":
+                return 40000
+            case "exclusive":
+                return 50000
+            default:
+                return 100
+        }
     };
 
-    const percentage = calculatePercentage(tariffBalance, user?.tariffFirstDeposit || 0);
+
+    const calculatePercentage = (tariffBalance: number, baseValue: number) => {
+        return Math.floor((tariffBalance / baseValue) * 100);
+    };
+
+    const percentage = calculatePercentage(tariffBalance, baseValue(user?.tariff || ""));
 
     const handleWithdraw = async () => {
         if (user?.tariffBalance === 0) {
@@ -82,35 +107,32 @@ const Salary = () => {
             console.log(error)
         }
     };
+    const remainingMoney = parseFloat(remainingMoneyForNextTariff(tariff, tariffBalance)).toFixed(2);
 
-    const calculateRemainingDays = (tariff: string) => {
-        let daysDiff = "";
-
-        switch (tariff) {
-            case 'start':
-                daysDiff = "28 дней";
-                break;
-            case 'comfort':
-                daysDiff = "24 дня";
-                break;
-            case 'premium':
-                daysDiff = "17 дней";
-                break;
-            case 'maximum':
-                daysDiff = "9 дней";
-                break;
-            case 'exclusive':
-                daysDiff = "6 дней";
-                break;
-            default:
-                return "Неизвестно";
-        }
-
-        return daysDiff;
+    const getDaysLabel = (days: number): string => {
+        if (days % 10 === 1 && days % 100 !== 11) return "день";
+        if ([2, 3, 4].includes(days % 10) && ![12, 13, 14].includes(days % 100)) return "дня";
+        return "дней";
     };
 
-    const remainingDays = calculateRemainingDays(tariff);
-    const remainingMoney = parseFloat(remainingMoneyForNextTariff(tariff, tariffBalance)).toFixed(2);
+    const calculateDays = (balance: number, tariff: string): string => {
+        if (!(tariff in tariffs)) return "Данные отсутствуют";
+
+        const { rate, min, next } = tariffs[tariff as keyof typeof tariffs];
+        if (!next) return "Вы уже на максимальном тарифе";
+        if (balance < min) return `Данные отсутствуют`;
+
+        let days = 0;
+        let currentBalance = balance;
+
+        while (currentBalance < next) {
+            currentBalance += currentBalance * rate;
+            days++;
+        }
+        return `${days} ${getDaysLabel(days)}`;
+    };
+
+    const remainingDays = calculateDays(user?.tariffBalance || 0, user?.tariff || "");
 
     return (
         <>
