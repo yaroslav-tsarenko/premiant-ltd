@@ -51,7 +51,7 @@ const Login: FC<AuthenticationProps> = ({ headline, greeting, linkRoute }) => {
         <div className={styles.wrapper}>
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             {user ?
-                <Validation title="Вы уже авторизованы" />
+                <Validation title="Переадресация..." redirect={true} button={false} />
                 :
                 <div className={styles.loginContainer}>
                     <div className={styles.head}>
