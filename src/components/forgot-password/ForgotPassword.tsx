@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styles from "./ForgotPassword.module.scss";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
-import { TbEye, TbEyeClosed } from "react-icons/tb";
+import {TbEye, TbEyeClosed} from "react-icons/tb";
 import Alert from "@/components/alert/Alert";
 import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
-import {BACKEND_URL} from "@/constants/constants";
 import {useRouter} from "next/navigation";
+import {newRequest} from "@/utils/newRequest";
 
 type FormData = {
     email: string;
@@ -20,14 +20,15 @@ type FormData = {
 const ForgotPassword = () => {
     const [step, setStep] = useState<number>(1);
     const router = useRouter();
-    const [formData, setFormData] = useState<FormData>({
+    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const initialValues: FormData = {
         email: "",
         verificationCode: "",
         newPassword: "",
         confirmPassword: "",
-    });
-    const [alert, setAlert] = useState<{ title: string, description: string } | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    };
 
     const validationSchemas = [
         Yup.object({
@@ -46,19 +47,14 @@ const ForgotPassword = () => {
         }),
     ];
 
-    const handleNextStep = async (values: Partial<FormData>) => {
-        setFormData({ ...formData, ...values });
+    const handleNextStep = async (values: FormData) => {
         setLoading(true);
         if (step === 1) {
             try {
-                const response = await fetch(`${BACKEND_URL}/user/request-password-reset`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email: values.email }),
+                const response = await newRequest.post('/user/request-password-reset', {
+                    email: values.email,
                 });
-                if (response.ok) {
+                if (response.status === 200) {
                     setStep((prev) => prev + 1);
                 } else {
                     console.error("Error requesting password reset:", response.statusText);
@@ -70,14 +66,11 @@ const ForgotPassword = () => {
             }
         } else if (step === 2) {
             try {
-                const response = await fetch(`${BACKEND_URL}/user/verify-code`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email: formData.email, verificationCode: values.verificationCode }),
+                const response = await newRequest.post('/user/verify-code', {
+                    email: values.email,
+                    verificationCode: values.verificationCode,
                 });
-                if (response.ok) {
+                if (response.status === 200) {
                     setStep((prev) => prev + 1);
                 } else {
                     console.error("Error verifying code:", response.statusText);
@@ -92,34 +85,40 @@ const ForgotPassword = () => {
 
     const handleNav = (str: string) => {
         router.push(str);
-    }
+    };
 
     const handlePreviousStep = () => {
         setStep((prev) => prev - 1);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (values: FormData) => {
         setLoading(true);
         try {
-            const response = await fetch(`${BACKEND_URL}/user/reset-password`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email: formData.email, newPassword: formData.newPassword }),
+            const response = await newRequest.post('/user/reset-password', {
+                email: values.email,
+                newPassword: values.newPassword,
             });
-            if (response.ok) {
-                setAlert({ title: "Успех!", description: "Пароль изменён успешно!" });
+            if (response.status === 200) {
+                setAlert({title: "Успех!", description: "Пароль изменён!"});
                 setTimeout(() => {
                     window.location.href = "/login";
                 }, 500);
             } else {
-                const errorData = await response.json();
+                const errorData = response.data;
                 console.error("Error resetting password:", errorData.message);
-                setAlert({ title: "Произошла ошибка при смене пароля", description: "Такого аккаунта нету в системе" });
+                setAlert({title: "Упс!", description: errorData.message || "Такого пользователя нет"});
             }
-        } catch (error) {
-            console.error("Error resetting password:", error);
+        } catch (error: any) {
+            if (error.response) {
+                console.error("Error resetting password:", error.response.data);
+                setAlert({title: "Упс!", description: error.response.data.message || "Такого пользователя нет"});
+            } else if (error.request) {
+                console.error("Error resetting password:", error.request);
+                setAlert({title: "Упс!", description: "Нет ответа от сервера"});
+            } else {
+                console.error("Error resetting password:", error.message);
+                setAlert({title: "Упс!", description: error.message || "Ошибка на сервере"});
+            }
         } finally {
             setLoading(false);
         }
@@ -134,13 +133,13 @@ const ForgotPassword = () => {
     return (
         <div className={styles.wrapper}>
             <Formik
-                initialValues={formData}
+                initialValues={initialValues}
                 validationSchema={validationSchemas[step - 1]}
                 onSubmit={(values) => {
                     if (step < 3) {
                         handleNextStep(values);
                     } else {
-                        handleSubmit();
+                        handleSubmit(values);
                     }
                 }}
             >
@@ -162,11 +161,11 @@ const ForgotPassword = () => {
                                         placeholder="E-mail"
                                         className={styles.input}
                                     />
-                                    <ErrorMessage name="email" component="div" className={styles.error} />
+                                    <ErrorMessage name="email" component="div" className={styles.error}/>
                                 </div>
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
-                                        {loading ? <RotatingLinesLoader title="Обработка..." /> : "Восстановить пароль"}
+                                        {loading ? <RotatingLinesLoader title="Обработка..."/> : "Восстановить пароль"}
                                     </button>
                                     <p className={styles.bottomText}>
                                         Или {" "}
@@ -201,7 +200,7 @@ const ForgotPassword = () => {
                                             className={styles.input}
                                             readOnly
                                         />
-                                        <ErrorMessage name="email" component="div" className={styles.error} />
+                                        <ErrorMessage name="email" component="div" className={styles.error}/>
                                     </div>
 
                                     <div className={styles.inputGroup}>
@@ -221,7 +220,7 @@ const ForgotPassword = () => {
 
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
-                                        {loading ? <RotatingLinesLoader title="Обработка..." /> : "Восстановить пароль"}
+                                        {loading ? <RotatingLinesLoader title="Обработка..."/> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
@@ -257,9 +256,10 @@ const ForgotPassword = () => {
                                                 placeholder="Новый пароль"
                                             />
                                             <span className={styles.icon} onClick={toggleNewPasswordVisibility}>
-                                                {showNewPassword ? <TbEye /> : <TbEyeClosed />}</span>
+                                                {showNewPassword ? <TbEye/> : <TbEyeClosed/>}
+                                            </span>
                                         </div>
-                                        <ErrorMessage name="newPassword" component="div" className={styles.error} />
+                                        <ErrorMessage name="newPassword" component="div" className={styles.error}/>
                                     </div>
 
                                     <div className={styles.inputGroup}>
@@ -271,18 +271,15 @@ const ForgotPassword = () => {
                                                 className={styles.input}
                                             />
                                             <span className={styles.icon} onClick={toggleConfirmPasswordVisibility}>
-                                                {showConfirmPassword ? <TbEye /> : <TbEyeClosed />}</span>
+                                                {showConfirmPassword ? <TbEye/> : <TbEyeClosed/>}
+                                            </span>
                                         </div>
-                                        <ErrorMessage
-                                            name="confirmPassword"
-                                            component="div"
-                                            className={styles.error}
-                                        />
+                                        <ErrorMessage name="confirmPassword" component="div" className={styles.error}/>
                                     </div>
                                 </div>
                                 <div className={styles.bottomSection}>
                                     <button type="submit" className={styles.button} disabled={loading}>
-                                        {loading ? <RotatingLinesLoader title="Обработка..." /> : "Восстановить пароль"}
+                                        {loading ? <RotatingLinesLoader title="Обработка..."/> : "Восстановить пароль"}
                                     </button>
 
                                     <p className={styles.bottomText}>
@@ -301,7 +298,7 @@ const ForgotPassword = () => {
                     </Form>
                 )}
             </Formik>
-            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
+            {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
         </div>
     );
 };
