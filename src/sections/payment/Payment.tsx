@@ -71,6 +71,11 @@ const Payment = () => {
         }
     };
 
+    const handleNextStepAndClosePopup = () => {
+        setStep((prev) => (prev < 3 ? prev + 1 : 1));
+        setPopup(false)
+    }
+
     const handleFormSubmit = async (values: { amount: string; wallet: string }) => {
         await new Promise<void>((resolve) => {
             const observer = setInterval(() => {
@@ -157,7 +162,7 @@ const Payment = () => {
                     description="К сожалению, данный способ выплаты сейчас недоступен в связи с техническим обслуживанием. Пожалуйста, выберите Tether (USDT), который доступен и работает стабильно!"
                     onClose={() => setAlert(null)}
                     firstChildren={<Button variant="popupGrey" onClick={() => setPopup(false)}>Отменить</Button>}
-                    secondChildren={<Button variant="popupBlack" onClick={() => setPopup(false)}>Использовать Tether (TRC-20)</Button>}
+                    secondChildren={<Button variant="popupBlack" onClick={handleNextStepAndClosePopup}>Использовать Tether (TRC-20)</Button>}
                 />
             )}
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)}/>}
