@@ -10,11 +10,6 @@ export function authWrapper(Component: React.ComponentType<any>) {
             const cookieStore = await cookies();
             const token = cookieStore.get('token')?.value;
 
-            if (!token) {
-                console.warn("No token found in cookies.");
-                throw new Error("Authentication token missing.");
-            }
-
             const response = await fetch(`${BACKEND_URL}/user/get-user`, {
                 headers: { Authorization: `Bearer ${token}` },
                 cache: 'no-store',
