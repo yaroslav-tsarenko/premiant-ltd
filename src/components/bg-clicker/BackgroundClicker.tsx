@@ -1,9 +1,8 @@
 import React from 'react';
-import Image from "next/image";
 
 const BackgroundClicker: React.FC = () => {
     return (
-        <Image
+        <img
             style={{
                 display: 'block',
                 WebkitUserSelect: 'none',
