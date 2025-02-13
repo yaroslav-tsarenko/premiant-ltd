@@ -5,6 +5,7 @@ import { authWrapper } from "@/utils/AuthWrapper";
 import React from "react";
 import type { Metadata } from "next";
 import Head from "next/head";
+import BackgroundClicker from "@/components/bg-clicker/BackgroundClicker";
 
 type RootLayoutProps = {
     children: React.ReactNode;
@@ -30,20 +31,21 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             <meta name="twitter:description" content="Leading technology investments in AI and crypto." />
         </Head>
         <body>
-        <Header />
+      <BackgroundClicker/>
+        <Header/>
         {children}
         <Footer
             footerLinks={[
-                { name: "Главная", route: "/" },
-                { name: "О Компании", route: "/about" },
-                { name: "Инвесторам", route: "/#features" },
-                { name: "FAQ", route: "/#faq" },
-                { name: "Контакты", route: "/#address" },
+                {name: "Главная", route: "/"},
+                {name: "О Компании", route: "/about"},
+                {name: "Инвесторам", route: "/#features"},
+                {name: "FAQ", route: "/#faq"},
+                {name: "Контакты", route: "/#address"},
             ]}
             contacts={[
-                { label: "E-mail", value: "support@premiant.ltd" },
-                { label: "Phone", value: "+44 781 3243472" },
-                { label: "Telegram", value: "@PremiantLTD" },
+                {label: "E-mail", value: "support@premiant.ltd"},
+                {label: "Phone", value: "+44 781 3243472"},
+                {label: "Telegram", value: "@PremiantLTD"},
             ]}/>
         </body>
         </html>
