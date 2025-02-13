@@ -1,11 +1,10 @@
 import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
-import { authWrapper } from "@/utils/AuthWrapper";
+import {authWrapper} from "@/utils/AuthWrapper";
 import React from "react";
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import Head from "next/head";
-import BackgroundClicker from "@/components/bg-clicker/BackgroundClicker";
 
 type RootLayoutProps = {
     children: React.ReactNode;
@@ -14,24 +13,23 @@ type RootLayoutProps = {
 export const metadata: Metadata = {
     title: "Premiant LTD - Invest in technologies that deliver results | Traffic | Crypto | AI",
     description: "Invest in technologies that deliver results | Traffic | Crypto | AI",
-    authors: [{ name: "Premiant LTD" }],
+    authors: [{name: "Premiant LTD"}],
 };
 
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: React.FC<RootLayoutProps> = ({children}) => {
     return (
         <html lang="en">
         <Head>
-            <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-            <meta name="googlebot" content="noarchive" />
-            <meta property="og:title" content="Premiant LTD - Invest in technologies that deliver results" />
-            <meta property="og:description" content="Invest in AI, Traffic, and Crypto innovations." />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="Premiant LTD - Invest in technologies that deliver results" />
-            <meta name="twitter:description" content="Leading technology investments in AI and crypto." />
+            <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+            <meta name="googlebot" content="noarchive"/>
+            <meta property="og:title" content="Premiant LTD - Invest in technologies that deliver results"/>
+            <meta property="og:description" content="Invest in AI, Traffic, and Crypto innovations."/>
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:title" content="Premiant LTD - Invest in technologies that deliver results"/>
+            <meta name="twitter:description" content="Leading technology investments in AI and crypto."/>
         </Head>
         <body>
-      <BackgroundClicker/>
         <Header/>
         {children}
         <Footer
