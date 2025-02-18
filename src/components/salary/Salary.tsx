@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import styles from "./Salary.module.scss";
 import Diagram from "@/components/diagram/Diagram";
@@ -13,18 +11,19 @@ type TariffKey = 'start' | 'comfort' | 'premium' | 'maximum' | 'exclusive' | str
 
 const Salary = () => {
 
-    const tariffs: Record<TariffKey, { rate: number; min: number; next: number | null }> = {
-        start: { rate: 2 / 100, min: 100, next: 2000 },
-        comfort: { rate: 3.35 / 100, min: 2000, next: 7000 },
-        premium: { rate: 5.67 / 100, min: 5000, next: 15000 },
-        maximum: { rate: 154 / 100, min: 10000, next: 40000 },
-        exclusive: { rate: 172 / 100, min: 40000, next: null },
+    const tariffs: Record<TariffKey, { rate: number; min: number; next: number | null; term: number }> = {
+        start: { rate: 2 / 100, min: 100, next: 2000, term: 28 },
+        comfort: { rate: 3.35 / 100, min: 2000, next: 7000, term: 24 },
+        premium: { rate: 5.67 / 100, min: 5000, next: 15000, term: 17 },
+        maximum: { rate: 154 / 100, min: 10000, next: 40000, term: 9 },
+        exclusive: { rate: 172 / 100, min: 40000, next: null, term: 6 },
     };
 
     const user = useUser();
     const [tariffBalance, setTariffBalance] = useState(user?.tariffBalance ?? 0);
     const tariff = user?.tariff ?? "";
     const [alert, setAlert] = useState<{ title: string; description: string } | null>(null);
+    const [term, setTerm] = useState(tariffs[user?.tariff || ""]?.term);
 
     useEffect(() => {
         const ws = new WebSocket(`${BACKEND_URL.replace(/^http/, "ws")}`);
@@ -41,6 +40,24 @@ const Salary = () => {
         };
     }, [user?._id]);
 
+    useEffect(() => {
+        const savedTerm = localStorage.getItem('term');
+        const initialTerm = savedTerm ? parseInt(savedTerm, 10) : term;
+        setTerm(initialTerm);
+
+        const dailyInterval = setInterval(() => {
+            setTerm((prevTerm) => {
+                const newTerm = prevTerm > 0 ? prevTerm - 1 : 0;
+                localStorage.setItem('term', newTerm.toString());
+                return newTerm;
+            });
+        }, 24 * 60 * 60 * 1000);
+
+        return () => {
+            clearInterval(dailyInterval);
+        };
+    }, []);
+
     const remainingMoneyForNextTariff = (tariff: TariffKey, tariffBalance: number) => {
         const nextLevel = tariffs[tariff]?.next;
         if (!nextLevel) return "Данные отсутствуют";
@@ -52,10 +69,26 @@ const Salary = () => {
     };
 
     const calculatePercentage = (tariffBalance: number, baseValue: number) => {
-        return Math.floor((tariffBalance / baseValue) * 100);
+        const result = (tariffBalance / baseValue) * 100;
+        return isNaN(result) ? 0 : parseFloat(result.toFixed(2));
     };
 
-    const percentage = calculatePercentage(tariffBalance, baseValue(user?.tariff || ""));
+    const [percentage, setPercentage] = useState(() => {
+        return calculatePercentage(tariffBalance, baseValue(user?.tariff || ""));
+    });
+
+    useEffect(() => {
+        const increment = 100 / (term * 24 * 60);
+
+        const interval = setInterval(() => {
+            setPercentage((prev) => {
+                const newValue = prev + increment;
+                return newValue > 100 ? 100 : parseFloat(newValue.toFixed(2));
+            });
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [term]);
 
     const handleWithdraw = async () => {
         if (user?.tariffBalance === 0) {
@@ -70,6 +103,7 @@ const Salary = () => {
             setAlert({ title: "Ошибка!", description: "Вы не можете вывести деньги до конца тарифа" });
             return;
         }
+
 
         try {
             const response = await newRequest.put("/user/update-balance");
@@ -95,25 +129,25 @@ const Salary = () => {
         return "дней";
     };
 
-    function calculateDays(balance: number, tariff: TariffKey): number {
-        const currentTariff = tariffs[tariff];
-        if (!currentTariff || !currentTariff.next) {
-            return NaN;
-        }
+    // function calculateDays(balance: number, tariff: TariffKey): number {
+    //     const currentTariff = tariffs[tariff];
+    //     if (!currentTariff || !currentTariff.next) {
+    //         return NaN;
+    //     }
+    //
+    //     const dailyRate = currentTariff.rate;
+    //     const targetBalance = currentTariff.next;
+    //     const remainingAmount = targetBalance - balance;
+    //
+    //     if (remainingAmount <= 0) {
+    //         return 0;
+    //     }
+    //
+    //     const days = Math.ceil(Math.log(targetBalance / balance) / Math.log(1 + dailyRate));
+    //     return days;
+    // }
 
-        const dailyRate = currentTariff.rate;
-        const targetBalance = currentTariff.next;
-        const remainingAmount = targetBalance - balance;
-
-        if (remainingAmount <= 0) {
-            return 0;
-        }
-
-        const days = Math.ceil(Math.log(targetBalance / balance) / Math.log(1 + dailyRate));
-        return days;
-    }
-
-    const remainingDays = calculateDays(user?.tariffBalance || 0, user?.tariff || "");
+    // const remainingDays = calculateDays(user?.tariffBalance || 0, user?.tariff || "");
 
     return (
         <>
@@ -138,7 +172,7 @@ const Salary = () => {
                     <div className={styles.rest}>
                         <p className={styles.title}>До конца тарифа осталось:</p>
                         <p className={styles.title}>
-                            {remainingDays ? `${remainingDays} ${getDaysLabel(remainingDays)}` : "Данные отсутствуют"}
+                            {term ? `${term} ${getDaysLabel(term)}` : "Данные отсутствуют"}
                         </p>
                     </div>
                 </div>
