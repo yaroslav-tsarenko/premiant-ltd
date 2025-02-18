@@ -8,7 +8,7 @@ interface DiagramProps {
     backgroundStrokeWidth?: number;
 }
 
-const Diagram: React.FC<DiagramProps> = ({value, size, strokeWidth, backgroundStrokeWidth}) => {
+const Diagram: React.FC<DiagramProps> = ({ value, size, strokeWidth, backgroundStrokeWidth }) => {
     const validSize = isNaN(size) ? 400 : size;
     const validStrokeWidth = isNaN(strokeWidth) ? 10 : strokeWidth;
     const validBackgroundStrokeWidth = backgroundStrokeWidth !== undefined && !isNaN(backgroundStrokeWidth) ? backgroundStrokeWidth : validStrokeWidth / 2;
@@ -36,7 +36,7 @@ const Diagram: React.FC<DiagramProps> = ({value, size, strokeWidth, backgroundSt
                 r={radius}
                 cx="50%"
                 cy="50%"
-                style={{strokeDasharray: circumference, strokeDashoffset: offset}}
+                style={{ strokeDasharray: circumference, strokeDashoffset: offset }}
             />
             <text
                 x="50%"
@@ -45,10 +45,9 @@ const Diagram: React.FC<DiagramProps> = ({value, size, strokeWidth, backgroundSt
                 dy=".3em"
                 className={styles.value}
             >
-                {validValue}%
+                {validValue.toFixed(2)}%
             </text>
         </svg>
-
     );
 };
 
