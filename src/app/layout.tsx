@@ -5,7 +5,6 @@ import {authWrapper} from "@/utils/AuthWrapper";
 import React from "react";
 import type {Metadata} from "next";
 import Head from "next/head";
-import RequestLocation from "@/components/request-location/RequestLocation";
 
 type RootLayoutProps = {
     children: React.ReactNode;
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
     description: "Invest in technologies that deliver results | Traffic | Crypto | AI",
     authors: [{name: "Premiant LTD"}],
 };
-
 
 const RootLayout: React.FC<RootLayoutProps> = ({children}) => {
     return (
@@ -33,7 +31,6 @@ const RootLayout: React.FC<RootLayoutProps> = ({children}) => {
         <body>
         <Header/>
         {children}
-        <RequestLocation/>
         <Footer
             footerLinks={[
                 {name: "Главная", route: "/"},
