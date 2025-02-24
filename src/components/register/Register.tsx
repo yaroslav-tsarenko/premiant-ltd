@@ -13,7 +13,6 @@ import RotatingLinesLoader from "@/components/loader/RotatingLinesLoader";
 import Validation from "@/components/validation-component/Validation";
 import { useUser } from "@/utils/UserContext";
 import { BACKEND_URL } from "@/constants/constants";
-import { useLocation } from "@/hooks/useLocation";
 
 const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, referralCode }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -24,11 +23,7 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, refe
     const [verificationCode, setVerificationCode] = useState('');
     const [registrationData, setRegistrationData] = useState<any>(null);
     const user = useUser();
-    const { location, error } = useLocation();
-    if (error) {
-        console.error('Error:', error);
-        return null;
-    }
+
     const scrollPage = (direction: 'top' | 'bottom') => {
         if (direction === 'top') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -64,20 +59,17 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, refe
         password: string;
         confirmPassword: string;
         curator?: string;
-        idAddress?: string;
         referralCode?: string;
-        fullLocationName?: string;
     }) => {
         setProcessing(true);
         setAlert(null);
         try {
-            const fullLocation = `${location?.country}, ${location?.city}, ${location?.state}, ${location?.address}, ${location?.apartment}, ${location?.postalCode}`;
             const response = await fetch(`${BACKEND_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...values, fullLocationName: fullLocation, ipAddress: location?.ip }),
+                body: JSON.stringify({ ...values}),
             });
 
             if (!response.ok) {
