@@ -78,17 +78,21 @@ const Salary = () => {
     });
 
     useEffect(() => {
-        const increment = 100 / (term * 24 * 60);
+        const calculateRemainingPercentage = () => {
+            const currentDate = new Date();
+            const tariffExpirationDate = new Date(user?.tariffExpirationDate ?? "");
+            const totalMinutes = term * 24 * 60;
+            const remainingMinutes = (tariffExpirationDate.getTime() - currentDate.getTime()) / (1000 * 60);
+            const remainingPercentage = (remainingMinutes / totalMinutes) * 100;
+            return remainingPercentage > 100 ? 100 : parseFloat(remainingPercentage.toFixed(3));
+        };
 
         const interval = setInterval(() => {
-            setPercentage((prev) => {
-                const newValue = prev + increment;
-                return newValue > 100 ? 100 : parseFloat(newValue.toFixed(2));
-            });
+            setPercentage(calculateRemainingPercentage());
         }, 60000);
 
         return () => clearInterval(interval);
-    }, [term]);
+    }, [term, user?.tariffExpirationDate]);
 
     const handleWithdraw = async () => {
         if (user?.tariffBalance === 0) {
@@ -103,7 +107,6 @@ const Salary = () => {
             setAlert({ title: "Ошибка!", description: "Вы не можете вывести деньги до конца тарифа" });
             return;
         }
-
 
         try {
             const response = await newRequest.put("/user/update-balance");
@@ -128,26 +131,6 @@ const Salary = () => {
         if ([2, 3, 4].includes(days % 10) && ![12, 13, 14].includes(days % 100)) return "дня";
         return "дней";
     };
-
-    // function calculateDays(balance: number, tariff: TariffKey): number {
-    //     const currentTariff = tariffs[tariff];
-    //     if (!currentTariff || !currentTariff.next) {
-    //         return NaN;
-    //     }
-    //
-    //     const dailyRate = currentTariff.rate;
-    //     const targetBalance = currentTariff.next;
-    //     const remainingAmount = targetBalance - balance;
-    //
-    //     if (remainingAmount <= 0) {
-    //         return 0;
-    //     }
-    //
-    //     const days = Math.ceil(Math.log(targetBalance / balance) / Math.log(1 + dailyRate));
-    //     return days;
-    // }
-
-    // const remainingDays = calculateDays(user?.tariffBalance || 0, user?.tariff || "");
 
     return (
         <>

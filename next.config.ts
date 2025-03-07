@@ -1,16 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    output: "export",
+
     images: {
         remotePatterns: [
             {
-                protocol: 'https',
-                hostname: 'iplogger.com',
-                port: '',
-                pathname: '/**',
+                protocol: "https",
+                hostname: "iplogger.com",
+                pathname: "/**",
             },
         ],
     },
+
     async rewrites() {
         return [
             {

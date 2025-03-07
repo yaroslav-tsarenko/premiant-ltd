@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "backend": "nodemon backend/server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@mui/material": "^6.4.1",
