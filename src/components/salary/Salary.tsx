@@ -70,13 +70,13 @@ const Salary = () => {
             return;
         }
 
-        const currentDate = new Date();
+       /* const currentDate = new Date();
         const tariffExpirationDate = new Date(user?.tariffExpirationDate ?? "");
 
         if (tariffExpirationDate > currentDate) {
             setAlert({ title: "Ошибка!", description: "Вы не можете вывести деньги до конца тарифа" });
             return;
-        }
+        }*/
 
         try {
             const response = await newRequest.put("/user/update-balance");
