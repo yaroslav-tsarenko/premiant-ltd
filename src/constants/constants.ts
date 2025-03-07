@@ -1,9 +1,9 @@
 export const FRONTEND_URL = "https://premiant.ltd";
-export const BACKEND_URL = "https://premiant-be-y5a7.onrender.com";
+export const BACKEND_URL = "http://localhost:8080";
 
 /*http://localhost:3000
-http://localhost:8080
 https://backend.premiant.ltd
+https://premiant-be-y5a7.onrender.com
 https://premiant.ltd
 https://premiant-be-y5a7.onrender.com
 https://premiant-ltd.vercel.app
