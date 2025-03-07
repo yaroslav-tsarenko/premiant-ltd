@@ -54,7 +54,7 @@ const Diagram: React.FC<DiagramProps> = ({size, strokeWidth, backgroundStrokeWid
                 dy=".3em"
                 className={styles.value}
             >
-                {valuePerMinute}%
+                {user?.tariff === "none" ? "0" : valuePerMinute}%
             </text>
         </svg>
     );

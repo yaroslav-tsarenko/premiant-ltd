@@ -130,7 +130,7 @@ const Salary = () => {
                     <div className={styles.rest}>
                         <p className={styles.title}>До конца тарифа осталось:</p>
                         <p className={styles.title}>
-                            {diffInDays ? `${diffInDays} ${getDaysLabel(diffInDays)}` : "Данные отсутствуют"}
+                            {user?.tariff === "none" ?  "Данные отсутствуют" : `${diffInDays} ${getDaysLabel(diffInDays)}`}
                         </p>
                     </div>
                 </div>
