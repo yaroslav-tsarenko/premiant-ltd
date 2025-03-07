@@ -64,36 +64,6 @@ const Salary = () => {
         return `${(nextLevel - tariffBalance).toFixed(2)}$`;
     };
 
-    const baseValue = (tariff: TariffKey) => {
-        return tariffs[tariff]?.next || 100;
-    };
-
-    const calculatePercentage = (tariffBalance: number, baseValue: number) => {
-        const result = (tariffBalance / baseValue) * 100;
-        return isNaN(result) ? 0 : parseFloat(result.toFixed(2));
-    };
-
-    const [percentage, setPercentage] = useState(() => {
-        return calculatePercentage(tariffBalance, baseValue(user?.tariff || ""));
-    });
-
-    useEffect(() => {
-        const calculateRemainingPercentage = () => {
-            const currentDate = new Date();
-            const tariffExpirationDate = new Date(user?.tariffExpirationDate ?? "");
-            const totalMinutes = term * 24 * 60;
-            const remainingMinutes = (tariffExpirationDate.getTime() - currentDate.getTime()) / (1000 * 60);
-            const remainingPercentage = (remainingMinutes / totalMinutes) * 100;
-            return remainingPercentage > 100 ? 100 : parseFloat(remainingPercentage.toFixed(3));
-        };
-
-        const interval = setInterval(() => {
-            setPercentage(calculateRemainingPercentage());
-        }, 60000);
-
-        return () => clearInterval(interval);
-    }, [term, user?.tariffExpirationDate]);
-
     const handleWithdraw = async () => {
         if (user?.tariffBalance === 0) {
             setAlert({ title: "Ошибка!", description: "У вас пустой баланс тарифа на снятие" });
@@ -132,12 +102,17 @@ const Salary = () => {
         return "дней";
     };
 
+    const now = new Date();
+    const expirationDate = new Date(user?.tariffExpirationDate ?? "");
+    const diffInMs = expirationDate.getTime() - now.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
     return (
         <>
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             <div className={styles.wrapper}>
                 <div className={styles.diagram}>
-                    <Diagram value={percentage} size={200} strokeWidth={30} />
+                    <Diagram size={200} strokeWidth={30} />
                 </div>
                 <div className={styles.currentSalary}>
                     <div className={styles.sumContent}>
@@ -155,7 +130,7 @@ const Salary = () => {
                     <div className={styles.rest}>
                         <p className={styles.title}>До конца тарифа осталось:</p>
                         <p className={styles.title}>
-                            {term ? `${term} ${getDaysLabel(term)}` : "Данные отсутствуют"}
+                            {diffInDays ? `${diffInDays} ${getDaysLabel(diffInDays)}` : "Данные отсутствуют"}
                         </p>
                     </div>
                 </div>
