@@ -24,6 +24,8 @@ export type User = {
     tariffExpirationDate: string;
     payeerWallet: string;
     card: string;
+    remainingDays: number;
+    percentPerMinute: number;
 };
 export const UserContext = createContext<User | undefined>(undefined);
 

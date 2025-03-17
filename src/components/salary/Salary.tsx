@@ -10,7 +10,6 @@ import { BACKEND_URL } from "@/constants/constants";
 type TariffKey = 'start' | 'comfort' | 'premium' | 'maximum' | 'exclusive' | string;
 
 const Salary = () => {
-
     const tariffs: Record<TariffKey, { rate: number; min: number; next: number | null; term: number }> = {
         start: { rate: 2 / 100, min: 100, next: 2000, term: 28 },
         comfort: { rate: 3.35 / 100, min: 2000, next: 7000, term: 24 },
@@ -21,19 +20,30 @@ const Salary = () => {
 
     const user = useUser();
     const [tariffBalance, setTariffBalance] = useState(user?.tariffBalance ?? 0);
+    const [percentPerMinute, setPercentPerMinute] = useState(user?.percentPerMinute ?? 0);
     const tariff = user?.tariff ?? "";
     const [alert, setAlert] = useState<{ title: string; description: string } | null>(null);
     const [term, setTerm] = useState(tariffs[user?.tariff || ""]?.term);
 
     useEffect(() => {
-        const ws = new WebSocket(`${BACKEND_URL.replace(/^http/, "ws")}`);
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`);
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            if (data.userId === user?._id && data.tariffBalance !== undefined) {
-                setTariffBalance(data.tariffBalance);
+
+            if (data.userId === user?._id) {
+                if (data.tariffBalance !== undefined) {
+                    setTariffBalance(data.tariffBalance);
+                }
+                if (data.percentPerMinute !== undefined) {
+                    setPercentPerMinute(data.percentPerMinute);
+                }
+
             }
         };
+
+        ws.onclose = () => console.log("WebSocket connection closed");
 
         return () => {
             ws.close();
@@ -70,14 +80,6 @@ const Salary = () => {
             return;
         }
 
-       /* const currentDate = new Date();
-        const tariffExpirationDate = new Date(user?.tariffExpirationDate ?? "");
-
-        if (tariffExpirationDate > currentDate) {
-            setAlert({ title: "Ошибка!", description: "Вы не можете вывести деньги до конца тарифа" });
-            return;
-        }*/
-
         try {
             const response = await newRequest.put("/user/update-balance");
             if (response.status === 200) {
@@ -102,17 +104,12 @@ const Salary = () => {
         return "дней";
     };
 
-    const now = new Date();
-    const expirationDate = new Date(user?.tariffExpirationDate ?? "");
-    const diffInMs = expirationDate.getTime() - now.getTime();
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-
     return (
         <>
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             <div className={styles.wrapper}>
                 <div className={styles.diagram}>
-                    <Diagram size={200} strokeWidth={30} />
+                    <Diagram size={200} strokeWidth={30} percentPerMinute={percentPerMinute} />
                 </div>
                 <div className={styles.currentSalary}>
                     <div className={styles.sumContent}>
@@ -130,7 +127,7 @@ const Salary = () => {
                     <div className={styles.rest}>
                         <p className={styles.title}>До конца тарифа осталось:</p>
                         <p className={styles.title}>
-                            {user?.tariff === "none" ?  "Данные отсутствуют" : `${diffInDays} ${getDaysLabel(diffInDays)}`}
+                            {user?.remainingDays === 0 ?  "Данные отсутствуют" : `${user?.remainingDays} ${getDaysLabel(user?.remainingDays || 0)}`}
                         </p>
                     </div>
                 </div>
