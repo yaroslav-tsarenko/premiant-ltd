@@ -1,60 +1,64 @@
-import React from 'react';
-import styles from './Diagram.module.scss';
-import {useUser} from "@/utils/UserContext";
+import React, { useEffect, useState } from "react";
+import styles from "./Diagram.module.scss";
+import { useUser } from "@/utils/UserContext";
+import { BACKEND_URL } from "@/constants/constants";
 
 interface DiagramProps {
-    value?: number;
     size: number;
     strokeWidth: number;
-    backgroundStrokeWidth?: number;
+    percentPerMinute?: number;
 }
 
-const Diagram: React.FC<DiagramProps> = ({size, strokeWidth, backgroundStrokeWidth}) => {
+const Diagram: React.FC<DiagramProps> = ({ size, strokeWidth, percentPerMinute: initialPercent }) => {
     const user = useUser();
-    const now = new Date();
-    const expirationDate = new Date(user?.tariffExpirationDate ?? "");
-    const diffInMs = expirationDate.getTime() - now.getTime();
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    const calculateValueByRemainingDays = parseFloat((diffInDays / 100 / 24 / 60).toFixed(3));
-    const validValue = isNaN(calculateValueByRemainingDays) ? 0 : Math.min(100, Math.max(0, calculateValueByRemainingDays));
-    const validSize = isNaN(size) ? 400 : size;
-    const validStrokeWidth = isNaN(strokeWidth) ? 10 : strokeWidth;
-    const validBackgroundStrokeWidth = backgroundStrokeWidth !== undefined && !isNaN(backgroundStrokeWidth) ? backgroundStrokeWidth : validStrokeWidth / 2;
-    const radius = (validSize - validStrokeWidth) / 2;
-    const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (validValue / 100) * circumference;
+    const [percentPerMinute, setPercentPerMinute] = useState(initialPercent ?? user?.percentPerMinute ?? 0);
 
-    const valuePerMinute = (100 / diffInDays / 24 / 60).toFixed(3);
+    useEffect(() => {
+        const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, "")}/ws`);
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            if (data.userId === user?._id && data.percentPerMinute !== undefined) {
+                setPercentPerMinute(data.percentPerMinute);
+            }
+        };
+
+        ws.onclose = () => console.log("WebSocket connection closed");
+
+        return () => {
+            ws.close();
+        };
+    }, [user?._id]);
+
+    const radius = (size - strokeWidth) / 2;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (percentPerMinute / 100) * circumference;
+
+    const formatPercent = (percent: number) => {
+        if (percent === 0) {
+            return "0";
+        } else if (percent < 10) {
+            return percent.toFixed(3);
+        } else {
+            return percent.toFixed(2);
+        }
+    };
 
     return (
-        <svg
-            viewBox={`0 0 ${validSize} ${validSize}`}
-            className={styles.circle}
-            preserveAspectRatio="xMidYMid meet"
-        >
-            <circle
-                className={styles.background}
-                strokeWidth={validBackgroundStrokeWidth}
-                r={radius}
-                cx="50%"
-                cy="50%"
-            />
+        <svg viewBox={`0 0 ${size} ${size}`} className={styles.circle}>
+            <circle className={styles.background} strokeWidth={strokeWidth / 2} r={radius} cx="50%" cy="50%" />
             <circle
                 className={styles.progress}
-                strokeWidth={validStrokeWidth}
+                strokeWidth={strokeWidth}
                 r={radius}
                 cx="50%"
                 cy="50%"
-                style={{strokeDasharray: circumference, strokeDashoffset: offset}}
+                style={{ strokeDasharray: circumference, strokeDashoffset: offset }}
             />
-            <text
-                x="50%"
-                y="50%"
-                textAnchor="middle"
-                dy=".3em"
-                className={styles.value}
-            >
-                {user?.tariff === "none" ? "0" : valuePerMinute}%
+            <text x="50%" y="50%" textAnchor="middle" dy=".3em" className={styles.value}>
+                {formatPercent(percentPerMinute)}%
             </text>
         </svg>
     );

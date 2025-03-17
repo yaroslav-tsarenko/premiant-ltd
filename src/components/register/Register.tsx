@@ -96,11 +96,9 @@ const Register: FC<AuthenticationProps> = ({ headline, greeting, linkRoute, refe
                 },
                 body: JSON.stringify({ email: registrationData.email, verificationCode }),
             });
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
             const data = await response.json();
             document.cookie = `token=${data.token}; path=/;`;
             setAlert({ title: 'Успех!', description: 'Спасибо за регистрацию!' });
