@@ -5,7 +5,6 @@ import { useUser } from "@/utils/UserContext";
 import { FaArrowRight } from "react-icons/fa6";
 import { newRequest } from "@/utils/newRequest";
 import Alert from "@/components/alert/Alert";
-import { BACKEND_URL } from "@/constants/constants";
 
 type TariffKey = 'start' | 'comfort' | 'premium' | 'maximum' | 'exclusive' | string;
 
@@ -19,36 +18,11 @@ const Salary = () => {
     };
 
     const user = useUser();
-    const [tariffBalance, setTariffBalance] = useState(user?.tariffBalance ?? 0);
-    const [percentPerMinute, setPercentPerMinute] = useState(user?.percentPerMinute ?? 0);
     const tariff = user?.tariff ?? "";
     const [alert, setAlert] = useState<{ title: string; description: string } | null>(null);
     const [term, setTerm] = useState(tariffs[user?.tariff || ""]?.term);
 
-    useEffect(() => {
-        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`);
 
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-
-            if (data.userId === user?._id) {
-                if (data.tariffBalance !== undefined) {
-                    setTariffBalance(data.tariffBalance);
-                }
-                if (data.percentPerMinute !== undefined) {
-                    setPercentPerMinute(data.percentPerMinute);
-                }
-
-            }
-        };
-
-        ws.onclose = () => console.log("WebSocket connection closed");
-
-        return () => {
-            ws.close();
-        };
-    }, [user?._id]);
 
     useEffect(() => {
         const savedTerm = localStorage.getItem('term');
@@ -96,7 +70,7 @@ const Salary = () => {
         }
     };
 
-    const remainingMoney = parseFloat(remainingMoneyForNextTariff(tariff, tariffBalance)).toFixed(2);
+    const remainingMoney = parseFloat(remainingMoneyForNextTariff(tariff, user?.tariffBalance || 0)).toFixed(2);
 
     const getDaysLabel = (days: number): string => {
         if (days % 10 === 1 && days % 100 !== 11) return "день";
@@ -109,19 +83,19 @@ const Salary = () => {
             {alert && <Alert title={alert.title} description={alert.description} onClose={() => setAlert(null)} />}
             <div className={styles.wrapper}>
                 <div className={styles.diagram}>
-                    <Diagram size={200} strokeWidth={30} percentPerMinute={percentPerMinute} />
+                    <Diagram size={200} strokeWidth={30} percentPerMinute={user?.percentPerMinute} />
                 </div>
                 <div className={styles.currentSalary}>
                     <div className={styles.sumContent}>
                         <p className={styles.title}>Ваш текущий заработок</p>
                         <p className={styles.sum}>
-                            {tariffBalance ? `${tariffBalance.toFixed(2)}$` : "0.00$"}
+                            {user?.tariffBalance ? `${user?.tariffBalance.toFixed(2)}$` : "0.00$"}
                         </p>
                     </div>
                     <div className={styles.rest}>
                         <p className={styles.title}>След. тариф через:</p>
                         <p className={styles.title}>
-                            {tariffBalance ? `${remainingMoney}$` : "Данные отсутствуют"}
+                            {user?.tariffBalance ? `${remainingMoney}$` : "Данные отсутствуют"}
                         </p>
                     </div>
                     <div className={styles.rest}>
