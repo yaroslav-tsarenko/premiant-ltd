@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Diagram.module.scss";
 import { useUser } from "@/utils/UserContext";
-import { BACKEND_URL } from "@/constants/constants";
 
 interface DiagramProps {
     size: number;
@@ -11,26 +10,7 @@ interface DiagramProps {
 
 const Diagram: React.FC<DiagramProps> = ({ size, strokeWidth, percentPerMinute: initialPercent }) => {
     const user = useUser();
-    const [percentPerMinute, setPercentPerMinute] = useState(initialPercent ?? user?.percentPerMinute ?? 0);
-
-    useEffect(() => {
-        const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, "")}/ws`);
-
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-
-            if (data.userId === user?._id && data.percentPerMinute !== undefined) {
-                setPercentPerMinute(data.percentPerMinute);
-            }
-        };
-
-        ws.onclose = () => console.log("WebSocket connection closed");
-
-        return () => {
-            ws.close();
-        };
-    }, [user?._id]);
+    const percentPerMinute = initialPercent ?? user?.percentPerMinute ?? 0;
 
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
