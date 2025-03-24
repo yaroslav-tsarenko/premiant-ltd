@@ -1,28 +1,14 @@
 "use client";
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { PromoBarProps } from "@/types/promoBar";
 import Image from 'next/image';
 import Link from "next/link";
 import styles from './PromoBar.module.scss';
-import { BACKEND_URL } from "@/constants/constants";
+import {useTotalBalance} from "@/utils/TotalBalanceContext";
 
 const PromoBar: FC<PromoBarProps> = ({ text, promoLink, arrowIcon }) => {
-    const [totalBalance, setTotalBalance] = useState<number | null>(null);
-
-    useEffect(() => {
-        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        const ws = new WebSocket(`${protocol}://${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`);
-
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            setTotalBalance(data.totalBalance);
-        };
-
-        ws.onclose = () => console.log('WebSocket connection closed');
-
-        return () => ws.close();
-    }, []);
+   const {totalBalance} = useTotalBalance();
 
     return (
         <div className={styles.promoWrapper}>

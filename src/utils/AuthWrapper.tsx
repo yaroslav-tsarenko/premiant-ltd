@@ -1,28 +1,32 @@
-import { UserProvider } from './UserContext';
-import { cookies } from 'next/headers';
-import {BACKEND_URL} from "@/constants/constants";
+import { UserProvider } from "./UserContext";
+import { cookies } from "next/headers";
+import { newRequest } from "@/utils/newRequest";
+import { ComponentType, ReactNode } from "react";
 
-export function authWrapper(Component: React.ComponentType<any>) {
-    return async function WrappedComponent(props: unknown | any) {
+interface WrappedComponentProps {
+    children?: ReactNode;
+}
+
+export function authWrapper<T extends WrappedComponentProps>(Component: ComponentType<T>) {
+    return async function WrappedComponent(props: T) {
         let user = null;
-
         try {
             const cookieStore = await cookies();
-            const token = cookieStore.get('token')?.value;
+            const token = cookieStore.get("token")?.value;
 
-            const response = await fetch(`${BACKEND_URL}/user/get-user`, {
-                headers: { Authorization: `Bearer ${token}` },
-                cache: 'no-store',
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error("Fetch failed:", errorText);
-                throw new Error(`Fetch error! Status: ${response.status}`);
+            if (!token) {
+                console.warn("No token found in cookies.");
             }
 
-            const data = await response.json();
-            user = data.user;
+            const response = await newRequest.get("/user/get-user", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (response.status !== 200) {
+                console.error("Fetch failed:", response.statusText);
+            }
+
+            user = response.data.user;
         } catch (error) {
             console.error("Error fetching user:", error);
         }

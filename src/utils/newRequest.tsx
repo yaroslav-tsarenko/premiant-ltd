@@ -11,7 +11,7 @@ if (typeof document !== "undefined") {
 
 export const newRequest = axios.create({
     baseURL: `${BACKEND_URL}`,
-    timeout: 10000,
+    timeout: 15000,
     withCredentials: true,
     headers: {
         Authorization: token ? `Bearer ${token}` : "",
