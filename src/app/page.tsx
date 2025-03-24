@@ -26,6 +26,7 @@ import styles from "@/components/custom-block/CustomBlock.module.scss";
 import TariffCalculator from "@/components/tariff-calculator/TariffСalculator";
 import CookiePopup from "@/components/cookie-popup/CookiePopup";
 import {useUser} from "@/utils/UserContext";
+import {TotalBalanceProvider} from "@/utils/TotalBalanceContext";
 
 export default function Home() {
 
@@ -49,7 +50,7 @@ export default function Home() {
     };
 
     return (
-        <>
+        <TotalBalanceProvider>
             <HeroSection
                 headline="Инвестируйте в технологии, которые приносят результат"
                 text="Получайте максимальную отдачу от трафика криптовалютных активов при помощи Искусственного Интеллекта">
@@ -207,6 +208,6 @@ export default function Home() {
                 burgerIcon={<GiHamburgerMenu />}
             />
             <CookiePopup/>
-        </>
+        </TotalBalanceProvider>
     );
 }
