@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
+
 export type User = {
     _id: string;
     name: string;
@@ -27,12 +28,18 @@ export type User = {
     remainingDays: number;
     percentPerMinute: number;
 };
-export const UserContext = createContext<User | undefined>(undefined);
+
+interface UserProviderProps {
+    user: User | null;
+    children: ReactNode;
+}
+
+const UserContext = createContext<User | null>(null);
 
 export function useUser() {
     return useContext(UserContext);
 }
 
-export function UserProvider({ user, children }: { user: User; children: React.ReactNode }) {
+export function UserProvider({ user, children }: UserProviderProps) {
     return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
