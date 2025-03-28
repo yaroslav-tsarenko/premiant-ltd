@@ -80,11 +80,13 @@ const TariffComponent: FC<TariffComponentProps> = ({
                         </div>
                         <div className={styles.prices}>
                             <p>Процент:</p>
-                            <p>{percent}% в день</p>
+                            <p>{percent}%
+                                {(headline === 'ЭКСКЛЮЗИВ' || headline === 'МАКСИМУМ') ? ' в конце' : ' в день'}
+                            </p>
                         </div>
                         {term && (
                             <div className={styles.prices}>
-                                <p>Срок</p>
+                            <p>Срок</p>
                                 <p>{term} дней</p>
                             </div>
                         )}

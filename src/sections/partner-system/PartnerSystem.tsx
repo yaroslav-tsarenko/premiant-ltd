@@ -82,7 +82,7 @@ const PartnerSystem = () => {
                         </div>
                         <div className={styles.transactions}>
                             <h1 className={styles.headline}>
-                                ТРАНЗАКЦИИ партнеров
+                               Недавние пользователи
                             </h1>
                             <TransactionsTable headers={tablePartners} transactions={partnersTransactions} />
                         </div>
