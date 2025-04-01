@@ -8,14 +8,13 @@ import TransactionsTable from "@/components/transactions-table/TransactionsTable
 import Dashboard from "@/components/dashboard/Dashboard";
 import { ReferralProvider } from "@/utils/ReferralContext";
 import { useCurator } from "@/utils/CuratorContext";
-import { useUsers } from "@/utils/UsersContext";
 import { Transaction } from "@/types/transaction";
 
 const PartnerSystem = () => {
     const { users } = useCurator();
-    const { allUsers } = useUsers();
+   /* const { allUsers } = useUsers();*/
     const tableReferrals = ["Имя пользователя", "Куратор", "Дата регистрации", "Депозит", "Процент", "Выплачено", "Статус оплаты"];
-    const tablePartners = ["Имя пользователя", "Тип транзакции", "Дата", "ЭПС", "Сумма", "Статус оплаты"];
+   /* const tablePartners = ["Имя пользователя", "Тип транзакции", "Дата", "ЭПС", "Сумма", "Статус оплаты"];*/
 
     const mapStatus = (status: string): "В обработке" | "Выполнено" | "Отклонено" => {
         switch (status) {
@@ -30,7 +29,7 @@ const PartnerSystem = () => {
         }
     };
 
-    const randomUsers = allUsers ? allUsers.sort(() => 0.5 - Math.random()).slice(0, 10) : [];
+  /*  const randomUsers = allUsers ? allUsers.sort(() => 0.5 - Math.random()).slice(0, 10) : [];*/
 
     const referralsTransactions: Transaction[] = users.map(user => ({
         userName: user.name,
@@ -49,7 +48,7 @@ const PartnerSystem = () => {
         status: mapStatus(user.averagePaymentStatus),
     }));
 
-    const partnersTransactions: Transaction[] = randomUsers.map(user => ({
+  /*  const partnersTransactions: Transaction[] = randomUsers.map(user => ({
         userName: user.name,
         transactionType: mapStatus(user.averagePaymentStatus),
         date: new Date(user.createdAt).toLocaleString('en-GB', {
@@ -63,7 +62,7 @@ const PartnerSystem = () => {
         eps: "Tether (TRC20)",
         amount: user.totalDeposit,
         status: mapStatus(user.averagePaymentStatus),
-    }));
+    }));*/
 
     return (
         <Dashboard>
@@ -80,12 +79,12 @@ const PartnerSystem = () => {
                             </h1>
                             <TransactionsTable headers={tableReferrals} transactions={referralsTransactions} />
                         </div>
-                        <div className={styles.transactions}>
+                      {/*  <div className={styles.transactions}>
                             <h1 className={styles.headline}>
                                Недавние пользователи
                             </h1>
                             <TransactionsTable headers={tablePartners} transactions={partnersTransactions} />
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </ReferralProvider>
